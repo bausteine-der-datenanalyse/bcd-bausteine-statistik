@@ -1,0 +1,25 @@
+.neuerbegriff { 
+    color: midnightblue; 
+} 
+	
+.einzug {
+  text-indent: 5%;
+}
+
+.eintest {
+  text-indent: 10%;
+}
+
+.beispiel {
+  background-color: WhiteSmoke;
+  border-left: 6px solid;
+  padding-left: 8px;
+}
+
+.definition {
+  background-color: #dee0e3;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  padding: 5px;
+}
