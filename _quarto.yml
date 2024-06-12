@@ -1,0 +1,32 @@
+project:
+  output-dir: _output
+
+lang: de
+number-depth: 3
+number-sections: true
+
+filters: 
+  - latex-environment
+commands: [neuerbegriff]
+environments: [definition, beispiel, center, multicols]
+
+format: 
+  html: 
+    css: bcd-style.css
+    license: CC BY-SA
+    default-image-extension: svg
+  pdf:
+    include-in-header:
+      - bcd-macros.tex
+      - text: |
+          \usepackage{makeidx}
+          \usepackage{multicol}
+          \makeindex
+    include-after-body:
+      text: |
+        \printindex
+    default-image-extension: pdf
+    keep-tex: true
+
+bibliography: bcd-bausteine-statistik.bib
+
