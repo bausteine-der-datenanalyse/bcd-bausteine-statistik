@@ -26,9 +26,12 @@ Wie Daten aus dem Bau- und Umweltingenieurwesen konkret aussehen können, sehen 
 
 #### Mobilitätsbefragung -- Wege zur BO
 
-Im Rahmen des Moduls 'Methoden der Verkehrsplanung' von Prof. Mühlenbruch führen Studierende regelmäßig eine Befragung unter Angehörigen der BO durch. Ziel ist es herauszufinden, von wo und mit welchen Verkehrsmitteln die Befragten zur Hochschule gelangen. Auf @fig-mobilitaetsbefragung links dargestellt ist der verwendete Fragebogen. Um die manuelle Übertragung der knapp 300 Fragebögen in eine Tabellenkalkulation zu vereinfachen sind die Antworten mit Ziffern codiert. Entsprechend enthält die in @fig-mobilitaetsbefragung rechts dargestellte tabellarische Zusammenfassung im Wesentlichen Zahlen und die Spaltenüberschriften sind etwas kryptisch.
+Im Rahmen des Moduls 'Methoden der Verkehrsplanung' von Prof. Mühlenbruch führen Studierende regelmäßig eine Befragung unter Angehörigen der BO durch. Ziel ist es herauszufinden, von wo und mit welchen Verkehrsmitteln die Befragten zur Hochschule gelangen. Auf @fig-mobilitaetsbefragung links dargestellt ist der verwendete Fragebogen. Um die manuelle Übertragung der knapp 300 Fragebögen in eine Tabellenkalkulation zu vereinfachen sind Antworten mit Ziffern codiert. Entsprechend enthält die in @fig-mobilitaetsbefragung rechts dargestellte tabellarische Zusammenfassung im Wesentlichen Zahlen und die Spaltenüberschriften sind etwas kryptisch.
 
-![Mobilitätsbefragung 'Wege zur BO' (Fragebogen und Auswertung)](00-bilder/mobilitaetsbefragung.svg){#fig-mobilitaetsbefragung}
+![Mobilitätsbefragung 'Wege zur BO' (Fragebogen und Auswertung)](00-bilder/mobilitaetsbefragung.svg){
+  #fig-mobilitaetsbefragung
+  fig-alt="Befragungsbogen zu Verkehrsmitteln und Ergebnisse in Tabelle"
+}
 
 #### Geschwindigkeitsmessung Universitätsstraße
 
