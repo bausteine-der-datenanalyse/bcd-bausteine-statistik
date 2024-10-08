@@ -13,14 +13,26 @@ idx <- 1
 dir_out <- file.path(getwd(), "c")
 yaml_content <- read_yaml("content.yml")
 
+
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 
 assignments <- yaml_content$assignments
 
+if (!is.null(assignments$root)) {
+    dir_in_base <- here(file.path(assignments$root))
+} else {
+    dir_in_base <- here()
+}
+
 for (entry in assignments$content) {
-    dir_in <- file.path(here(entry$root), "aufgaben")
+    dir_in <- file.path(dir_in_base, entry$root, "aufgaben")
     dir_data_in <- file.path(dir_in, "01-daten")
     dir_data_out <- file.path(dir_out, "01-daten")
+
+    # Check input folder
+    if (!dir.exists(dir_in)) {
+        stop("Folder ", dir_in, " does not exist")
+    }
 
     # Copy data folder
     if (dir.exists(dir_data_in)) {
