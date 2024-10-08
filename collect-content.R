@@ -44,6 +44,16 @@ for (entry in assignments$content) {
         }
     }
 
+    # Info
+    print("Processing entry")
+    print(entry)
+    for (inc in entry$include) {
+        print(inc)
+        for (file in list.files(path = dir_in, pattern = inc)) {
+            print(file)
+        }
+    }
+
     # Redirect output
     sink(file.path(dir_out, paste0("aufgabenblatt-", str_pad(idx, 2, side = "left", pad = "0"), ".qmd")))
 
