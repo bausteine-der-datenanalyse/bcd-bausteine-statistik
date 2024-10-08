@@ -1,0 +1,44 @@
+---
+title: "Übungsblatt 1: Statistische Daten"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+editor: visual
+---
+
+## Aufgabe 1
+
+In der Excel-Datei `beispiel-rohdaten.xlsx` finden Sie die Daten zu Beispiel 1.2.1 im Skript. Ermitteln Sie für alle vier angegebenen Lösungen zur Organisation der Daten
+
+-   die gesamte Anzahl der Fälle sowie
+-   deren Anteil an der Gesamtbevölkerung.
+
+In welcher der vier Lösungen ist die Aufgabe am einfachsten? Wodurch zeichnet sich diese Lösung aus?
+
+Zur Kontrolle: Richtig sind 547660 Fälle sowie ein Anteil von 0.019% an der Gesamtbevölkerung.
+
+## Aufgabe 2
+
+Eine Firma interessiert sich im Rahmen der Planung von Parkplätzen und dem Einsatz von firmeneigenen Bussen dafür, in welcher Entfernung ihre Beschäftigten von der Arbeitsstätte wohnen und mit welchen Beförderungsmitteln die Arbeitsstätte überwiegend erreicht wird. Sie greift dazu auf eine Untersuchung zurück, die zur Erfassung der wirtschaftlichen Lage der Mitarbeiterinnen und Mitarbeiter durchgeführt wurde. Bei der Untersuchung wurden an einem Stichtag 50 Beschäftige ausgewählt und befragt hinsichtlich
+
+-   Haushaltsgröße (Anzahl der im Haushalt lebenden Personen),
+-   monatliche Miete,
+-   Beförderungsmittel, mit dem die Arbeitsstätte überwiegend erreicht wird,
+-   Entfernung zwischen Wohnung und Arbeitsstätte,
+-   eigene Einschätzung der wirtschaftlichen Lage mit 1 = sehr gut, $\dots$ , 5 = sehr schlecht.
+
+Aufgaben:
+
+1.  Geben Sie die Grundgesamtheit und die statistischen Einheiten an.
+2.  Geben Sie für jedes Merkmal an,
+    a)  welche Ausprägungen es gibt und ob das Merkmal stetig oder diskret ist,
+    b)  welches Skalenniveau zugrunde liegt,
+    c)  ob es sich um ein qualitatives oder ein quantitatives Merkmal handelt.
+
+Aus: Fahrmeier et al.: Statistik
+
+## Aufgabe 3
+
+In einer Temperaturaufzeichnung werden die Werte als Zahlen mit einer Nachkommastelle aufgezeichnet. Handelt es sich um ein diskretes oder um ein stetiges Merkmal?

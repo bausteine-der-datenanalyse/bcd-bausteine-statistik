@@ -1,12 +1,14 @@
+% Packages needed here
 \usepackage{framed}
 \usepackage{tcolorbox}
 
-% Customize description lists
+% Customize appearance
 \renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textit{#1}}
 
 % Environments
 \newenvironment{definition}{\begin{tcolorbox}}{\end{tcolorbox}}
 \newenvironment{beispiel}{\begin{leftbar}}{\end{leftbar}}
 
+% Commands
 \newcommand{\neuerbegriff}[1]{\textcolor{MidnightBlue}{#1}\index{#1}}
 

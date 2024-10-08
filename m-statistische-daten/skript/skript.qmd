@@ -152,7 +152,7 @@ Bei den in der Mobilitätsbefragung befragten Studierenden handelt es sich um ei
 
 -   Die Geschwindigkeitsmessung lässt sich im Prinzip beliebig fortsetzen, es handelt sich hier um eine unendlich große Grundgesamtheit.
 
--   Wenn man über die Abschlussnoten für Bauingenieursabsolventen der BO im Jahr 2025 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
+-   Wenn man über die Abschlussnoten für Bauingenieursabsolventen der BO im Jahr 2095 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
 
 ![Grundgesamtheit und Stichproben](00-bilder/stichprobe.svg){
     #fig-stichprobe
@@ -230,9 +230,9 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
     a)  Zahlen sind,
 
-    b)  sich die Differenz zwischen zwei Werten sinnvoll interpretieren lässt, es aber
+    a)  sich die Differenz zwischen zwei Werten sinnvoll interpretieren lässt, es aber
 
-    c)  keinen natürlichen Nullpunkt gibt.
+    a)  keinen natürlichen Nullpunkt gibt.
 
     Dadurch, dass es keinen Nullpunkt gibt, lassen sich keine Quotienten von Ausprägungen berechnen. Ein typisches Beispiel für eine intervallskalierte Größe ist die Temperatur in Grad Celsius: Die Aussage
 
