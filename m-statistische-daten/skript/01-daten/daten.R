@@ -1,7 +1,7 @@
 # Daten zum Beispiel Tidy Data
 
 d_td_loesung_1 <- tribble(
-  ~"Land",  ~"Jahr", ~"Typ", ~"Anzahl",
+  ~"Land", ~"Jahr", ~"Typ", ~"Anzahl",
   "Italien", 1999, "Fälle", 745,
   "Italien", 1999, "Bevölkerung", 19987071,
   "Italien", 200, "Fälle", 2666,
@@ -17,7 +17,7 @@ d_td_loesung_1 <- tribble(
 )
 
 d_td_loesung_2 <- tribble(
-  ~"Land",  ~"Jahr", ~"Fälle", ~"Bevölkerung",
+  ~"Land", ~"Jahr", ~"Fälle", ~"Bevölkerung",
   "Italien", 1999, 745, 19987071,
   "Italien", 2000, 2666, 20595360,
   "Brasilien", 1999, 37737, 172006362,
@@ -27,7 +27,7 @@ d_td_loesung_2 <- tribble(
 )
 
 d_td_loesung_3 <- tribble(
-  ~"Land",  ~"Jahr", ~"Anteile", 
+  ~"Land", ~"Jahr", ~"Anteile",
   "Italien", 1999, "745/19987071",
   "Italien", 2000, "2666/20595360",
   "Brasilien", 1999, "37737/172006362",
@@ -37,14 +37,14 @@ d_td_loesung_3 <- tribble(
 )
 
 d_td_loesung_41 <- tribble(
-  ~"Land",  ~"1999", ~"2000", 
+  ~"Land", ~"1999", ~"2000",
   "Italien", 745, 2666,
   "Brasilien", 37737, 80488,
   "China", 212258, 213766,
 )
 
 d_td_loesung_42 <- tribble(
-  ~"Land",  ~"1999", ~"2000", 
+  ~"Land", ~"1999", ~"2000",
   "Italien", 19987071, 20595360,
   "Brasilien", 172006362, 174504898,
   "China", 1272915272, 1280428583,
@@ -52,8 +52,8 @@ d_td_loesung_42 <- tribble(
 
 # Daten Abfluss Donau
 d_abfluss_donau <- read_delim(
-  "01-daten/6342800.day", 
-  delim = ";", locale = locale(decimal_mark = "."), skip=40, trim_ws=TRUE
+  "01-daten/6342800.day",
+  delim = ";", locale = locale(decimal_mark = "."), skip = 40, trim_ws = TRUE
 ) |>
   select(
     Datum = "YYYY-MM-DD",

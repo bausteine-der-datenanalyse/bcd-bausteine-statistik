@@ -1,0 +1,35 @@
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## Messung mit dem Seitenradar {#sec-seitenradar}
+
+Dargestellt ist ein Ausschnitt einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum.
+
+```{r}
+#| echo: false
+tibble(
+    Datum = c("13.12.2017 09:15:25", "13.12.2017 09:15:30", "13.12.2017 09:15:31", "13.12.2017 09:15:33", "13.12.2017 09:15:34", "13.12.2017 09:15:38", "13.12.2017 09:15:40", "13.12.2017 09:15:52", "13.12.2017 09:15:55", "13.12.2017 09:16:38", "13.12.2017 09:16:44", "13.12.2017 09:16:47", "13.12.2017 09:16:50", "13.12.2017 09:16:55", "13.122017 09:16:57", "13.12.2017 09:17:00", "13.12.2017 09:17:01", "13.12.2017 09:17:03", "13.12.2017 09:17:04", "13.12.2017 09:17:05", "13.12.2017 09:17:07", "13.12.2017 09:17:08", "13.12.2017 09:17:09", "13.12.2017 09:17:13", "13.12.2017 09:17:17", "13.12.2017 09:17:19", "13.12.2017 09:17:21", "13.12.2017 09:17:24", "13.12.2017 09:17:25", "13.12.2017 09:17:27"),
+    Geschwindigkeit = c(47, 48, 38, 40, 40, 36, 34, 57, 34, 57, 56, 53, 48, 63, 51, 51, 49, 49, 52, 48, 45, 48, 55, 49, 49, 52, 50, 60, 47, 48),
+    Abstand = c(1.54, 4.33, 0.19, 1.47, 0.86, 2.19, 0.82, 11.29, 2.63, 43.71, 4.8, 2.89, 2.04, 5.34, 0.44, 2.99, 0.37, 1.13, 0.25, 1.45, 0.51, 0.2, 0.59, 3.34, 3.18, 2.22, 1.97, 1.73, 0.55, 1.55),
+    "Länge (Radar)" = c(478, 383, 399, 437, 417, 1088, 349, 800, 93, 431, 632, 413, 640, 440, 810, 427, 499, 413, 433, 468, 1013, 456, 388, 396, 400, 692, 336, 421, 96, 405),
+    "Länge (cm)" = c(541, 433, 451, 494, 472, 1231, 395, 905, 105, 488, 715, 467, 768, 498, 917, 483, 565, 467, 490, 530, 1146, 516, 439, 448, 453, 764, 380, 476, 116, 458),
+    Fahrzeug = c("Transporter", "PKW", "PKW", "Transporter", "PKW", "Lastzug", "PKW", "Lastzug", "Zweirad", "Transporter", "LKW", "PKW", "LKW", "Transporter", "Lastzug", "Transporter", "Transporter", "PKW", "Transporter", "Transporter", "Lastzug", "Transporter", "PKW", "PKW", "PKW", "LKW", "PKW", "PKW", "Zweirad", "PKW")
+) |>
+    kable(
+        booktabs = TRUE,
+        align = c("l", "c", "c", "c", "c", "r")
+    ) |>
+    row_spec(0, bold = TRUE) |>
+    kable_styling(font_size = 7)
+```
+
+Bearbeiten Sie folgende Punkte:
+
+1. Welche Fahrzeuge fahren wie oft am Messgerät vorbei? Wie groß sind die Anteile bezogen auf die gesamte Anzahl von Fahrzeugen?
+1. Stellen Sie die absolute Häufigkeitsverteilung in einem Säulen- und einem Kreisdiagramm dar (Skizze)
+1. Wie würde das Stabdiagramm für die absolute Häufigkeitsverteilung des Abstandes prinzipiell aussehen (Skizze)? Macht diese Darstellung hier Sinn?
+1. Erstellen Sie ein Histogramm für die Geschwindigkeit mit geeigneten Klassen (Skizze)

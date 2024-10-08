@@ -1,0 +1,12 @@
+assignments:
+  title: "Aufgabenblatt $idx"
+  content:
+  - root: m-statistische-daten
+    subtitle: "Statistische Daten"
+    include:
+    - "01.*.qmd"
+    - "02.*.qmd"
+  - root: m-einzelne-merkmale
+    subtitle: "Untersuchung einzelner Merkmale"
+    include:
+    - ".*.qmd"

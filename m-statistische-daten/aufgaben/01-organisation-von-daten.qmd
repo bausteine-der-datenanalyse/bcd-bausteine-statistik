@@ -1,0 +1,10 @@
+## Organisation von Daten
+
+In der Excel-Datei `beispiel-rohdaten.xlsx` finden Sie die fiktive Daten zu Ländern und Fallzahlen (Beispiel im Skript). Ermitteln Sie für alle vier angegebenen Lösungen zur Organisation der Daten
+
+- die gesamte Anzahl der Fälle sowie
+- deren Anteil an der Gesamtbevölkerung.
+
+In welcher der vier Lösungen ist die Aufgabe am einfachsten? Wodurch zeichnet sich diese Lösung aus?
+
+Zur Kontrolle: Richtig sind 547660 Fälle sowie ein Anteil von 0.019% an der Gesamtbevölkerung.
