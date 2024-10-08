@@ -1,2 +1,13 @@
 project:
+  output-dir: ../../_output/aufgaben
   pre-render: ../../collect-content.R
+
+lang: de
+number-depth: 3
+number-sections: true
+
+format: 
+  html: 
+    license: CC BY-SA
+    css: ../../bcd-style.css
+  pdf: default

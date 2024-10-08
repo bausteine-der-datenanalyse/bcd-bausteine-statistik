@@ -1,8 +1,8 @@
 ## Datenquellen im Internet
 
-Im Internet stehen eine unglaubliche Menge an Daten zur Verfügung. Recherchieren Sie zu einem Thema, beispielsweise
+Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren Sie zu einem Thema, beispielsweise
 
-- Temperatur Bochum
+- Lufttemperatur in Bochum (Deutscher Wetterdienst)
 - Entwicklung der Lebenserwartung weltweit
 - Verkehr auf Bundesautobahnen
 - Potential für Windkraftanlagen in Regionen Deutschlands

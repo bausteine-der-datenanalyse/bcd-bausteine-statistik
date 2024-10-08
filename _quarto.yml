@@ -1,5 +1,6 @@
 project:
   output-dir: _output
+  pre-render: collect-content.R
 
 lang: de
 number-depth: 3
@@ -26,7 +27,6 @@ format:
       text: |
         \printindex
     default-image-extension: pdf
-    keep-tex: true
 
 bibliography: bcd-bausteine-statistik.bib
 

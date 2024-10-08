@@ -12,9 +12,9 @@ Aufgaben:
 
 1. Geben Sie die Grundgesamtheit und die statistischen Einheiten an.
 1. Geben Sie für jedes Merkmal an,
-  a) welche Ausprägungen es gibt und ob das Merkmal stetig oder diskret ist,
-  a) welches Skalenniveau zugrunde liegt,
-  a) ob es sich um ein qualitatives oder ein quantitatives Merkmal handelt.
+    a) welche Ausprägungen es gibt und ob das Merkmal stetig oder diskret ist,
+    a) welches Skalenniveau zugrunde liegt,
+    a) ob es sich um ein qualitatives oder ein quantitatives Merkmal handelt.
 
 Es bietet sich an, die Angaben in tabellarischer Form zusammenzustellen.
 
