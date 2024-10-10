@@ -1,0 +1,3 @@
+[beispiel-rohdaten-loesung.xlsx](01-daten/beispiel-rohdaten-loesung.xlsx)
+
+![](00-bilder/l-sd-10.jpg)

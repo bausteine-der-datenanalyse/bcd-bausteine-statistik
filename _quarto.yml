@@ -1,6 +1,5 @@
 project:
   output-dir: _output
-  pre-render: collect-content.R
 
 lang: de
 number-depth: 3

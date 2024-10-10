@@ -17,4 +17,3 @@ Was konnten Sie finden? Gehen Sie dabei auf folgende Punkte ein:
 - Wie sind die Daten organisiert?
 - Welchen Umfang besitzt die Datenbasis?
 - Welche Merkmale werden erfasst? Charakterisieren Sie die Merkmale!
-

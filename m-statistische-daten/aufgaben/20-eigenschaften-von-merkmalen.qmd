@@ -19,4 +19,3 @@ Aufgaben:
 Es bietet sich an, die Angaben in tabellarischer Form zusammenzustellen.
 
 Quelle: Fahrmeir, L., Heumann, C., Künstler, R., Pigeot, I., & Tutz, G. (2016). Statistik, Der Weg zur Datenanalyse (8. Auflage).
-
