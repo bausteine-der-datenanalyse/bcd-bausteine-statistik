@@ -6,7 +6,7 @@ library(purrr)
 library(readr)
 library(stringr)
 
-source(here("r-lib/utilities.R"))
+source(file.path(this.path::this.dir(), "r-lib/utilities.R"))
 
 # Variables
 dir_in_base <- here()
