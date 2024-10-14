@@ -18,51 +18,50 @@ Um die Häufigkeitsverteilung zu bestimmen, muss zunächst geschaut werden, welc
 
 Als absolute Häufigkeit der Ausprägung $a_j$ bezeichnen wir nun die Anzahl der Werte aus der Urliste $x_1, x_2, \dots, x_n$, die mit $a_j$ übereinstimmen. Wird die absolute Häufigkeit durch den Stichprobenumfang $n$ geteilt, dann ergibt sich die relative Häufigkeit.
 
-::: {.definition}
-**Definition (absolute und relative Häufigkeit):** 
-Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir folgende Bezeichnungen.
+::: definition
+**Definition (absolute und relative Häufigkeit):** Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir folgende Bezeichnungen.
 
 $h(a_j)$:
 
-: absolute Häufigkeit der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
+:   absolute Häufigkeit der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
 
 $f(a_j) = h(a_j)/n$:
 
-: relative Häufigkeit der Ausprägung $a_j$.
+:   relative Häufigkeit der Ausprägung $a_j$.
 
 Mit den Abkürzungen $h_j = h(a_j)$ und $f_j = f(a_j)$ heißen die Zahlenfolgen
 
 $h_1, h_2, \dots, h_k$:
 
-: [absolute Häufigkeitsverteilung]{.neuerbegriff},
+:   [absolute Häufigkeitsverteilung]{.neuerbegriff},
 
 $f_1, f_2, \dots, f_k$:
 
-: [relative Häufigkeitsverteilung]{.neuerbegriff}.
+:   [relative Häufigkeitsverteilung]{.neuerbegriff}.
 :::
 
 ### Grafische Darstellung von Häufigkeitsverteilungen {#sec-grafische-darstellung}
 
 Die Häufigkeitsverteilungen lassen sich natürlich tabellarisch aufbereiten, häufig ist aber eine grafische Darstellung besser geeignet. Die gebräuchlichsten Darstellungsformen sind Stab-, Säulen-, Balken- und Kreisdiagramme. Als Alternative zu Kreisdiagrammen werden häufig auch Ringdiagramme verwendet. In @fig-diagrammtypen sind diese Diagrammtypen beispielhaft dargestellt.
 
-::: {.definition}
-**Diagrammtypen** 
+::: definition
+**Diagrammtypen**
 
 Stabdiagramm:
 
-: Zahlenwerte für $h_1, h_2, \dots, h_n$ (oder $f_1, f_2, \dots, f_n$) werden mit einem senkrechten Strich angetragen.
+:   Zahlenwerte für $h_1, h_2, \dots, h_n$ (oder $f_1, f_2, \dots, f_n$) werden mit einem senkrechten Strich angetragen.
 
 Säulendiagramm:
 
-: Wie das Stabdiagramm aber mit Rechtecken anstatt Strichen.
+:   Wie das Stabdiagramm aber mit Rechtecken anstatt Strichen.
 
 Balkendiagramm:
 
-: Das Säulendiagramm um 90° gedreht.
+:   Das Säulendiagramm um 90° gedreht.
 
 Kreisdiagramm:
 
-: Der vom $j$-ten Kreissektor eingeschlossene Winkel beträgt $\alpha_j = f_j \cdot 360°$. Die Flächen der Kreissektoren sind damit proportional zu den Häufigkeiten.
+:   Der vom $j$-ten Kreissektor eingeschlossene Winkel beträgt $\alpha_j = f_j \cdot 360°$. Die Flächen der Kreissektoren sind damit proportional zu den Häufigkeiten.
 :::
 
 ```{r}
@@ -86,7 +85,6 @@ p_pie <- ggplot(data = d_energietraeger_anteil_2017) +
 ```
 
 ::: {#fig-diagrammtypen layout="[[100,-5,100], [1], [1], [1], [100,-5,100]]"}
-
 ```{r}
 #| fig-width: 6
 #| fig-asp: 0.8
@@ -105,7 +103,7 @@ p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 ```
 
-&nbsp;\bigskip
+ \bigskip
 
 ```{r}
 #| fig-width: 12
@@ -116,7 +114,7 @@ p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 p_bar + coord_flip()
 ```
 
-&nbsp;\bigskip
+ \bigskip
 
 ```{r}
 #| fig-width: 6
@@ -141,13 +139,13 @@ Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm)
 
 **Kritik an Kreisdiagrammen**. Obwohl Kreisdiagramme in der Praxis sehr häufig verwendet werden sind sie nicht ganz unproblematisch. Das hat mehrere Gründe:
 
-- Längen sind leichter zu unterscheiden als Winkel (siehe @fig-pie-or-bar).
+-   Längen sind leichter zu unterscheiden als Winkel (siehe @fig-pie-or-bar).
 
-- Die Diagramme werden für viele Merkmalsausprägungen schnell unübersichtlich.
+-   Die Diagramme werden für viele Merkmalsausprägungen schnell unübersichtlich.
 
-- Wenn Verteilungen verglichen werden sollen, dann müssen zwei Kreisdiagramme erstellt werden.
+-   Wenn Verteilungen verglichen werden sollen, dann müssen zwei Kreisdiagramme erstellt werden.
 
-- Die Darstellung der zeitlichen Entwicklung einer Verteilung ist nicht möglich (siehe @fig-diagramm-balken-jahre).
+-   Die Darstellung der zeitlichen Entwicklung einer Verteilung ist nicht möglich (siehe @fig-diagramm-balken-jahre).
 
 ```{r}
 #| label: fig-pie-or-bar
@@ -181,7 +179,7 @@ ggplot(data = d_energietraeger_pj) +
 
 Wenn ein Merkmal viele verschiedene Ausprägungen besitzt, das heißt, wenn die meisten Ausprägungen nur ein oder zwei mal vorkommen, dann ist die Darstellung einer Verteilung nicht informativ. Das ist zum Beispiel fast immer dann der Fall, wenn es sich um stetige oder quasi-stetige Merkmale handelt.
 
-::: {.beispiel}
+::: beispiel
 **Beispiel Klausurergebnisse:** Wir betrachten die Ergebnisse einer Klausur im Fach Mathematik mit knapp 130 Teilnehmern. Die erreichten Prozentpunkte bilden die Urliste
 
 $$
@@ -207,13 +205,13 @@ Um Merkmale mit einer großen Zahl an verschiedenen Ausprägungen übersichtlich
 
 Ein Histogramm entsteht in drei Schritten. Wir gehen dabei davon aus, dass es sich um ein zahlenwertiges Merkmal handelt.
 
-1. Für die [Gruppierung]{.neuerbegriff} der Daten wählen wir als [Klassen]{.neuerbegriff} die $k$ benachbarten Intervalle $$[c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1}$$. Die Intervalle sind auf einer Seite geschlossen und auf der anderen Seite offen, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist.
+1.  Für die [Gruppierung]{.neuerbegriff} der Daten wählen wir als [Klassen]{.neuerbegriff} die $k$ benachbarten Intervalle $$[c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1}$$. Die Intervalle sind auf einer Seite geschlossen und auf der anderen Seite offen, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist.
 
 Anmerkung: Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (also linksoffen) wählen können, das macht keinen grundlegenden Unterschied.
 
-1. Wir zählen für jede Klasse wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
+1.  Wir zählen für jede Klasse wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
 
-1. Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
+2.  Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
 
@@ -223,7 +221,7 @@ $$
 
 aber letztlich entscheidet der subjektive Eindruck.
 
-::: {.beispiel}
+::: beispiel
 **Beispiel Klausurergebnisse (Fortsetzung):** Mit den Klassen $$[0, 5), [5, 10), \dots, [95, 101)$$
 
 ergibt sich für die Mathematikklausur folgendes Histogramm:
@@ -285,7 +283,7 @@ An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegeb
 
 **Absolute kumulierte Häufigkeitsverteilung.** Häufig stellt sich für ein bestimmtes Merkmal einer Erhebung die Frage, wie viele der Werte $x_1, x_2, \dots, x_n$ kleiner oder gleich einem bestimmten Grenzwert $x$ sind. So kann man zum Beispiel bei einer Klausur fragen, wie viele Studierende durchgefallen sind, das heißt in der Prüfung $49$ oder weniger Prozentpunkte erreicht haben. Selbstverständlich könnte man die entsprechenden Werte einfach zählen, einen bildhaften Eindruck liefert jedoch eine Darstellung der absoluten kumulierten Häufig-keits-ver-teilung des Merkmals. Es handelt sich dabei um eine Funktion, die üblicherweise mit $H$ bezeichnet wird. Am einfachsten ist das an einem Beispiel zu sehen.
 
-::: {.beispiel}
+:::: beispiel
 **Beispiel Häufigkeitsverteilung:** Wir betrachten ein Merkmal mit den Werten
 
 $$
@@ -345,7 +343,7 @@ ggplot() +
 :::
 
 Am Graphen der absoluten kumulierten Häufigkeitsverteilung lässt sich nun unmittelbar ablesen, dass es (zum Beispiel) 4 Werte gibt, die kleiner oder gleich 1.9 sind.
-:::
+::::
 
 Wie wir an dem Beispiel gesehen haben, ist die absolute Häufigkeitsverteilung $H : \mathbb{R} \to \mathbb{N}$ also eine Funktion mit der Zuordnungsvorschrift
 
@@ -375,7 +373,7 @@ $$
 
 wobei wieder $a_j \leq x$ und $a_{j+1} > x$ gelten soll.
 
-::: {.beispiel}
+::: beispiel
 **Beispiel Klausurergebnisse (Fortsetzung ):** Für die Mathematikklausur erhalten wir (mit den auf ganze Zahlen gerundeten Prozentpunkten) folgende empirische Verteilungsfunktion:
 
 ```{r}
@@ -409,14 +407,14 @@ und die Durchfallquote beträgt 32%.
 
 **Eigenschaften der Funktionen.** Die Funktionen $H$ und $F$ haben folgende Eigenschaften:
 
-- Beide Funktionen sind monoton wachsend.
+-   Beide Funktionen sind monoton wachsend.
 
-- Für $x < a_1$ ist der Funktionswert gleich null, es gilt also 
+-   Für $x < a_1$ ist der Funktionswert gleich null, es gilt also
 
-  $$
-    H(x) = F(x) = 0 \quad \text{für} \quad x < a_1.
-  $$
+    $$
+      H(x) = F(x) = 0 \quad \text{für} \quad x < a_1.
+    $$
 
-- Für $x \geq a_k$ ist der Funktionswert von $H$ gleich der Anzahl der Beobachtungen und für $F$ gleich eins, so dass $$H(x) = n  \quad \text{beziehungsweise} \quad F(x) = 1 \quad \text{für} \quad x \geq a_k$$ gilt.
+-   Für $x \geq a_k$ ist der Funktionswert von $H$ gleich der Anzahl der Beobachtungen und für $F$ gleich eins, so dass $$H(x) = n  \quad \text{beziehungsweise} \quad F(x) = 1 \quad \text{für} \quad x \geq a_k$$ gilt.
 
-- Die Funktionen springen an den Stellen $a_j$ jeweils um $h_j$ beziehungsweise $f_j$.
+-   Die Funktionen springen an den Stellen $a_j$ jeweils um $h_j$ beziehungsweise $f_j$.
