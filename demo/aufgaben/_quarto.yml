@@ -1,6 +1,6 @@
 project:
   output-dir: ../../_output/aufgaben
-  pre-render: ../../collect-content.R
+  pre-render: ../../../bcd-bausteine-montieren/collect-content.R
 
 lang: de
 number-depth: 3
