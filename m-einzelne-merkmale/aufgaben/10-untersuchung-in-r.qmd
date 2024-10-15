@@ -1,0 +1,53 @@
+## Untersuchung einzelner Merkmale in R
+
+In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat.
+
+### Teil 1
+
+Öffnen Sie im RStudio-Projekt `03-untersuchung-einzelner-merkmale` (von Moodle herunterladen) das Dokument `uebung.Rmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm`an. Überprüfen Sie das Ergebnis mit `knit`
+
+### Teil 2
+
+Die ungefähren Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der nachfolgenden Tabelle zusammengefasst.
+
+\begin{center}
+  \begin{tabular}{rc}
+    \toprule
+    Stadt         & Entfernung [km] \\
+    \midrule
+    Essen         & 17.8            \\
+    Wattenscheid  & 10.2            \\
+    Dortmund      & 15.4            \\
+    Herne         & 10.7            \\
+    Wuppertal     & 21.4            \\
+    Gelsenkirchen & 14.1            \\
+    Mühlheim      & 27.2            \\
+    \bottomrule    
+  \end{tabular}
+\end{center}
+
+Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und stellen Sie die Entfernungen in einem geeigneten Plot dar.
+
+### Teil 3
+
+Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folgenden Fragen jeweils mit einem geeigneten Plot:
+
+1.  Wie viele der befragten Personen sind weiblich, wieviele männlich?
+2.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
+3.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
+
+### Teil 4
+
+Welche Verkehrsmittel werden für den Weg zur BO verwendet? Im Einzelnen:
+
+-   Welches Verkehrsmittel wird wie häufig genutzt?
+-   Welcher Fachbereich nutzt am stärksten den ÖPNV?
+
+### Teil 5
+
+Wie lange dauert der Weg zur Hochschule Bochum? Im Einzelnen:
+
+-   Wie sind die Wegezeiten verteilt?
+-   Gibt es einen Zusammenhang zwischen Verkehrsmittel und der benötigten Zeit?
+-   Welche Wegezeit wird von 75% der Befragten nicht überschritten?
+-   Wie unterscheidet sich dieser 75% Anteil nach den Verkehrsmitteln?
