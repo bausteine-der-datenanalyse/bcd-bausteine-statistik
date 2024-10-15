@@ -2,6 +2,16 @@ library(readr)
 library(stringr)
 
 
+exclude_file_from_copy <- function(file) {
+    for (p in copy_exclude_patterns) {
+        if (str_detect(file, p)) {
+            return(TRUE)
+        }
+    }
+    FALSE
+}
+
+
 copy_dir <- function(dir, from_basedir, to_basedir) {
     from_dir <- file.path(from_basedir, dir)
     to_dir <- file.path(to_basedir, dir)
@@ -9,9 +19,13 @@ copy_dir <- function(dir, from_basedir, to_basedir) {
     if (dir.exists(from_dir)) {
         if (!dir.exists((to_dir))) dir.create((to_dir))
         for (file in list.files(path = from_dir)) {
-            from_file <- file.path(from_dir, file)
-            to_file <- file.path(to_dir, file)
-            file.copy(from_file, to_file, overwrite = FALSE)
+            if (!exclude_file_from_copy(file)) {
+                from_file <- file.path(from_dir, file)
+                to_file <- file.path(to_dir, file)
+
+                # list.files lists folders
+                if (!dir.exists(from_file)) file.copy(from_file, to_file, overwrite = FALSE)
+            }
         }
     }
 }
@@ -56,7 +70,7 @@ cat_files <- function(dir, pattern, with_solution = FALSE) {
 }
 
 
-fname <- function(basename, idx) {
+fname <- function(basename, idx, extension = ".qmd") {
     idx <- str_pad(idx, 2, side = "left", pad = "0")
-    paste0(insert_index(basename, idx), ".qmd")
+    paste0(insert_index(basename, idx), extension)
 }
