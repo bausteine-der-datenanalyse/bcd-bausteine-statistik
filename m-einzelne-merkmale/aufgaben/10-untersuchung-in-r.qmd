@@ -2,9 +2,9 @@
 
 In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat.
 
-### Teil 1
+### Projekt herunterladen
 
-Öffnen Sie im RStudio-Projekt `03-untersuchung-einzelner-merkmale` (von Moodle herunterladen) das Dokument `uebung.Rmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm`an. Überprüfen Sie das Ergebnis mit `knit`
+Öffnen Sie im RStudio-Projekt zu den Aufgaben (von Moodle herunterladen) das Dokument `einzelne-merkmale.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
 
 ### Teil 2
 
