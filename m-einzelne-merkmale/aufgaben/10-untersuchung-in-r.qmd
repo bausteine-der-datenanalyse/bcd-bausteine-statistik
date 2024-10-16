@@ -6,7 +6,7 @@ In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung,
 
 Öffnen Sie im RStudio-Projekt zu den Aufgaben (von Moodle herunterladen) das Dokument `einzelne-merkmale.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
 
-### Teil 2
+### Entfernungen zu umliegenden Städten
 
 Die ungefähren Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der nachfolgenden Tabelle zusammengefasst.
 
@@ -22,7 +22,7 @@ Die ungefähren Entfernungen von der Hochschule Bochum zu umliegenden Städten s
 
 Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und stellen Sie die Entfernungen in einem geeigneten Plot dar.
 
-### Teil 3
+### Merkmale der befragten Personen
 
 Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folgenden Fragen jeweils mit einem geeigneten Plot:
 
@@ -30,14 +30,14 @@ Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folg
 2.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
 3.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
 
-### Teil 4
+### Wahl der Verkehrsmittel
 
 Welche Verkehrsmittel werden für den Weg zur BO verwendet? Im Einzelnen:
 
 -   Welches Verkehrsmittel wird wie häufig genutzt?
 -   Welcher Fachbereich nutzt am stärksten den ÖPNV?
 
-### Teil 5
+### Wegezeiten
 
 Wie lange dauert der Weg zur Hochschule Bochum? Im Einzelnen:
 
