@@ -4,11 +4,11 @@ In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung,
 
 ### Projekt herunterladen
 
-Öffnen Sie im RStudio-Projekt zu den Aufgaben (von Moodle herunterladen) das Dokument `einzelne-merkmale.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
+Öffnen Sie im RStudio-Projekt zu den Aufgaben (von Moodle herunterladen) das Dokument `einzelne-merkmale-aufgaben.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
 
 ### Entfernungen zu umliegenden Städten
 
-Die ungefähren Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der nachfolgenden Tabelle zusammengefasst.
+Die Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der nachfolgenden Tabelle zusammengefasst.
 
 | Stadt         | Entfernung (km) |
 |---------------|-----------------|
@@ -27,8 +27,8 @@ Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und st
 Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folgenden Fragen jeweils mit einem geeigneten Plot:
 
 1.  Wie viele der befragten Personen sind weiblich, wieviele männlich?
-2.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
-3.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
+1.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
+1.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
 
 ### Wahl der Verkehrsmittel
 
