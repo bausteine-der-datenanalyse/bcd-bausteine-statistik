@@ -10,21 +10,15 @@ In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung,
 
 Die ungefähren Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der nachfolgenden Tabelle zusammengefasst.
 
-\begin{center}
-  \begin{tabular}{rc}
-    \toprule
-    Stadt         & Entfernung [km] \\
-    \midrule
-    Essen         & 17.8            \\
-    Wattenscheid  & 10.2            \\
-    Dortmund      & 15.4            \\
-    Herne         & 10.7            \\
-    Wuppertal     & 21.4            \\
-    Gelsenkirchen & 14.1            \\
-    Mühlheim      & 27.2            \\
-    \bottomrule    
-  \end{tabular}
-\end{center}
+| Stadt         | Entfernung (km) |
+|---------------|-----------------|
+| Essen         | 17.8            |
+| Wattenscheid  | 10.2            |
+| Dortmund      | 15.4            |
+| Herne         | 10.7            |
+| Wuppertal     | 21.4            |
+| Gelsenkirchen | 14.1            |
+| Mühlheim      | 27.2            |
 
 Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und stellen Sie die Entfernungen in einem geeigneten Plot dar.
 
