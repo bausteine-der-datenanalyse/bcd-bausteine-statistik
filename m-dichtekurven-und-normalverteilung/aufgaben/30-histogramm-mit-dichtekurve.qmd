@@ -1,0 +1,3 @@
+## Histogramm mit Dichtekurve
+
+Stellen Sie das Histogramm der Geschwindigkeiten gemeinsam mit einer approximierten Dichtekurve dar. Experimentieren Sie hierbei mit verschiedenen Breiten des Kerns.

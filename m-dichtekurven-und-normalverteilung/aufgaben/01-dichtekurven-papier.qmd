@@ -1,0 +1,18 @@
+
+## Dichtekurven auf dem Papier
+
+Gegeben ist die Funktion $f : \mathbb{R} \to \mathbb{R}$ mit
+
+$$
+  f(x) 
+  =
+  \begin{cases}
+    a \cdot(1-(x-1)^2) & \text{für} \quad 0 \leq x \leq 2 \\
+    0 & \text{sonst}
+  \end{cases}
+$$ 
+<br/>
+
+1.  Bestimmen Sie den Wert von $a \in \mathbb{R}$, so dass $f$ eine Dichtekurve ist.
+2.  Geben Sie den Median $x_{\mathrm{med}}$ an.
+3.  Skizzieren Sie die Funktion $F : \mathbb{R} \to \mathbb{R}$ für die gilt: $p = F(x_p)$.
