@@ -1,18 +1,41 @@
-assignments:
+target-folder: c
 
-  with_solution: true
-  title: "Aufgabenblatt ${idx}"
 
-  content:
+definitions:
 
-  - root: m-statistische-daten
-    subtitle: "Statistische Daten"
-    sol: 6ou3wer
-    include:
-    - ".*.qmd"
+- assignment-header: |
+    ---
+    title: "Aufgabenblatt ${sidx}"
+    subtitle: "${subtitle}"
+    ---
 
-  - root: m-einzelne-merkmale
-    subtitle: "Untersuchung einzelner Merkmale"
-    sol: 834hja1
-    include:
-    - ".*.qmd"
+- assignment-solution-header: |
+    ---
+    title: "Lösungen zu Aufgabenblatt ${sidx}"
+    subtitle: "${subtitle}"
+    ---
+
+
+jobs:
+
+# 1. Statistische Daten
+- assignment-paper:
+  subtitle: "Statistische Daten"
+  sol: 6ou3wer
+  files: 
+  - ${project-folder}/m-statistische-daten/aufgaben/*.qmd
+- copy:
+  from: ${project-folder}/m-statistische-daten/aufgaben/00-bilder
+  to: ${target-folder}/00-bilder
+- copy:
+  from: ${project-folder}/m-statistische-daten/aufgaben/01-daten
+  to: ${target-folder}/01-daten
+- increment-index:
+
+# 1. Einzelne Merkmale
+- assignment-paper:
+  subtitle: "Untersuchung einzelner Merkmale"
+  sol: 834hja1
+  files: 
+  - ${project-folder}/m-einzelne-merkmale/aufgaben/*.qmd    
+- increment-index:
