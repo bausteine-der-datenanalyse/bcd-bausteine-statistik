@@ -2,11 +2,13 @@
 
 Ein Körper besteht aus drei verschiedenen Materialien:
 
-| Material | Dichte [kg $m^{-3}$]| Masse [kg] |
-|------------------------|------------------------|------------------------|
-| 1 | 1200 | 3600 |
-| 2 | 2400 | 4800 |
-| 3 | 500 | 2000 |
+| Material | Dichte in kg/m³ | Masse in kg |
+|----------|-----------------|-------------|
+| 1        | 1200            | 3600        |
+| 2        | 2400            | 4800        |
+| 3        | 500             | 2000        |
 
-1.  Geben Sie die mittlere Dichte $\rho_m$ des Körpers an
-2.  Leiten Sie daraus eine Formel für die mittlere Dichte eines Körpers ab, der aus $n$ Anteilen von je einem Kilogramm Gewicht mit den Dichten $\rho_1, \rho_2, \dots, \rho_n$ besteht.
+Aufgaben:
+
+1.  Geben Sie die mittlere Dichte $\rho_\mathrm{m}$ des Körpers an
+1.  Leiten Sie daraus eine Formel für die mittlere Dichte eines Körpers ab, der aus $n$ Anteilen von je einem Kilogramm Gewicht mit den Dichten $\rho_1, \rho_2, \dots, \rho_n$ besteht.

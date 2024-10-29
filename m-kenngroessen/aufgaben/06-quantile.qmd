@@ -1,0 +1,11 @@
+## Quantile
+
+1.  Stellen Sie 20 unterschiedliche Zahlen auf dem Zahlenstrahl dar, die Werte spielen dabei keine Rolle.
+1.  Zeichnen Sie die in der Tabelle unten angegebenen Zahlen auf dem Zahlenstrahl ein.
+1.  Ermitteln Sie die Position der Zahlen $x_{0.05}, x_{0.33}$ und $x_{0.75}$ mithilfe der empirischen Verteilungsfunktion $F$ zu Ihren Werten (Graph skizzieren).
+
+| Zahl | Eigenschaft 1 | Eigenschaft 2 |
+|----------------|----------------------------|----------------------------|
+| $x_{0.05}$ | Mind. 5% der Zahlen $\leq x_{0.05}$ | Mind. 95% der Zahlen $\geq x_{0.05}$ |
+| $x_{0.33}$ | Mind. 33% der Zahlen $\leq x_{0.33}$ | Mind. 67% der Zahlen $\geq x_{0.33}$ |
+| $x_{0.75}$ | Mind. 75% der Zahlen $\leq x_{0.75}$ | Mind. 25% der Zahlen $\geq x_{0.75}$ |

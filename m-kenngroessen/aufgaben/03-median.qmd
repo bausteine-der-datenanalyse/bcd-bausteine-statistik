@@ -1,0 +1,25 @@
+## Median
+
+Geben Sie eine Vorschrift zur Bestimmung der $x$-Koordinate des blauen Punktes an. Tipp: Es hilft, die roten Punkte durchzunummerieren.
+
+::: {layout-ncol=3}
+
+![](00-bilder/median-funktion-1.svg){}
+
+![](00-bilder/median-funktion-2.svg){}
+
+![](00-bilder/median-funktion-3.svg){}
+
+![](00-bilder/median-funktion-4.svg){}
+
+![](00-bilder/median-funktion-5.svg){}
+
+![](00-bilder/median-funktion-6.svg){}
+
+![](00-bilder/median-funktion-7.svg){}
+
+![](00-bilder/median-funktion-8.svg){}
+
+![](00-bilder/median-funktion-9.svg){}
+
+:::

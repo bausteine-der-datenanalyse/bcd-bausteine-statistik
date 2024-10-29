@@ -32,10 +32,22 @@ jobs:
   to: ${target-folder}/01-daten
 - increment-index:
 
-# 1. Einzelne Merkmale
+# 2. Einzelne Merkmale
 - assignment-paper:
   subtitle: "Untersuchung einzelner Merkmale"
   sol: 834hja1
   files: 
   - ${project-folder}/m-einzelne-merkmale/aufgaben/*.qmd    
+- increment-index:
+
+# 3. Kenngrößen von Verteilungen
+- assignment-paper:
+  subtitle: "Kenngrößen von Verteilungen"
+  sol: 348aiue
+  files: 
+  - ${project-folder}/m-kenngroessen/aufgaben/*.qmd    
+- copy:
+  from: ${project-folder}/m-kenngroessen/aufgaben/00-bilder
+  to: ${target-folder}/00-bilder
+  exclude-patterns: [".afdesign$"]
 - increment-index:

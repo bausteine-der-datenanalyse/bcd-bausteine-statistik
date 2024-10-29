@@ -1,0 +1,7 @@
+## Lagemaße berechnen
+
+Das Bundesamt für politische Bildung hat die unten dargestellte Tabelle über die Anzahl von Kindern in deutschen Haushalten erstellt (eine aktuellere Version finden Sie [hier](https://www.bpb.de/kurz-knapp/zahlen-und-fakten/soziale-situation-in-deutschland/61597/familienhaushalte-nach-zahl-der-kinder/)). Geben Sie das arithmetische Mittel, den Median und den Modus für die Anzahl der Kinder je Haushalt an. Welche vereinfachende Annahme müssen Sie hierzu treffen?
+
+![](00-bilder/familien.png){fig-align="center" width=60%}
+
+
