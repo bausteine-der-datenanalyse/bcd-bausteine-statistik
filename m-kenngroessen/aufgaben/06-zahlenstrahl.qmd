@@ -1,0 +1,16 @@
+## Zahlenstrahl
+
+1.  Stellen Sie 20 unterschiedliche Zahlen auf dem Zahlenstrahl dar, die Werte spielen dabei keine Rolle.
+2.  Zeichnen Sie folgende Zahlen auf dem Zahlenstrahl ein: 
+
+
+| Zahl | Eigenschaft 1| Eigenschaft 1  |
+|------------------------|------------------------|------------------------|
+| $x_{0.05}$ | Mind. 5\% der Zahlen $\leq x_{0.05}$ | Mind. 95\% der Zahlen $\geq x_{0.05}$ |
+| $x_{0.33}$ | Mind. 33\% der Zahlen $\leq x_{0.33}$ | Mind. 67\% der Zahlen $\geq x_{0.33}$ |
+| $x_{0.75}$ | Mind. 75\% der Zahlen $\leq x_{0.75}$ | Mind. 25\% der Zahlen $\geq x_{0.75}$ |
+
+
+<br/>
+
+3.  Ermitteln Sie die Position der Zahlen $x_{0.05}, x_{0.33}$ und $x_{0.75}$ mithilfe der empirischen Verteilungsfunktion $F$ (Graph skizzieren).

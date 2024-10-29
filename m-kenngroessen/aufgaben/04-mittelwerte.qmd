@@ -1,0 +1,6 @@
+
+## Mittelwerte berechnen
+
+Das Bundesamt für politische Bildung hat die links dargestellte Tabelle über die Anzahl von Kindern in deutschen Haushalten erstellt. Geben Sie das arithmetische Mittel, den Median und den Modus an.
+
+![](00-bilder/familien.png){}

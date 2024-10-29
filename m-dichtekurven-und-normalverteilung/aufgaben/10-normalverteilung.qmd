@@ -1,0 +1,7 @@
+## Normalverteilung
+
+Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2, 1, 2, 4$ in einem Plot dar.
+
+Zusatzaufgabe: Füllen Sie die Bereiche unter den Kurven farbig und verwenden Sie hierfür transparente Flächen.
+
+**Hinweis:** Für Aufgaben 3 bis 5 verwenden Sie den Datensatz zu einer Geschwindigkeitsmessung an der Universitätsstraße Bochum im Jahr 2017 von Prof. Iris Mühlenbruch. Die Spalte VZ kennzeichnet dabei die Verkehrszeit (siehe <https://de.wikipedia.org/wiki/Verkehrszeiten>).

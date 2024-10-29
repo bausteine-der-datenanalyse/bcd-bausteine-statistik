@@ -1,0 +1,11 @@
+## Titel:
+
+Zeigen Sie, dass die Beziehungen
+
+$$
+  \sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y}) = \sum_{i=1}^n x_i y_i - n \, \overline{x} \, \overline{y}
+  \quad \text{und} \quad
+  \displaystyle \sum_{i=1}^n (x_i - \overline{x})^2 = \sum_{i=1}^n x_i^2 - \, n \, \overline{x}^2
+$$ 
+
+gelten.

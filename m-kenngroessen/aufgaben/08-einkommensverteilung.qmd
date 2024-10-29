@@ -1,0 +1,14 @@
+## Aufgabe 8
+
+Gegeben sei folgende Einkommensverteilung. Dabei beträgt in jeder Einkommensklasse das Gesamteinkommen 80000 Euro.
+
+::: {layout-ncol=2}
+
+![](00-bilder/einkommen.png){}
+
+1.Bestimmen Sie die Lorenzkurve und den Gini-Koeffizient.
+2.Berechnen Sie den arithmetischen Mittelwert und die Standardabweichung.
+<br/>
+3.Wie groß ist der Anteil der 25% reichsten Einkommensbezieher am Gesamteinkommen?
+
+:::
