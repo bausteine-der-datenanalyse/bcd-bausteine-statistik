@@ -1,3 +1,0 @@
-## Histogramm
-
-Plotten Sie das Histogramm der Geschwindigkeiten zusammen mit der zugehörigen Normalverteilung. Stellen Sie in dem Plot zusätzlich die Werte $\mu - \sigma, \mu, \mu + \sigma$ dar. Prüfen Sie mithilfe eines NQ-Plots, ob die Werte näherungsweise normalverteilt sind.

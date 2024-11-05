@@ -1,5 +1,4 @@
-
-## Dichtekurven auf dem Papier
+## Eigenschaften von Dichtekurven
 
 Gegeben ist die Funktion $f : \mathbb{R} \to \mathbb{R}$ mit
 
@@ -11,8 +10,9 @@ $$
     0 & \text{sonst}
   \end{cases}
 $$ 
-<br/>
+
+Aufgaben:
 
 1.  Bestimmen Sie den Wert von $a \in \mathbb{R}$, so dass $f$ eine Dichtekurve ist.
-2.  Geben Sie den Median $x_{\mathrm{med}}$ an.
-3.  Skizzieren Sie die Funktion $F : \mathbb{R} \to \mathbb{R}$ für die gilt: $p = F(x_p)$.
+1.  Geben Sie den Median $x_{\mathrm{med}}$ an.
+1.  Skizzieren Sie die Funktion $F : \mathbb{R} \to \mathbb{R}$ für die gilt: $p = F(x_p)$.
