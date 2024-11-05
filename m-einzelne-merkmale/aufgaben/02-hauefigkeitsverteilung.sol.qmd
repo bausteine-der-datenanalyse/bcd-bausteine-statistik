@@ -1,0 +1,8 @@
+1. Stabdiagramm
+
+   ![](00-bilder/l-em-02.1.png)
+
+1. Funktion $H$
+
+   ![](00-bilder/l-em-02.2.png)
+

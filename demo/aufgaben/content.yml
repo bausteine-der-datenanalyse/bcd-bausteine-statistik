@@ -38,6 +38,9 @@ jobs:
   sol: 834hja1
   files: 
   - ${project-folder}/m-einzelne-merkmale/aufgaben/*.qmd    
+- copy:
+  from: ${project-folder}/m-einzelne-merkmale/aufgaben/00-bilder
+  to: ${target-folder}/00-bilder
 - increment-index:
 
 # 3. Kenngrößen von Verteilungen

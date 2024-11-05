@@ -1,0 +1,17 @@
+1. Häufigkeitsverteilung und relative Häufigkeiten
+
+   ![](00-bilder/l-em-01.1.png)
+
+1. Stellen Sie die absolute Häufigkeitsverteilung in einem Säulen- und einem Kreisdiagramm dar (Skizze)
+
+   ![](00-bilder/l-em-01.2.png)
+
+1. Stabdiagramm
+
+   ![](00-bilder/l-em-01.3.png)
+
+   Die Darstellung macht keinen Sinn, da die allermeisten Werte nur ein oder zwei mal vorkommen
+
+1. Histogramm
+
+   ![](00-bilder/l-em-01.4.png)
