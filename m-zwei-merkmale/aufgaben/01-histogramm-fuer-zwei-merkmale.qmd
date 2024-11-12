@@ -1,6 +1,5 @@
-
-## Histogramm auf dem Papier
+## Histogramm für zwei Merkmale
 
 Übertragen Sie die Idee des Histogramms für eine Variable auf die unten dargestellte Situation mit zwei Merkmalen.
 
-![](00-bilder/histogramm-2d.png){}
+![](00-bilder/histogramm-2d.svg){width=50% fig-align="center"}
