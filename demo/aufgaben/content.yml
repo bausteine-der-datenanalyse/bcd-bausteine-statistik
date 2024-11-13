@@ -63,6 +63,8 @@ jobs:
   files: 
   - ${bcd-bausteine-statistik}/m-dichtekurven-und-normalverteilung/aufgaben/*.qmd    
   - ${bcd-bausteine-r}/w-dichtekurven-und-normalverteilung/aufgaben/10.*.qmd
+  folders:
+  - ${bcd-bausteine-statistik}/m-dichtekurven-und-normalverteilung/aufgaben/*
 - increment-index:
 
 # 05
