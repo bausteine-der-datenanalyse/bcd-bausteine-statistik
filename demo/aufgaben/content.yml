@@ -1,7 +1,12 @@
 target-folder: c
+deploy-folder: _output/aufgaben/c
 
 
+# Global variable definitions
 definitions:
+
+- bcd-bausteine-r: ${project-folder}/../bcd-bausteine-r
+- bcd-bausteine-statistik: ${project-folder}
 
 - assignment-header: |
     ---
@@ -16,41 +21,62 @@ definitions:
     ---
 
 
+# Individual jobs
 jobs:
 
-# 1. Statistische Daten
+# 01
 - assignment-paper:
   subtitle: "Statistische Daten"
   sol: 6ou3wer
   files: 
-  - ${project-folder}/m-statistische-daten/aufgaben/*.qmd
-- copy:
-  from: ${project-folder}/m-statistische-daten/aufgaben/00-bilder
-  to: ${target-folder}/00-bilder
-- copy:
-  from: ${project-folder}/m-statistische-daten/aufgaben/01-daten
-  to: ${target-folder}/01-daten
+  - ${bcd-bausteine-statistik}/m-statistische-daten/aufgaben/*.qmd
+  folders:
+  - ${bcd-bausteine-statistik}/m-statistische-daten/aufgaben/*
 - increment-index:
 
-# 2. Einzelne Merkmale
+# 02
 - assignment-paper:
   subtitle: "Untersuchung einzelner Merkmale"
   sol: 834hja1
   files: 
-  - ${project-folder}/m-einzelne-merkmale/aufgaben/*.qmd    
-- copy:
-  from: ${project-folder}/m-einzelne-merkmale/aufgaben/00-bilder
-  to: ${target-folder}/00-bilder
+  - ${bcd-bausteine-statistik}/m-einzelne-merkmale/aufgaben/*.qmd    
+  - ${bcd-bausteine-r}/w-einzelne-merkmale/aufgaben/10.*.qmd
+  folders:
+  - ${bcd-bausteine-statistik}/m-einzelne-merkmale/aufgaben/*
 - increment-index:
 
-# 3. Kenngrößen von Verteilungen
+# 03
 - assignment-paper:
-  subtitle: "Kenngrößen von Verteilungen"
-  sol: 348aiue
+  subtitle: "Kenngrößen und Beschreibung von Verteilungen"
+  sol: kjdf784
   files: 
-  - ${project-folder}/m-kenngroessen/aufgaben/*.qmd    
-- copy:
-  from: ${project-folder}/m-kenngroessen/aufgaben/00-bilder
-  to: ${target-folder}/00-bilder
-  exclude-patterns: [".afdesign$"]
+  - ${bcd-bausteine-statistik}/m-kenngroessen/aufgaben/*.qmd    
+  - ${bcd-bausteine-r}/w-kenngroessen/aufgaben/10.*.qmd
+  folders:
+  - ${bcd-bausteine-statistik}/m-kenngroessen/aufgaben/*
 - increment-index:
+
+# 04
+- assignment-paper:
+  subtitle: "Dichtekurven und Normalverteilung"
+  sol: oa34alf
+  files: 
+  - ${bcd-bausteine-statistik}/m-dichtekurven-und-normalverteilung/aufgaben/*.qmd    
+  - ${bcd-bausteine-r}/w-dichtekurven-und-normalverteilung/aufgaben/10.*.qmd
+- increment-index:
+
+# 05
+- assignment-paper:
+  subtitle: "Untersuchung von zwei Merkmalen"
+  sol: iuzert4
+  files: 
+  - ${bcd-bausteine-statistik}/m-zwei-merkmale/aufgaben/01.*.qmd    
+  - ${bcd-bausteine-r}/w-zwei-merkmale/aufgaben/10.*.qmd
+  - ${bcd-bausteine-statistik}/m-zwei-merkmale/aufgaben/0[2-4].*.qmd    
+  - ${bcd-bausteine-r}/w-zwei-merkmale/aufgaben/20.*.qmd
+  folders:
+  - ${bcd-bausteine-statistik}/m-zwei-merkmale/aufgaben/*
+  - ${bcd-bausteine-r}/w-zwei-merkmale/aufgaben/bilder
+- increment-index:
+
+
