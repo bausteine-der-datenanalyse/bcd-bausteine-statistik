@@ -1,7 +1,7 @@
 ```{r}
 #| include: false
-source("../bcd-setup.R")
-source("skripte/setup.R")
+source("../../bcd-setup.R")
+source("01-daten/einzelne-merkmale.R")
 ```
 
 # Untersuchung einzelner Merkmale {#sec-einzelne-merkmale}

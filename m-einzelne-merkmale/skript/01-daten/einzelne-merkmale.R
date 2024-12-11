@@ -56,7 +56,7 @@ plot_pob_bar <- function(d) {
 
 # Daten Beispiel Klausur
 
-d_klausur <- read_excel("Klausurergebnis_Mathe2_SoSe2018.xls") |>
+d_klausur <- read_excel("01-daten/Klausurergebnis_Mathe2_SoSe2018.xls") |>
     mutate(prozente_g = round(prozente_g, 2))
 
 d_klausur_bestanden <- mutate(d_klausur,

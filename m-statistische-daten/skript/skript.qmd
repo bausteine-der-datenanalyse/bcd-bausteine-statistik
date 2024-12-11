@@ -1,7 +1,7 @@
 ```{r}
 #| include: false
 source("../../bcd-setup.R")
-source("01-daten/daten.R")
+source("01-daten/statistische-daten.R")
 ```
 
 # Statistische Daten
