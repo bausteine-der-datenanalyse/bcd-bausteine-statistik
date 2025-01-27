@@ -92,6 +92,23 @@ jobs:
   - ${bcd-bausteine-r}/w-weitere-geoms-und-plots-aufbereiten/aufgaben/*
   - ${bcd-bausteine-r}/w-grundlagen-r/aufgaben/*
 - increment-index:
+- increment-index:
 
 
+# 08
+- assignment-paper:
+  subtitle: "Dateien einlesen und aufbereiten"
+  sol: waeu374
+  files: 
+  - ${bcd-bausteine-r}/w-daten-aufbereiten/aufgaben/00.*.qmd
+  - ${bcd-bausteine-r}/w-daten-aufbereiten/aufgaben/10.*.qmd
+  - ${bcd-bausteine-r}/w-daten-aufbereiten/aufgaben/20.*.qmd
+- increment-index:
 
+# 09
+- assignment-paper:
+  subtitle: "Räumliche Daten"
+  sol: a7qzh58
+  files: 
+  - ${bcd-bausteine-r}/w-raeumliche-daten/aufgaben/10.*.qmd
+- increment-index:
