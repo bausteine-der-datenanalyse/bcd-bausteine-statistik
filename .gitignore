@@ -4,3 +4,5 @@ skript.tex
 skript_files
 demo/aufgaben/c
 demo/aufgaben/.quarto
+
+**/*.quarto_ipynb
