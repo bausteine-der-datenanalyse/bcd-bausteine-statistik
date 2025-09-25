@@ -511,7 +511,7 @@ $$
   =
   \sum_{i=1}^n x_i - n \cdot \bar{x}
   =
-  n\bigg(\underbrace{\frac{1}{n}\sum_{i=1}^n x_i}_{\bar{x}} - \bar{x}_mid \bigg) = 0.
+  n\bigg(\underbrace{\frac{1}{n}\sum_{i=1}^n x_i}_{\bar{x}} - \bar{x}_{mid} \bigg) = 0.
 $$
 
 Die Summe der Abweichungen vom Mittelwert ist also keinesfalls ein geeignetes Maß für Variabilität.
