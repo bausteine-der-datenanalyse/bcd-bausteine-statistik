@@ -1,8 +1,7 @@
 ```{r}
 #| echo: false
 #| output: false
-#library(here)
-source(here::here("bcd-setup.R"))
+source(rprojroot::is_r_package$find_file("bcd-setup.R"))
 ```
 
 ## Histogramme und Verteilungsfunktionen
