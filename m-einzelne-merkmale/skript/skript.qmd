@@ -19,15 +19,17 @@ Um die Häufigkeitsverteilung zu bestimmen, muss zunächst geschaut werden, welc
 Als absolute Häufigkeit der Ausprägung $a_j$ bezeichnen wir nun die Anzahl der Werte aus der Urliste $x_1, x_2, \dots, x_n$, die mit $a_j$ übereinstimmen. Wird die absolute Häufigkeit durch den Stichprobenumfang $n$ geteilt, dann ergibt sich die relative Häufigkeit.
 
 ::: definition
-**Definition (absolute und relative Häufigkeit):** Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir folgende Bezeichnungen.
+**Definitionen: absolute und relative Häufigkeit** 
+
+Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir folgende Bezeichnungen:
 
 $h(a_j)$:
 
-:   absolute Häufigkeit der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
+:   **absolute Häufigkeit** der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
 
 $f(a_j) = h(a_j)/n$:
 
-:   relative Häufigkeit der Ausprägung $a_j$.
+:   **relative Häufigkeit** der Ausprägung $a_j$.
 
 Mit den Abkürzungen $h_j = h(a_j)$ und $f_j = f(a_j)$ heißen die Zahlenfolgen
 
@@ -45,7 +47,7 @@ $f_1, f_2, \dots, f_k$:
 Die Häufigkeitsverteilungen lassen sich natürlich tabellarisch aufbereiten, häufig ist aber eine grafische Darstellung besser geeignet. Die gebräuchlichsten Darstellungsformen sind Stab-, Säulen-, Balken- und Kreisdiagramme. Als Alternative zu Kreisdiagrammen werden häufig auch Ringdiagramme verwendet. In @fig-diagrammtypen sind diese Diagrammtypen beispielhaft dargestellt.
 
 ::: definition
-**Diagrammtypen**
+**Definitionen: Diagrammtypen**
 
 Stabdiagramm:
 
@@ -103,7 +105,7 @@ p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 ```
 
- \bigskip
+ \skip
 
 ```{r}
 #| fig-width: 12
@@ -114,7 +116,7 @@ p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 p_bar + coord_flip()
 ```
 
- \bigskip
+ \skip
 
 ```{r}
 #| fig-width: 6
@@ -137,7 +139,7 @@ p_pie + xlim(0.125, 2.5)
 Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm) zur Darstellung von Verteilungen (Energieträger Bundesrepublik Deutschland 2017, Datenquelle: BMWI)
 :::
 
-**Kritik an Kreisdiagrammen**. Obwohl Kreisdiagramme in der Praxis sehr häufig verwendet werden sind sie nicht ganz unproblematisch. Das hat mehrere Gründe:
+**Kritik an Kreisdiagrammen**. Obwohl Kreisdiagramme in der Praxis sehr häufig verwendet werden, sind sie nicht ganz unproblematisch. Das hat mehrere Gründe:
 
 -   Längen sind leichter zu unterscheiden als Winkel (siehe @fig-pie-or-bar).
 
@@ -162,10 +164,11 @@ plot_grid(                    # Aus cowplot, mit "layout-ncol: 3" wird im pdf ke
 )
 ```
 
+ \skip
+
 ```{r}
 #| label: fig-diagramm-balken-jahre
-#| fig-cap: "Zeitliche Entwicklung einer Verteilung in einem Säulendiagramm (Energieträger Bundesrepublik Deutschland 1990 - 2017, Quelle: BMWI)"
-#| fig-alt: "Die Darstellung der zeitlichen Entwicklung zeigt, dass erneuerbare Energieträger mit der Zeit zunehmen, während andere Energieformen abnehmen"
+#| fig-cap: "Zeitliche Entwicklung einer Verteilung in einem Säulendiagramm (Energieträger Bundesrepublik Deutschland 1990 - 2017, Quelle: BMWI). Die Darstellung der zeitlichen Entwicklung zeigt, dass erneuerbare Energieträger mit der Zeit zunehmen, während andere Energieformen abnehmen"
 
 ggplot(data = d_energietraeger_pj) +
     geom_col(mapping = aes(x = Jahr, y = Wert, fill = Energieträger)) +
@@ -191,7 +194,7 @@ Die zugehörige Häufigkeitsverteilung ist nachfolgend dargestellt.
 ```{r}
 #| warning: false
 #| fig-align: center
-#| fig-alt: "Stabdiagramm der erreichten Prozentpunkte der Mathematikklausur"
+#| fig-cap: "Stabdiagramm der erreichten Prozentpunkte der Mathematikklausur"
 
 ggplot(data = d_klausur) +
     geom_bar(mapping = aes(x = prozente_g), width = 0.5) +
@@ -209,9 +212,9 @@ Ein Histogramm entsteht in drei Schritten. Wir gehen dabei davon aus, dass es si
 
 Anmerkung: Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (also linksoffen) wählen können, das macht keinen grundlegenden Unterschied.
 
-1.  Wir zählen für jede Klasse wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
+2.  Wir zählen für jede Klasse, wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
 
-2.  Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
+3.  Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
 
@@ -260,7 +263,7 @@ c(rnorm(3500), rnorm(1500, 4)) |> plot_verteilung()
 c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> plot_verteilung()
 ```
 
-**Symmetrische und schiefe Verteilungen.** Gibt es für eine Verteilung eine Symmetrieachse, so dass der Verlauf links und rechts von dieser Achse annähernd gleich ist, dann handelt es sich um eine [symmetrische Verteilung]{.neuerbegriff}. Wichtig ist dabei, dass die Verteilung nicht exakt symmetrisch verlaufen muss, um als symmetrisch zu gelten. Ist die Verteilung deutlich unsymmetrisch, dann handelt es sich um eine [schiefe Verteilung]{.neuerbegriff}. Eine unimodale Verteilung, die nach links hin sehr steil abfällt, wird [linkssteil]{.neuerbegriff}(oder [rechtsschief]{.neuerbegriff}) genannt. Entsprechend heißt eine Verteilung, die nach rechts hin steil abfällt [rechtssteil]{.neuerbegriff}(oder [linksschief]{.neuerbegriff}) (vergleiche @fig-schiefe).
+**Symmetrische und schiefe Verteilungen.** Gibt es für eine Verteilung eine Symmetrieachse, so dass der Verlauf links und rechts von dieser Achse annähernd gleich ist, dann handelt es sich um eine [symmetrische Verteilung]{.neuerbegriff}. Wichtig ist dabei, dass die Verteilung nicht exakt symmetrisch verlaufen muss, um als symmetrisch zu gelten. Ist die Verteilung deutlich unsymmetrisch, dann handelt es sich um eine [schiefe Verteilung]{.neuerbegriff}. Eine unimodale Verteilung, die nach links hin sehr steil abfällt, wird [linkssteil]{.neuerbegriff} (oder [rechtsschief]{.neuerbegriff}) genannt. Entsprechend heißt eine Verteilung, die nach rechts hin steil abfällt [rechtssteil]{.neuerbegriff} (oder [linksschief]{.neuerbegriff}) (vergleiche @fig-schiefe).
 
 ```{r}
 #| layout-ncol: 3
@@ -281,7 +284,7 @@ rlnorm(10000) |> plot_verteilung(q=0.95) + scale_x_reverse()
 
 An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegebenen Wert ermitteln, welcher Anteil der Ausprägungen kleiner oder gleich diesem Wert ist. Grundlage für diese Funktion bildet die absolute kumulierte Häufigkeitsverteilung.
 
-**Absolute kumulierte Häufigkeitsverteilung.** Häufig stellt sich für ein bestimmtes Merkmal einer Erhebung die Frage, wie viele der Werte $x_1, x_2, \dots, x_n$ kleiner oder gleich einem bestimmten Grenzwert $x$ sind. So kann man zum Beispiel bei einer Klausur fragen, wie viele Studierende durchgefallen sind, das heißt in der Prüfung $49$ oder weniger Prozentpunkte erreicht haben. Selbstverständlich könnte man die entsprechenden Werte einfach zählen, einen bildhaften Eindruck liefert jedoch eine Darstellung der absoluten kumulierten Häufig-keits-ver-teilung des Merkmals. Es handelt sich dabei um eine Funktion, die üblicherweise mit $H$ bezeichnet wird. Am einfachsten ist das an einem Beispiel zu sehen.
+**Absolute kumulierte Häufigkeitsverteilung.** Häufig stellt sich für ein bestimmtes Merkmal einer Erhebung die Frage, wie viele der Werte $x_1, x_2, \dots, x_n$ kleiner oder gleich einem bestimmten Grenzwert $x$ sind. So kann man zum Beispiel bei einer Klausur fragen, wie viele Studierende durchgefallen sind, das heißt in der Prüfung $49$ oder weniger Prozentpunkte erreicht haben. Selbstverständlich könnte man die entsprechenden Werte einfach zählen, einen bildhaften Eindruck liefert jedoch eine Darstellung der absoluten kumulierten Häufigkeitsverteilung des Merkmals. Es handelt sich dabei um eine Funktion, die üblicherweise mit $H$ bezeichnet wird. Am einfachsten ist das an einem Beispiel zu sehen.
 
 :::: beispiel
 **Beispiel Häufigkeitsverteilung:** Wir betrachten ein Merkmal mit den Werten

@@ -12,7 +12,7 @@ Grundlage jeder statistischen Untersuchung sind Daten, die auf unterschiedliche 
 
 Heute sind viele Daten im Internet frei zugänglich. Hier einige Beispiele:
 
-- Ministerien (etwa [BMDV](https://bmdv.bund.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html) oder [BMWK](https://www.bmwk.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien)) und Bundesämter ([Bundesanstalt für Straßenwesen](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de)).
+- Ministerien (etwa [BMV](https://bmv.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html) oder [BMWE](https://www.bundeswirtschaftsministerium.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien)) und Bundesämter ([Bundesanstalt für Straßen- und Verkehrswesen](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de)).
 
 - Das kostenpflichtige Statistik-Portal [Statista](https://de.statista.com). Die Hochschule Bochum hat eine Lizenz, aus dem Netz der Hochschule Bochum (von zu Hause aus über VPN) nutzbar.
 
@@ -26,14 +26,14 @@ Wie Daten aus dem Bau- und Umweltingenieurwesen konkret aussehen können, sehen 
 
 #### Mobilitätsbefragung -- Wege zur BO
 
-Im Rahmen des Moduls 'Methoden der Verkehrsplanung' von Prof. Mühlenbruch führen Studierende regelmäßig eine Befragung unter Angehörigen der BO durch. Ziel ist es herauszufinden, von wo und mit welchen Verkehrsmitteln die Befragten zur Hochschule gelangen. Auf @fig-mobilitaetsbefragung links dargestellt ist der verwendete Fragebogen. Um die manuelle Übertragung der knapp 300 Fragebögen in eine Tabellenkalkulation zu vereinfachen sind Antworten mit Ziffern codiert. Entsprechend enthält die in @fig-mobilitaetsbefragung rechts dargestellte tabellarische Zusammenfassung im Wesentlichen Zahlen und die Spaltenüberschriften sind etwas kryptisch.
+Im Rahmen des Moduls "Methoden der Verkehrsplanung" von Prof. Mühlenbruch führen Studierende regelmäßig eine Befragung unter Angehörigen der BO durch. Ziel ist es herauszufinden, von wo und mit welchen Verkehrsmitteln die Befragten zur Hochschule gelangen. Auf @fig-mobilitaetsbefragung links dargestellt ist der verwendete Fragebogen. Um die manuelle Übertragung der knapp 300 Fragebögen in eine Tabellenkalkulation zu vereinfachen, sind Antworten mit Ziffern codiert. Entsprechend enthält die in @fig-mobilitaetsbefragung rechts dargestellte tabellarische Zusammenfassung im Wesentlichen Zahlen und die Spaltenüberschriften sind etwas kryptisch.
 
 ![Mobilitätsbefragung 'Wege zur BO' (Fragebogen und Auswertung)](00-bilder/mobilitaetsbefragung.svg){
   #fig-mobilitaetsbefragung
   fig-alt="Befragungsbogen zu Verkehrsmitteln und Ergebnisse in Tabelle"
 }
 
-#### Geschwindigkeitsmessung Universitätsstraße
+#### Geschwindigkeitsmessung Universitätsstraße {#sec-beispiel-sdr}
 
 Mit einem Seitenradar kann die Geschwindigkeit und die Länge der auf einer Straße vorbeifahrenden Fahrzeuge gemessen werden. Eine solche Messung ist von Prof. Mühlenbruch über zwei Tage im Jahr 2017 an der Universitätsstraße durchgeführt worden. Die Daten werden nach der Messung aus dem Messgerät ausgelesen und auf dem Computer in Form einer Excel-Datei gespeichert, siehe @fig-seitenradar. 
 
@@ -59,7 +59,7 @@ ggplot(data = d_abfluss_donau) +
 
 ## Organisation von Datensätzen {#sec-organisation-datensatz}
 
-In den Beispielen oben haben wir gesehen, in welcher Form Rohdaten vorliegen können. Um effizient statistische Untersuchungen durchführen zu können, ist es hilfreich, die Daten in einer gut handhabbaren Form zu darzustellen. Bei umfangreichen Daten geschieht das natürlich auf dem Computer. Die Entscheidung darüber, wie die einzelnen Werte angeordnet werden sollen, kann man dabei aber nicht dem Computer überlassen. Dass es hier durchaus Wahlmöglichkeiten gibt, sehen wir an dem folgenden Beispiel.
+In den Beispielen oben haben wir gesehen, in welcher Form Rohdaten vorliegen können. Um effizient statistische Untersuchungen durchführen zu können, ist es hilfreich, die Daten in einer einfach zu verarbeitenden Form zu darzustellen. Bei umfangreichen Daten geschieht das natürlich auf dem Computer. Die Entscheidung darüber, wie die einzelnen Werte angeordnet werden sollen, kann man dabei aber nicht dem Computer überlassen. Dass es hier durchaus Wahlmöglichkeiten gibt, sehen wir an dem folgenden Beispiel.
 
 ::: beispiel
 **Beispiel:** Wir betrachten einen fiktiven Datensatz zu Bevölkerungszahlen und das Auftreten von Krankheitsfällen in drei verschiedenen Ländern für die Jahre 1999 und 2000 (in Anlehnung an [@wickham_r_2016]). Nachfolgend dargestellt sind verschiedene Lösungen, wie die Daten in Tabellen zusammengestellt werden können.
@@ -114,11 +114,11 @@ Lösung 4: Jeweils eine Tabelle für Fälle und Bevölkerung
 
 Statistische Datensätze liegen in der Regel in Form rechteckiger Tabellen vor, die aus Zeilen und Spalten bestehen. Spalten sind dabei in der Regel mit einer Spaltenüberschrift versehen. Dabei hat es sich gezeigt, dass es häufig zielführend ist die Daten so aufzubereiten, dass die folgenden drei Anforderungen erfüllt sind:
 
-1.  Jede Variable erhält eine eigene Spalte
+1.  Jede Variable erhält eine eigene Spalte.
 
-2.  Jeder Beobachtung entspricht einer Zeile
+2.  Jeder Beobachtung entspricht einer Zeile.
 
-3.  Jeder Wert steht in einer eigenen Zelle
+3.  Jeder Wert steht in einer eigenen Zelle.
 
 In @fig-tidy-data ist zu erkennen, dass für das Beispiel oben mit Lösung 2 diesem Schema entsprochen wird.
 
@@ -179,10 +179,10 @@ Für die Auswertung in einem Computerprogramm spielen diese Fragen keine Rolle. 
 Eine Größe, für die man sich in einer statistischen Untersuchung interessiert, heißt [Merkmal]{.neuerbegriff} oder auch [Variable]{.neuerbegriff}. Manchmal betrachtet man nur ein einzelnes Merkmal (wie etwa den Abfluss des Pegels), in der Regel werden jedoch für eine einzelne statistische Einheit mehrere Merkmale erhoben. Die Merkmale können dabei für jede statistische Einheit unterschiedliche [Werte]{.neuerbegriff} annehmen (klar, sonst müsste man sie ja nicht erheben). Diese Werte werden auch [Merkmalsausprägungen]{.neuerbegriff} oder kurz [Ausprägungen]{.neuerbegriff} genannt.
 
 ::: definition
-**Definition:** Statistische Einheiten, Merkmale, Gesamtheiten
+**Definitionen: Grundbegriffe**
 
 Statistische Einheiten:
-: Objekte an denen interessierende Größen erfasst werden
+: Objekte, an denen interessierende Größen erfasst werden
 
 Grundgesamtheit:
 : Menge aller für die Fragestellung relevanten statistischen Einheiten
@@ -251,16 +251,18 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
 Intervall- und Verhältnisskalen werden unter den Oberbegriffen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff} zusammengefasst. In der folgenden Tabelle sind Skalenarten und zugehörige sinnvolle Operationen nochmals kompakt dargestellt.
 
+::: {style="width:100%; table-layout:fixed;"}
 | Skalenart  | auszählen | ordnen | Differenzen bilden | Quotienten bilden |
 |:----------:|:---------:|:------:|:------------------:|:-----------------:|
 |  nominal   |    Ja     |  Nein  |        Nein        |       Nein        |
 |  ordinal   |    Ja     |   Ja   |        Nein        |       Nein        |
 | Intervall  |    Ja     |   Ja   |         Ja         |       Nein        |
 | Verhältnis |    Ja     |   Ja   |         Ja         |        Ja         |
+:::
 
 #### (c) Qualitative und quantitative Merkmale
 
-Eine weiterer Aspekt nach dem Merkmale unterschieden werden können, betrifft den Typ der Merkmalsausprägung: Handelt es sich um eine Kategorie oder um eine Größe, die in Zahlen messbar ist.
+Eine weiterer Aspekt, nach dem Merkmale unterschieden werden können, betrifft den Typ der Merkmalsausprägung: Handelt es sich um eine Kategorie oder um eine Größe, die in Zahlen messbar ist?
 
 1.  [Qualitative Merkmale]{.neuerbegriff}: Wenn ein Merkmal endlich viele Ausprägungen besitzt und nominal- oder ordinalskaliert ist, dann nennt man es ein qualitatives Merkmal. Wesentlich dabei ist, dass die Ausprägungen einer Qualität oder einer Kategorie entspricht.
 
@@ -271,7 +273,7 @@ Anmerkung: Es gibt auch Merkmale, die weder qualitativ noch quantitativ sind, zu
 In der Folgenden Definition sind die Arten von Merkmalen nochmals kompakt zusammengefasst.
 
 ::: definition
-**Definition:** Arten von Merkmalen
+**Definitionen: Arten von Merkmalen**
 
 Diskret:
 : endlich oder abzählbar unendlich viele Ausprägungen

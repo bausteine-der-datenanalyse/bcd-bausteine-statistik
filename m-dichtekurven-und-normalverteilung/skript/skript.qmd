@@ -1,0 +1,50 @@
+```{r}
+#| include: false
+source("../../bcd-setup.R")
+library(tidyverse)
+library(kableExtra)
+```
+
+# Dichtekurven und Normalverteilung {#sec-dichtekurven-normalverteilung}
+
+In der Geschwindigkeitsmessung mit dem Seitenradar [@sec-beispiel-sdr] wurden innerhalb von zwei Tagen die Geschwindigkeiten von 20.707 Fahrzeugen gemessen. In @fig-histogram-unistrasse ist das Histogramm der relativen Häufigkeiten der Geschwindigkeiten dargestellt. Die Klassenbreite wurde dabei mit 1 km/h gewählt. Dies entspricht gerade der Genauigkeit der Messung, eine kleinere Klassenbreite ist daher nicht sinnvoll.
+
+```{r}
+#| fig-width: 15
+#| fig-height: 10
+#| fig-alt: "Histogramm der gefahrenen Geschwindigkeiten an der Universitätsstraße im Jahr 2017. Zu erkennen ist eine unimodale, symmetrische Verteilung mit dem Modus in etwa bei der zulässigen Höchstgeschwindigkeit von 50 km/h."
+#| fig-cap: "Histogramm der Geschwindigkeiten an der Universitätsstraße 2017"
+#| label: fig-histogram-unistrasse
+
+
+d<-read_excel("01-daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
+ggplot(data = d) +
+  geom_histogram(mapping = aes(x = Geschwindigkeit, y = after_stat(density)), binwidth = 1) +
+  ylab("Relative Häufigkeit")
+```
+
+Man kann sich nun aber vorstellen, die Messung der Geschwindigkeiten mit einer höheren Genauigkeit durchzuführen und dabei über einen längeren Zeitraum zu messen. Dann wäre es durchaus möglich, das Histogramm mit einer kleineren Klassenbreite zu erstellen,zum Beispiel 0.1 km/h. Damit nähert sich der Verlauf des Histogramms der kontinuierlichen Kurve an, die sich im Grenzübergang zu einer unendlich langen und gleichzeitig exakten Messung mit einer gegen Null gehenden Klassenbreite ergeben würde.
+
+## Dichtekurven {#sec-dichtekurven}
+
+Mit einer Dichtekurve wird dieser Grenzübergang vorweggenommen: Die Idee dabei ist es, das Histogramm durch eine kontinuierliche Funktion $f$ : $R$ $→$ $R$ zu approximieren. Die zugehörige Dichtekurve $y$ = $f(x)$ approximiert und glättet das Histogramm. Dabei gehen gegebenenfalls Details verloren. Dafür ergibt sich eine optisch klare Darstellung, die sich manchmal sogar mit einer einfachen Formel für die Zuordnungsvorschrift von $f$ angeben lässt.
+
+Um eine solche Funktion charakterisieren zu können, rufen wir uns nochmal die Eigenschaften des Histogramms der relativen Häufigkeiten in Erinnerung:
+1. Alle Rechtecke haben eine positive Höhe,
+2. die Fläche eines Rechtecks ist der Anteil der Werte, die in der entsprechenden Klasse liegen,
+3. die Summe der Rechtecksflächen ist demnach eins.
+
+Damit erhalten wir die folgende Definition:
+
+::: definition
+**Definition: Dichtekurve** 
+
+Eine stetige Funktion $f : R → R$ heißt Dichtekurve, wenn für alle $x \in R$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
+
+$$
+\int_{-\infty}^{\infty} f(x)\, dx = 1
+$$
+aufschreiben.
+:::
+
+
