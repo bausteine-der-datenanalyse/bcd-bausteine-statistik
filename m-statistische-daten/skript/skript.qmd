@@ -52,7 +52,10 @@ Historische Daten über den Abfluss und den Wasserstand eines Flusses bilden die
 #| fig-alt: "Zeitraum von 100 Jahren auf der X-Achse, Abfluss gemessen in m³/s auf der Y-Achse. Jeder Tag stellt einen Datenpunkt dar."
 
 ggplot(data = d_abfluss_donau) + 
-  geom_point(mapping = aes(x = Datum, y = Abfluss, color = Abfluss), alpha = 1/5, show.legend = FALSE, size = 0.1) +
+  geom_point(
+    mapping = aes(x = Datum, y = Abfluss, color = Abfluss), 
+    alpha = 1/5, show.legend = FALSE, size = 0.1
+  ) +
   scale_colour_gradientn(colours = terrain.colors(10)) +
   labs(x = NULL, y = "Abfluss in m³/s")
 ```
@@ -143,9 +146,9 @@ In der Statistik wird meist davon ausgegangen, dass Daten an gewissen Objekten b
 
 Ein solches Objekt wird in der Statistik als [statistische Einheit]{.neuerbegriff} bezeichnet. Allerdings ist diese Vereinbarung nicht immer unproblematisch. Beispiele:
 
--   Was ist die statistische Einheit in der Geschwindigkeitsmessung, wenn ein Fahrzeug innerhalb eines Messzeitraums zweimal am Seitenradar vorbeifährt?
+- Was ist die statistische Einheit in der Geschwindigkeitsmessung, wenn ein Fahrzeug innerhalb eines Messzeitraums zweimal am Seitenradar vorbeifährt?
 
--   Bei der Durchflussmessung geht es immer um dasselbe Objekt, nämlich die Donau bei Hofkirchen.
+- Bei der Durchflussmessung geht es immer um dasselbe Objekt, nämlich die Donau bei Hofkirchen.
 
 Daher: Manchmal macht es Sinn, von statistischen Einheiten zu sprechen, den Begriff Beobachtung können wir aber immer verwenden.
 
@@ -153,24 +156,68 @@ Daher: Manchmal macht es Sinn, von statistischen Einheiten zu sprechen, den Begr
 
 Bei den in der Mobilitätsbefragung befragten Studierenden handelt es sich um eine Auswahl aller zum Zeitpunkt der Befragung an der BO eingeschriebenen Studierenden. Die Gesamtheit aller Studierenden bildet dabei die sogenannte [Grundgesamtheit]{.neuerbegriff}. Als Grundgesamtheit wird somit die Menge aller statistischen Einheiten bezeichnet, über die man Aussagen treffen möchte. In der Mobilitätsbefragung ist die Grundgesamtheit endlich groß und bekannt. Das ist nicht immer so:
 
--   Die Geschwindigkeitsmessung lässt sich im Prinzip beliebig fortsetzen, es handelt sich hier um eine unendlich große Grundgesamtheit.
+- Die Geschwindigkeitsmessung lässt sich im Prinzip beliebig fortsetzen, es handelt sich hier um eine unendlich große Grundgesamtheit.
 
--   Wenn man über die Abschlussnoten für Bauingenieursabsolventen der BO im Jahr 2095 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
+- Wenn man über die Abschlussnoten für Bauingenieursabsolvent:innen der BO im Jahr 2095 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
 
-![Grundgesamtheit und Stichproben](00-bilder/stichprobe.svg){
-    #fig-stichprobe
-    fig-alt="169 Beobachtungen dargestellt als vier verschieden farbige Kreise in einem 13 mal 13 Quadrat. Stichprobe A enthält 30 Beobachtungen in allen Farben. Stichprobe B enthält 4 Beobachtungen und nur zwei Farben."
+```{r}
+#| label: fig-stichprobe
+#| fig-cap: Grundgesamtheit und Stichproben
+#| fig-alt: "169 Beobachtungen mit zwei verschiedenen Stichproben."
+n <- 13.0
+
+samples <- tibble(
+    x = c(n / 2 + 0.5, 5.5, 11.0),
+    y = c(n / 2 + 0.5, 8.5, 4.0),
+    s = c(n, 6.0, 3.0)
+)
+
+df <- tibble(
+    x = rep(1:n, times = n),
+    y = rep(1:n, times = rep(n, n)),
+    c = sample(x = c("1", "2", "3", "4"), size = n * n, replace = TRUE)
+)
+
+p1 <- ggplot(data = df) +
+    geom_tile(
+        data = samples, mapping = aes(x = x, y = y, width = s, height = s),
+        fill = "light gray", color = "black", linewidth = 0.75
+    ) +
+    geom_point(
+        mapping = aes(x = x, y = y, color = c), size = 2.5, show.legend = FALSE
+    ) +
+    annotate(geom="text", x = 0.5, y = n + 1.25, label = "Grundgesamtheit", hjust = "left") +
+    annotate(geom="text", x = 10, y = n + 1.25, label = "Stichprobe A", hjust = "left") +
+    annotate(geom="step", x = c(7.5, 7.5, 9.9), y = c(11.5, n + 1.25, n + 1.25)) +
+    annotate(geom="text", x = 10, y = -0.25, label = "Stichprobe B", hjust = "right") +
+    annotate(geom="step", x = c(10.1, 10.5), y = c(-0.25, 2.5)) +
+    coord_fixed() +
+    theme_void()
+
+plot_bars <- function(df, title) {
+  ggplot(data = df) + 
+    geom_bar(mapping = aes(x = c, fill = c), show.legend = FALSE) +
+    scale_x_discrete( breaks = NULL) +
+    scale_y_discrete( breaks = NULL) +
+    labs(x = NULL, y = NULL, subtitle = title)
 }
+
+p21 <- plot_bars(df, "Grundgesamtheit")
+p22 <- plot_bars(df, "Stichprobe A")
+p23 <- plot_bars(df, "Stichprobe B")
+
+p1 + (p21 / p22 / p23)
+```
 
 #### Stichprobe
 
-In den allermeisten Fällen ist es nicht möglich oder nicht notwendig in einer statistischen Untersuchung alle statistischen Einheiten der Grundgesamtheit einzubeziehen. Man beschränkt sich auf einen Teil der Grundgesamtheit und spricht dabei von einer [Stichprobe]{.neuerbegriff} . @fig-stichprobe zeigt ein entsprechendes Beispiel.
+In den allermeisten Fällen ist es nicht möglich oder nicht notwendig in einer statistischen Untersuchung alle statistischen Einheiten der Grundgesamtheit einzubeziehen. Man beschränkt sich auf einen Teil der Grundgesamtheit und spricht dabei von einer [Stichprobe]{.neuerbegriff}. @fig-stichprobe zeigt ein entsprechendes Beispiel.
 
 Dass die Planung einer Erhebung keine triviale Aufgabe ist, sehen wir an zwei Beispielen:
 
--   @fig-stichprobe zeigt zwei Stichproben. Welche der beiden Stichproben können wir verwenden, um Aussagen über die Verteilung der Farben in der Grundgesamtheit zu treffen? Wie groß ist dann groß genug? Wir werden uns dieser Frage im Rahmen der schließenden Statistik zuwenden.
+- @fig-stichprobe zeigt zwei Stichproben. Welche der beiden Stichproben können wir verwenden, um Aussagen über die Verteilung der Farben in der Grundgesamtheit zu treffen? Wie groß ist dann groß genug? Mit diesen Fragen befasst sich die schließende Statistik.
 
--   Um eine aussagekräftige Stichprobe zu erhalten ist es notwendig, dass jede statistische Einheit mit gleicher Wahrscheinlichkeit in die Stichprobe aufgenommen wird. Wenn zum Beispiel die Befragung zur Mobilität auf dem Bahnsteig der U35 durchgeführt wird, dann ist die Stichprobe keinesfalls repräsentativ.
+- Um eine aussagekräftige Stichprobe zu erhalten ist es notwendig, dass jede statistische Einheit mit gleicher Wahrscheinlichkeit in die Stichprobe aufgenommen wird. Wenn zum Beispiel die Befragung zur Mobilität auf dem Bahnsteig der U35 durchgeführt wird, dann ist die Stichprobe keinesfalls repräsentativ.
 
 Für die Auswertung in einem Computerprogramm spielen diese Fragen keine Rolle. Hier entspricht die Stichprobe einfach dem statistischen Datensatz.
 
@@ -203,9 +250,9 @@ Für die statistische Auswertung von Daten ist es hilfreich und nützlich, Merkm
 
 a.  Ist ein Merkmal stetig oder diskret?
 
-b.  Auf welcher Skala wird ein Merkmal gemessen?
+a.  Auf welcher Skala wird ein Merkmal gemessen?
 
-c.  Beschreibt das Merkmal eine Qualität oder eine Größe, die in Zahlen messbar ist?
+a.  Beschreibt das Merkmal eine Qualität oder eine Größe, die in Zahlen messbar ist?
 
 Beachten Sie, dass diese Einordnungen nicht immer exakt gleich verwendet werden. Es handelt sich nicht um mathematische Definitionen sondern eher um eine Orientierungshilfe.
 
@@ -225,17 +272,17 @@ In der praktischen Anwendung werden stetige Merkmale durch Dezimalzahlen oder au
 
 Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werden vier Skalenniveaus unterschieden.
 
-1.  [Nominalskala]{.neuerbegriff}: Ein Merkmal heißt nominalskaliert, wenn die Ausprägungen Namen oder Kategorien sind. Für Werte nominalskalierter Merkmale gibt es keine natürliche Rangfolge (im Sinn von besser, größer, schneller und so weiter).
+1. [Nominalskala]{.neuerbegriff}: Ein Merkmal heißt nominalskaliert, wenn die Ausprägungen Namen oder Kategorien sind. Für Werte nominalskalierter Merkmale gibt es keine natürliche Rangfolge (im Sinn von besser, größer, schneller und so weiter).
 
-2.  [Ordinalskala]{.neuerbegriff}: Wenn es für die Ausprägungen eines Merkmals eine natürliche Ordnung gibt, es aber keinen Sinn macht, Abstände zwischen den Werten zu bestimmen, dann ist das Merkmal ordinalskaliert.
+1. [Ordinalskala]{.neuerbegriff}: Wenn es für die Ausprägungen eines Merkmals eine natürliche Ordnung gibt, es aber keinen Sinn macht, Abstände zwischen den Werten zu bestimmen, dann ist das Merkmal ordinalskaliert.
 
-3.  [Intervallskala]{.neuerbegriff}: Man spricht von einem intervallskalierten Merkmal, wenn die Ausprägungen
+1. [Intervallskala]{.neuerbegriff}: Man spricht von einem intervallskalierten Merkmal, wenn die Ausprägungen
 
-    a)  Zahlen sind,
+    a) Zahlen sind,
 
-    a)  sich die Differenz zwischen zwei Werten sinnvoll interpretieren lässt, es aber
+    a) sich die Differenz zwischen zwei Werten sinnvoll interpretieren lässt, es aber
 
-    a)  keinen natürlichen Nullpunkt gibt.
+    a) keinen natürlichen Nullpunkt gibt.
 
     Dadurch, dass es keinen Nullpunkt gibt, lassen sich keine Quotienten von Ausprägungen berechnen. Ein typisches Beispiel für eine intervallskalierte Größe ist die Temperatur in Grad Celsius: Die Aussage
 
@@ -243,7 +290,7 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
     macht wenig Sinn.
 
-4.  [Verhältnisskala]{.neuerbegriff}: Gibt es für ein zahlenwertiges Merkmal zusätzlich noch einen natürlichen Nullpunkt, dann lassen sich Quotienten bilden und man spricht von einem verhältnisskalierten Merkmal. Zum Beispiel gibt es für die Geschwindigkeit einen natürlichen Nullpunkt und der Satz
+1.  [Verhältnisskala]{.neuerbegriff}: Gibt es für ein zahlenwertiges Merkmal zusätzlich noch einen natürlichen Nullpunkt, dann lassen sich Quotienten bilden und man spricht von einem verhältnisskalierten Merkmal. Zum Beispiel gibt es für die Geschwindigkeit einen natürlichen Nullpunkt und der Satz
 
     > "Mein Porsche fährt mehr als doppelt so schnell wie dein Smart''
 
@@ -266,7 +313,7 @@ Eine weiterer Aspekt, nach dem Merkmale unterschieden werden können, betrifft d
 
 1.  [Qualitative Merkmale]{.neuerbegriff}: Wenn ein Merkmal endlich viele Ausprägungen besitzt und nominal- oder ordinalskaliert ist, dann nennt man es ein qualitatives Merkmal. Wesentlich dabei ist, dass die Ausprägungen einer Qualität oder einer Kategorie entspricht.
 
-2.  [Quantitative Merkmale]{.neuerbegriff}: Lässt sich ein Merkmal auf einer Intervall- oder Verhältnisskala messen, dann spricht man von einem quantitativen Merkmal. Eine Ausprägung ist hier eine Zahl, die eine Menge, Intensität oder ein Ausmaß wiedergibt.
+1.  [Quantitative Merkmale]{.neuerbegriff}: Lässt sich ein Merkmal auf einer Intervall- oder Verhältnisskala messen, dann spricht man von einem quantitativen Merkmal. Eine Ausprägung ist hier eine Zahl, die eine Menge, Intensität oder ein Ausmaß wiedergibt.
 
 Anmerkung: Es gibt auch Merkmale, die weder qualitativ noch quantitativ sind, zum Beispiel Eigennamen.
 
