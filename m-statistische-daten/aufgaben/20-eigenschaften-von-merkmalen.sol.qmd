@@ -1,8 +1,9 @@
 **1. Grundgesamtheit und statistische Einheiten**
 
-- Grundgesamtheit: Haushalte aller Beschäftigten
+- Grundgesamtheit: Haushalte aller Beschäftigten / Alle Beschäftigten (Interpretierspielraum)
 - Statistische Einheiten: Einzelne Haushalte
 
 **2. Merkmale**
 
 ![](00-bilder/l-sd-20.2.jpg)
+- Die Haushaltsgröße könnte auch als Verhältnisskala interpretiert werden. Es gibt zwar keinen natürlichen Nullpunkt (zumindest praktisch nicht), jedoch lassen sich Quotienten bilden. Ein Haushalt mit einer Haushaltsgröße von 4 Personen hat doppelt so viele Personen wie ein Haushalt mit einer Haushaltsgröße von 2 Personen.

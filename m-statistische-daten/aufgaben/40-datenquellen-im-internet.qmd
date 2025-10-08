@@ -1,6 +1,16 @@
 ## Datenquellen im Internet
 
-Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren Sie zu einem Thema, beispielsweise
+Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren Sie zu einem Thema, das **Sie** interessiert. 
+
+Was können Sie finden? Gehen Sie dabei auf folgende Punkte ein:
+
+- In welchen Format liegen die Daten vor?
+- Wie sind die Daten organisiert?
+- Welchen Umfang besitzt die Datenbasis?
+- Welche Merkmale werden erfasst? Charakterisieren Sie die Merkmale!
+
+
+Falls Sie Inspiration brauchen, können Sie beispielsweise zu folgenden Themen recherchieren:
 
 - Lufttemperatur in Bochum (Deutscher Wetterdienst)
 - Entwicklung der Lebenserwartung weltweit
@@ -10,10 +20,3 @@ Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren
 - Entwicklung der Baupreise in Deutschland
 - Entwicklungsindikatoren (Weltbank)
 - Entwicklung des Energiesplits in Deutschland
-
-Was konnten Sie finden? Gehen Sie dabei auf folgende Punkte ein:
-
-- In welchen Format liegen die Daten vor?
-- Wie sind die Daten organisiert?
-- Welchen Umfang besitzt die Datenbasis?
-- Welche Merkmale werden erfasst? Charakterisieren Sie die Merkmale!
