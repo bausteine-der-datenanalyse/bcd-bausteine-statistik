@@ -25,11 +25,11 @@ Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen A
 
 $h(a_j)$:
 
-:   **absolute Häufigkeit** der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
+: absolute Häufigkeit der Ausprägung $a_j$. Der Wert $h(a_j)$ gibt an, wie oft die Ausprägung $a_j$ in den Werten $x_1, x_2, \dots, x_n$ vorkommt,
 
 $f(a_j) = h(a_j)/n$:
 
-:   **relative Häufigkeit** der Ausprägung $a_j$.
+: relative Häufigkeit der Ausprägung $a_j$.
 
 Mit den Abkürzungen $h_j = h(a_j)$ und $f_j = f(a_j)$ heißen die Zahlenfolgen
 
