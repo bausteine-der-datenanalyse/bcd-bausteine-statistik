@@ -4,7 +4,7 @@ d_td_loesung_1 <- tribble(
   ~"Land", ~"Jahr", ~"Typ", ~"Anzahl",
   "Italien", 1999, "Fälle", 745,
   "Italien", 1999, "Bevölkerung", 19987071,
-  "Italien", 200, "Fälle", 2666,
+  "Italien", 2000, "Fälle", 2666,
   "Italien", 2000, "Bevölkerung", 20595360,
   "Brasilien", 1999, "Fälle", 37737,
   "Brasilien", 1999, "Bevölkerung", 172006362,
