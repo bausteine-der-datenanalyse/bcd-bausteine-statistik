@@ -411,7 +411,9 @@ $$
 Wir haben damit die Definition des harmonischen Mittels gefunden.
 
 ::: definition
-**Definition (Harmonisches Mittel):** Für die Werte $x_1, \dots, x_n$ heißt die Zahl
+**Definition: Harmonisches Mittel** 
+
+Für die Werte $x_1, \dots, x_n$ heißt die Zahl
 
 $$
 \bar{x}_{har} = \frac{n}{\displaystyle \sum_{i=1}^n\frac{1}{x_i}}
@@ -607,7 +609,7 @@ $$
 :::
 
 ::: definition
-**Definitionen: Streuungsmaße**
+**Definition: Streuungsmaße**
 
 $$
 \begin{aligned}
