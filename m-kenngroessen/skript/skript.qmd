@@ -12,90 +12,118 @@ Ein Lagemaß ist eine Zahl, die etwas darüber aussagt, wo das Zentrum einer Ver
 
 ### Arithmetisches Mittel {#sec-arithmetisches-mittel}
 
-Das geläufigste Lagemaß ist das [arithmetische Mittel]{.neuerbegriff} oder kurz der [Mittelwert]{.neuerbegriff}. Es ist nichts anderes als die Summe aller beobachteten Werte geteilt durch die Anzahl der Beobachtungen. Dementsprechend kann man das arithmetische Mittel nur für metrische Merkmale berechnen (also für Merkmale, die mindestens intervallskaliert sind).
+Das geläufigste Lagemaß ist das arithmetische Mittel oder kurz der Mittelwert. Es ist nichts anderes als die Summe aller beobachteten Werte geteilt durch die Anzahl der Beobachtungen. Dementsprechend kann man das arithmetische Mittel nur für metrische Merkmale berechnen (also für Merkmale, die mindestens intervallskaliert sind).
 
 ::: definition
 **Definition: Arithmetisches Mittel**
 
-Für die $n$ Zahlen $x_1, x_2, \dots, x_n$ wird der Wert $$
-\bar{x} = \frac{1}{n}\left(x_1 + x_2 + \dots + x_n\right) = \frac{1}{n} \sum_{j=1}^n x_j
-$$ arithmetisches Mittel oder kurz Mittelwert genannt.
+Für die $n$ Zahlen $x_1, x_2, \dots, x_n$ wird der Wert
+$$
+  \bar{x} = \frac{1}{n}\left(x_1 + x_2 + \dots + x_n\right) = \frac{1}{n} \sum_{j=1}^n x_j
+$$
+[arithmetisches Mittel]{.neuerbegriff} oder kurz [Mittelwert]{.neuerbegriff} genannt.
 :::
 
 Das arithmetische Mittel $\bar{x}$ besitzt zwei wichtige Eigenschaften:
 
-1.  Das arithmetische Mittel minimiert die Summe der quadrierten Abstände: $$
-    \bar{x} = \underset{a}{\operatorname{argmin}}  \sum_{j-1}^n (x_j - a)^2.
-    $$ .
+1. Das arithmetische Mittel minimiert die Summe der quadrierten Abstände $(x_j - a)^2,\; j = 1, \dots, n$, es gilt daher
+$$
+    \bar{x} = \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n (x_j - a)^2.
+$$
 
-2.  Wenn man sich vorstellt, dass jedem Wert $x_j$ eine Kugel entspricht, die an der Stelle $x_j$ an eine gewichtslose Stange gehängt wird, dann ist $\bar{x}$ die Stelle, an der man die Stange auf einem Finger balancieren kann (also der Schwerpunkt).
+1. Wenn man sich vorstellt, dass jedem Wert $x_j$ einer Kugel entspricht, die an der Stelle $x_j$ an eine gewichtslose Stange gehängt wird, dann ist $\bar{x}$ die Stelle, an der man die Stange auf einem Finger balancieren kann (also der Schwerpunkt).
 
-![](00-bilder/mittelwert-stange.eps.png){fig-alt="Darstellung des arithmetischen Mittels als Schwerpunkt an einer Stange." width="75%" fig-align="center"}
+```{r}
+#| fig-alt: "Arithmetisches Mittels als Schwerpunkt von Kugeln an einer Stange"
+#| fig-align: center
+#| fig-asp: 0.2
+bar_y <- 0.3
+ticklength <- 0.1
+positions <- c(1, 2, 2, 2, 3, 4, 6, 8, 17)
+data <- tibble(X = positions)
+threads <- tibble(X = unique(positions), Y = c(0, -1.5, 0, 0, 0, 0, 0))
+xbar = mean(positions)
 
-::::: beispiel
-**Beispiel Arithmetisches Mittel:**
+ggplot(data = data) +
+  geom_hline(
+    yintercept = bar_y, linewidth = 1
+  ) +
+  geom_segment(
+    data = threads, mapping = aes(x = X, xend = X, y = bar_y + ticklength, yend = Y), linewidth = 0.35
+  ) +
+  geom_dotplot(
+    mapping = aes(x = X), 
+    method = "histodot", dotsize = 0.75, binwidth = 1, stackdir = "down", stackratio = 1.25
+  ) +
+  annotate("point", x = xbar, y = bar_y - 0.15, size = 4) +
+  ylim(-2, 0.75) +
+  theme_void() 
+```
+
+::: beispiel
+**Beispiel: Arithmetisches Mittel**
 
 Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ und $Y$ mit den Werten
 
 ```{r}
-tbl1 |>
-  kable(
-    booktabs = TRUE,
-    align = c("l", "c", "c", "c")
-  ) |>
-  row_spec(0, bold = TRUE)
+d_bsp_mittelwert |>
+  transpose_df() |>
+  gt(rowname_col = "name") |>
+  tab_options(column_labels.hidden = T)
 ```
 
 Für die arithmetischen Mittel der beiden Merkmale ergibt sich folgende Situation:
 
-::: {.multicols arguments="2"}
 ```{r}
-#| fig-alt: "Jeder Datenpunkt als ein Kreis dargestellt in einer Art Histogramm. Eine rote Linie stellt das arithmetische Mittel relativ zentral in die Verteilung dar."
-
-ggplot(data = d_arith_a) +
-  geom_dotplot(mapping = aes(x = X), binwidth = 1) +
-  geom_vline(xintercept = mean_arith_a, color = 'red', linewidth = 1.15) +
-  scale_x_continuous(breaks = c(1, 10, 20), minor_breaks = 1:21, limits = c(1, 21)) +
-  scale_y_continuous(breaks = NULL, minor_breaks = NULL) +
-  labs(x = NULL, y = NULL) + 
-  annotate("text", x = mean_arith_a + 0.2, y = 0.975, label= "Arithmetisches Mittel",  hjust = 0, size = 4.5) +
-  coord_fixed(ratio = ar_arith) 
+plot_mean <- function(d, m) {
+  x_bar <- mean(pull(d, {{m}}))
+  ggplot(data = d) +
+    geom_dotplot(
+      mapping = aes(x = {{m}}),
+      method = "histodot", dotsize = 0.75, binwidth = 1, stackratio = 1.25
+    ) +
+    geom_vline(xintercept = x_bar, color = 'red', linewidth = 1.15) +
+    scale_x_continuous(breaks = c(1, 10, 20), minor_breaks = 1:21, limits = c(1, 21)) +
+    scale_y_continuous(breaks = NULL, minor_breaks = NULL, limits = c(0, 1)) +
+    annotate("text", x = x_bar + 0.3, y = 0.5, label= "Arithmetisches Mittel",  hjust = "left", vjust = "center", size = 6) +
+    labs(x = NULL, y = NULL)
+}
 ```
 
-Arithmetisches Mittel von Merkmal $X$ $$
-\bar{x} = \frac{1}{17}(1 + 2 + 6 + \dots + 2 + \dots + 2) = 2.588\dots
-$$
-:::
+Merkmal $X$:
 
-::: {.multicols arguments="2"}
 ```{r}
-#| fig-alt: "Jeder Datenpunkt als ein Kreis dargestellt in einer Art Histogramm. Ein Ausreißer bei Y = 21 fällt sofort auf und verzerrt das durch die rote Linie gekennzeichnete arithmetische Mittel in die Richtung des Ausreißers."
-
-ggplot(data = d_arith_b) +
-   geom_dotplot(mapping = aes(x = X), binwidth = 1) +
-   geom_vline(xintercept = mean_arith_b, color = 'red', linewidth = 1.15) +
-   scale_x_continuous(breaks = c(1, 10, 20), minor_breaks = 1:21, limits = c(1, 21)) +
-   scale_y_continuous(breaks = NULL, minor_breaks = NULL) +
-   labs(x = NULL, y = NULL) + 
-   annotate("text", x = mean_arith_b + 0.2, y = 0.975, label= "Arithmetisches Mittel",  hjust = 0, size = 4.5) +
-   coord_fixed(ratio = ar_arith) 
+#| fig-align: center
+#| fig-asp: 0.35
+plot_mean(d_bsp_mittelwert, `X`)
 ```
 
-Arithmetisches Mittel von Merkmal $Y$ $$
-\bar{y} = \frac{1}{17}(1 + 2 + 6 + \dots + 21 + \dots + 2) = 3.705\dots
 $$
-:::
+  \bar{x} = \frac{1}{17}(1 + 2 + 6 + \dots + 2 + \dots + 2) = 2.588\dots
+$$
+
+Merkmal $Y$:
+
+```{r}
+#| fig-align: center
+#| fig-asp: 0.35
+plot_mean(d_bsp_mittelwert, `Y`)
+```
+
+$$
+  \bar{y} = \frac{1}{17}(1 + 2 + 6 + \dots + 21 + \dots + 2) = 3.705\dots
+$$
 
 Wir sehen, dass sich der Wert $y_{13} = 21$ für das arithmetische Mittel $\overline{y}$ offensichtlich stark auswirkt. Anhand der beiden oben festgehaltenen Eigenschaften des arithmetischen Mittels lässt sich das auf zwei Arten verstehen:
 
-1.Der Abstand $(21 - a)$ geht quadratisch in die zu minimierende Summe ein
+1. Der Abstand $(21 - a)$ geht quadratisch in die zu minimierende Summe ein
 
-2.Der Hebelarm der Kugel zum Wert $y_{13} = 21$ ist vergleichsweise groß
+1. Der Hebelarm der Kugel zum Wert $y_{13} = 21$ ist vergleichsweise groß
 
 Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabefehler handelt: Es wurden aus Versehen die nebeneinanderliegenden Tasten 2 und 1 anstatt nur der Taste 2 gedrückt. In diesem Fall verzerrt der einzelne falsche Wert den Mittelwert stark.
-:::::
+:::
 
-**Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel Arithmetisches Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genausogut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
+**Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genausogut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
 
 ::: beispiel
 Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersateliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satelitendaten das gesamte Ausmaß des Problems. Nach [@ludwig2006]. Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
@@ -113,45 +141,45 @@ $$
 x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(i)} \leq \dots \leq x_{(n)}
 $$
 
-gelten soll. Für eine ungerade Anzahl an Beobachtungen ist der Median $x_{med}$ nun der Wert, der in der geordneten Urliste in der Mitte steht; ist die Anzahl ungerade, dann ist es der Mittelwert der beiden in der Mitte stehenden Werte. Entsprechend definieren wir den Median für mindestens intervallskalierte Merkmale.
+gelten soll. Für eine ungerade Anzahl an Beobachtungen ist der Median $x_\mathrm{med}$ nun der Wert, der in der geordneten Urliste in der Mitte steht; ist die Anzahl ungerade, dann ist es der Mittelwert der beiden in der Mitte stehenden Werte. Entsprechend definieren wir den Median für mindestens intervallskalierte Merkmale.
 
 ::: definition
 **Definition: Median**
 
 $$
-x_{med} =
+x_\mathrm{med} =
     \begin{cases}
-      \;\; x_{\left(\frac{n+1}{2}\right)} & \text{für ungerades $n$} \\[1em]
-      \;\; \frac{1}{2}\left(x_{(n/2)} + x_{(n/2+1)}\right) & \text{für gerades $n$}
+      x_{\left(\frac{n+1}{2}\right)} & \text{für ungerades $n$} \\[1em]
+      \frac{1}{2}\left(
+        x_{\left(\frac{n}{2}  \right)} + 
+        x_{\left(\frac{n}{2}+1\right)}
+      \right) & \text{für gerades $n$}
     \end{cases}
 $$
 :::
 
 Anders als das arithmetische Mittel kann der Median auch für ordinal skalierte Merkmale angegeben werden. Bei einer geraden Anzahl von Stichproben liegt der Median dann gegebenenfalls zwischen zwei Ausprägungen.
 
-Darüber hinaus besitzt der Median $x_{med}$ folgende Eigenschaften:
+Darüber hinaus besitzt der Median $x_\mathrm{med}$ folgende Eigenschaften:
 
-1.Der Median minimiert die Summe der Beträge der Abstände: $$x_{med}= \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n |x_j - a|$$
+1. Der Median minimiert die Summe der Beträge der Abstände: $$x_\mathrm{med}= \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n |x_j - a|$$
 
-2.Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_{med}$ und mindestens 50% der Daten sind größer oder gleich dem Median $x_{med}$.
+1. Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_\mathrm{med}$ und mindestens 50% der Daten sind größer oder gleich dem Median $x_\mathrm{med}$.
 
 An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich zum arithmetischen Mittel ein resistentes Lagemaß darstellt: In den Betrag des Modus geht eine extrem große Abweichung vom Mittelwert wesentlich weniger stark ein als in das Quadrat des arithmetischen Mittels.
 
 ::: beispiel
-**Beispiel Güteklasse:**
+**Beispiel Güteklasse**
 
-Die Auswertung eines Merkmals "Güteklasse" ergab die Liste
+Die Auswertung eines Merkmals "Güteklasse" ergibt
 
 ```{r}
-tbl3 |>
-  kable(
-    booktabs = TRUE,
-    align = c("l", "c", "c", "c")
-  ) |>
-  row_spec(0, bold = TRUE)
+d_bsp_median |>
+  transpose_df() |>
+  gt(rowname_col = "name")
 ```
 
-mit dem Umfang $n = 12$. Der Median liegt daher zwischen $x_{6} = \text{B}$ und $x_{7} = \text{B}$. Beide Werte sind gleich, also ist $x_{med} = \text{B}$.
+mit dem Umfang $n = 12$. Der Median liegt daher zwischen $x_{(6)} = \text{B}$ und $x_{(7)} = \text{B}$. Beide Werte sind gleich, also ist $x_\mathrm{med} = \text{B}$.
 :::
 
 ### Modus {#sec-modus}
@@ -161,7 +189,7 @@ Ein weiteres Lagemaß ist der Modus, der angibt, welche Ausprägung am häufigst
 ::: definition
 **Definition: Modus**
 
-Der Modus $x_{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der Modus ist nur dann eindeutig bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
+Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der Modus ist nur dann bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
 :::
 
 Der Modus lässt sich für alle Arten von Merkmalen bestimmen, auch wenn es sich nur um eine nominalskalierte Größe handelt. In der Darstellung durch ein Stab- oder Säulendiagramm entspricht der Modus der Ausprägung mit dem höchsten Stab bzw. der höchsten Säule.
@@ -173,51 +201,52 @@ Falls es sich um eine unimodale Verteilung handelt, kann aus den Zahlenwerten vo
 ::: beispiel
 Wir betrachten drei Verteilungen, für die bereits die drei oben besprochenen Lagemaße bestimmt wurden.
 
-+--------------+--------------+---------------+----------------+
-| $a_i$        | Stichprobe I | Stichprobe II | Stichprobe III |
-|              |              |               |                |
-|              | $h(a_i)$     | $h(a_i)$      | $h(a_i)$       |
-+==============+==============+===============+================+
-| 1            | 8            | 1             | 1              |
-+--------------+--------------+---------------+----------------+
-| 2            | 10           | 2             | 2              |
-+--------------+--------------+---------------+----------------+
-| 3            | 8            | 4             | 2              |
-+--------------+--------------+---------------+----------------+
-| 4            | 6            | 8             | 4              |
-+--------------+--------------+---------------+----------------+
-| 5            | 5            | 10            | 5              |
-+--------------+--------------+---------------+----------------+
-| 6            | 4            | 8             | 6              |
-+--------------+--------------+---------------+----------------+
-| 7            | 2            | 4             | 8              |
-+--------------+--------------+---------------+----------------+
-| 8            | 2            | 2             | 10             |
-+--------------+--------------+---------------+----------------+
-| 9            | 1            | 1             | 8              |
-+--------------+--------------+---------------+----------------+
-| $\bar{x}$    | 3.57         | 5             | 6.43           |
-+--------------+--------------+---------------+----------------+
-| $x_{med}$    | 3            | 5             | 7              |
-+--------------+--------------+---------------+----------------+
-| $x_{mod}$    | 2            | 5             | 8              |
-+--------------+--------------+---------------+----------------+
+```{r}
+mmean <- function(d) mean(rep(1:9, d))
+mmed <- function(d) median(rep(1:9, d))
+mmod <- function(d) modes(rep(1:9, d))
+
+d_bsp_lageregeln |>
+  gt(rowname_col = "a") |>
+  tab_stubhead(md("$a_i$")) |>
+  tab_spanner(label = "Stichprobe I", columns = I) |>
+  tab_spanner(label = "Stichprobe II", columns = II) |>
+  tab_spanner(label = "Stichprobe III", columns = III) |>
+  cols_label(everything() ~ md("$h(a_i)$"))  |>
+  cols_align(
+    align = "center",
+    columns = c(I, II, III)
+  ) |>
+  cols_align(
+    align = "left",
+    columns = a
+  ) |>
+  grand_summary_rows(
+    fns = list(
+      list(label = md("$\\bar{x}$"), fn = "mmean"),
+      list(label = md("$x_\\mathrm{med}$"), fn = "mmed"),
+      list(label = md("$x_\\mathrm{mod}$"), fn = "mmod")
+    ),
+    fmt = ~ fmt_number(., drop_trailing_zeros = T)
+  )
+```
 
 ```{r}
-# | layout-nrow: 1
+#| out-width: "100%"
 
-plot_lageregeln(c(8, 10, 8, 6, 5, 4, 2, 2, 1), "I")
-plot_lageregeln(c(1 , 2 , 4 , 8 , 10, 8 , 4 , 2 , 1 ), "II")
-plot_lageregeln(rev(c(8, 10, 8, 6, 5, 4, 2, 2, 1)), "III")
+p1 <- plot_lageregeln(d_bsp_lageregeln, "I")
+p2 <- plot_lageregeln(d_bsp_lageregeln, "II")
+p3 <- plot_lageregeln(d_bsp_lageregeln, "III")
+p1 + p2 + p3 + plot_layout(axes = "collect", guides = "collect")
 ```
 
 Offensichtlich besteht hier folgender Zusammenhang zischen der Form der Verteilung und den Größen der drei Lagemaße:
 
 $$
 \begin{aligned}
-\text{Stichprobe I} & \quad \text{linkssteil} & \quad \bar{x} > x_{med} > x_{mod} \\
-\text{Stichprobe II} & \quad \text{symmetrisch} & \quad \bar{x} = x_{med} = x_{mod} \\
-\text {Stichprobe III} & \quad \text{rechtssteil} & \quad  \bar{x} < x_{med} < x_{mod}
+\text{Stichprobe I} & \quad \text{linkssteil} & \quad \bar{x} > x_\mathrm{med} > x_\mathrm{mod} \\
+\text{Stichprobe II} & \quad \text{symmetrisch} & \quad \bar{x} = x_\mathrm{med} = x_\mathrm{mod} \\
+\text {Stichprobe III} & \quad \text{rechtssteil} & \quad  \bar{x} < x_\mathrm{med} < x_\mathrm{mod}
 \end{aligned}
 $$
 
@@ -235,15 +264,15 @@ Muss der im Beispiel beobachtete Zusammenhang zwischen Symmetrie und Steilheit u
 Wir halten also die Lageregeln
 
 ::: definition
-**Definition: Lageregeln** 
+**Definition: Lageregeln**
 
 Für eine unimodale Verteilung gilt
 
 $$
 \begin{aligned}
-\text{Linkssteil} \quad \iff \bar{x} > x_{med} > x_{mod} \\
-\text{Symmetrisch} \quad \iff \bar{x} \approx x_{med} \approx x_{mod} \\
-\text{Rechtssteil} \quad \iff \bar{x} < x_{med} < x_{mod}
+\text{Linkssteil} \quad \iff \bar{x} > x_\mathrm{med} > x_\mathrm{mod} \\
+\text{Symmetrisch} \quad \iff \bar{x} \approx x_\mathrm{med} \approx x_\mathrm{mod} \\
+\text{Rechtssteil} \quad \iff \bar{x} < x_\mathrm{med} < x_\mathrm{mod}
 \end{aligned}
 $$
 :::
@@ -259,13 +288,11 @@ Das geometrische Mittel wird verwendet, wenn es sich bei den Werten eines Merkma
 
 Wir betrachten ein Wasserreservoir mit den Wasserständen
 
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| Tag $i$                                                                  | 0                                                                        | 1                                                                        | 2                                                                        | 3                                                                        | 4                                                                        | 5                                                                        | 6                                                                        |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| Wasserstand $W_i$                                                        | 1.00                                                                     | 2.00                                                                     | 1.50                                                                     | 4.50                                                                     | 2.25                                                                     | 4.50                                                                     | 5.00                                                                     |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
++-------------------+-------+-------+-------+-------+-------+-------+-------+
+| Tag $i$           | 0     | 1     | 2     | 3     | 4     | 5     | 6     |
++-------------------+-------+-------+-------+-------+-------+-------+-------+
+| Wasserstand $W_i$ | 1.00  | 2.00  | 1.50  | 4.50  | 2.25  | 4.50  | 5.00  |
++-------------------+-------+-------+-------+-------+-------+-------+-------+
 
 Dann ist für jeden Zeitraum $i = 1, \dots, n$ das Verhältnis der beiden Wasserstände
 
@@ -278,66 +305,52 @@ der $i$-te Wachstumsfaktor. Insgesamt ergeben sich für den Wachstumsfaktor die 
 +-----------------------+--------+--------+--------+--------+--------+------------------+
 | Zeitraum $i$          | 1      | 2      | 3      | 4      | 5      | 6                |
 +-----------------------+--------+--------+--------+--------+--------+------------------+
-| Wachstumsfaktor $x_i$ | 2.00   | 0.75   | 3.00   | 0.50   | 2.00   | $1.\overline{1}$ |
+| Wachstumsfaktor $x_i$ | 2.00   | 0.75   | 3.00   | 0.50   | 2.00   | 1.11             |
 +-----------------------+--------+--------+--------+--------+--------+------------------+
 
 Grafisch stellt sich die Situation so dar:
 
 ```{r}
-#| fig-alt: "Wasserstand in m auf der Y-Achse, Tage auf der X-Achse. Die jeweiligen Punkte wurden durch ein Liniendiagramm miteinander verbunden. Für jeden Tag wurde ebenfalls ein Balkendiagramm erstellt mit blauer Farbe für Tage an denen der Wasserstand stieg und roter Farbe für Tage an denen der Wasserstand sank. Allgemein steigt der Wasserstand stetig."
+#| fig-alt: "Wasserstand eines Reservoirs mit Zuwachsraten"
 
 ggplot(data = d1_geo, mapping = aes(x = x, y = B)) +
   geom_col(data = d2_geo, mapping = aes(x = x, y = w, fill = g), alpha = 1/2, show.legend = FALSE) +
   geom_line(linewidth = 1.05) + geom_point(size = 3) +
   scale_x_continuous(breaks = 0:n, minor_breaks = NULL) +
   scale_y_continuous(limits = c(0, 5)) +
-  scale_fill_manual(values = c("TRUE" = "#1FBFC3", "FALSE" = "#F57670")) +
   labs(x = "Tag", y = "Wasserstand [m]")
 ```
 
 Aus der Definition des Wachstumsfaktors erhalten wir $W_i = x_i W_{j-i}$. Mit den Wachstumsfaktoren $x_i$ und dem Wasserstand $W_0 = 1$ können wir also den Verlauf des Wasserstandes für die betrachteten Tage rekonstruieren:
 
 $$
-W_1  = x_1 \cdot W_0 = 2 \cdot 1 = 2 \quad = x_1 \cdot W_0
+\begin{aligned}
+W_1  & = x_1 \cdot W_0 & = 2 \cdot 1 = 2 \quad = x_1 \cdot W_0 \\
+W_2  & = x_2 \cdot W_1 & = 0.75 \cdot 2 = 1.5 \quad = x_2 \cdot x_1 \cdot W_0 \\
+W_3  & = x_3 \cdot W_2 & = 3.00 \cdot 1.5 = 4.5 \quad = x_3 \cdot x_2 \cdot x_1 \cdot W_0 \\
+& \vdots \\
+W_6  & = x_6 \cdot W_5 & = 1.\overline{1} \cdot 4.5 = 5 \quad = x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1 \cdot W_0 \\
+\end{aligned}
 $$
 
-$$
-W_2  = x_2 \cdot W_1 = 0.75 \cdot 2 = 1.5 \quad = x_2 \cdot x_1 \cdot W_0
-$$
-
-$$
-W_3  = x_3 \cdot W_2 = 3.00 \cdot 1.5 = 4.5 \quad = x_3 \cdot x_2 \cdot x_1 \cdot W_0
-$$
-
-$$
-\vdots
-$$
-
-$$
-W_6  = x_6 \cdot W_5 = 1.\overline{1} \cdot 4.5 = 5 \quad = x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1 \cdot W_0
-$$
-
-Für einen mittleren Wachstumsfaktor $z$ müssen wir dasselbe Ergebnis erhalten, wenn wir sechs Tage lang diesen Wachstumsfaktor ansetzen. Es muss gelten
+Für einen mittleren Wachstumsfaktor $z$ müssen wir dasselbe Ergebnis erhalten, wenn wir sechs Tage lang diesen Wachstumsfaktor ansetzen. Es muss daher
 
 $$
 W_6 = z \cdot z \cdot z \cdot z \cdot z \cdot z \cdot W_0 = z^6 \cdot W_0
 $$
 
-so dass wir den mittleren Wachstumsfaktor
+gelten, so dass wir den mittleren Wachstumsfaktor
 
 $$
-z
-    =
-    \sqrt[6]{x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1} = 
-    \sqrt[6]{ 2.00 \cdot 0.75 \cdot 3.00 \cdot 0.50 \cdot 2.00 \cdot 1.\overline{1}}=
-    \sqrt[6]{5}
-    =
-    1.307\dots
+\begin{aligned}
+z & = \sqrt[6]{x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1} \\
+  & = \sqrt[6]{ 2.00 \cdot 0.75 \cdot 3.00 \cdot 0.50 \cdot 2.00 \cdot 1.\overline{1}} \\
+  & = \sqrt[6]{5} \\
+  & = 1.307\dots
+\end{aligned}
 $$
 
-für den Wasserstand erhalten.
-
-Hier nochmals die Situation mit dem mittleren Wachstum.
+für den Wasserstand erhalten. Hier nochmals die Situation mit dem mittleren Wachstum.
 
 ```{r}
 #| fig-alt: "In die vorherige Abbildung wurde nun ein Liniendiagramm für das mittlere Wachstum hinzugefügt. Die Balkendiagramme wurden ebenfalls geändert, sodass diese nun ebenfalls alle das mittlere Wachstum darstellen."
@@ -356,22 +369,22 @@ ggplot(data = d3_geo, mapping = aes(x = x, y = B)) +
 Entsprechend der Überlegung im Beispiel definieren wir
 
 ::: definition
-**Definition: Geometrisches Mittel** 
+**Definition: Geometrisches Mittel**
 
-Das [geometrische Mittel]{.neuerbegriff} zu den Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt der Faktoren, also $$
-\bar{x}_{geom} = (x_1 \cdot x_2 \cdot \dots \cdot x_n)^{1/n}.
+Das [geometrische Mittel]{.neuerbegriff} zu den Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt der Faktoren, also 
 
+$$ 
+  \bar{x}_\mathrm{geom} = \sqrt[n]{x_1 \cdot x_2 \cdot \dots \cdot x_n}.
 $$
 :::
 
 Daraus erhält man für einen Bestand $B_0, B_1, \dots, B_n$ mit den Wachstumsfaktoren $x_i = B_i / B_{i-1}, \quad i = 1, \dots, n$ den Zusammenhang
 
-$$
-B_n = \underbrace{\bar{x}_{geom} \cdot \; \dots \; \cdot \bar{x}_{geom}}_{n-\mathrm{mal}} \cdot B_0 = (\bar{x}_{geom})^n B_0.
+$$ 
+  B_n = \underbrace{\bar{x}_\mathrm{geom} \cdot \; \dots \; \cdot \bar{x}_\mathrm{geom}}_{n-\text{mal}} \cdot B_0 = (\bar{x}_\mathrm{geom})^n B_0.
+$$ 
 
-$$
-Mit $\bar{x}_{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_{geom}$ die adäquate Mittelung der Wachstumsfaktoren.
-
+Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_\mathrm{geom}$ die adäquate Mittelung der Wachstumsfaktoren.
 
 ### Das harmonische Mittel {#sec-har-mittel}
 
@@ -385,7 +398,7 @@ Bei einer Autofahrt werden zunächst 10km mit einer Geschwindigkeit von 50km/h z
 Zunächst bestimmen wir die Gesamtstrecke und die gesamte Fahrzeit:
 
 $$    
-S = 10 + 60 = 70 km
+S = 10 + 60 = \SI{70}{km}
     \quad \text{und} \quad
     T = 10 \cdot 1 / 50 + 60 \cdot 1 / 110 \approx 0.7455\ h
 $$
@@ -411,7 +424,7 @@ $$
 Wir haben damit die Definition des harmonischen Mittels gefunden.
 
 ::: definition
-**Definition: Harmonisches Mittel** 
+**Definition: Harmonisches Mittel**
 
 Für die Werte $x_1, \dots, x_n$ heißt die Zahl
 
@@ -630,7 +643,7 @@ Mit den Lage- und Variabilitätsmaßen haben wir nun die Möglichkeit, eine Vert
 
 ### Quantile {#sec-quantile}
 
-Die oben genannten Quartile sind, wie auch der Median, spezielle Quantilwerte. Sie erinnern sich: Der Median $x_{med}$ war so gewählt, dass die eine Hälfte (also 50%) der Werte kleiner gleich $x_{med}$ sind und die andere Hälfte (also ebenfalls 50%) der Werte größer gleich $x_{med}$. Für die Stichprobe mit 20 Werten
+Die oben genannten Quartile sind, wie auch der Median, spezielle Quantilwerte. Sie erinnern sich: Der Median $x_\mathrm{med}$ war so gewählt, dass die eine Hälfte (also 50%) der Werte kleiner gleich $x_\mathrm{med}$ sind und die andere Hälfte (also ebenfalls 50%) der Werte größer gleich $x_\mathrm{med}$. Für die Stichprobe mit 20 Werten
 
 ```{r}
 #| fig-height: 0.5
@@ -675,7 +688,7 @@ p_box_2
 Wir sehen, dass wir die eingangs formulierte Idee noch etwas präzisieren müssen, um die Lage des Quantils eindeutig festlegen zu können.
 
 ::: definition
-**Definition: Quantil** 
+**Definition: Quantil**
 
 Eine Zahl $x_p$ mit $0 < p < 1$ heißt $p$-Quantil, wenn mindestens ein Anteil von $p \cdot$ 100% der Daten kleiner/gleich $x_p$ und mindestens ein Anteil von $(1-p) \cdot$ 100% größer/gleich $x_p$ ist. Es muss für $x_p$ also
 
@@ -735,8 +748,8 @@ $$d_{\mathrm{Q}} = x_{0.75} - x_{0.25}$$
 heißt Interquartilsabstand, kurz IQR (englisch: [interquartile range]{.eng}). Zusammen mit den Extremwerten und dem Median erhalten wir die [Fünf-Punkte-Zusammenfassung]{.neuerbegriff} einer Verteilung
 
 $$
-x_{\mathrm{min}}, \; x_{0.25}, \; x_{med}, \; x_{0.75}, \; x_{\mathrm{max}},
-$$ 
+x_{\mathrm{min}}, \; x_{0.25}, \; x_\mathrm{med}, \; x_{0.75}, \; x_{\mathrm{max}},
+$$
 
 mit der man die Verteilung in vier Bereiche aufteilt, die jeweils gleich viele Werte enthalten.
 
@@ -767,8 +780,8 @@ Mit einem Box-Plot wird die Fünf-Punkte-Zusammenfassung graphisch dargestellt. 
 Ein Box-Plot entsteht in fünf Schritten:
 
 1.  Ein Rechteck (englisch: [*box*]{.eng}) liegt zwischen den Quartilen $x_{0.25}$ und $x_{0.75}$.
-2.  Ein Strich in dem Rechteck markiert die Lage des Medians $x_{med}$. 
-3. Alle Werte im Intervall $[x_{0.25} - 1.5 d_\mathrm{Q}, x_{0.75} + 1.5 d_\mathrm{Q}]$ werden als normale Beobachtungen angesehen.
+2.  Ein Strich in dem Rechteck markiert die Lage des Medians $x_\mathrm{med}$.
+3.  Alle Werte im Intervall $[x_{0.25} - 1.5 d_\mathrm{Q}, x_{0.75} + 1.5 d_\mathrm{Q}]$ werden als normale Beobachtungen angesehen.
 4.  Zwei Linien (die [*whiskers*]{.eng}) gehen bis zur kleinsten und bis zur größten normalen Beobachtung. Manchmal werden diese Linien durch einen kurzen Querstrich abgeschlossen.
 5.  Alle Werte außerhalb des Intervalls der normalen Beobachtungen (Ausreißer) werden als Punkte eingezeichnet.
 
@@ -847,7 +860,7 @@ Man kann sich überlegen, dass die Lorenzkurve monoton steigend ist, wobei die S
 Aus dem Beispiel oben können wir die Rechenvorschrift für die Punkte der Lorenzkurve ableiten und in der folgenden Definition festhalten.
 
 ::: definition
-**Definition: Lorenzkurve** 
+**Definition: Lorenzkurve**
 
 Für die geordnete Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ist die [Lorenzkurve]{.neuerbegriff} der Polygonzug durch die Punkte
 
@@ -914,7 +927,7 @@ Die starke Konzentration der Jahresniederschläge in Nha Trang ist an dem Verlau
 Die Stärke der Konzentration drückt sich in der Entfernung der Lorenzkurve von der Diagonalen aus. Es ist daher naheliegend, die Fläche zwischen der Diagonalen und der Lorenzkurve als Maß für die Konzentration des Merkmals zu verwenden. Diese Fläche wird noch auf die Fläche des Dreiecks unter der Winkelhalbierenden bezogen.
 
 ::: definition
-**Definition: Gini-Koeffizient** 
+**Definition: Gini-Koeffizient**
 
 Der [Gini-Koeffizient]{.neuerbegriff} ist
 
@@ -931,9 +944,8 @@ $$
 
 Für den Gini-Koeffizienten gibt es zwei Extremfälle:
 
-:::: {layout="[50,50]"}
+::: {layout="[50,50]"}
 ![](00-bilder/lorenzkurve-extremfaelle.eps.png){fig-alt="Zwei Extremfälle von Gini-Koeffizienten: Zuerst sind alle Werte gleich, also liegt die Lorenzkurve auf der Diagonalen. Danach ist nur ein Wert ungleich Null, sodass die Lorenzkurve bis dahin auf der horizontalen Achse liegt." width="228"}
-
 :::
 
 Extremfall 1 (links): Alle Werte in der Stichprobe sind gleich. Dann ist die Lorenzkurve gleich der Diagonalen und der Gini-Koeffizient wird minimal: $$
@@ -944,11 +956,10 @@ Extremfall 2 (rechts): Nur ein Wert ist ungleich Null. Hier verläuft die Lorenz
 G_{max}  = 2 \cdot (1/2 - 1/2 \cdot 1 \cdot 1/n) = (n-1)/n.
 $$
 
-
 Wir sehen, dass der maximale Gini-Koeffizient von der Anzahl der Beobachtungen abhängt. Dieser unerwünschte Effekt wird mit dem normierten Gini-Koeffizienten umgangen.
 
 ::: definition
-**Definition: normierter Gini-Koeffizient/Lorenz-Müller-Koeffizient** 
+**Definition: normierter Gini-Koeffizient/Lorenz-Müller-Koeffizient**
 
 Der Gini-Koeffizient wird mit dem Faktor $n/(n-1)$ multipliziert und wir erhalten den [normierten Gini-Koeffizienten]{.neuerbegriff}
 
