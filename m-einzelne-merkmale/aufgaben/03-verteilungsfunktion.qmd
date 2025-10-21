@@ -1,4 +1,9 @@
 ## Empirische Verteilungsfunktion
 
-Bestimmen Sie für die Geschwindigkeitsmessung mit dem Seitenradar (Aufgabe oben) mithilfe der empirischen Verteilungsfunktion, welche Geschwindigkeit von 80% der Verkehrsteilnehmer eingehalten wird. Die hierfür benötigte Häufigkeitsverteilung lässt sich von Hand am einfachsten mit einem Stamm-Blatt-Diagramm (selber auf Wikipedia nachschauen) ermitteln.
+Bestimmen Sie für die Geschwindigkeitsmessung mit dem Seitenradar (Aufgabe oben) mithilfe der empirischen Verteilungsfunktion, welche Geschwindigkeit von 80% der Verkehrsteilnehmer eingehalten wird. Erstellen Sie hierfür
+
+1. ein Stamm-Blatt-Diagramm (https://de.wikipedia.org/wiki/Stamm-Blatt-Diagramm),
+1. eine tabellarische Übersicht über die absoluten und relativen kumulierten Häufigkeiten und
+1. die empirische Verteilungsfunktion.
+
 

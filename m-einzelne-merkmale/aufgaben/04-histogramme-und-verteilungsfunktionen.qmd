@@ -1,12 +1,15 @@
 ```{r}
 #| echo: false
 #| output: false
+library(tidyverse)
+library(lubridate)
+library(cowplot)
 source(rprojroot::is_r_package$find_file("bcd-setup.R"))
 ```
 
 ## Histogramme und Verteilungsfunktionen
 
-Welche empirische Verteilungsfunktion (A-C) gehört zu welchem Histogramm (1-4)?
+Welche empirische Verteilungsfunktion (A-D) gehört zu welchem Histogramm (1-4)?
 
 ```{r}
 #| echo: false
@@ -38,7 +41,7 @@ d4 <- tibble(X = (100 + runif(35 * n0, min = -0.1, max = 0.1)))
 
 plot_grid(
     plot_hist(d1, "1"), plot_hist(d2, "2"), plot_hist(d3, "3"), plot_hist(d4, "4"),
-    plot_ecdf(d3, "3"), plot_ecdf(d4, "4"), plot_ecdf(d2, "2"), plot_ecdf(d1, "1"), 
+    plot_ecdf(d4, "4"), plot_ecdf(d3, "3"), plot_ecdf(d2, "2"), plot_ecdf(d1, "1"), 
     ncol = 4
 )
 ```
