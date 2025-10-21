@@ -175,7 +175,7 @@ $$\hat f(x, y)
   
 Die Glättungseigenschaften des
 Schätzers hängen von den Parametern $h_1$ und $h_2$ sowie der Wahl der
-Kernfunktion $K$ ab (@sec:approximation-dichtekurven).
+Kernfunktion $K$ ab (@sec-approximation-dichtekurven).
 
 In einer zweidimensionalen Darstellung des Histogramms oder der
 Dichtefunktion werden die Häufigkeiten farblich kodiert. Eine weitere
