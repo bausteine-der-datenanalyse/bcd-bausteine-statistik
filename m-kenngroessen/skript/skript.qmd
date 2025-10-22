@@ -41,14 +41,16 @@ Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ 
 tbl1 |>
   kable(
     booktabs = TRUE,
-    align = c("l", "c", "c", "c")
+    align = c("l", rep("c", 12))
   ) |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(2:13, width = "1cm") |>
   row_spec(0, bold = TRUE)
 ```
 
 Für die arithmetischen Mittel der beiden Merkmale ergibt sich folgende Situation:
 
-::: {.multicols arguments="2"}
+
 ```{r}
 #| fig-alt: "Jeder Datenpunkt als ein Kreis dargestellt in einer Art Histogramm. Eine rote Linie stellt das arithmetische Mittel relativ zentral in die Verteilung dar."
 
@@ -62,12 +64,11 @@ ggplot(data = d_arith_a) +
   coord_fixed(ratio = ar_arith) 
 ```
 
-Arithmetisches Mittel von Merkmal $X$ $$
+Arithmetisches Mittel von Merkmal $X$ 
+$$
 \bar{x} = \frac{1}{17}(1 + 2 + 6 + \dots + 2 + \dots + 2) = 2.588\dots
 $$
-:::
 
-::: {.multicols arguments="2"}
 ```{r}
 #| fig-alt: "Jeder Datenpunkt als ein Kreis dargestellt in einer Art Histogramm. Ein Ausreißer bei Y = 21 fällt sofort auf und verzerrt das durch die rote Linie gekennzeichnete arithmetische Mittel in die Richtung des Ausreißers."
 
@@ -81,16 +82,16 @@ ggplot(data = d_arith_b) +
    coord_fixed(ratio = ar_arith) 
 ```
 
-Arithmetisches Mittel von Merkmal $Y$ $$
+Arithmetisches Mittel von Merkmal $Y$ 
+$$
 \bar{y} = \frac{1}{17}(1 + 2 + 6 + \dots + 21 + \dots + 2) = 3.705\dots
 $$
-:::
 
-Wir sehen, dass sich der Wert $y_{13} = 21$ für das arithmetische Mittel $\overline{y}$ offensichtlich stark auswirkt. Anhand der beiden oben festgehaltenen Eigenschaften des arithmetischen Mittels lässt sich das auf zwei Arten verstehen:
+Wir sehen, dass sich der Wert $y_{13} = 21$ für das arithmetische Mittel $\bar{y}$ offensichtlich stark auswirkt. Anhand der beiden oben festgehaltenen Eigenschaften des arithmetischen Mittels lässt sich das auf zwei Arten verstehen:
 
-1.Der Abstand $(21 - a)$ geht quadratisch in die zu minimierende Summe ein
+1. Der Abstand $(21 - a)$ geht quadratisch in die zu minimierende Summe ein
 
-2.Der Hebelarm der Kugel zum Wert $y_{13} = 21$ ist vergleichsweise groß
+2. Der Hebelarm der Kugel zum Wert $y_{13} = 21$ ist vergleichsweise groß
 
 Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabefehler handelt: Es wurden aus Versehen die nebeneinanderliegenden Tasten 2 und 1 anstatt nur der Taste 2 gedrückt. In diesem Fall verzerrt der einzelne falsche Wert den Mittelwert stark.
 :::::
@@ -98,7 +99,9 @@ Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabef
 **Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel Arithmetisches Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genausogut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
 
 ::: beispiel
-Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersateliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satelitendaten das gesamte Ausmaß des Problems. Nach [@ludwig2006]. Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
+Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersateliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satelitendaten das gesamte Ausmaß des Problems. [@ludwig2006]
+
+Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
 :::
 
 **Empfindliche und robuste Lagemaße.** Das arithmetische Mittel ist ein Lagemaß, dass gegenüber Ausreißern sehr empfindlich ist: Einzelne fehlerhafte Werte können den Mittelwert stark verfälschen. Lagemaße hingegen, die wenig anfällig gegenüber Extremwerten sind, heißen [resistent]{.neuerbegriff} oder [robust]{.neuerbegriff}.
@@ -131,9 +134,9 @@ Anders als das arithmetische Mittel kann der Median auch für ordinal skalierte 
 
 Darüber hinaus besitzt der Median $x_{med}$ folgende Eigenschaften:
 
-1.Der Median minimiert die Summe der Beträge der Abstände: $$x_{med}= \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n |x_j - a|$$
+1. Der Median minimiert die Summe der Beträge der Abstände: $$x_{med}= \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n |x_j - a|$$
 
-2.Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_{med}$ und mindestens 50% der Daten sind größer oder gleich dem Median $x_{med}$.
+2. Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_{med}$ und mindestens 50% der Daten sind größer oder gleich dem Median $x_{med}$.
 
 An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich zum arithmetischen Mittel ein resistentes Lagemaß darstellt: In den Betrag des Modus geht eine extrem große Abweichung vom Mittelwert wesentlich weniger stark ein als in das Quadrat des arithmetischen Mittels.
 
@@ -146,8 +149,10 @@ Die Auswertung eines Merkmals "Güteklasse" ergab die Liste
 tbl3 |>
   kable(
     booktabs = TRUE,
-    align = c("l", "c", "c", "c")
+    align = c("l", rep("c", 12))
   ) |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(2:13, width = "1cm") |>
   row_spec(0, bold = TRUE)
 ```
 
@@ -173,35 +178,35 @@ Falls es sich um eine unimodale Verteilung handelt, kann aus den Zahlenwerten vo
 ::: beispiel
 Wir betrachten drei Verteilungen, für die bereits die drei oben besprochenen Lagemaße bestimmt wurden.
 
-+--------------+--------------+---------------+----------------+
-| $a_i$        | Stichprobe I | Stichprobe II | Stichprobe III |
-|              |              |               |                |
-|              | $h(a_i)$     | $h(a_i)$      | $h(a_i)$       |
-+==============+==============+===============+================+
-| 1            | 8            | 1             | 1              |
-+--------------+--------------+---------------+----------------+
-| 2            | 10           | 2             | 2              |
-+--------------+--------------+---------------+----------------+
-| 3            | 8            | 4             | 2              |
-+--------------+--------------+---------------+----------------+
-| 4            | 6            | 8             | 4              |
-+--------------+--------------+---------------+----------------+
-| 5            | 5            | 10            | 5              |
-+--------------+--------------+---------------+----------------+
-| 6            | 4            | 8             | 6              |
-+--------------+--------------+---------------+----------------+
-| 7            | 2            | 4             | 8              |
-+--------------+--------------+---------------+----------------+
-| 8            | 2            | 2             | 10             |
-+--------------+--------------+---------------+----------------+
-| 9            | 1            | 1             | 8              |
-+--------------+--------------+---------------+----------------+
-| $\bar{x}$    | 3.57         | 5             | 6.43           |
-+--------------+--------------+---------------+----------------+
-| $x_{med}$    | 3            | 5             | 7              |
-+--------------+--------------+---------------+----------------+
-| $x_{mod}$    | 2            | 5             | 8              |
-+--------------+--------------+---------------+----------------+
++---------------+--------------+---------------+----------------+
+| $a_i$         | Stichprobe I | Stichprobe II | Stichprobe III |
+|               |              |               |                |
+|               | $h(a_i)$     | $h(a_i)$      | $h(a_i)$       |
++===============+==============+===============+================+
+| 1             | 8            | 1             | 1              |
++---------------+--------------+---------------+----------------+
+| 2             | 10           | 2             | 2              |
++---------------+--------------+---------------+----------------+
+| 3             | 8            | 4             | 2              |
++---------------+--------------+---------------+----------------+
+| 4             | 6            | 8             | 4              |
++---------------+--------------+---------------+----------------+
+| 5             | 5            | 10            | 5              |
++---------------+--------------+---------------+----------------+
+| 6             | 4            | 8             | 6              |
++---------------+--------------+---------------+----------------+
+| 7             | 2            | 4             | 8              |
++---------------+--------------+---------------+----------------+
+| 8             | 2            | 2             | 10             |
++---------------+--------------+---------------+----------------+
+| 9             | 1            | 1             | 8              |
++---------------+--------------+---------------+----------------+
+| **$\bar{x}$** | 3.57         | 5             | 6.43           |
++---------------+--------------+---------------+----------------+
+| **$x_{med}$** | 3            | 5             | 7              |
++---------------+--------------+---------------+----------------+
+| **$x_{mod}$** | 2            | 5             | 8              |
++---------------+--------------+---------------+----------------+
 
 ```{r}
 # | layout-nrow: 1
@@ -252,20 +257,19 @@ fest. Beachten Sie dabei, dass die Verwendung der Begriffe unimodal, linkssteil,
 
 ### Das geometrische Mittel {#sec-geo-mittel}
 
-Das geometrische Mittel wird verwendet, wenn es sich bei den Werten eines Merkmals um Wachstumsfaktoren handelt.
+Das [geometrische Mittel]{.neuerbegriff} wird verwendet, wenn es sich bei den Werten eines Merkmals um Wachstumsfaktoren handelt.
 
 ::: beispiel
 **Beispiel Wasserreservoir**
 
 Wir betrachten ein Wasserreservoir mit den Wasserständen
 
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| Tag $i$                                                                  | 0                                                                        | 1                                                                        | 2                                                                        | 3                                                                        | 4                                                                        | 5                                                                        | 6                                                                        |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| Wasserstand $W_i$                                                        | 1.00                                                                     | 2.00                                                                     | 1.50                                                                     | 4.50                                                                     | 2.25                                                                     | 4.50                                                                     | 5.00                                                                     |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
++-------------------+--------+--------+--------+--------+--------+--------+--------+
+| Tag $i$           | 0      | 1      | 2      | 3      | 4      | 5      | 6      |
++-------------------+--------+--------+--------+--------+--------+--------+--------+
+| Wasserstand $W_i$ | 1.00   | 2.00   | 1.50   | 4.50   | 2.25   | 4.50   | 5.00   |
++-------------------+--------+--------+--------+--------+--------+--------+--------+
+
 
 Dann ist für jeden Zeitraum $i = 1, \dots, n$ das Verhältnis der beiden Wasserstände
 
@@ -358,17 +362,21 @@ Entsprechend der Überlegung im Beispiel definieren wir
 ::: definition
 **Definition: Geometrisches Mittel** 
 
-Das [geometrische Mittel]{.neuerbegriff} zu den Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt der Faktoren, also $$
-\bar{x}_{geom} = (x_1 \cdot x_2 \cdot \dots \cdot x_n)^{1/n}.
+Das geometrische Mittel zu den Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt der Faktoren, also
+
+
 
 $$
+\bar{x}_{geom} = (x_1 \cdot x_2 \cdot \dots \cdot x_n)^{1/n} \text{.}
+$$
+
+
 :::
 
 Daraus erhält man für einen Bestand $B_0, B_1, \dots, B_n$ mit den Wachstumsfaktoren $x_i = B_i / B_{i-1}, \quad i = 1, \dots, n$ den Zusammenhang
 
 $$
-B_n = \underbrace{\bar{x}_{geom} \cdot \; \dots \; \cdot \bar{x}_{geom}}_{n-\mathrm{mal}} \cdot B_0 = (\bar{x}_{geom})^n B_0.
-
+B_n = \underbrace{\bar{x}_{geom} \cdot \; \dots \; \cdot \bar{x}_{geom}}_{n-\mathrm{mal}} \cdot B_0 = (\bar{x}_{geom})^n B_0 \text{.}
 $$
 Mit $\bar{x}_{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_{geom}$ die adäquate Mittelung der Wachstumsfaktoren.
 
@@ -393,7 +401,7 @@ $$
 und somit die Durchschnittsgeschwindigkeit
 
 $$
-70 / 0.7455 = 93.9 \,  km/h.
+70 / 0.7455 = 93.9 \,  km/h \text{.}
 $$
 
 Verallgemeinerungsfähig wird das dann, wenn wir die Situation etwas anders formulieren: Es liegen für die Fahrstrecke 70 Beobachtungen über die Geschwindigkeit vor, eine für jeden gefahrenen Kilometer. Dabei entsprechen 10 Beobachtungen einem Wert von 50km/h und 60 einem Wert von 110km/h. Damit entspricht die Durchschnittsgeschwindigkeit dem Bruch
@@ -426,6 +434,8 @@ Mit den verschiedenen Lagemaßen lässt sich die ungefähre Lage der Werte auf d
 
 Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist naheliegend zu erwarten, dass wir eine Variabilität von Null erhalten, wenn alle betrachteten Werte identisch sind. Demzufolge wächst die Zahl mit zunehmender Variabilität an, so dass eine negative Variabilität keinen Sinn ergibt. Darüber hinaus soll das Maß für die Variabilität nicht vom Umfang der Stichprobe abhängen.
 
+
+:::beispiel
 Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet.
 
 ::: {layout-nrow="1"}
@@ -466,6 +476,8 @@ $$
 
 sehr nah beieinander (horizontale Linien im Plot). In der Summe hat es in beiden Jahren ungefähr gleich viel geregnet. Allerdings waren 2010 die Monate April und Juni sehr trocken, während es im August extrem viel geregnet hat. Im Vergleich dazu liegen die monatlichen Werte im Jahr 2008 insgesamt deutlich näher am Mittelwert.
 
+:::
+
 Derartige Zusammenhänge versucht man mithilfe von Streuungsmaßen zu erfassen.
 
 ### Spannweite
@@ -482,7 +494,7 @@ Für die Niederschläge der Jahre 2008 und 2010 betragen die Spannweiten der mon
 $$
 R_{2008} = 114.7 - 43.9 = 70.8mm
     \quad \text{und} \quad
-    R_{2010} = 187.4 - 11.4 = 176.0mm.
+    R_{2010} = 187.4 - 11.4 = 176.0mm \text{.}
 $$
 :::
 
@@ -499,8 +511,10 @@ Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der m
 tbl2 |>
   kable(
     booktabs = TRUE,
-    align = c("l", "c", "c", "c")
+    align = c("l", rep("c", 12))
   ) |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(2:13, width = "1.5cm") |>
   kable_styling(font_size = 9)
 ```
 
@@ -521,7 +535,7 @@ $$
   =
   \sum_{i=1}^n x_i - n \cdot \bar{x}
   =
-  n\bigg(\underbrace{\frac{1}{n}\sum_{i=1}^n x_i}_{\bar{x}} - \bar{x}_{mid} \bigg) = 0.
+  n\bigg(\underbrace{\frac{1}{n}\sum_{i=1}^n x_i}_{\bar{x}} - \bar{x}_{mid} \bigg) = 0 \text{.}
 $$
 
 Die Summe der Abweichungen vom Mittelwert ist also keinesfalls ein geeignetes Maß für Variabilität.
@@ -545,7 +559,7 @@ $$
   =
   \frac{1}{n} \left( (x_1 - \bar{x})^2 + \dots + (x_n - \bar{x})^2 \right) 
   =
-  \frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2.
+  \frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2  \text{.}
 $$
 
 Die Varianz ist also das arithmetische Mittel der quadrierten Abweichungen. Sie ist klein, wenn die Werte nahe des Mittelwerts angesiedelt sind. Infolge des Quadrierens hat $\tilde{s}^2$ nicht die gleiche Maßeinheit wie die Werte $x_i$.
@@ -574,7 +588,7 @@ sowie die Standardabweichungen
 $$
 \tilde{s}_{2008} = \sqrt{453.17} = 21.29mm
     \quad \text{und} \quad
-    \tilde{s}_{2010} = \sqrt{2000.32} = 44.7mm.
+    \tilde{s}_{2010} = \sqrt{2000.32} = 44.7mm  \text{.}
 $$
 
 Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in diesen Streuungsmaßen deutlich zum Ausdruck. Die Standardabweichung ist dabei einfacher zu interpretieren, da sie im selben Wertebereich wie die Beobachtungen selber liegen.
@@ -583,7 +597,7 @@ Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in diese
 In der schließenden Statistik wird die empirische Varianz in einer leicht veränderten Form verwendet: Man dividiert durch $n-1$ und erhält die [Stichprobenvarianz]{.neuerbegriff}
 
 $$
-s^2 = \frac{1}{n - 1} \cdot \sum_{i=1}^n (x_i - \bar{x})^2,
+s^2 = \frac{1}{n - 1} \cdot \sum_{i=1}^n (x_i - \bar{x})^2  \text{,}
 $$
 
 auf die im entsprechenden Kapitel genauer eingegangen wird. Für größere Werte von $n$ ist der Unterschied zwischen $\tilde{s}^2$ und $s^2$ vernachlässigbar.
@@ -593,7 +607,7 @@ auf die im entsprechenden Kapitel genauer eingegangen wird. Für größere Werte
 Für ein Merkmal mit nichtnegativen Ausprägungen und einem Mittelwert $\bar{x} > 0$ kann die Standardabweichung noch auf den Mittelwert bezogen werden. Man erhält den dimensionslosen [Variationskoeffizienten]{.neuerbegriff}
 
 $$
-v = \frac{\tilde{s}}{\bar{x}}, 
+v = \frac{\tilde{s}}{\bar{x}}  \text{,} 
 $$
 
 der angibt, wie groß die Variabilität im Verhältnis zum Mittelwert ist.
@@ -604,7 +618,7 @@ Für die Niederschlagsmengen erhalten wir
 $$
 v_{2008} \approx \frac{21.29}{72.45} \approx 0.29
     \quad \text{und} \quad
-v_{2010} \approx \frac{44.72}{73.05} \approx 0.61.
+v_{2010} \approx \frac{44.72}{73.05} \approx 0.61  \text{.}
 $$
 :::
 
@@ -651,15 +665,15 @@ Die Quantile verallgemeinern die Idee des Medians nun dahingehend, dass die Stic
 
 Für unsere zwanzig Werte können wir beispielhaft die Lage der folgenden $p$-Quantile bestimmen:
 
-+--------------+---------------------------------------+--------------------------------------+------------------------------------+
-| $p$          | Anzahl der Werte kleiner gleich $x_p$ | Anzahl der Werte größer gleich $x_p$ | Lage von $x_p$                     |
-+==============+=======================================+======================================+====================================+
-| 5%           | $0.05 \cdot 20 = 1$                   | $(1 - 0.05)\cdot 20 = 19$            | zwischen $x_{(1)}$ und $x_{(2)}$   |
-+--------------+---------------------------------------+--------------------------------------+------------------------------------+
-| 33%          | $0.33 \cdot 20 = 6.6$                 | $(1 - 0.33)\cdot 20 = 13.4$          | bei $x_{(7)}$                      |
-+--------------+---------------------------------------+--------------------------------------+------------------------------------+
-| 75%          | $0.75 \cdot 20 = 15$                  | $(1 - 0.75)\cdot 20 = 5$             | zwischen $x_{(15)}$ und $x_{(16)}$ |
-+--------------+---------------------------------------+--------------------------------------+------------------------------------+
++-------+---------------------------------------+--------------------------------------+------------------------------------+
+| $p$   | Anzahl der Werte kleiner gleich $x_p$ | Anzahl der Werte größer gleich $x_p$ | Lage von $x_p$                     |
++=======+=======================================+======================================+====================================+
+| 5%    | $0.05 \cdot 20 = 1$                   | $(1 - 0.05)\cdot 20 = 19$            | zwischen $x_{(1)}$ und $x_{(2)}$   |
++-------+---------------------------------------+--------------------------------------+------------------------------------+
+| 33%   | $0.33 \cdot 20 = 6.6$                 | $(1 - 0.33)\cdot 20 = 13.4$          | bei $x_{(7)}$                      |
++-------+---------------------------------------+--------------------------------------+------------------------------------+
+| 75%   | $0.75 \cdot 20 = 15$                  | $(1 - 0.75)\cdot 20 = 5$             | zwischen $x_{(15)}$ und $x_{(16)}$ |
++-------+---------------------------------------+--------------------------------------+------------------------------------+
 
 ```{r}
 #| fig-height: 0.5
@@ -699,7 +713,6 @@ $$
 Dabei ist $[pn]$ die größte ganze Zahl, die kleiner als $p \cdot n$ ist (runden nach unten).
 :::
 
- \skip
 
 Eine andere Möglichkeit, Quantile anschaulich zu interpretieren, erhalten wir mithilfe der empirischen Verteilungsfunktion $F$, die uns zu einer Zahl $x$ sagt, welcher Anteil der Werte kleiner oder gleich $x$ ist. Geben wir also ein $p$-Quantil vor, dann können wir den Wert $x_p$ aus dem Graphen von $F$ ablesen.
 
@@ -862,7 +875,7 @@ u_j = \frac{1}{n} \cdot j
   \quad \text{und} \quad
   v_j = \frac{1}{s} \cdot \sum_{i=1}^j x_i
   \quad \text{wobei} \quad
-  s = \sum_{i=1}^n x_i.
+  s = \sum_{i=1}^n x_i \text{.}
 $$
 
 Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
@@ -923,11 +936,10 @@ G  = \frac{\text{Fläche zwischen Diagonale und Lorenzkurve}}{\text{Fläche zwis
 $$
 
 $$
-= 2 \cdot \text{Fläche zwischen Diagonale und Lorenzkurve}.
+= 2 \cdot \text{Fläche zwischen Diagonale und Lorenzkurve} \text{.}
 $$
 :::
 
- \skip
 
 Für den Gini-Koeffizienten gibt es zwei Extremfälle:
 
@@ -936,12 +948,15 @@ Für den Gini-Koeffizienten gibt es zwei Extremfälle:
 
 :::
 
-Extremfall 1 (links): Alle Werte in der Stichprobe sind gleich. Dann ist die Lorenzkurve gleich der Diagonalen und der Gini-Koeffizient wird minimal: $$
+Extremfall 1 (links): Alle Werte in der Stichprobe sind gleich. Dann ist die Lorenzkurve gleich der Diagonalen und der Gini-Koeffizient wird minimal: 
+$$
 G_{min}  = 0.
 $$
 
-Extremfall 2 (rechts): Nur ein Wert ist ungleich Null. Hier verläuft die Lorenzkurve bis zum vorletzten Punkt auf der horizontalen Achse. Da der horizontale Abstand zwischen den Punkten $1/n$ beträgt, ergibt sich der maximale Gini-Koeffizient $$
-G_{max}  = 2 \cdot (1/2 - 1/2 \cdot 1 \cdot 1/n) = (n-1)/n.
+Extremfall 2 (rechts): Nur ein Wert ist ungleich Null. Hier verläuft die Lorenzkurve bis zum vorletzten Punkt auf der horizontalen Achse. Da der horizontale Abstand zwischen den Punkten $1/n$ beträgt, ergibt sich der maximale Gini-Koeffizient 
+
+$$
+G_{max}  = 2 \cdot (1/2 - 1/2 \cdot 1 \cdot 1/n) = (n-1)/n \text{.}
 $$
 
 
