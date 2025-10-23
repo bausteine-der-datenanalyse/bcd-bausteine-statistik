@@ -1,3 +1,8 @@
+```{r}
+#| include: false
+source("01-daten/zwei-merkmale.R")
+```
+
 # Untersuchung von zwei Merkmalen {#sec-zwei-merkmale}
 
 Eine wichtige Anwendung statistischer Methoden besteht darin zu
@@ -376,7 +381,12 @@ bis 2009 einen Korrelationskoeffizienten von $r = 0.95$ auf.
 Wir merken uns daher:
 
 ::: definition
-Korrelation $\neq$ Kausalität
+
+$$
+\begin{aligned}
+    \text{Korrelation} \quad \neq \quad \text{Kausalität}
+\end{aligned}
+$$
 :::
 
 
