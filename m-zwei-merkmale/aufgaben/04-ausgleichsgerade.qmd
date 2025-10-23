@@ -1,6 +1,6 @@
 ## Ausgleichsgerade
 
-Bestimmen Sie zu den gegebenen Daten die Ausgleichsgerade. Skizze!
+Bestimmen Sie zu den gegebenen Daten die Ausgleichsgerade und skizzieren Sie diese!
 
 |     | 1   | 2   | 3   |
 |-----|-----|-----|-----|
