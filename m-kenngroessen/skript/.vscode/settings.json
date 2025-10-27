@@ -1,0 +1,8 @@
+{
+    "ltex.enabled": [        
+        "bibtex",
+        "markdown",
+        "quarto"
+    ],
+    "ltex.language": "de-DE"
+}
