@@ -35,39 +35,21 @@ Mit den Abkürzungen $h_j = h(a_j)$ und $f_j = f(a_j)$ heißen die Zahlenfolgen
 
 $h_1, h_2, \dots, h_k$:
 
-:   [absolute Häufigkeitsverteilung]{.neuerbegriff},
+: [absolute Häufigkeitsverteilung]{.neuerbegriff},
 
 $f_1, f_2, \dots, f_k$:
 
-:   [relative Häufigkeitsverteilung]{.neuerbegriff}.
+: [relative Häufigkeitsverteilung]{.neuerbegriff}.
 :::
 
 ### Grafische Darstellung von Häufigkeitsverteilungen {#sec-grafische-darstellung}
 
 Die Häufigkeitsverteilungen lassen sich natürlich tabellarisch aufbereiten, häufig ist aber eine grafische Darstellung besser geeignet. Die gebräuchlichsten Darstellungsformen sind Stab-, Säulen-, Balken- und Kreisdiagramme. Als Alternative zu Kreisdiagrammen werden häufig auch Ringdiagramme verwendet. In @fig-diagrammtypen sind diese Diagrammtypen beispielhaft dargestellt.
 
-::: definition
-**Definition: Diagrammtypen**
-
-Stabdiagramm:
-
-:   Zahlenwerte für $h_1, h_2, \dots, h_n$ (oder $f_1, f_2, \dots, f_n$) werden mit einem senkrechten Strich angetragen.
-
-Säulendiagramm:
-
-:   Wie das Stabdiagramm aber mit Rechtecken anstatt Strichen.
-
-Balkendiagramm:
-
-:   Das Säulendiagramm um 90° gedreht.
-
-Kreisdiagramm:
-
-:   Der vom $j$-ten Kreissektor eingeschlossene Winkel beträgt $\alpha_j = f_j \cdot 360°$. Die Flächen der Kreissektoren sind damit proportional zu den Häufigkeiten.
-:::
-
 ```{r}
-#| include: false
+#| label: fig-diagrammtypen
+#| fig-cap: "Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm) zur Darstellung von Verteilungen (Energieträger Bundesrepublik Deutschland 2017, Datenquelle: BMWI)"
+#| fig-asp: 1
 
 p_col <- ggplot(data = d_energietraeger_anteil_2017) +
     geom_col(mapping = aes(x = Energieträger, y = Wert), width = 0.125) +
@@ -84,84 +66,56 @@ p_pie <- ggplot(data = d_energietraeger_anteil_2017) +
     scale_fill_manual(values = c_energietraeger) +
     labs(x = NULL, y = NULL) +
     theme_void()
+
+p1 <- p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
+p2 <- p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
+p3 <- p_bar + coord_flip()
+p4 <- p_pie
+p5 <- p_pie + xlim(0.125, 2.5)
+
+free(p1 + p2 + plot_layout(axes = "collect")) / free(p3) / (p4 + p5 + plot_layout(guides = "collect"))
 ```
 
-::: {#fig-diagrammtypen layout="[[100,-5,100], [1], [1], [1], [100,-5,100]]"}
-```{r}
-#| fig-width: 6
-#| fig-asp: 0.8
-#| out-width: "100%"
-#| fig-alt: "Stabdiagramm"
+Die Eigenschaften der Diagramme sind in der folgenden Definition zusammengefasst.
 
-p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
-```
+::: definition
+**Definition: Diagrammtypen**
 
-```{r}
-#| fig-width: 6
-#| fig-asp: 0.8
-#| out-width: "100%"
-#| fig-alt: "Säulendiagramm"
+Stabdiagramm:
+: Zahlenwerte für $h_1, h_2, \dots, h_n$ (oder $f_1, f_2, \dots, f_n$) werden mit einem senkrechten Strich angetragen.
 
-p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
-```
+Säulendiagramm:
+: Wie das Stabdiagramm aber mit Rechtecken anstatt Strichen.
 
- \bigskip
+Balkendiagramm:
+: Das Säulendiagramm um 90° gedreht.
 
-```{r}
-#| fig-width: 12
-#| fig-asp: 0.5
-#| out-width: "100%"
-#| fig-alt: "Balkendiagramm"
-
-p_bar + coord_flip()
-```
-
- \bigskip
-
-```{r}
-#| fig-width: 6
-#| fig-asp: 0.8
-#| out-width: "100%"
-#| fig-alt: "Kreisdiagramm"
-
-p_pie
-```
-
-```{r}
-#| fig-width: 6
-#| fig-asp: 0.8
-#| out-width: "100%"
-#| fig-alt: "Ringdiagramm"
-
-p_pie + xlim(0.125, 2.5)
-```
-
-Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm) zur Darstellung von Verteilungen (Energieträger Bundesrepublik Deutschland 2017, Datenquelle: BMWI)
+Kreisdiagramm:
+: Der vom $j$-ten Kreissektor eingeschlossene Winkel beträgt $\alpha_j = f_j \cdot 360°$. Die Flächen der Kreissektoren sind damit proportional zu den Häufigkeiten.
 :::
 
 **Kritik an Kreisdiagrammen**. Obwohl Kreisdiagramme in der Praxis sehr häufig verwendet werden, sind sie nicht ganz unproblematisch. Das hat mehrere Gründe:
 
--   Längen sind leichter zu unterscheiden als Winkel (siehe @fig-pie-or-bar).
+- Längen sind leichter zu unterscheiden als Winkel (siehe @fig-pie-or-bar).
 
--   Die Diagramme werden für viele Merkmalsausprägungen schnell unübersichtlich.
+- Die Diagramme werden für viele Merkmalsausprägungen schnell unübersichtlich.
 
--   Wenn Verteilungen verglichen werden sollen, dann müssen zwei Kreisdiagramme erstellt werden.
+- Wenn Verteilungen verglichen werden sollen, dann müssen zwei Kreisdiagramme erstellt werden.
 
--   Die Darstellung der zeitlichen Entwicklung einer Verteilung ist nicht möglich (siehe @fig-diagramm-balken-jahre).
+- Die Darstellung der zeitlichen Entwicklung einer Verteilung ist nicht möglich (siehe @fig-diagramm-balken-jahre).
+
+Letztlich ist die Entscheidung für oder gegen ein Kreis- oder Ringdiagramm aber immer abhängig vom Kontext zu entscheiden.
 
 ```{r}
 #| label: fig-pie-or-bar
 #| fig-cap: "Drei Verteilungen jeweils in einem Kreis- und einem Säulendiagramm dargestellt. Die Kreisdiagramme unterscheiden sich auf den ersten Blick nur unwesentlich voneinander und die Eigenschaften der Verteilungen werden nicht klar ersichtlich"
 
-plot_grid(                    # Aus cowplot, mit "layout-ncol: 3" wird im pdf kein Abstand gesetzt
-    plot_pob_pie(d_pob_1),
-    plot_pob_pie(d_pob_2),
-    plot_pob_pie(d_pob_3),
-    plot_pob_bar(d_pob_1),
-    plot_pob_bar(d_pob_2),
-    plot_pob_bar(d_pob_3),
-    ncol = 3
-)
+plot_pob_pie(d_pob_1) +
+  plot_pob_pie(d_pob_2) +
+  plot_pob_pie(d_pob_3) +
+  plot_pob_bar(d_pob_1) +
+  plot_pob_bar(d_pob_2) +
+  plot_pob_bar(d_pob_3)
 ```
 
  \bigskip
@@ -208,13 +162,13 @@ Um Merkmale mit einer großen Zahl an verschiedenen Ausprägungen übersichtlich
 
 Ein Histogramm entsteht in drei Schritten. Wir gehen dabei davon aus, dass es sich um ein zahlenwertiges Merkmal handelt.
 
-1.  Für die [Gruppierung]{.neuerbegriff} der Daten wählen wir als [Klassen]{.neuerbegriff} die $k$ benachbarten Intervalle $$[c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1}$$. Die Intervalle sind auf einer Seite geschlossen und auf der anderen Seite offen, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist.
+1. Für die [Gruppierung]{.neuerbegriff} der Daten wählen wir als [Klassen]{.neuerbegriff} die $k$ benachbarten Intervalle $$[c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1}$$. Die Intervalle sind auf einer Seite geschlossen und auf der anderen Seite offen, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist.
 
 Anmerkung: Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (also linksoffen) wählen können, das macht keinen grundlegenden Unterschied.
 
-2.  Wir zählen für jede Klasse, wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
+1. Wir zählen für jede Klasse, wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
 
-3.  Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
+1. Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
 
@@ -290,33 +244,17 @@ An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegeb
 **Beispiel Häufigkeitsverteilung:** Wir betrachten ein Merkmal mit den Werten
 
 $$
-  x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4
+  x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4.
 $$
 
-und der dargestellten Häufigkeitsverteilung.
-
-<!-- ::: {.multicols arguments="2"} -->
+Aus der tabellarischen Zusammenstellung der Häufigkeiten und der kumullierten Häufigkeiten
 
 ```{r}
 d_hfkv_1 |> kable(align = c("c")) 
 ```
 
-```{r}
-#| fig-width: 4.5
-#| out-width: "50%"
-#| fig-alt: "Kumulierte Häufigkeitsverteilungen"
+lässt sich sofort die Zuordnungsvorschrift der absoluten kumulierten Häufigkeitsverteilung
 
-ggplot(data = d_hfkv_1) + 
-  geom_col(mapping = aes(x = Ausprägung, y = Häufigkeit)) +
-  scale_x_continuous(breaks=c(1.1, 1.9, 2.5, 4)) +
-  labs(x = NULL, y = NULL)
-```
-
-<!-- ::: -->
-
-Die absolute kumulierte Häufigkeitsverteilung $H$ sagt uns nun zu jeder Zahl $x$, wie viele Ausprägungen kleiner oder gleich diesem Wert sind.
-
-::: {.multicols arguments="2"}
 $$
   H(x) = \begin{cases}
     \; 0 & \text{für} \quad x < 1.1 \\
@@ -329,23 +267,29 @@ $$
   \end{cases}
 $$
 
-```{r}
-#| fig-width: 4.5
-#| out-width: "50%"
-#| fig-alt: "Graph der kumulierten Häufigkeitsverteilungen"
+angeben. Sie sagt uns zu jeder Zahl $x$, wie viele Ausprägungen kleiner oder gleich diesem Wert sind.
 
-ggplot() + 
-  geom_segment(data = d_hfkv_2, mapping = aes(x = Xs, y = S, xend = Xe, yend = S)) +
+```{r}
+sx <- scale_x_continuous(breaks = c(1.1, 1.3, 1.9, 2.1, 2.5, 4), limit = c(0.8, 4.3), minor_breaks = NULL)
+
+p1 <- ggplot(data = d_hfkv_1) + 
+  geom_col(mapping = aes(x = Ausprägung, y = Häufigkeit)) +
+  sx +
+  scale_y_continuous(breaks = 0:2, minor_breaks = NULL) +
+  labs(x = NULL, y = NULL)
+
+p2 <- ggplot(data = d_hfkv_2) + 
+  geom_segment(mapping = aes(x = Xs, y = S, xend = Xe, yend = S)) +
   geom_point(data = filter(d_hfkv_2, Xs > d_hfkv_a), mapping = aes(x = Xs, y = S)) +
   geom_point(data = filter(d_hfkv_2, Xe < d_hfkv_b), mapping = aes(x = Xe, y = S), shape = 21) +
-  scale_x_continuous(breaks = c(1.1, 1.9, 2.5, 4)) +
-  scale_y_continuous(breaks = 0:7) +
-  labs(x = NULL, y = NULL) +
-  theme(panel.grid.minor = element_blank())
-```
-:::
+  sx +
+  scale_y_continuous(breaks = 0:7, minor_breaks = NULL) +
+  labs(x = NULL, y = NULL)
 
-Am Graphen der absoluten kumulierten Häufigkeitsverteilung lässt sich nun unmittelbar ablesen, dass es (zum Beispiel) 4 Werte gibt, die kleiner oder gleich 1.9 sind.
+p1 / p2 + plot_layout(axes = "collect")
+```
+
+Am Graphen der absoluten kumulierten Häufigkeitsverteilung lässt sich nun unmittelbar ablesen, dass es (zum Beispiel) 4 Werte gibt, die kleiner oder gleich 1.9 sind. Gleichzeitig erkennt man, dass die Höhe der Balken in dem oberen Diagramm genau der Höhe der Sprünge im Graphen von $H$ entspricht.
 ::::
 
 Wie wir an dem Beispiel gesehen haben, ist die absolute Häufigkeitsverteilung $H : \mathbb{R} \to \mathbb{N}$ also eine Funktion mit der Zuordnungsvorschrift
@@ -382,7 +326,7 @@ wobei wieder $a_j \leq x$ und $a_{j+1} > x$ gelten soll.
 ```{r}
 #| fig-alt: "Treppenfunktion der erreichten Prozentpunkte. Bei 49 erreichten Prozentpunkten zeigt ein Pfeil auf den Funktionswert, um zu verdeutlichen, dass 32% der Teilnehmer die Prüfung nicht bestanden haben."
 
-f <- ecdf(d_klausur_bestanden$prozente_g)
+f <- ecdf(pull(d_klausur_bestanden, prozente_g))
 q <- f(49)
 pp <- tibble(x = c(49, 49), y = c(0, q))
 
@@ -402,7 +346,7 @@ Beachten Sie, dass der Graph von $F$ hier in Form einer Treppenfunktion dargeste
 Die Durchfallquote bei der Klausur entspricht damit genau dem Funktionswert von $F$ für $x = 49$. Der Wert lässt sich mit dem Programm R einfach berechnen, es ist
 
 $$
-  F(49) = 0.32
+  F(49) = 0.32 TODO ausrechnen lassen
 $$
 
 und die Durchfallquote beträgt 32%.
