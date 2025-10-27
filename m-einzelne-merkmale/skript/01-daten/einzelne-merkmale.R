@@ -82,7 +82,8 @@ d_hfkv_a <- 0.8
 d_hfkv_b <- 4.3
 d_hfkv_1 <- tibble(Ausprägung = c(1.1, 1.3, 1.9, 2.5, 2.1, 1.3, 4)) |>
     group_by(Ausprägung) |>
-    summarise(Häufigkeit = n())
+    summarise(Häufigkeit = n()) |>
+    mutate(`Kumulierte Häufigkeit` = cumsum(Häufigkeit))
 d_hfkv_2 <- d_hfkv_1 |>
     rename(Xs = Ausprägung, n = Häufigkeit) |>
     mutate(Xe = lead(Xs, default = d_hfkv_b), S = cumsum(n)) |>
