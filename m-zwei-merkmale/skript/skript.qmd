@@ -307,6 +307,25 @@ Für die Lage des neuen Koordinatensystems verwenden wir die Mittelwerte
 $\bar{x}$ und $\bar{y}$ der Merkmale $X$ und $Y$. Damit können wir uns nun
 überlegen, wie der Korrelationskoeffizient bestimmt werden kann.
 
+::::: columns
+::: {.column width="45%"}
+
+![](00-bilder/korrelationskoeffizient-1-e.svg)
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="50%"}
+
+Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i - 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis D werden sich die Flächeninhalte in etwa aufheben.
+
+:::
+:::::
+
+Um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, wird noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert.
+
 Wir erhalten damit den Korrelationskoeffizienten
 $$
 r = \frac{\text{Summe der blauen und roten Flächen}}{
