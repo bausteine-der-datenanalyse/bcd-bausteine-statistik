@@ -427,7 +427,7 @@ umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende
 Datenfile ist ca. 1.5 GB groß.
 
 ::::: columns
-::: {.column width="35%"}
+::: {.column width="40%"}
 
 ![](00-bilder/pisa-1.svg)
 
@@ -436,9 +436,9 @@ Datenfile ist ca. 1.5 GB groß.
 ::: {.column width="5%"}
 :::
 
-::: {.column width="60%"}
+::: {.column width="55%"}
 
-Links dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $$r = 0.94$$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
+Links dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
 
 :::
 :::::
@@ -474,7 +474,7 @@ $$y_i = \alpha + \beta x_i + \varepsilon_i,$$ wobei $\varepsilon_i$ den
 Fehler erfasst, der sich aus der Geradenanpassung ergibt. Der
 Zusammenhang ist in @fig-ausgleichsgerade dargestellt.
 
-![Ausgleichsgerade](00-bilder/ausgleichsgerade.svg){#fig-ausgleichsgerade width=60%}
+![Ausgleichsgerade](00-bilder/ausgleichsgerade.svg){#fig-ausgleichsgerade width=80%}
 
 
 ### Berechnung der Ausgleichsgeraden
