@@ -63,29 +63,43 @@ p_mittelwert <- function(d, m) {
 }
 
 # Lageregeln
-p_lageregeln <- function(dd, n) {
-  a <- pull(dd, a)
-  h <- pull(dd, n)
-  x = rep(a, h)
-  d <- tibble(X = x)
-  k <- c("Mittelwert", "Median", "Modus")
-  l <- tibble(
-    value = c(mean(x), median(x), modes(x)),
-    kind = factor(k, levels = k)
-  )
+p_lageregeln <- function(d, var) {
+  values <- pull(d, a)
+  frequencies <- pull(d, {{ var }})
+  measures <- 
+    tibble(X = rep(values, frequencies)) |> 
+    summarise(
+      Mittelwert = mean(X),
+      Median = median(X),
+      Modus = modes(X),
+    ) |>
+    pivot_longer(cols = everything()) |>
+    mutate(name = factor(name, levels = c("Mittelwert", "Median", "Modus")))
 
   ggplot() +
-    geom_bar(data = d, mapping = aes(x = X)) +
+    geom_col(
+      data = d, mapping = aes(x = a, y = {{ var }})
+    ) +
     geom_vline(
-      data = l,
-      mapping = aes(xintercept = value, color = kind),
+      data = measures,
+      mapping = aes(xintercept = value, color = name),
       linewidth = 1.15
     ) +
-    scale_x_continuous(breaks = 1:9, minor_breaks = NULL) +
-    scale_y_continuous(breaks = c(0, 5, 10), minor_breaks = NULL) +
-    ggtitle(paste("Stichprobe", n)) +
-    theme(plot.title = element_text(size = 20)) +
-    labs(x = NULL, y = NULL, color = NULL)
+    scale_x_continuous(
+      breaks = values, minor_breaks = NULL
+    ) +
+    scale_y_continuous(
+      breaks = c(0, 5, 10), minor_breaks = NULL
+    ) +
+    ggtitle(
+      paste("Stichprobe", rlang::as_name(rlang::enquo(var)))
+    ) +
+    theme(
+      plot.title = element_text(size = 20)
+    ) +
+    labs(
+      x = NULL, y = NULL, color = NULL
+    )
 }
 
 # Stichprobe auf Zahlenstrahl
