@@ -170,6 +170,57 @@ Anmerkung: Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (
 
 1. Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem Prinzip der Flächentreue konstruiert.
 
+Das [Prinzip der Flächentreue] {.neuerbegriff} wird am folgenden Beispiel verdeutlicht.
+
+::: beispiel
+
+```{r}
+d_pdf_beispiel <- tibble(x =c(3, 4, 6, 7, 7, 9, 10, 11, 12, 12, 13, 14, 15, 16, 17, 18, 19, 22, 24, 27))
+p5 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x), binwidth = 5, boundary = 0, color = "black", closed ="left") + 
+  labs(title="Histogramme mit gleichen Klassenbreiten (5)") +
+  ylab("absolute Häufigkeit") + xlab ("Beispielmerkmal")
+
+p6 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x, y=after_stat(density)), binwidth = 5, boundary = 0, color = "black", closed ="left") + 
+  ylab("relative Häufigkeit") + xlab ("Beispielmerkmal")
+
+p7 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x), binwidth = 10, boundary = 0, color = "black", closed ="left") + 
+  labs(title="Histogramme mit gleichen Klassenbreiten (10)") +
+  ylab("absolute Häufigkeit") + xlab ("Beispielmerkmal")
+
+p8 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x, y=after_stat(density)), binwidth = 10, boundary = 0, color = "black", closed ="left") + 
+  ylab("relative Häufigkeit") + xlab ("Beispielmerkmal")
+
+p9 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x), breaks = c(0, 10, 15, 30) , color = "black", closed ="left") + 
+  labs(title="Histogramme mit ungleichen Klassenbreiten") +
+  ylab("absolute Häufigkeit") + xlab ("Beispielmerkmal")
+
+p10 <- ggplot(data = d_pdf_beispiel)+
+  geom_histogram(mapping = aes(x=x, y=after_stat(density)), breaks = c(0, 10, 15, 30) , color = "black", closed ="left") + 
+  ylab("relative Häufigkeit") + xlab ("Beispielmerkmal")
+
+p5 + p6
+p7 + p8
+p9 + p10
+
+```
+Im linken Histogramm mit ungleichen Klassenbreiten sehen wir, dass sich ggplot hier nicht an das Prinzip der Flächentreue hält und die Höhe der Balken der absoluten Häufigkeit entspricht. Das erleichtert zwar das Ablesen, die Flächen der Balken ist nun aber nicht proportional zur Häufigkeit. Dies verzerrt unsere Wahrnehmung der Daten. Daher verwenden wir die relative Häufigkeit (rechts).
+
+Betrachten wir nur das Intervall $[0;10) = \{ x \mid 0 \leq x < 10 \}$: 
+
+- Bei der Klassenbreite = 5 besteht es aus zwei Intervallen mit den relativen Häufigkeiten 0.02 und 0.04. Der Flächeninhalt beider Balken ist folglich $5*0.02 + 5*0.04 = 0.3$.
+- Gemäß dem Prinzip der Flächentreue muss die Fläche bei anderen Klassenbreiten ebenfalls gelten.
+- Das prüfen wir: Wir haben einen Balken mit der Klassenbreite = 10 und der relativen Häufigkeit = 0.03. Das ergibt $10*0.03 = 0.3$. 
+
+**Hinweis**:
+Eine eckige Klammer zeigt ein geschlossenes Intervall und eine runde Klammer ein offenes Intervall an.
+
+:::
+
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
 
 $$
