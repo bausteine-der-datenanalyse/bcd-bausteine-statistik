@@ -1,5 +1,9 @@
 ```{r}
 #| include: false
+library(tidyverse)
+library(latex2exp)
+library(patchwork)
+source("../../bcd-setup.R")
 source("01-daten/zwei-merkmale.R")
 ```
 
@@ -96,23 +100,18 @@ Symbole nach einem dritten Merkmal skaliert, dann spricht man von einem [Blasend
 
 :::beispiel
 
-::::: columns
-::: {.column width="35%"}
+```{r}
+ggplot(data = d1, mapping = aes(x = Prognose, y = Wachstum)) + 
+  geom_abline(intercept = 0, slope = 1, color = "gray") +
+  geom_point(shape = 21, size = 2, fill = "orange") +
+  geom_rug() +
+  coord_fixed(xlim = c(-2, 6), ylim = c(-2, 6)) +
+  theme_bw()
+```
 
-![](00-bilder/sachverstaendigenrat-2.svg)
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="60%"}
 
 #### Sachverständigenrat
-Links dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständienrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Im Idealfall lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. Je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
-
-:::
-:::::
+Dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständienrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Im Idealfall lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. Je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
 
 
 #### Lebenserwartung
@@ -121,28 +120,91 @@ In den folgenden Plots ist die mittlere Lebenserwartung über
 verschiedene andere Indikatoren geplottet. Beachten Sie, dass im Plot
 über das Bruttoinlandsprodukt eine logarithmische Skala verwendet wird.
 
-![](00-bilder/weltbank-1.svg) ![](00-bilder/weltbank-2.svg)
+```{r}
+# Ausgaben Gesundheitswesen in % BIP
+p1 <- 
+  ggplot(data = d3, mapping = aes(x = he, y = le)) +
+  geom_point(mapping = aes(fill = hl), shape = 21, show.legend = F) +
+  geom_label(
+    data = filter(d_wb_latest, country %in% cl), 
+    mapping = aes(label = country),
+    hjust = 0.8, nudge_y = 2, size = 2.5, alpha = 0.5
+  ) +
+  scale_x_continuous(limits = c(0, 17)) +
+  scale_fill_manual(values = c("light blue", "red")) +
+  labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung") +
+  theme(aspect.ratio = 1)
+```
 
-![](00-bilder/weltbank-3.svg) ![](00-bilder/weltbank-4.svg)
+```{r}
+# Bildung
+p2 <-
+  ggplot(data = d3, mapping = aes(x = edu, y = le)) +
+  geom_point(mapping = aes(fill = hl), shape = 21, show.legend = F) +
+  geom_label(
+    data = filter(d3, country %in% cl), 
+    mapping = aes(label = country),
+    hjust = 0.1, nudge_y = 2, size = 2.5, alpha = 0.5
+  ) +
+  scale_fill_manual(values = c("light blue", "red")) +
+  labs(x = "Bildung (% BIP)", y = "Mittlere Lebenserwartung") +
+  theme(aspect.ratio = 1)
+```
+
+```{r}
+# Gini
+p3 <-
+  ggplot(data = d3, mapping = aes(x = gini, y = le)) +
+  geom_point(mapping = aes(fill = hl), shape = 21, show.legend = F) +
+  geom_label(
+    data = filter(d_wb_latest, country %in% cl), 
+    mapping = aes(label = country),
+    hjust = 0, nudge_x = 1, size = 2.5, alpha = 0.5
+  ) +
+  scale_fill_manual(values = c("light blue", "red")) +
+  labs(x = "Gini-Koeffizient", y = "Mittlere Lebenserwartung") +
+  theme(aspect.ratio = 1)
+```
+
+```{r}
+# BIP pro Kopf
+p4 <-
+  ggplot(data = d3, mapping = aes(x = gdppc, y = le)) +
+  geom_point(mapping = aes(fill = hl), shape = 21, show.legend = F) +
+  geom_label(
+    data = filter(d_wb_latest, country %in% cl), 
+    mapping = aes(label = country),
+    hjust = 0.3, nudge_y = 2, size = 2.5, alpha = 0.5
+  ) +
+  scale_fill_manual(values = c("light blue", "red")) +
+  scale_x_log10(limits = c(NA, 100000), labels = function(x) {paste0(x/1000, "K")}) +
+  labs(x = "BIP pro Kopf (USD)", y = "Mittlere Lebenserwartung") +
+  theme(aspect.ratio = 1)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p1 + p2
+p3 + p4
+```
 
 ####
 
-::::: columns
-::: {.column width="35%"}
 
-![](00-bilder/weltbank-5.svg)
+```{r}
+# Ausgaben Gesundheitswesen in % BIP mit BIP pro Kopf
+ggplot(data = arrange(d3, gdppc), mapping = aes(x = he, y = le)) +
+  geom_point(mapping = aes(fill = gdppc, size = gdppc), shape = 21, show.legend = F, alpha = 0.8) +
+  scale_x_continuous(limits = c(0, 17)) +
+  scale_y_continuous(limits = c(45, 85)) +
+  scale_size(range = c(0.1, 10)) +
+  scale_fill_distiller(palette = "Reds", direction = 1) +
+  labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung") +
+  theme(aspect.ratio = 1)
+```
 
-:::
 
-::: {.column width="5%"}
-:::
+Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem dargestellten Blasendiagramm, in dem die Wirtschaftsleitung der Länder auf Größe und Farbe der Kreise abgebildet ist.
 
-::: {.column width="60%"}
-
-Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem links dargestellten Blasendiagramm, in dem die Wirtschaftsleitung der Länder auf Größe und Farbe der Kreise abgebildet ist.
-
-:::
-:::::
 
 ::::
 
@@ -187,28 +249,37 @@ Dichtefunktion werden die Häufigkeiten farblich kodiert. Eine weitere
 Möglichkeit besteht in einer dreidimensionalen Darstellung. Beide
 Varianten sind in @fig-histogramme-2d-3d zu sehen.
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p5 <- ggplot(data = d3) +
+  stat_bin2d(mapping = aes(x = he, y = le), binwidth = c(2.5,5)/2, color = "black", size = 0.25) +
+  labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung", fill = "Anzahl") +
+  scale_fill_distiller(palette = "Blues", direction = 1, guide = "legend", breaks = seq(1, 9, by = 4)) +
+  scale_x_continuous(breaks = seq(5, 15, by = 5), minor_breaks = seq(0, 20, by = 1.25)) +
+  scale_y_continuous(breaks = seq(50, 80, by = 10), minor_breaks = seq(45, 85, by = 2.5)) +
+  coord_cartesian(xlim = c(1.5, 17), ylim = c(45, 85)) +
+  theme(aspect.ratio = 1, legend.position = "top")
+
+p6 <- ggplot(data = d3) +
+  stat_density_2d(mapping = aes(x = he, y = le, fill = ..level..), color = "black", size = 0.25, geom = "polygon", show.legend = FALSE, alpha = 0.8, bins = 10) +
+  labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung", fill = "Anzahl") +
+  scale_fill_distiller(palette = "Blues", direction = 1, guide = "legend") +
+  scale_x_continuous(breaks = seq(0, 35, by = 5), minor_breaks = seq(0, 20, by = 1.25), limits = c(5-3*1.25, 15+2*1.25)) +
+  scale_y_continuous(breaks = seq(50, 90, by = 10), minor_breaks = seq(45, 90, by = 2.5), limits = c(45, 90)) +
+  coord_cartesian(xlim = c(1.5, 17), ylim = c(45, 85)) +
+  theme(aspect.ratio = 1, legend.position = "top")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p5 + p6
+```
+
+
 ::::: columns
-::: {.column width="45%"}
-![](00-bilder/weltbank-2d-1.svg)
-:::
-
-::: {.column width="10%"}
-:::
-
-::: {.column width="45%"}
-![](00-bilder/weltbank-2d-3.svg)
-:::
-:::::
-
-::::: columns
-::: {.column width="45%"}
+::: {.column width="50%"}
 ![](00-bilder/weltbank-3d-1.svg)
 :::
 
-::: {.column width="10%"}
-:::
-
-::: {.column width="45%"}
+::: {.column width="50%"}
 ![](00-bilder/weltbank-3d-2.svg)
 :::
 ::::: 
@@ -239,17 +310,34 @@ sind in @fig-korrelation dargestellt.
 
 ####
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p7 <- kb(x, 0.1 +  0.7 * x + 0.1 * rnorm(200))
+p8 <- kb(x, 0.5-0.7 * (x-0.5) + 0.1 * rnorm(200))
+p9 <- kb(x, 0.5 + 0.1 * rnorm(200))
+p10 <- kb( 0.35*rnorm(200), rnorm(200))
+p11 <- kb(x, 3*(x-0.5)^2 + 0.1 + 0.1 * rnorm(200))
+set.seed(5)
+p12 <- kb(x, 1-(3*(x-0.5)^2 + 0.1 + 0.12 * rnorm(200)))
+```
+
+
 ::::: columns
 ::: {.column width="30%"}
-![](00-bilder/korrelation-beispiel-1.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p7
+```
 $$ A: r > 0$$
 :::
+
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="30%"}
-![](00-bilder/korrelation-beispiel-2.svg)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p8
+```
 $$ B: r < 0$$
 :::
 
@@ -257,7 +345,10 @@ $$ B: r < 0$$
 :::
 
 ::: {.column width="30%"}
-![](00-bilder/korrelation-beispiel-3.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p9
+```
+
 $$ C: r \approx 0$$
 :::
 :::::
@@ -265,7 +356,10 @@ $$ C: r \approx 0$$
 ::::: columns
 ::: {.column width="30%"}
 
-![](00-bilder/korrelation-beispiel-4.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p10
+```
+
 $$ D: r \approx 0$$
 :::
 
@@ -273,7 +367,10 @@ $$ D: r \approx 0$$
 :::
 
 ::: {.column width="30%"}
-![](00-bilder/korrelation-beispiel-5.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p11
+```
+
 $$ E: r \approx 0$$
 :::
 
@@ -281,7 +378,10 @@ $$ E: r \approx 0$$
 :::
 
 ::: {.column width="30%"}
-![](00-bilder/korrelation-beispiel-6.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p12
+```
+
 $$ F: r \approx 0$$
 :::
 :::::
@@ -426,22 +526,20 @@ Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter
 umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende
 Datenfile ist ca. 1.5 GB groß.
 
-::::: columns
-::: {.column width="40%"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = d5, mapping = aes(x = read, y = math)) +
+  geom_point(mapping = aes(fill = sel), shape = 21, show.legend = F) +
+  geom_label(
+    data = filter(d5, country %in% cnt), 
+    mapping = aes(label = country),
+    hjust = 1, nudge_x = -3, nudge_y = 5, size = 2.5, alpha = 0.5
+  ) +
+  scale_fill_manual(values = c("light blue", "red")) +
+  labs(x = "Lesekompetenz", y = "Mathematische Kompetenz") +
+  theme(aspect.ratio = 1)
+```
 
-![](00-bilder/pisa-1.svg)
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="55%"}
-
-Links dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
-
-:::
-:::::
+Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
 
 ::::
 
@@ -560,22 +658,18 @@ Die Kleinste-Quadrate-Schätzer $$\hat \alpha = \bar{y} - \hat \beta \bar{x}
 ####
 
 :::beispiel
-::::: columns
-::: {.column width="35%"}
 
-![](00-bilder/pisa-2.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", size = 1) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = "Lesekompetenz", y = "Mathematische Kompetenz") +
+  theme(aspect.ratio = 1)
+```
 
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="60%"}
 
 Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten $$\bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0$$ die Parameter $$\hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875$$ der links dargestellten Ausgleichsgeraden.
 
-:::
-:::::
 :::
 
 ####
@@ -590,41 +684,45 @@ der Statistiker John Anscombe im Jahr 1973 hingewiesen. Er hat hierzu
 die unten dargestellten vier Datensätze verwendet, die alle zur selben
 Regressionsgeraden führen.
 
-::::: columns
-::: {.column width="22%"}
 
-![](00-bilder/anscombe1.svg)
 
-:::
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+xm <- mean(xa1)
+ym <- mean(ya1)
+beta <- sum((xa1-xm)*(ya1-ym))/sum((xa1-xm)^2)
+alpha <- ym - beta * xm
+yh <- alpha + beta * xa1
 
-::: {.column width="4%"}
-:::
+p13 <- ggplot(data = d_ans, mapping = aes(x = xa1, y = ya1)) +
+  geom_abline(intercept = alpha, slope = beta, color = "red", size = 1) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(4,14)) +
+  theme(aspect.ratio = 1)
+p14 <- ggplot(data = d_ans, mapping = aes(x = xa2, y = ya2)) +
+  geom_abline(intercept = alpha, slope = beta, color = "red", size = 1) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(4,14)) +
+  theme(aspect.ratio = 1)
+p15 <- ggplot(data = d_ans, mapping = aes(x = xa3, y = ya3)) +
+  geom_abline(intercept = alpha, slope = beta, color = "red", size = 1) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(4,14)) +
+  theme(aspect.ratio = 1)
+p16 <- ggplot(data = d_ans, mapping = aes(x = xa4, y = ya4)) +
+  geom_abline(intercept = alpha, slope = beta, color = "red", size = 1) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(4,14)) +
+  theme(aspect.ratio = 1)
+```
 
-::: {.column width="22%"}
 
-![](00-bilder/anscombe2.svg)
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="22%"}
-
-![](00-bilder/anscombe3.svg)
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="22%"}
-
-![](00-bilder/anscombe4.svg)
-
-:::
-
-:::::
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+( p13 | p14 | p15 | p16 )
+```
 
 
 Zu den vier Plots halten wir fest:
@@ -683,15 +781,28 @@ Ausgleichsgerade herum wird also sehr gut erfasst.
 
 
 ::::: columns
-::: {.column width="45%"}
-![](00-bilder/ausgleichsgerade-r2-1.svg)
+::: {.column width="50%"}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = d7, mapping = aes(x = X, y = Y)) +
+  geom_point(shape = 21, fill = "light blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red", size = 1) +
+  labs(x = NULL, y = NULL) +
+  theme(aspect.ratio = 1)
+```
+
 :::
 
-::: {.column width="5%"}
-:::
+::: {.column width="50%"}
 
-::: {.column width="45%"}
- ![](00-bilder/ausgleichsgerade-r2-2.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = d8, mapping = aes(x = X, y = Y)) +
+  geom_point(shape = 21, fill = "light blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red", size = 1) +
+  labs(x = NULL, y = NULL) +
+  theme(aspect.ratio = 1)
+```
+
 :::
 :::::
 
@@ -703,32 +814,43 @@ dass wir hier keinerlei Aufschluss darüber erhalten, ob das lineare
 Modell sinnvoll ist oder nicht. Im Zweifelsfall sollte man daher immer
 die Residuen $\varepsilon_i$ plotten.
 
-::::: columns
-::: {.column width="22%"}
-![](00-bilder/anscombe-r1.svg)
-:::
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+xm <- mean(xa1)
+ym <- mean(ya1)
+beta <- sum((xa1-xm)*(ya1-ym))/sum((xa1-xm)^2)
+alpha <- ym - beta * xm
+yh <- alpha + beta * xa1
 
-::: {.column width="4%"}
-:::
+p17 <- ggplot(data = d_ans, mapping = aes(x = xa1, y = ya1-yh)) +
+  geom_hline(color = "red", size = 1, yintercept = 0) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(-5,5)) +
+  theme(aspect.ratio = 1)
+p18 <- ggplot(data = d_ans, mapping = aes(x = xa2, y = ya2-yh)) +
+  geom_hline(color = "red", size = 1, yintercept = 0) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(-5,5)) +
+  theme(aspect.ratio = 1)
+p19 <- ggplot(data = d_ans, mapping = aes(x = xa3, y = ya3-yh)) +
+  geom_hline(color = "red", size = 1, yintercept = 0) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(-5,5)) +
+  theme(aspect.ratio = 1)
+p20 <- ggplot(data = d_ans, mapping = aes(x = xa4, y = ya4-yh)) +
+  geom_hline(color = "red", size = 1, yintercept = 0) +
+  geom_point(shape = 21, fill = "light blue") +
+  labs(x = NULL, y = NULL) +
+  lims(x = c(4, 20), y = c(-5,5)) +
+  theme(aspect.ratio = 1)
+```
 
-::: {.column width="22%"}
-![](00-bilder/anscombe-r2.svg)
-:::
 
-::: {.column width="4%"}
-:::
-
-::: {.column width="22%"}
-![](00-bilder/anscombe-r3.svg)
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="22%"}
-![](00-bilder/anscombe-r4.svg)
-:::
-:::::
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+( p17 | p18 | p19 | p20 )
+```
 
 :::
 
@@ -753,22 +875,17 @@ $\alpha, \beta, \gamma$ aus einem linearen Gleichungssystem mit drei
 unbekannten. Für das exponentielle Modell ist eine nichtlineare
 Gleichung zu lösen.
 
-::::: columns
-::: {.column width="35%"}
 
-![](00-bilder/loess.svg)
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="60%"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data = d9, mapping = aes(x = X, y = Y)) +
+  geom_point(shape = 21, fill = "light blue") +
+  geom_smooth(method = "loess", se = FALSE, color = "red", size = 1) +
+  labs(x = NULL, y = NULL) +
+  theme(aspect.ratio = 1)
+```
 
 Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, die auch komplexere Zusammenhänge zwischen Merkmalen erfassen kann. Das Akronym LOESS steht dabei für *Locally Estimated Scatterplot Smoothing*. Links dargestellt ist ein Datensatz mit Werten, die um eine Sinusfunktion herum variieren. Die zugehörige Regressionskurve bildet den zugrunde liegenden Zusammenhang sehr gut ab.
 
-:::
-:::::
 
 ## Beispiele {#sec:beispiele}
 
@@ -777,22 +894,22 @@ Abschließend werden die Datensätze zu den Prognosen des
 Sachverständigenrats und der Lebenserwartung mit den oben diskutierten
 Methoden untersucht.
 
-::::: columns
-::: {.column width="35%"}
 
-![](00-bilder/zwei-merkmale-beispiele-0.svg)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p21 <- plotit(d1, "Prognose", "Wachstum", "Prognose", "Wachstum")
+p22 <- plotit(d_wb_latest, "he", "le", "Gesundheitswesen (% BIP)", "Mittlere Lebenswerwartung")
+p23 <- plotit(d_wb_latest, "edu", "le", "Bildungswesen (% BIP)", "Mittlere Lebenswerwartung")
+p24 <- plotit(d_wb_latest, "gini", "le", "Gini-Koeffizient", "Mittlere Lebenswerwartung")
+p25 <- plotit(d_wb_latest, "gdppc", "le", "BIP pro Kopf", "Mittlere Lebenswerwartung", log = TRUE)
+```
 
-:::
 
-::: {.column width="5%"}
-:::
-
-::: {.column width="60%"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p21
+```
 
 Für die Prognose des Sachverständigenrats besteht mit 64 % eine mittlere Korrelation mit dem realen Wirtschaftswachstum. Entsprechend lassen sich 40 % der Variabilität des Wachstums durch den unterstellten linearen Zusammenhang erklären.
 
-:::
-:::::
 
 In den nachfolgend dargestellten Auswertungen zur mittleren
 Lebenserwartung auf Grundlage der Weltbankdaten zeigt sich, abgesehen
@@ -803,30 +920,8 @@ zwischen den Ausgaben für Bildung ist erwartungsgemäß schwächer.
 Demgegenüber zeigt sich für die BIP pro Kopf (in einer logarithmischen
 Skalierung) mit 86 % eine starke Korrelation mit der Lebenserwartung.
 
-::::: columns
-::: {.column width="45%"}
-![](00-bilder/zwei-merkmale-beispiele-1.svg)
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="45%"}
-![](00-bilder/zwei-merkmale-beispiele-2.svg)
-:::
-:::::
-
-::::: columns
-::: {.column width="45%"}
-![](00-bilder/zwei-merkmale-beispiele-3.svg)
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="45%"}
-![](00-bilder/zwei-merkmale-beispiele-4.svg)
-:::
-:::::
-
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p22 + p23
+p24 + p25
+```
 :::
