@@ -26,7 +26,7 @@ $(x_i, y_i), \; i = 1, \dots, n$ wobei $x_i, y_i \in R$ vorliegende
 Zahlenwerte sind. Bei Bedarf wird auch darauf eingegangen, wie weitere
 Merkmale berücksichtigt werden können.
 
-:::beispiel
+::: beispiel
 #### Prognose des Sachverständigenrats
 
 Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur
@@ -98,7 +98,7 @@ Symbole nach einem dritten Merkmal skaliert, dann spricht man von einem [Blasend
 
 ####
 
-:::beispiel
+::: beispiel
 
 ```{r}
 ggplot(data = d1, mapping = aes(x = Prognose, y = Wachstum)) + 
@@ -111,6 +111,7 @@ ggplot(data = d1, mapping = aes(x = Prognose, y = Wachstum)) +
 
 
 #### Sachverständigenrat
+
 Dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständienrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Im Idealfall lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. Je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
 
 
@@ -187,8 +188,8 @@ p1 + p2
 p3 + p4
 ```
 
-####
 
+####
 
 ```{r}
 # Ausgaben Gesundheitswesen in % BIP mit BIP pro Kopf
@@ -435,8 +436,9 @@ Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtige
 Um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, wird noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert.
 
 Wir erhalten damit den Korrelationskoeffizienten
+
 $$
-r = \frac{\text{Summe der blauen und roten Flächen}}{
+  r = \frac{\text{Summe der blauen und roten Flächen}}{
     \sqrt{(\text{Summe der gelben Flächen})\cdot (\text{Summe der grünen Flächen})}
   },
 $$
@@ -665,7 +667,7 @@ Die Kleinste-Quadrate-Schätzer $$\hat \alpha = \bar{y} - \hat \beta \bar{x}
 
 ####
 
-:::beispiel
+::: beispiel
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
@@ -691,8 +693,6 @@ Ausgleichsgeraden auch die zugrunde liegenden Daten zu betrachten, hat
 der Statistiker John Anscombe im Jahr 1973 hingewiesen. Er hat hierzu
 die unten dargestellten vier Datensätze verwendet, die alle zur selben
 Regressionsgeraden führen.
-
-
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 xm <- mean(xa1)
@@ -727,22 +727,20 @@ p16 <- ggplot(data = d_ans, mapping = aes(x = xa4, y = ya4)) +
   theme(aspect.ratio = 1)
 ```
 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ( p13 | p14 | p15 | p16 )
 ```
-
 
 Zu den vier Plots halten wir fest:
 
 1.  Ausgleichsgerade sinnvoll, offenbar liegt ein linearer Zusammenhang
     vor.
 
-2.  Der Zusammenhang ist quadratisch, Ausgleichsgerade sinnlos.
+1.  Der Zusammenhang ist quadratisch, Ausgleichsgerade sinnlos.
 
-3.  Die Ausgleichsgerade wird durch einen Ausreißer verfälscht.
+1.  Die Ausgleichsgerade wird durch einen Ausreißer verfälscht.
 
-4.  Ohne den Ausreißer könnte keine Ausgleichsgerade bestimmt werden.
+1.  Ohne den Ausreißer könnte keine Ausgleichsgerade bestimmt werden.
 
 ### Bestimmtheitsmaß
 
@@ -786,7 +784,7 @@ Korrelationskoeffizient entspricht dem Anteil der Gesamtstreuung, der
 durch das lineare Modell erklärt werden kann.
 
 
-:::beispiel
+::: beispiel
 Als Beispiel betrachten wir die beiden nachfolgend dargestellten
 Datensätze. Wir erhalten die Bestimmtheitsmaße links mit $R^2 = 0.99$
 und rechts mit $R^2 = 0.75$. Die unterschiedliche Variabilität um die
@@ -902,7 +900,7 @@ Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, di
 
 ## Beispiele {#sec:beispiele}
 
-:::beispiel
+::: beispiel
 Abschließend werden die Datensätze zu den Prognosen des
 Sachverständigenrats und der Lebenserwartung mit den oben diskutierten
 Methoden untersucht.
