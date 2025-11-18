@@ -1,8 +1,13 @@
 /.quarto/
 /_output/
+**/out/
 skript.tex
 skript_files
 demo/aufgaben/c
 demo/aufgaben/.quarto
 
+**/*.idx
+m-*/**/*.md
+m-*/**/*.rmarkdown
 **/*.quarto_ipynb
+*_files
