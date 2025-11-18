@@ -207,11 +207,9 @@ Für das zweidimensionale Histogramm Histogramm definiert man Klassen für
 beide zu betrachtende Merkmale $X$ und $Y$ 
 
 $$
-  \begin{aligned}
-    [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
-    \quad \text{und} \quad
-    [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
-  \end{aligned}
+  [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
+  \quad \text{und} \quad
+  [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
 $$ 
 
 und zählt für jedes Rechteck
