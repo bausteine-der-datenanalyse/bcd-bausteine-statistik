@@ -527,15 +527,9 @@ Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist nahel
 ::: beispiel
 **Beispiel: Niederschläge in Bochum 2008 und 2010**
 
-Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken, einen Vergleich aus der Stadt Dresden zeigt @fig-dresden. 
+Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken, einen Vergleich aus der Stadt Dresden zeigen die fogenden Bilder (Quelle: spiegel.de). Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts). 
 
-::: {#fig-dresden layout-ncol=2}
-![](00-bilder/sommer-2010-1.png){fig-alt="Elbe mit sehr niedrigem Wasserstand"}
-
-![](00-bilder/sommer-2010-2.png){fig-alt="Elbe mit Hochwasser"}
-
-Die Bilder (Quelle: spiegel.de) zeigen, wie sich das extreme Wetter des Jahres 2010 in Dresden auswirkte. Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts).
-:::
+![](00-bilder/sommer-2010.svg){fig-alt="Elbe mit sehr niedrigem Wasserstand und Elbe bei Hochwasser (Dresden)"}
 
 Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich dazu in einem "normalen'' Jahr? Wir betrachten hierzu die Monatssumme der täglichen Niederschlagshöhe in Bochum für die Jahre 2008 und 2010 (Quelle: Deutscher Wetterdienst). Die Werte sind in Millimetern angegeben.
 
@@ -1059,13 +1053,9 @@ ggplot(data = d_ns_bo_2008_2010) +
 Für eine gegebene Stichprobe kann man sich neben der Lage und der Streuung auch noch danach fragen, in welchem Maß einzelne Werte zur Summe aller Werte beitragen. Wir betrachten das am Beispiel von Niederschlägen. 
 
 ::: beispiel
-In @fig-konzentration-niederschlag sind die monatlichen Niederschläge des Jahres 2008 in Bochum und des Jahres 2010 in Nha Trang (Vietnam) zu sehen. Insgesamt sind in Bochum $\SI{869}{mm}$ und in Nha Trang $\SI{`r sum(pull(d_ns_nt_2015_monat, Niederschlag))`}{mm}$ Niederschläge gefallen. Allerdings konzentrieren sich die Niederschläge in Vietnam auf drei Monate, in allen anderen Monaten regnet es sogar weniger als in Bochum. Eine solche Konzentration von großen Beiträgen zu einer Gesamtsumme auf wenige Merkmalen wird mithilfe eines Konzentrationsmaßes quantifiziert.
+In Abbildung unten sind die monatlichen Niederschläge des Jahres 2008 in Bochum und des Jahres 2010 in Nha Trang (Vietnam) zu sehen. Insgesamt sind in Bochum $\SI{869}{mm}$ und in Nha Trang $\SI{`r sum(pull(d_ns_nt_2015_monat, Niederschlag))`}{mm}$ Niederschläge gefallen. Allerdings konzentrieren sich die Niederschläge in Vietnam auf drei Monate, in allen anderen Monaten regnet es sogar weniger als in Bochum. Eine solche Konzentration von großen Beiträgen zu einer Gesamtsumme auf wenige Merkmalen wird mithilfe eines Konzentrationsmaßes quantifiziert.
 
 ```{r}
-#| label: fig-konzentration-niederschlag
-#| fig-cap: "Monatliche Niederschläge in Bochum (2008) und dem vietnamesischen Badeort Nha Trang (2010). Quellen: DWD und Behörde VN"
-#| fig-alt: "Monatliche Niederschläge in Bochum und Nha Trang in einem Balkendiagramm. Der Niederschlag in Nha Trang konzentriert sich auf den Zeitraum von Oktober bis Dezember."
-
 ggplot(d_ns_bo_nt) + 
   geom_col(mapping = aes(x = Monat, y = Niederschlag, fill = Ort), position = "dodge", color = "black") +
   labs(fill = NULL, x = NULL, y = NULL)
