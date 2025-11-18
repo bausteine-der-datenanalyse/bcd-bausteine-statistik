@@ -9,6 +9,7 @@ Depends:
 Imports:
     gt,
     sf,
+    png,
     zip,
     ineq,
     rdwd,
@@ -17,6 +18,7 @@ Imports:
     readr,
     trend,
     giscoR,
+    raster,
     hexbin,
     lwgeom,
     modelr,

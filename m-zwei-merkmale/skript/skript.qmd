@@ -1,5 +1,7 @@
 ```{r}
 #| include: false
+library(png)
+library(grid)
 library(tidyverse)
 library(latex2exp)
 library(patchwork)
@@ -241,11 +243,11 @@ Kernfunktion $K$ ab (@sec-approximation-dichtekurven).
 In einer zweidimensionalen Darstellung des Histogramms oder der
 Dichtefunktion werden die Häufigkeiten farblich kodiert. Eine weitere
 Möglichkeit besteht in einer dreidimensionalen Darstellung. Beide
-Varianten sind in @fig-histogramme-2d-3d zu sehen.
+Varianten sind in @fig-histogramme-2d zu sehen.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
 p5 <- ggplot(data = d3) +
-  stat_bin2d(mapping = aes(x = he, y = le), binwidth = c(2.5,5)/2, color = "black", size = 0.25) +
+  stat_bin2d(mapping = aes(x = he, y = le), binwidth = c(2.5,5)/2, color = "black", linewidth = 0.25) +
   labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung", fill = "Anzahl") +
   scale_fill_distiller(palette = "Blues", direction = 1, guide = "legend", breaks = seq(1, 9, by = 4)) +
   scale_x_continuous(breaks = seq(5, 15, by = 5), minor_breaks = seq(0, 20, by = 1.25)) +
@@ -254,31 +256,25 @@ p5 <- ggplot(data = d3) +
   theme(aspect.ratio = 1, legend.position = "top")
 
 p6 <- ggplot(data = d3) +
-  stat_density_2d(mapping = aes(x = he, y = le, fill = ..level..), color = "black", size = 0.25, geom = "polygon", show.legend = FALSE, alpha = 0.8, bins = 10) +
+  stat_density_2d(mapping = aes(x = he, y = le, fill = after_stat(level)), color = "black", linewidth = 0.25, geom = "polygon", show.legend = FALSE, alpha = 0.8, bins = 10) +
   labs(x = "Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung", fill = "Anzahl") +
   scale_fill_distiller(palette = "Blues", direction = 1, guide = "legend") +
   scale_x_continuous(breaks = seq(0, 35, by = 5), minor_breaks = seq(0, 20, by = 1.25), limits = c(5-3*1.25, 15+2*1.25)) +
   scale_y_continuous(breaks = seq(50, 90, by = 10), minor_breaks = seq(45, 90, by = 2.5), limits = c(45, 90)) +
   coord_cartesian(xlim = c(1.5, 17), ylim = c(45, 85)) +
   theme(aspect.ratio = 1, legend.position = "top")
+
+p8 <- wrap_elements(
+  panel = rasterGrob(readPNG("00-bilder/weltbank-3d.png"), interpolate = TRUE)
+)
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-p5 + p6
+```{r}
+#| fig-cap: "Darstellung eines Histogramms (links) und einer geschätzten Verteilungsfunktion (rechts) für Lebenserwartung und Ausgaben für das Gesundheitswesen. Die 3D-Plots wurden mit dem Programm Mathematica erstellt, die 2D-Plots in R. Offenbar werden unterschiedliche Klasseneinteilungen für das Histogramm verwendet"
+#| label: fig-histogramme-2d
+(p5 + p6) /
+free(p8)
 ```
-
-
-::::: columns
-::: {.column width="50%"}
-![](00-bilder/weltbank-3d-1.svg)
-:::
-
-::: {.column width="50%"}
-![](00-bilder/weltbank-3d-2.svg)
-:::
-::::: 
-
-![Darstellung eines Histogramms (links) und einer geschätzten Verteilungsfunktion (rechts) für Lebenserwartung und Ausgaben für das Gesundheitswesen. Die 3D-Plots wurden mit dem Programm Mathematica erstellt, die 2D-Plots in R. Offenbar werden unterschiedliche Klasseneinteilungen für das Histogramm verwendet.](data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=){#fig-histogramme-2d-3d}
 
 ## Zusammenhangsmaß: Empirischer Korrelationskoeffizient von Bravais und Pearson {#sec-korrelationskoeffizient}
 
