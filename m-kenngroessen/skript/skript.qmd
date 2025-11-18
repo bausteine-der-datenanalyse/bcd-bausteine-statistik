@@ -69,7 +69,10 @@ Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ 
 d_bsp_mittelwert |>
   transpose_df() |>
   gt(rowname_col = "name") |>
-  tab_options(column_labels.hidden = T)
+  tab_options(
+    column_labels.hidden = TRUE,
+    latex.use_longtable = TRUE
+  )
 ```
 
 Für die arithmetischen Mittel der beiden Merkmale ergibt sich folgende Situation:
@@ -162,7 +165,8 @@ Die Auswertung eines Merkmals "Güteklasse" ergibt
 ```{r}
 d_bsp_median |>
   transpose_df() |>
-  gt(rowname_col = "name")
+  gt(rowname_col = "name") |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 mit dem Umfang $n = 12$. Der Median liegt daher zwischen $x_{(6)} = \text{B}$ und $x_{(7)} = \text{B}$. Beide Werte sind gleich, also ist $x_\mathrm{med} = \text{B}$.
@@ -213,8 +217,9 @@ d_bsp_lageregeln |>
       list(label = md("$x_\\mathrm{med}$"), fn = "mmed"),
       list(label = md("$x_\\mathrm{mod}$"), fn = "mmod")
     ),
-    fmt = ~ fmt_number(., drop_trailing_zeros = T)
-  )
+    fmt = ~ fmt_number(., drop_trailing_zeros = TRUE)
+  ) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 ```{r}
@@ -278,7 +283,8 @@ d_bsp_gm_w |>
   cols_align(
     align = "center",
     columns = everything()
-  )
+  ) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 Dann ist für jeden Zeitraum $i = 1, \dots, 6$ das Verhältnis der Wasserstände am Tag $i$ und dem vorausgegangenen Tag $i - 1$
@@ -298,7 +304,8 @@ d_bsp_gm_f |>
   cols_align(
     align = "center",
     columns = everything()
-  )
+  ) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 Grafisch stellt sich die Situation so dar:
@@ -537,7 +544,8 @@ Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich d
 d_ns_bo_2008_2010_monat |> 
   pivot_wider(names_from = Monat, values_from = Niederschlag) |>
   gt(rowname_col = "Jahr") |>
-  tab_stubhead("Jahr")
+  tab_stubhead("Jahr") |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 ```{r}
@@ -628,7 +636,8 @@ Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der m
 d_niederschlag_am |>
   pivot_wider(names_from = Monat, values_from = Niederschlag) |>
   gt(rowname_col = "Jahr") |>
-  tab_stubhead("Jahr")
+  tab_stubhead("Jahr") |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 ```{r}
@@ -1092,7 +1101,8 @@ Wir betrachten den Datensatz
 ```{r}
 gt(d_bsp_lorenzkurve) |>
   cols_width(everything() ~ px(50)) |>
-  cols_align("center")
+  cols_align("center") |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 mit den Merkmalen $A$, $B$ und $C$ sowie die zugehörigen Lorenzkurven
@@ -1150,7 +1160,8 @@ d_ns_bo_nt |>
   ) |>
   transpose_df() |>
   gt(rowname_col = "name") |>
-  cols_label_with(fn = clf)
+  cols_label_with(fn = clf) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 die beiden Lorenzkurven
@@ -1245,7 +1256,8 @@ Wir betrachten hierzu als Beispiel zwei Gruppen von je zehn Personen, die jeweil
 ```{r}
 d_bsp_gini_reduktion |>
   transpose_df() |>
-  gt(rowname_col = "name")
+  gt(rowname_col = "name") |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 Die Summe der Beträge beläuft sich auf $5 \cdot 9 + 5 \cdot 81 = 9 \cdot 25 + 225 = 450$. Damit liegt folgende Situation vor:
