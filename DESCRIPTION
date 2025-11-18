@@ -1,0 +1,44 @@
+Package: bcdstatistik
+Title: BCD Statistik
+Version: 0.1
+Authors@R: c(
+    person("Matthias", "Baitsch", ,"matthias.baitsch@hs-bochum.de", role = c("aut", "cre"))
+  )
+Depends: 
+    R
+Imports:
+    gt,
+    sf,
+    zip,
+    ineq,
+    rdwd,
+    purrr,
+    RCurl,
+    readr,
+    trend,
+    giscoR,
+    hexbin,
+    lwgeom,
+    modelr,
+    plotly,
+    osmdata,
+    wbstats,
+    stringr,
+    cowplot,
+    tsibble,
+    wbstats,
+    webshot2,
+    RcppRoll,
+    ggridges,
+    latex2exp,
+    patchwork,
+    rprojroot,
+    tidyverse,
+    this.path,
+    kableExtra,
+    reticulate,
+    rnaturalearth,
+    rnaturalearthdata
+Encoding: UTF-8
+License: CC NC ND 3.0
+

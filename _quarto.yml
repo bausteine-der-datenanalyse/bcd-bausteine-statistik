@@ -15,7 +15,6 @@ format:
     css: bcd-style.css
     license: CC BY-SA
     default-image-extension: svg
-    html-table-processing: none
   pdf:
     include-in-header:
       - bcd-macros.tex
