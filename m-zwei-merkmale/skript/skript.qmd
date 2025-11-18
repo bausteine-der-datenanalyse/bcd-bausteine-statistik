@@ -96,9 +96,7 @@ $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ durch geometrische Objekte
 Symbole nach einem dritten Merkmal skaliert, dann spricht man von einem [Blasendiagramm]{.neuerbegriff}.
 :::
 
-####
-
-::: beispiel
+#### Sachverständigenrat
 
 ```{r}
 ggplot(data = d1, mapping = aes(x = Prognose, y = Wachstum)) + 
@@ -109,11 +107,7 @@ ggplot(data = d1, mapping = aes(x = Prognose, y = Wachstum)) +
   theme_bw()
 ```
 
-
-#### Sachverständigenrat
-
 Dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständienrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Im Idealfall lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. Je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
-
 
 #### Lebenserwartung
 
@@ -188,9 +182,6 @@ p1 + p2
 p3 + p4
 ```
 
-
-####
-
 ```{r}
 # Ausgaben Gesundheitswesen in % BIP mit BIP pro Kopf
 ggplot(data = arrange(d3, gdppc), mapping = aes(x = he, y = le)) +
@@ -203,11 +194,7 @@ ggplot(data = arrange(d3, gdppc), mapping = aes(x = he, y = le)) +
   theme(aspect.ratio = 1)
 ```
 
-
 Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem dargestellten Blasendiagramm, in dem die Wirtschaftsleitung der Länder auf Größe und Farbe der Kreise abgebildet ist.
-
-
-::::
 
 ### Zweidimensionale Histogramme und Dichten {#sec-2d-histogramme}
 
