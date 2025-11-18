@@ -4,10 +4,6 @@ Die Grundlagen Statistik bestehen aus verschiedenen Methodenbausteinen, die als 
 
 ## Dokumente
 
-### Einführung und Überblick
-
-- [Skript](TODO Link)
-
 ### Statistische Daten
 
 - [Skript](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-statistik/m-statistische-daten/skript/skript.html)
