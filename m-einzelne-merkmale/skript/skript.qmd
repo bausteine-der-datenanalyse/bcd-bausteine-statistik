@@ -377,8 +377,8 @@ wobei wieder $a_j \leq x$ und $a_{j+1} > x$ gelten soll.
 ```{r}
 #| fig-alt: "Treppenfunktion der erreichten Prozentpunkte. Bei 49 erreichten Prozentpunkten zeigt ein Pfeil auf den Funktionswert, um zu verdeutlichen, dass 32% der Teilnehmer die Prüfung nicht bestanden haben."
 
-f <- ecdf(pull(d_klausur_bestanden, prozente_g))
-q <- f(49)
+F <- ecdf(pull(d_klausur_bestanden, prozente_g))
+q <- F(49)
 pp <- tibble(x = c(49, 49), y = c(0, q))
 
 ggplot(data = d_klausur_bestanden) +
@@ -397,7 +397,7 @@ Beachten Sie, dass der Graph von $F$ hier in Form einer Treppenfunktion dargeste
 Die Durchfallquote bei der Klausur entspricht damit genau dem Funktionswert von $F$ für $x = 49$. Der Wert lässt sich mit dem Programm R einfach berechnen, es ist
 
 $$
-  F(49) = 0.32 TODO ausrechnen lassen
+  F(49) = `r round(F(49), 2)`
 $$
 
 und die Durchfallquote beträgt 32%.
