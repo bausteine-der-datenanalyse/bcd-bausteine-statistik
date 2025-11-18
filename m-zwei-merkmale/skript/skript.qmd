@@ -200,7 +200,7 @@ Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung
 
 Insbesondere wenn es sich um umfangreiche Datensätze handelt, überdecken
 sich in einem Streuplot häufig die Punkte. Diese Problematik lässt sich
-mithilfe von zweidimensionalen Histogrammen umgehen oder
+mithilfe von zweidimensionalen Histogrammen oder
 zweidimensionalen Kerndichteschätzern umgehen.
 
 Für das zweidimensionale Histogramm Histogramm definiert man Klassen für
