@@ -336,7 +336,7 @@ ggplot(data = d_bsp_gm_w, mapping = aes(x = Tag, y = Wasserstand)) +
 Aus der Definition des Wachstumsfaktors erhalten wir $W_i = x_i W_{j-i}$. Mit den Wachstumsfaktoren $x_i$ und dem Wasserstand $W_0 = 1$ können wir also den Verlauf des Wasserstandes für die betrachteten Tage rekonstruieren:
 
 $$
-  \begin{alignat}{4}
+  \begin{aligned}
     W_1  
     & = 
     x_1 \cdot W_0 
@@ -367,7 +367,7 @@ $$
     & = 5.0 
     & = && \,\,
     x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1 \cdot W_0 \\
-  \end{alignat}
+  \end{aligned}
 $$
 
 Für einen mittleren Wachstumsfaktor $z$ möchten wir dasselbe Ergebnis erhalten, wenn wir sechs Tage lang diesen Wachstumsfaktor ansetzen. Es muss daher

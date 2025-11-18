@@ -317,26 +317,34 @@ Gauß-Kern
 :::
 :::::
 
-mit den zugehörigen Funktionsgleichungen $$\begin{align*}
-  K(u)
-  & = 
-    \begin{cases}
-      \displaystyle \frac{3}{4}(1 - u)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
-      0 & \text{sonst}
-    \end{cases}
-  && \text{Epachenikov-Kern}
-    \\[1em]
-  K(u)
-  & =
-    \begin{cases}
-      \displaystyle \frac{15}{16}(1 - u^2)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
-      0 & \text{sonst}
-    \end{cases}    
-  && \text{Bisquare-Kern}
-    \\[1em]
-  K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
-  && \text{Gauß-Kern}
-\end{align*}$$ Für alle Kerne gilt, dass die vom zugehörigen Graphen
+mit den zugehörigen Funktionsgleichungen 
+
+$$
+  \begin{aligned}
+      K(u)
+      & = 
+        \begin{cases}
+          \displaystyle \frac{3}{4}(1 - u)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
+          0 & \text{sonst}
+        \end{cases}
+      && \text{Epachenikov-Kern} 
+      \\[1em]
+      K(u)
+      & =
+        \begin{cases}
+          \displaystyle \frac{15}{16}(1 - u^2)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
+          0 & \text{sonst}
+        \end{cases}    
+      && 
+      \text{Bisquare-Kern} 
+      \\[1em]
+      K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
+      && 
+      \text{Gauß-Kern}
+  \end{aligned}
+$$ 
+
+Für alle Kerne gilt, dass die vom zugehörigen Graphen
 überdeckte Fläche gleich 1 ist. Damit können wir den sogenannten
 Kern-Dichteschätzer definieren.
 

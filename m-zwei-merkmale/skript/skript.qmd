@@ -216,11 +216,17 @@ mithilfe von zweidimensionalen Histogrammen umgehen oder
 zweidimensionalen Kerndichteschätzern umgehen.
 
 Für das zweidimensionale Histogramm Histogramm definiert man Klassen für
-beide zu betrachtende Merkmale $X$ und $Y$ $$\begin{align*}
-  [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
-  \quad \text{und} \quad
-  [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
-\end{align*}$$ und zählt für jedes Rechteck
+beide zu betrachtende Merkmale $X$ und $Y$ 
+
+$$
+  \begin{aligned}
+    [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
+    \quad \text{und} \quad
+    [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
+  \end{aligned}
+$$ 
+
+und zählt für jedes Rechteck
 $[c^x_{i-1}, c^x_{i}) \times [c^y_{j-1}, c^y_{j})$ die Punkte, die in
 diesem Rechteck liegen. Damit ergeben sich die Klassenhäufigkeiten
 $h_{ij}$. Über jedem Rechteck $ij$ wird dann ein Quader angeordnet,
@@ -231,14 +237,16 @@ Alternativ kann auch im zweidimensionalen Fall ein Kerndichteschätzer
 verwendet werden. Dieser funktioniert im Prinzip genauso wie für eine
 Variable, nur dass wir jetzt das Produkt von zwei Kernfunktionen
 verwenden: 
-$$\hat f(x, y)
+
+$$
+  \hat f(x, y)
   =
   \frac{1}{n \, h_1 h_2} 
   \;
   \sum_{i=1}^n  
   K\left(\frac{x-x_i}{h_1}\right)
   K\left(\frac{y-y_i}{h_2}\right).
-  $$ 
+$$ 
   
 Die Glättungseigenschaften des
 Schätzers hängen von den Parametern $h_1$ und $h_2$ sowie der Wahl der
@@ -502,9 +510,9 @@ Wir merken uns daher:
 ::: definition
 
 $$
-\begin{aligned}
-    \text{Korrelation} \quad \neq \quad \text{Kausalität}
-\end{aligned}
+  \begin{aligned}
+      \text{Korrelation} \quad \neq \quad \text{Kausalität}
+  \end{aligned}
 $$
 :::
 
@@ -753,13 +761,18 @@ dann ist das Bestimmtheitsmaß gleich eins.
 
 Für die Werte
 $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ erfasst das Bestimmtheitsmaß
-$$R^2 
+
+$$
+  R^2 
     \; = \;
     \frac{
       \displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
     }{
       \displaystyle \sum_{i=1}^n(y_i - \bar{y})^2
-    }$$ mit $0 \leq R^2 \leq 1$ die Güte des linearen Modells. Dabei ist
+    }
+$$ 
+
+mit $0 \leq R^2 \leq 1$ die Güte des linearen Modells. Dabei ist
 $$\hat y_i = \hat \alpha + \hat \beta x_i.$$
 Es lässt sich zeigen, dass es sich bei dem
 Bestimmtheitsmaß um das Quadrat des Korrelationskoeffizienten $r$
