@@ -36,7 +36,7 @@ jobs:
         with:
           extra-packages: rcmdcheck
       - name: Quarto render
-        run: for f in m-*; do quarto render -t html $f; done
+        run: for f in m-*; do quarto render $f -t html; done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
