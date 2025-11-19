@@ -1,9 +1,13 @@
 project:
   output-dir: _output
 
+execute: 
+  echo: false
+
 lang: de
 number-depth: 3
 number-sections: true
+bibliography: bcd-bausteine-statistik.bib
 
 filters: 
   - latex-environment
@@ -12,7 +16,7 @@ environments: [definition, beispiel, center, multicols]
 
 format: 
   html: 
-    css: bcd-style.css
+    css: bcd-style-notes.css
     license: CC BY-SA
     default-image-extension: svg
   pdf:
@@ -26,6 +30,3 @@ format:
       text: |
         \printindex
     default-image-extension: pdf
-
-bibliography: bcd-bausteine-statistik.bib
-
