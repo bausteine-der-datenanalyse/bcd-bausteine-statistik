@@ -5,20 +5,6 @@
 # Vektoren a, b zu a1, b1, a2, b2, ... kombinieren
 mix <- function(a, b) as.vector(rbind(a, b))
 
-# Transponieren mit Index als Merkmal
-transpose_df <- function(d, start = 1, col = NULL) {
-  if (is.null(col)) {
-    d |>
-      mutate(n = start:(nrow(d) + start - 1)) |>
-      pivot_longer(cols = !n) |>
-      pivot_wider(names_from = n)
-  } else {
-    d |>
-      pivot_longer(cols = !starts_with(col)) |>
-      pivot_wider(names_from = all_of(col))
-  }
-}
-
 # Modus
 # https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode
 modes <- function(x) {
