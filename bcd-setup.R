@@ -1,7 +1,7 @@
 library(gt)
 library(readxl)
 library(cowplot)
-# library(wbstats)
+library(wbstats)
 library(latex2exp)
 library(lubridate)
 library(patchwork)
