@@ -18,15 +18,11 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 **Prognose des Sachverständigenrats:** Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
-tbl_wirtschaftswachstum(1975, 1983)
+tbl_wirtschaftswachstum(1975, 1987)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1983, 1991)
-```
-
-```{r}
-tbl_wirtschaftswachstum(1991, 2000)
+tbl_wirtschaftswachstum(1987, 2000)
 ```
 
 Es liegt in der Natur von Prognosen, dass sie von der später beobachteten Wirklichkeit abweichen. Interessant ist es jedoch zu fragen, in welchem Grad die Vorhersagen zutreffen. Ein Stück weit lässt sich bereits an der Tabelle ablesen, dass die Prognosen in vielen Fällen die wirtschaftliche Entwicklung gut vorhergesagt haben. Es gibt aber auch Vorhersagen, die weit danebenlagen, zum Beispiel in den Jahren 1975 oder 1982.
@@ -65,10 +61,16 @@ ggplot(
   data = d_wirtschaftswachstum,
   mapping = aes(x = Prognose, y = Wachstum)
 ) +
-  geom_abline(intercept = 0, slope = 1, color = "red", linewidth = 0.75) +
-  geom_point(shape = 21, fill = "light blue", size = 2.5) +
+  geom_abline(
+    intercept = 0, slope = 1, color = "red", linewidth = 0.75
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
   geom_rug() +
-  coord_fixed(xlim = c(-2, 6), ylim = c(-2, 6))
+  coord_fixed(
+    xlim = c(-2, 6), ylim = c(-2, 6)
+  )
 ```
 
 
@@ -92,18 +94,20 @@ p1 + p2 + p3 + p4 + plot_layout(axes = "collect", ncol = 2)
 Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem dargestellten Blasendiagramm, in dem die Wirtschaftsleitung der Länder auf Größe und Farbe der Kreise abgebildet ist.
 
 ```{r}
-ggplot(data = arrange(d3, gdppc), mapping = aes(x = he, y = le)) +
+ggplot(data = d_wb_latest) +
   geom_point(
-    mapping = aes(fill = gdppc, size = gdppc),
-    shape = 21,
-    show.legend = F,
-    alpha = 0.8
+    mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
+    shape = 21, show.legend = FALSE, alpha = 0.8
   ) +
-  scale_x_continuous(limits = c(0, 17)) +
-  scale_y_continuous(limits = c(45, 85)) +
-  scale_size(range = c(0.1, 10)) +
-  scale_fill_distiller(palette = "Reds", direction = 1) +
-  labs(x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung")
+  scale_size(
+    range = c(0.1, 10)
+  ) +
+  scale_fill_distiller(
+    palette = "Reds", direction = 1
+  ) +
+  labs(
+    x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
+  )
 ```
 
 ### Zweidimensionale Histogramme und Dichten {#sec-2d-histogramme}
@@ -152,21 +156,21 @@ In einer zweidimensionalen Darstellung des Histogramms oder der Dichtefunktion w
 #| fig-cap: Histogramms (links) und geschätzte Verteilungsfunktion (rechts), ebene Darstellung
 #| label: fig-zwei-merkmale-2d
 
-p0 <- ggplot(data = d3, mapping = aes(x = he, y = le))
+p0 <- ggplot(
+  data = d_wb_latest, 
+  mapping = aes(x = he, y = le)
+)
 
-p5 <- p0 +
+p1 <- p0 +
   geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
   scale_fill_distiller(palette = "Blues", direction = 1)
 
-p6 <- p0 +
+p2 <- p0 +
   geom_density_2d_filled(color = "black", linewidth = 0.25) +
   scale_fill_brewer(palette = "Blues")
 
-p5 +
-  p6 +
-  plot_layout(axes = 'collect') &
-  xlim(0, 20) &
-  ylim(45, 85) &
+p1 + p2 + plot_layout(axes = 'collect') &
+  xlim(0, 20) & ylim(45, 85) &
   labs(
     x = "Ausgaben Gesundheitswesen (% BIP)",
     y = "Mittlere Lebenserwartung",
@@ -176,7 +180,6 @@ p5 +
 ```
 
 ![Histogramms (links) und geschätzte Verteilungsfunktion (rechts), räumliche Darstellung](00-bilder/weltbank-3d.svg){#fig-zwei-merkmale-3d}
-
 
 ## Zusammenhangsmaß: Empirischer Korrelationskoeffizient von Bravais und Pearson {#sec-korrelationskoeffizient}
 
@@ -197,27 +200,11 @@ p1 <- plot_correlation_example(x, x + rnorm(n, sd = 0.3), TeX("A: $r > 0$"))
 p2 <- plot_correlation_example(x, -x + rnorm(n, sd = 0.3), TeX("B: $r < 0$"))
 p3 <- plot_correlation_example(x, rnorm(n, sd = 0.3), TeX("C: $r \\approx 0$"))
 p4 <- plot_correlation_example(0.4 * x, rnorm(n, sd = 1), TeX("D: $r \\approx 0$"))
-p5 <- plot_correlation_example(
-  x,
-  -1 + 2 * x^2 + rnorm(n, sd = 0.3),
-  TeX("E: $r \\approx 0$")
-)
-p6 <- plot_correlation_example(
-  x,
-  1 - 2 * x^2 + rnorm(n, sd = 0.3),
-  TeX("F: $r \\approx 0$")
-)
+p5 <- plot_correlation_example(x, -1 + 2 * x^2 + rnorm(n, sd = 0.3), TeX("E: $r \\approx 0$"))
+p6 <- plot_correlation_example(x, 1 - 2 * x^2 + rnorm(n, sd = 0.3), TeX("F: $r \\approx 0$"))
 
-p1 +
-  p2 +
-  p3 +
-  p4 +
-  p5 +
-  p6 +
-  plot_layout(guides = "collect") &
-  theme_void() &
-  xlim(-1, 1) &
-  ylim(-2, 2)
+p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect") &
+  theme_void() & xlim(-1, 1) & ylim(-2, 2)
 ```
 
 Wie lässt sich nun eine solche Zahl bestimmen? Die grundlegende Idee besteht darin, dass im Streudiagramm ein Koordinatensystem in das Zentrum der Punktwolke gelegt wird. Für jeden Punkt $(x_i, y_i)$ lässt sich dann überprüfen, in welchem Quadrant des neuen Koordinatensystems der Punkt liegt. In @fig-korrelation ist dieser Zusammenhang farblich hervorgehoben. Wir sehen sofort:
@@ -240,9 +227,9 @@ fig_correlation_idea()
 Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis D werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
 
 $$
-  r = \frac{\text{Summe der blauen und roten Flächen}}{
-    \sqrt{(\text{Summe der gelben Flächen})\cdot (\text{Summe der grünen Flächen})}
-  },
+  r = \frac
+    {\text{Summe der blauen und roten Flächen}}
+    {\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
 $$
   
 den wir nochmal formal festhalten wollen.
@@ -309,27 +296,30 @@ $$
 $$
 :::
 
-
 Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kausalen Zusammenhang verstehen, der näher zu untersuchen ist. Dazu sind stets sachlogische Überlegungen erforderlich. Zusätzlich ist immer zu bedenken, dass weitere wesentliche Merkmale unter Umständen übersehen wurden. Dies kann zu so genannten [Scheinkorrelationen]{.neuerbegriff} oder auch zu [verdeckten Korrelationen]{.neuerbegriff} führen. [@fahrmeir_statistik_2016]
-
 
 ::: beispiel
 **Beispiel Scheinkorrelation:** In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
 
 ```{r}
-ggplot(data = d5, mapping = aes(x = read, y = math)) +
-  geom_point(mapping = aes(fill = sel), shape = 21, show.legend = FALSE) +
-  geom_label(
-    data = filter(d5, country %in% cnt),
-    mapping = aes(label = country),
-    hjust = 1,
-    nudge_x = -3,
-    nudge_y = 5,
-    size = label_fontsize,
-    alpha = 0.5
+countries = c("Singapore", "Finland", "Brazil", "Switzerland")
+d <- mutate(d_pisa, sel = country %in% countries)
+
+ggplot(data = d, mapping = aes(x = read, y = math)) +
+  geom_point(
+    mapping = aes(fill = sel), shape = 21, show.legend = FALSE
   ) +
-  scale_fill_manual(values = c("light blue", "red")) +
-  labs(x = "Lesekompetenz", y = "Mathematische Kompetenz")
+  geom_label(
+    data = filter(d, country %in% countries),
+    mapping = aes(label = country),
+    hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
+  ) +
+  scale_fill_manual(
+    values = c("light blue", "red")
+  ) +
+  labs(
+    x = "Lesekompetenz", y = "Mathematische Kompetenz"
+  )
 ```
 
 Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
@@ -337,19 +327,13 @@ Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. 
 
 ## Lineare Regression
 
-Mithilfe der Korrelationsanalyse lassen sich ungerichtete Zusammenhänge
-zwischen zwei Merkmalen $X$ und $Y$ untersuchen. In vielen Fällen legt
-allerdings der untersuchte Sachverhalt nahe, dass eine der beobachteten
-Größen von der anderen Größe abhängt. Allerdings handelt es sich in der
-Regel nicht um einen rein deterministischen Zusammenhang der Form
+Mithilfe der Korrelationsanalyse lassen sich ungerichtete Zusammenhänge zwischen zwei Merkmalen $X$ und $Y$ untersuchen. In vielen Fällen legt allerdings der untersuchte Sachverhalt nahe, dass eine der beobachteten Größen von der anderen Größe abhängt. Allerdings handelt es sich in der Regel nicht um einen rein deterministischen Zusammenhang der Form
 
 $$
   Y = f(X),
 $$ 
 
-sondern es kommt noch eine zufällige Abweichung hinzu.
-Wenn wir von einem additiven Fehlerterm ausgehen, dann erhalten wir die
-Beziehung 
+sondern es kommt noch eine zufällige Abweichung hinzu. Wenn wir von einem additiven Fehlerterm ausgehen, dann erhalten wir die Beziehung 
 
 $$
   Y  = f(X) + \varepsilon,
@@ -372,7 +356,7 @@ $$
 
 wobei $\varepsilon_i$ den Fehler erfasst, der sich aus der Geradenanpassung ergibt. Der Zusammenhang ist in @fig-ausgleichsgerade dargestellt.
 
-![Ausgleichsgerade](00-bilder/ausgleichsgerade.svg){#fig-ausgleichsgerade width=80%}
+![Ausgleichsgerade](00-bilder/ausgleichsgerade.svg){#fig-ausgleichsgerade width=60%}
 
 ### Berechnung der Ausgleichsgeraden
 
@@ -497,8 +481,7 @@ $$
   y_i = \alpha + \beta x_i + \varepsilon_i
 $$ 
 
-lineare Einfachregression. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und
-$\varepsilon_i$ der Fehler.
+lineare Einfachregression. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und $\varepsilon_i$ der Fehler.
 
 Die Kleinste-Quadrate-Schätzer 
 
@@ -518,7 +501,6 @@ minimiert die Summe der Fehlerquadrate.
 :::
 
 ::: beispiel
-
 **Beispiel PISA-Studie:** Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
 
 $$
@@ -535,10 +517,17 @@ der unten dargestellten Ausgleichsgeraden.
 
 ```{r}
 ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
-  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75) +
-  geom_point(shape = 21, fill = "light blue", size = 2.5) +
-  labs(x = "Lesekompetenz", y = "Mathematische Kompetenz")
+  geom_smooth(
+    method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
+  labs(
+    x = "Lesekompetenz", y = "Mathematische Kompetenz"
+  )
 ```
+
 :::
 
 #### Anscombes Quartett
@@ -594,9 +583,7 @@ Damit lässt sich der Korrelationskoeffizient auch in Bezug auf das lineare Regr
 Als Beispiel betrachten wir die beiden nachfolgend dargestellten Datensätze. Wir erhalten die Bestimmtheitsmaße links mit $R^2 = `r round(summary(lm(y1 ~ x, data = d_rsquare_example))$r.squared, 2)`$ und rechts mit $R^2 = `r round(summary(lm(y2 ~ x, data = d_rsquare_example))$r.squared, 2)`$. Die unterschiedliche Variabilität um die Ausgleichsgerade herum wird also sehr gut erfasst.
 
 ```{r}
-plot_rsquare_example(y1) +
-  plot_rsquare_example(y2) +
-  plot_layout(axes = "collect") &
+plot_rsquare_example(y1) + plot_rsquare_example(y2) + plot_layout(axes = "collect") &
   scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
   scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
   labs(x = NULL, y = NULL)
@@ -644,14 +631,15 @@ tibble(
   x = 2 * pi * runif(300),
   y = sin(x) + 0.2 * rnorm(length(x))
 ) |>
-  ggplot(mapping = aes(x = x, y = y)) +
-  geom_point(shape = 21, fill = "light blue", size = 2.5) +
+  ggplot(
+    mapping = aes(x = x, y = y)
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
   geom_smooth(
-    method = "loess",
-    formula = y ~ x,
-    se = FALSE,
-    color = "red",
-    linewidth = 0.75
+    method = "loess", formula = y ~ x,
+    se = FALSE, color = "red", linewidth = 0.75
   ) +
   labs(x = NULL, y = NULL)
 ```
