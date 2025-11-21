@@ -23,6 +23,7 @@ Imports:
     lwgeom,
     modelr,
     plotly,
+    wbstats,
     osmdata,
     wbstats,
     stringr,
