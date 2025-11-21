@@ -195,7 +195,8 @@ tbl_wirtschaftswachstum <- function(s, e) {
     filter(Jahr >= s, Jahr < e) |>
     select(-Jahr) |>
     transpose_df(start = s) |>
-    gt(rowname_col = "name")
+    gt(rowname_col = "name") |>
+    tab_options(latex.use_longtable = TRUE)
 }
 
 

@@ -18,11 +18,15 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 **Prognose des Sachverständigenrats:** Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
-tbl_wirtschaftswachstum(1975, 1987)
+tbl_wirtschaftswachstum(1975, 1983)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1987, 2000)
+tbl_wirtschaftswachstum(1983, 1991)
+```
+
+```{r}
+tbl_wirtschaftswachstum(1991, 2000)
 ```
 
 Es liegt in der Natur von Prognosen, dass sie von der später beobachteten Wirklichkeit abweichen. Interessant ist es jedoch zu fragen, in welchem Grad die Vorhersagen zutreffen. Ein Stück weit lässt sich bereits an der Tabelle ablesen, dass die Prognosen in vielen Fällen die wirtschaftliche Entwicklung gut vorhergesagt haben. Es gibt aber auch Vorhersagen, die weit danebenlagen, zum Beispiel in den Jahren 1975 oder 1982.
@@ -67,10 +71,7 @@ ggplot(
   geom_point(
     shape = 21, fill = "light blue", size = 2.5
   ) +
-  geom_rug() +
-  coord_fixed(
-    xlim = c(-2, 6), ylim = c(-2, 6)
-  )
+  geom_rug()
 ```
 
 
@@ -207,15 +208,15 @@ p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect") &
   theme_void() & xlim(-1, 1) & ylim(-2, 2)
 ```
 
-Wie lässt sich nun eine solche Zahl bestimmen? Die grundlegende Idee besteht darin, dass im Streudiagramm ein Koordinatensystem in das Zentrum der Punktwolke gelegt wird. Für jeden Punkt $(x_i, y_i)$ lässt sich dann überprüfen, in welchem Quadrant des neuen Koordinatensystems der Punkt liegt. In @fig-korrelation ist dieser Zusammenhang farblich hervorgehoben. Wir sehen sofort:
+Wie lässt sich nun eine solche Zahl bestimmen? Die grundlegende Idee besteht darin, dass im Streudiagramm ein Koordinatensystem in das Zentrum der Punktwolke gelegt wird. Für jeden Punkt $(x_i, y_i)$ lässt sich dann überprüfen, in welchem Quadrant des neuen Koordinatensystems der Punkt liegt. In @fig-korrelation ist dieser Zusammenhang farblich hervorgehoben.
 
-Fall A
+Fall A:
 : Die überwiegende Zahl der Punkte liegt in den Quadranten I und III
           
-Fall B
+Fall B:
 : Hier liegen die allermeisten Punkte in den Quadranten II und IV
 
-Fälle C -- F
+Fälle C -- F:
 : Die Punkte verteilen sich auf alle Quadranten
 
 Für die Lage des neuen Koordinatensystems verwenden wir die Mittelwerte $\bar{x}$ und $\bar{y}$ der Merkmale $X$ und $Y$. Damit können wir uns nun überlegen, wie der Korrelationskoeffizient bestimmt werden kann.
@@ -250,29 +251,29 @@ $$
 Bravais-Person-[Korrelationskoeffizient]{.neuerbegriff} . Der Wertebereich ist $-1 \leq r \leq 1$.
 :::
 
-Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgende Situationen vor:
+Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgende Situationen vor.
 
-Falls $r > 0$
+Falls $r > 0$:
 : Positive Korrelation, gleichsinniger linearer Zusammenhang. Die Werte $(x_i, y_i)$ liegen tendenziell um eine Gerade positiver Steigung.
 
-Falls $r < 0$
+Falls $r < 0$:
 : Negative Korrelation, gegensinniger linearer Zusammenhang. Die Werte $(x_i, y_i)$ liegen tendenziell um eine Gerade negativer Steigung.
   
-Entsprechend dem Zahlenwert von $r$ unterscheidet man grob die folgenden Korrelationsgrade:
+Entsprechend dem Zahlenwert von $r$ unterscheidet man grob die Korrelationsgrade
 
-Für $r \approx 0$
+Für $r \approx 0$:
 : Keine Korrelation, unkorreliert, kein linearer Zusammenhang.
 
-Für $|r| < 0.5$
+Für $|r| < 0.5$:
 : Schwache Korrelation.
 
-Für $0.5 \leq |r| < 0.8$
+Für $0.5 \leq |r| < 0.8$:
 : Mittlere Korrelation.
 
-Für $0.8 \leq |r| < 1$
+Für $0.8 \leq |r| < 1$:
 : Starke Korrelation.
 
-Für $|r| = 1$
+Für $|r| = 1$:
 : Die Werte liegen exakt auf einer Geraden.
 
 Neben dem Korrelationskoeffizienten von Bravais und Pearson gibt es noch weitere Zusammenhangsmaße, zum Beispiel den Spaerman-Korrelationskoeffizienten. Diese sind aber weniger gebräuchlich und werden hier nicht weiter diskutiert.
