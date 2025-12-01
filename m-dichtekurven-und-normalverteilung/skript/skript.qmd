@@ -1,326 +1,355 @@
 ```{r}
 #| include: false
 source("../../bcd-setup.R")
-library(tidyverse)
-library(kableExtra)
+source("01-daten/dichtekurven-und-normalverteilung.R")
 ```
+
+\newcommand{\SI}[2]{#1\,\mathrm{#2}}
+\newcommand{\si}[1]{\mathrm{#1}}
 
 # Dichtekurven und Normalverteilung
 
+Dichtekurven sind eine Alternative zu Histogrammen für die Darstellung einzelner Merkmale. Die Grundidee soll am Beispiel einer Geschwindigkeitsmessung erläutert werden.
 
 :::beispiel
-In der Geschwindigkeitsmessung mit dem Seitenradar ([@sec-beispiel-sdr]) wurden innerhalb von zwei Tagen die Geschwindigkeiten von 20.707 Fahrzeugen gemessen. In @fig-histogram-unistrasse ist das Histogramm der relativen Häufigkeiten der Geschwindigkeiten dargestellt. Die Klassenbreite wurde dabei mit 1 km/h gewählt. Dies entspricht gerade der Genauigkeit der Messung, eine kleinere Klassenbreite ist daher nicht sinnvoll.
-
+In einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum wurden innerhalb von zwei Tagen die Geschwindigkeiten von `r nrow(d_unistrasse)` Fahrzeugen gemessen. 
 
 ```{r}
-d <- read_excel("01-daten/unistrasse-2017.xlsx", sheet = "raw(T)", range = "B2:H20712")
-ggplot(data = d) +
-    geom_histogram(mapping = aes(x = Geschwindigkeit, y = after_stat(density)), binwidth = 1) +
-    ylab("Relative Häufigkeit")
+d_unistrasse |>
+  select(-Fahrtrichtung, -Abstand, -`Länge (Radar)`, -`Länge (cm)`) |>
+  gt_preview() |>
+  tab_source_note(
+    source_note = md("Daten bereitgestellt von Iris Mühlenbruch")
+  ) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
-Man kann sich nun aber vorstellen, die Messung der Geschwindigkeiten mit einer höheren Genauigkeit durchzuführen und dabei über einen längeren Zeitraum zu messen. Dann wäre es durchaus möglich, das Histogramm mit einer kleineren Klassenbreite zu erstellen, zum Beispiel 0.1 km/h. Damit nähert sich der Verlauf des Histogramms der kontinuierlichen Kurve an, die sich im Grenzübergang zu einer unendlich langen und gleichzeitig exakten Messung mit einer gegen Null gehenden Klassenbreite ergeben würde.
+Unten dargestellt ist das Histogramm der relativen Häufigkeiten der gemessenen Geschwindigkeiten, die Klassenbreite wurde dabei mit $\SI{2}{km/h}$ gewählt.
+
+```{r}
+ggplot(data = d_unistrasse) +
+  geom_histogram(
+    mapping = aes(x = Geschwindigkeit, y = after_stat(density)),
+    binwidth = 2
+  ) +
+  ylab("Relative Häufigkeit")
+```
+
+Man kann sich nun vorstellen, die Messung der Geschwindigkeiten mit einer höheren Genauigkeit durchzuführen und dabei über einen längeren Zeitraum zu messen. Dann wäre es durchaus möglich, das Histogramm mit einer kleineren Klassenbreite zu erstellen, zum Beispiel $\SI{0.1}{km/h}$. Damit nähert sich der Verlauf des Histogramms der kontinuierlichen Kurve an, die sich im Grenzübergang zu einer unendlich langen und gleichzeitig exakten Messung mit einer gegen Null gehenden Klassenbreite ergeben würde.
 :::
 
-## Dichtekurven {#sec-dichtekurven}
+## Dichtekurven
 
-Mit einer [Dichtekurve]{.neuerbegriff} wird dieser Grenzübergang vorweggenommen: Die Idee dabei ist es, das Histogramm durch eine kontinuierliche Funktion $f : R → R$ zu approximieren. Die zugehörige Dichtekurve $y = f(x)$ approximiert und glättet das Histogramm. Dabei gehen gegebenenfalls Details verloren. Dafür ergibt sich eine optisch klare Darstellung, die sich manchmal sogar mit einer einfachen Formel für die Zuordnungsvorschrift von $f$ angeben lässt.
+Mit einer [Dichtekurve]{.neuerbegriff} wird dieser Grenzübergang vorweggenommen: Die Idee dabei ist es, das Histogramm durch eine kontinuierliche Funktion $f : \mathbb{R} \to \mathbb{R}$ zu approximieren. Die zugehörige Dichtekurve $y = f(x)$ approximiert und glättet das Histogramm. Dabei gehen gegebenenfalls Details verloren. Dafür ergibt sich eine optisch klare Darstellung, die sich manchmal sogar mit einer einfachen Formel für die Zuordnungsvorschrift von $f$ angeben lässt.
 
 Um eine solche Funktion charakterisieren zu können, rufen wir uns nochmal die Eigenschaften des Histogramms der relativen Häufigkeiten in Erinnerung:
 
 1. Alle Rechtecke haben eine positive Höhe,
-2. die Fläche eines Rechtecks ist der Anteil der Werte, die in der entsprechenden Klasse liegen,
-3. die Summe der Rechtecksflächen ist demnach eins.
+1. die Fläche eines Rechtecks ist der Anteil der Werte, die in der entsprechenden Klasse liegen,
+1. die Summe der Rechtecksflächen ist demnach eins.
 
-Damit erhalten wir die folgende Definition:
+Diese Eigenschaften werden auf die Dichtekurve übertragen und es ergibt sich die folgende Definition:
 
 ::: definition
 **Definition: Dichtekurve** 
 
-Eine stetige Funktion $f : R → R$ heißt Dichtekurve, wenn für alle $x \in R$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
+Eine stetige Funktion $f : \mathbb{R} \to \mathbb{R}$ heißt Dichtekurve, wenn für alle $x \in \mathbb{R}$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
 
 $$
-\int_{-\infty}^{\infty} f(x)\, dx = 1
+  \int_{-\infty}^{\infty} f(x)\, dx = 1
 $$
+
 aufschreiben.
 :::
 
-
-::::: columns
-::: {.column width="30%"}
-
-![](00-bilder/dichtekurven-2-e.svg)
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="65%"}
-
-Links dargestellt ist ein Beispiel für eine solche Dichtekurve. Da die Dichtekurve eine Approximation des Histogramms ist, approximiert die Fläche unter dem Graphen von $f$ zwischen $a$ und $b$ den Flächeninhalt des Rechtecks. Daher gilt
+In @fig-dichtekurve dargestellt ist ein Beispiel für eine solche Dichtekurve. Da die Dichtekurve eine Approximation des Histogramms ist, approximiert die Fläche unter dem Graphen von $f$ zwischen $a$ und $b$ den Flächeninhalt des Rechtecks. Daher gilt
 
 $$
-\int_{a}^{b} f(x)\, dx \approx \text{Anteil der Werte in}  (a, b\,].
+\int_{a}^{b} f(x)\, dx \approx \text{Anteil der Werte zwischen $a$ und $b$}.
 $$
 
-:::
-:::::
+Dieser Zusammenhang gilt sogar, wenn das Intervall von $a$ bis $b$ nicht mit Klassengrenzen des Histogramms übereinstimmt. Das Integral über die Dichtekurve spielt in verwandter Form eine besonders wichtige Rolle in der Wahrscheinlichkeitstheorie.
 
-Dieser Zusammenhang gilt sogar, wenn das Intervall von $a$ bis $b$ nicht mit Klassengrenzen des Histogramms übereinstimmt. Dem Integral über die Dichtekurve werden wir in verwandter Form in der Wahrscheinlichkeitstheorie wieder begegnen, es hat dort eine besonders wichtige Bedeutung.
+```{r}
+#| label: fig-dichtekurve
+#| fig-cap: Dichtekurve
+
+fig_dichtekurve()
+```
 
 ### Quantile und Median
 
 Zwei Größen, die sich unmittelbar von Häufigkeitsverteilungen auf Dichtekurven übertragen lassen, sind die Quantile und der Median (vergleiche [@fig-dichtekurven-quantil]). Das $p$-Quantil $x_p$ mit $0 < p < 1$ teilt die Fläche unter der Dichtekurve in zwei Teilflächen mit den Flächeninhalten $p$ und $1 - p$. Der Median $x_\text{med}$ teilt die Dichtekurve in zwei Teilflächen mit einem Flächeninhalt von jeweils $1/2$.
 
-![Quantile und Median einer Dichtekurve](00-bilder/dichtekurven-quantil.svg){fig-align="center" width=80% #fig-dichtekurven-quantil}
+```{r}
+#| label: fig-dichtekurven-quantil
+#| fig-cap: Quantile und Median einer Dichtekurve
+
+p1 <- fig_quantile(1.1, TeX("$x_p$")) +
+  annotate(
+    "text",
+    x = 0.75,
+    y = 0.05,
+    label = TeX("$p$", output = "character"),
+    parse = T
+  ) +
+  annotate(
+    "text",
+    x = 2,
+    y = 0.05,
+    label = TeX("$1 - p$", output = "character"),
+    parse = T
+  )
+
+p2 <- fig_quantile(1.835, TeX("$x_{med}$")) +
+  annotate(
+    "text",
+    x = 1.1,
+    y = 0.05,
+    label = TeX("$1/2$", output = "character"),
+    parse = T
+  ) +
+  annotate(
+    "text",
+    x = 2.45,
+    y = 0.05,
+    label = TeX("$1/2$", output = "character"),
+    parse = T
+  )
+
+p1 + p2
+```
 
 ## Normalverteilung {#sec-normalverteilung}
 
-::::: columns
-::: {.column width="30%"}
-
-![](00-bilder/10_DM_Serie4_Vorderseite.jpg)
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="65%"}
-
 Eine besonders wichtige Klasse von Dichtekurven bilden die Normalverteilungen. Sie sind nach dem Mathematiker Carl Friedrich Gaus (1777 - 1855) benannt. Der Graph einer Normalverteilung wird häufig auch Gaußsche Glockenkurve genannt. Sie hat es sogar auf den 10-Mark-Schein geschafft.
 
-:::
-:::::
+![](00-bilder/10_DM_Serie4_Vorderseite.jpg){width="30%"}
+
+Definiert ist die Dichtekurve der Normalverteilung mithilfe der Exponentialfunktion.
 
 ::: definition
 **Definition: Dichtekurven von Normalverteilungen** 
 
-Für $\mu, \sigma \in R$ und
-$\sigma > 0$ ist die Dichte der Normalverteilung durch $$f(x) 
+Für $\mu, \sigma \in \mathbb{R}$ und $\sigma > 0$ ist die Dichte der Normalverteilung durch 
+
+$$
+  f(x) 
   =
   \frac{1}{\sigma \sqrt{2\pi}}
-  \exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)$$
-gegeben. Dabei heißt $\mu$ Mittelwert und $\sigma$ Standardabweichung
-der Verteilung.
+  \exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)
+$$
+
+gegeben. Dabei heißt $\mu$ Mittelwert und $\sigma$ Standardabweichung der Verteilung.
 :::
 
 ### Eigenschaften der Normalverteilung
 
-Die Form der [Normalverteilung]{.neuerbegriff} ergibt sich aus dem Faktor
-$\exp(-1/2 \, ((x-\mu)/\sigma)^2)$ der Funktionsgleichung. Da das
-Argument der Exponentialfunktion negativ ist, nimmt die Funktion $f$ an
-der Stelle $x = \mu$ ihr Maximum ein. Sie fällt von dort nach links und
-rechts ab und nähert sich für $|x|$ gegen $\infty$ der $x$-Achse an. Das
-geht umso schneller, je kleiner der Wert von $\sigma$ ist. Weiterhin
-kann man sich überlegen, dass $f$ in $x = \mu - \sigma$ und
-$x = \mu + \sigma$ jeweils eine Wendestelle besitzt.
+Die Form der [Normalverteilung]{.neuerbegriff} ergibt sich aus dem Faktor $\exp(-1/2 \, ((x-\mu)/\sigma)^2)$ der Funktionsgleichung. Da das Argument der Exponentialfunktion negativ ist, nimmt die Funktion $f$ an der Stelle $x = \mu$ ihr Maximum ein. Sie fällt von dort nach links und rechts ab und nähert sich für $|x|$ gegen $\infty$ der $x$-Achse an. Das geht umso schneller, je kleiner der Wert von $\sigma$ ist. Weiterhin kann man sich überlegen, dass $f$ in $x = \mu - \sigma$ und $x = \mu + \sigma$ jeweils eine Wendestelle besitzt, siehe @fig-normalverteilung.
 
+```{r}
+#| label: fig-normalverteilung
+#| fig-cap: Zwei Normalverteilungen
 
-![](00-bilder/normalverteilung.svg){fig-align="center" width=50%}
+fig_normalverteilung()
+```
 
-Der Vorfaktor $1 / (\sigma \sqrt{2\pi})$ in der Funktionsgleichung von
-$f$ sorgt dafür, dass die Fläche unter dem Graphen von $f$ gleich 1 ist.
-Interessanterweise besitzt die Normalverteilung keine Stammfunktion, so
-dass man numerisch integrieren muss (zum Glück gibt es Computer). Für
-die Anteile in bestimmten Intervallen um den Mittelwert $\mu$ gilt die
-folgende Regel:
+Der Vorfaktor $1 / (\sigma \sqrt{2\pi})$ in der Funktionsgleichung von $f$ sorgt dafür, dass die Fläche unter dem Graphen von $f$ gleich 1 ist. Interessanterweise besitzt die Normalverteilung keine Stammfunktion, so dass man numerisch integrieren muss (zum Glück gibt es Computer). Für die Anteile in bestimmten Intervallen um den Mittelwert $\mu$ gilt die folgende Regel:
 
-::: definition
-
-::::: columns
-::: {.column width="50%"}
-
-![](00-bilder/normalverteilung-prozentregel.svg){width=80%}
-:::
-
-::: {.column width="50%"}
+::::: definition
 
 Die **68-95-99.7** Regel\
 
 Von der Gesamtfläche unter der Dichtekurve liegen 
+
+:::: {.columns}
+::: {.column width=50%}
 $$
 \begin{aligned}
-    68\% & \quad \text{im Intervall} \quad \mu \pm \sigma \\
-    95\% & \quad \text{im Intervall} \quad \mu \pm 2\sigma \\
+    68\% & \quad \text{im Intervall} \quad \mu \pm \sigma \\[1em]
+    95\% & \quad \text{im Intervall} \quad \mu \pm 2\sigma \\[1em]
     99.7\% & \quad \text{im Intervall} \quad \mu \pm 3\sigma
 \end{aligned}
 $$
 :::
-:::::
-
+::: {.column width=50%}
+![](00-bilder/normalverteilung-prozentregel.svg){fig-align="right" width="90%"}
 :::
+::::
+:::::
 
 
 ### Standardnormalverteilung
 
-Eine Normalverteilung mit dem Mittelwert $\mu = 0$ und der
-Standardabweichung $\sigma = 1$ heißt [Standardnormalverteilung]{.neuerbegriff}. Die
-zugehörige Dichtekurve ist
-$$\phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).$$ Das
-Quantil $p$ zu einem Wert $z_p$ ist, so haben wir das oben vereinbart,
-die Fläche unter der Dichtekurve $\phi(z)$ links von $z_p$. Natürlich
-kann man nun für beliebige Werte von $z$ den zugehörigen Flächeninhalt
-unter der Dichtekurve links davon bestimmen. Dies führt auf die Funktion
-$\Phi$, die unten rechts dargestellt ist. Aufgrund der Symmetrie von
-$\phi(z)$ und weil die gesamte Fläche unter $\phi(z)$ gleich 1 ist, muss
-$\Phi(0) = 0.5$ gelten. Für $z$ gegen $\infty$ nähert sich der
-Funktionswert dem Wert 1 an. Natürlich verwenden wir zur Bestimmung von
-$\Phi$ die Integralrechnung, aber dazu später mehr. Für den Moment gehen
-wir einfach davon aus, dass es die Funktion gibt.
+Eine Normalverteilung mit dem Mittelwert $\mu = 0$ und der Standardabweichung $\sigma = 1$ heißt [Standardnormalverteilung]{.neuerbegriff}, siehe @fig-standardnormalverteilung. Die zugehörige Dichtekurve ist
 
+$$
+  \phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).
+$$ 
 
-![](00-bilder/standardnormalverteilung.svg)
+Das Quantil $p$ zu einem Wert $z_p$ ist, so haben wir das oben vereinbart, die Fläche unter der Dichtekurve $\phi(z)$ links von $z_p$. Natürlich kann man nun für beliebige Werte von $z$ den zugehörigen Flächeninhalt unter der Dichtekurve links davon bestimmen. Dies führt auf die Verteilungsfunktion $\Phi$, die unten rechts dargestellt ist. Aufgrund der Symmetrie von $\phi(z)$ und weil die gesamte Fläche unter $\phi(z)$ gleich 1 ist, muss $\Phi(0) = 0.5$ gelten. Für $z$ gegen $\infty$ nähert sich der Funktionswert dem Wert 1 an. Erstaunlich ist, dass sich die Stammfunktion $\Phi$ nicht geschlossen angeben lässt, in der Regel wird sie numerisch ausgewertet.
 
+```{r}
+#| label: fig-standardnormalverteilung
+#| fig-cap: "Standardnormalverteilung $\\phi$ und zugehörige Verteilungsfunktion $\\Phi$"
+
+fig_dnorm()
+```
 
 ### Normalverteilung anpassen
 
-Um nun einen vorliegenden Datensatz durch eine Normalverteilung zu
-approximieren, liegt es nahe den Mittelwert $\bar{x}$ und die empirische
-Standardabweichung $\tilde{s}$ der Verteilung in die Normalverteilung
-einzusetzen. Mit $\mu = \bar{x}$ und $\sigma = \tilde{s}$ ergibt sich damit
-eine Approximation der Verteilung. Warum das so ist, werden wir im
-Kapitel zur schließenden Statistik sehen.
+Um nun einen vorliegenden Datensatz durch eine Normalverteilung zu approximieren, liegt es nahe den Mittelwert $\bar{x}$ und die empirische Standardabweichung $\tilde{s}$ der Verteilung in die Normalverteilung einzusetzen. Mit $\mu = \bar{x}$ und $\sigma = \tilde{s}$ ergibt sich damit eine Approximation der Verteilung.
 
-Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die
-Kenngrößen 
+Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
+
+```{r}
+v = pull(d_unistrasse, Geschwindigkeit)
+mu = mean(v)
+sigma = sd(v)
+```
+
 $$
-\bar{x} = 52.54 km/h
-\quad \text{und} \quad
-\tilde{s} = 7.820 km/h.
+  \bar{x} = \SI{`r round(mu, 2)`}{km/h}
+  \quad \text{und} \quad
+  \tilde{s} = \SI{`r round(sigma, 3)`}{km/h}.
 $$ 
-Damit ergibt sich für die
-Dichtekurve die Funktionsgleichung
-$$f(x) = 0.05102 \cdot \exp \left(-0.008176 \left(x -52.54 \right)^2 \right).$$
-Für die Dichtekurve ergibt sich zusammen mit dem Histogramm folgendes
-Bild: 
 
-![](00-bilder/dichtekurven-normalverteilung-angepasst.svg){fig-align="center" width=70%}
+Damit ergibt sich für die Dichtekurve die Funktionsgleichung
 
+$$
+  f(x) = 
+  `r signif(1 / (sigma * sqrt(2 * pi)), 4)` 
+  \cdot 
+  \exp 
+  \left(
+    - 
+    `r signif(1 / (2 * sigma^2), 4)` 
+    \cdot
+    \left(
+      x - `r signif(mu, 4)` 
+    \right)^2 
+  \right).
+$$
 
-Es ist zu erkennen, dass die Normalverteilung den Verlauf des Histogramms
-zwar grob erfasst, insgesamt jedoch etwas breiter und dafür weniger hoch
-ausfällt. Offensichtlich lassen sich die gemessenen Geschwindigkeiten
-nur unzureichend mithilfe einer Normalverteilung abbilden. Um die Güte
-der Approximation besser beurteilen zu können, verwendet man so genannte
-Normal-Quantil-Plots.
+Für die Dichtekurve ergibt sich zusammen mit dem Histogramm das in @fig-normalverteilung-angepasst dargestellte Bild. Es ist zu erkennen, dass die Normalverteilung den Verlauf des Histogramms zwar grob erfasst, insgesamt jedoch etwas breiter und dafür weniger hoch ausfällt. Offensichtlich lassen sich die gemessenen Geschwindigkeiten nur unzureichend mithilfe einer Normalverteilung abbilden. Um die Güte der Approximation besser beurteilen zu können, verwendet man so genannte Normal-Quantil-Plots.
+
+```{r}
+#| label: fig-normalverteilung-angepasst
+#| fig-cap: An Geschwindigkeitsmessung angepasste Normalverteilung
+ggplot(data = d_unistrasse) +
+  geom_histogram(
+    mapping = aes(x = Geschwindigkeit, y = after_stat(density)),
+    binwidth = 1
+  ) +
+  geom_function(
+    fun = dnorm,
+    args = list(mean = mu, sd = sigma),
+    color = "red",
+    linewidth = 1
+  ) +
+  ylab("Relative Häufigkeit")
+```
 
 ## Normal-Quantil-Plots
 
-Für den zu einem empirisch erhobenen Merkmal $X$ gehen wir wieder von
-der geordneten Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ aus. Da die
-Liste geordnet ist, sind für den Wert $x_{(i)}$ genau $i$ Werte kleiner
-oder gleich groß. Somit ist $x_{(i)}$ nichts anderes als das
-$i/n$-Quantil der Verteilung. Zu diesem $i/n$-Quantil bestimmt man nun
-den Wert $z_i$ als zugehöriges Quantil der Standardnormalverteilung.
-Diese Wertepaare werden als Punkte in einem $zx$-Koordinatensystem
-aufgetragen. Dabei muss man ein bisschen aufpassen: Das 1-Quantil der
-Standardnormalverteilung liegt im Unendlichen, für den letzten Wert
-$x_n$ würden wir daher keinen zugehörigen Werte $z_n$ auftragen können.
-Daher werden die Quantile der Standardnormalverteilung nicht für $i/n$
-sondern für $(i - 0.5)/n$ berechnet (Stetigkeitskorrektur). Die gesamte
-Vorgehensweise ist in @fig-nq-plot bildhaft erläutert.
+Für den zu einem empirisch erhobenen Merkmal $X$ gehen wir wieder von der geordneten Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ aus. Da die Liste geordnet ist, sind für den Wert $x_{(i)}$ genau $i$ Werte kleiner oder gleich groß. Somit ist $x_{(i)}$ nichts anderes als das $i/n$-Quantil der Verteilung. Zu diesem $i/n$-Quantil bestimmt man nun den Wert $z_i$ als zugehöriges Quantil der Standardnormalverteilung. Diese Wertepaare werden als Punkte in einem $zx$-Koordinatensystem aufgetragen. Dabei muss man ein bisschen aufpassen: Das 1-Quantil der Standardnormalverteilung liegt im Unendlichen, für den letzten Wert $x_n$ würden wir daher keinen zugehörigen Werte $z_n$ auftragen können. Daher werden die Quantile der Standardnormalverteilung nicht für $i/n$ sondern für $(i - 0.5)/n$ berechnet (Stetigkeitskorrektur). Die gesamte Vorgehensweise ist in @fig-nq-plot bildhaft erläutert.
 
-Mit dem Normal-Quantil-Plot wird also veranschaulicht, inwieweit die
-Verteilung eines Merkmals mit der theoretischen Standardnormalverteilung
-übereinstimmt. Je besser die Verteilungen übereinstimmen, desto näher
-liegen die Punkte $(z_{(i)}, x_{(i)})$ an der Geraden
-$x = \bar{x}+ \tilde{s} \cdot z$. Für vier verschiedene Merkmale ist dieser
-Zusammenhang in dargestellt.
+```{r}
+#| fig-asp: 1
+#| label: fig-nq-plot
+#| fig-cap: "Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte, die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen. Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte im Normal-Quantil-Plot"
 
-![Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte, die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen. Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte im Normal-Quantil-Plot.](00-bilder/nq-plot.svg){fig-align="center" #fig-nq-plot}
+fig_nq_plot()
+```
 
-![](00-bilder/nq-beispiel-verteilungen.svg)
+Mit dem Normal-Quantil-Plot wird also veranschaulicht, inwieweit die Verteilung eines Merkmals mit der theoretischen Standardnormalverteilung übereinstimmt. Je besser die Verteilungen übereinstimmen, desto näher liegen die Punkte $(z_{(i)}, x_{(i)})$ an der Geraden $x = \bar{x}+ \tilde{s} \cdot z$. Für vier verschiedene Merkmale ist dieser  Zusammenhang in @fig-nq-beispiel-plots dargestellt.
 
-![Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden, für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot.](00-bilder/nq-beispiel-plots.svg){#fig-nq-beispiel-plots}
+```{r}
+#| fig-asp: 1.5
+#| label: fig-nq-beispiel-plots
+#| fig-cap: "Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden, für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot"
 
-[]{.down80}
+d <- d_nq_examples()
 
-Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die
-Normalverteilung nur eine unzureichende Approximation der wirklichen
-Verteilung dar. Das sieht man auch an dem NQ-Plot:
+p1 <- ggplot(data = d) +
+  geom_histogram(
+    mapping = aes(x = wert, y = after_stat(density), fill = verteilung),
+    binwidth = 0.25,
+    boundary = 0
+  ) +
+  facet_wrap(
+    ~verteilung,
+    ncol = 2
+  ) +
+  labs(
+    title = "Verteilungen",
+    x = "Beobachtung",
+    y = "Relative Häufigkeit"
+  ) +
+  theme(
+    legend.position = "none"
+  )
 
+p2 <- ggplot(data = d, mapping = aes(sample = wert, color = verteilung)) +
+  geom_qq_line(
+    color = "black"
+  ) +
+  geom_qq() +
+  facet_wrap(
+    ~verteilung,
+    ncol = 2
+  ) +
+  labs(
+    title = "Normal-Quantil-Plots",
+    x = "Beobachtung",
+    y = "Theoretischer Wert"
+  ) +
+  theme(
+    legend.position = "none"
+  )
 
-![](00-bilder/dichtekurven-normalverteilung-nq.png){fig-align="center" width=60%}
+p1 / p2
+```
 
-Da die wirkliche Verteilung deutlich steiler ist als die angepasste
-Normalverteilung ergibt sich der hierfür charakteristische Verlauf der
-Punkte: Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb.
+Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
 
+```{r}
+#| label: fig-unistrasse-nq
+#| fig-cap: "Da die wirkliche Verteilung deutlich steiler ist als die angepasste Normalverteilung (@fig-normalverteilung-angepasst) ergibt sich der hierfür charakteristische Verlauf der Punkte: Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb."
+
+ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
+  geom_qq_line() +
+  geom_qq() +
+  labs(x = "Theoretischer Wert", y = "Geschwindigkeit")
+```
 
 ## Approximation von Dichtekurven {#sec-approximation-dichtekurven}
 
-Häufig lässt sich die Verteilung eines Merkmals nicht sinnvoll durch
-eine Normalverteilung darstellen. Allerdings ist es für eine
-kontinuierliche Variable trotzdem häufig wünschenswert, die Verteilung
-durch eine Dichtekurve darzustellen. Hierfür sprechen folgende Gründe:
+Häufig lässt sich die Verteilung eines Merkmals nicht sinnvoll durch eine Normalverteilung darstellen. Allerdings ist es für eine kontinuierliche Variable trotzdem häufig wünschenswert, die Verteilung durch eine Dichtekurve darzustellen. Hierfür sprechen folgende Gründe:
 
-- Die willkürlich zu wählende Klassenbreite beeinflusst den optischen
-  Eindruck
-
+- Die willkürlich zu wählende Klassenbreite beeinflusst den optischen Eindruck
 - Der Verlauf eines Histogramms kann sehr unregelmäßig sein
+- Eine eigentlich stetige Funktion wird durch eine Treppenkurve dargestellt
 
-- Eine eigentlich stetige Funktion wird durch eine Treppenkurve
-  dargestellt
+Diese Nachteile lassen sich vermeiden, wenn man die Dichtekurve geeignet durch eine stetige Funktion approximiert.
 
-Diese Nachteile lassen sich vermeiden, wenn man die Dichtekurve geeignet
-durch eine stetige Funktion approximiert.
-
-Die Idee dabei ist es, eine Kernfunktion $K : R \to R$ zu definieren
-und diesen Kern über die Datenpunkte zu schieben. An jeder Stelle $x$
-werden die Längen der Linien von den Werten $x_i$ bis zur Kernfunktion
-addiert und durch die Anzahl der Werte $n$ geteilt (siehe @fig-approximation-dichtekurve).
+Die Idee dabei ist es, eine Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ zu definieren und diesen Kern über die Datenpunkte zu schieben. An jeder Stelle $x$ werden die Längen der Linien von den Werten $x_i$ bis zur Kernfunktion addiert und durch die Anzahl der Werte $n$ geteilt (siehe @fig-approximation-dichtekurve).
 
 
-####
 
 ![Approximation einer Dichtekurve](00-bilder/approximation-dichtekurve.svg){#fig-approximation-dichtekurve}
 
-[]{.down60}
-
-Am gebräuchlichsten sind die Kerne
-
-::::: columns
-::: {.column width="30%"}
-
-![](00-bilder/k1.svg)
-Epanechikov-Kern
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="30%"}
-
-![](00-bilder/k2.svg)
-Bisquare-Kern
-
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="30%"}
-
-![](00-bilder/k3.svg)
-Gauß-Kern
-
-:::
-:::::
-
-mit den zugehörigen Funktionsgleichungen 
+Am gebräuchlichsten Kerne mit den Funktionsgleichungen 
 
 $$
   \begin{aligned}
       K(u)
       & = 
         \begin{cases}
-          \displaystyle \frac{3}{4}(1 - u)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
+          \displaystyle \frac{3}{4}(1 - u^2) & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
           0 & \text{sonst}
         \end{cases}
-      && \text{Epachenikov-Kern} 
+      && \text{Epachenikov-Kern,} 
       \\[1em]
       K(u)
       & =
@@ -329,24 +358,59 @@ $$
           0 & \text{sonst}
         \end{cases}    
       && 
-      \text{Bisquare-Kern} 
+      \text{Bisquare-Kern,} 
       \\[1em]
       K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
       && 
-      \text{Gauß-Kern}
+      \text{Gauß-Kern.}
   \end{aligned}
 $$ 
 
-Für alle Kerne gilt, dass die vom zugehörigen Graphen
-überdeckte Fläche gleich 1 ist. Damit können wir den sogenannten
-Kern-Dichteschätzer definieren.
+Eine Darstellung der Graphen der Kernfunktionen ist in @fig-kernfunktionen zu sehen.
+
+```{r}
+#| fig-asp: 0.4
+#| label: fig-kernfunktionen
+#| fig-cap: "Gebräuchliche Kernfunktionen"
+
+k_epachenikov <- function(u) ifelse(-1 <= u & u <= 1, 0.75 * (1 - u^2), 0)
+k_bisquare <- function(u) ifelse(-1 <= u & u <= 1, 15 / 16 * (1 - u^2)^2, 0)
+k_gauss <- function(u) 1 / sqrt(2 * pi) * exp(-u^2 / 2)
+
+p1 <- ggplot() +
+  geom_function(fun = k_epachenikov) +
+  labs(title = "Epachenikov-Kern")
+p2 <- ggplot() +
+  geom_function(fun = k_bisquare) +
+  labs(title = "Bisquare-Kern")
+p3 <- ggplot() +
+  geom_function(fun = k_gauss) +
+  labs(title = "Gauß-Kern")
+
+p1 +
+  p2 +
+  p3 +
+  plot_layout(axes = "collect") &
+  scale_x_continuous(minor_breaks = NULL, limits = c(-3, 3)) &
+  scale_y_continuous(
+    breaks = c(0, 0.5, 1),
+    minor_breaks = NULL,
+    limits = c(0, 1)
+  ) &
+  labs(x = NULL, y = NULL)
+```
+
+Für alle Kerne gilt, dass die vom zugehörigen Graphen überdeckte Fläche gleich 1 ist. Damit können wir den sogenannten Kern-Dichteschätzer definieren.
 
 ::: definition
 **Definition: Kern-Dichteschätzer**
 
-Zu einer Kernfunktion $K : R \to R$, gegebenen
-Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : R \to R$ mit
-$$\hat f(x) = \frac{1}{nh} \sum_{i=1}^n  K \left(\frac{x - x_i}{h}\right)$$
-ein [Kern-Dichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die
-Breite des Kerns fest.
+Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$, gegebenen
+Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
+
+$$
+  \hat f(x) = \frac{1}{nh} \sum_{i=1}^n  K \left(\frac{x - x_i}{h}\right)
+$$
+
+ein [Kern-Dichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die Breite des Kerns fest.
 :::
