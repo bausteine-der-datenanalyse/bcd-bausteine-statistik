@@ -11,3 +11,5 @@ m-*/**/*.md
 m-*/**/*.rmarkdown
 **/*.quarto_ipynb
 *_files
+xxx.R
+tmp*tex

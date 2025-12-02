@@ -64,6 +64,18 @@ d_nq_examples <- function() {
     )
 }
 
+fig_unistrasse <- function() {
+  ggplot(data = d_unistrasse) +
+    geom_histogram(
+      mapping = aes(x = Geschwindigkeit, y = after_stat(density)),
+      binwidth = 2,
+      boundary = 1,
+      closed = "left"
+    ) +
+    scale_x_continuous(breaks = c(25, 50, 75, 100)) +
+    ylab("Relative Häufigkeit")
+}
+
 fig_dichtekurve <- function() {
   set.seed(105)
 
@@ -211,8 +223,56 @@ fig_normalverteilung <- function() {
     labs(x = NULL, y = NULL)
 }
 
-fig_dnorm <- function() {
-  zp <- -0.55
+fig_normalverteilung_prozentregel <- function() {
+  ggplot() +
+    stat_function(
+      fun = dnorm,
+      geom = "area",
+      fill = "blue",
+      alpha = 1 / 3,
+      xlim = c(-1, 1)
+    ) +
+    stat_function(
+      fun = dnorm,
+      geom = "area",
+      fill = "red",
+      alpha = 1 / 3,
+      xlim = c(-2, 2)
+    ) +
+    stat_function(
+      fun = dnorm,
+      geom = "area",
+      fill = "yellow",
+      alpha = 1 / 3,
+      xlim = c(-3, 3)
+    ) +
+    annotate(
+      "segment",
+      x = c(-3, -2, -1, 1, 2, 3),
+      y = 0,
+      yend = dnorm(c(-3, -2, -1, 1, 2, 3)),
+      linewidth = 0.25
+    ) +
+    geom_function(fun = dnorm, xlim = c(-3.5, 3.5), linewidth = 1) +
+    scale_x_continuous(
+      breaks = -3:3,
+      labels = TeX(c(
+        "$-3\\sigma$",
+        "$-2\\sigma",
+        "$-\\sigma$",
+        "$\\mu$",
+        "\\sigma",
+        "2\\sigma",
+        "3\\sigma"
+      )),
+      minor_breaks = NULL
+    ) +
+    scale_y_continuous(breaks = NULL) +
+    labs(x = NULL, y = NULL)
+}
+
+fig_standardnormalverteilung <- function() {
+  zp <- -0.3
   w2 <- 2.5
 
   p1 <- ggplot() +
@@ -225,6 +285,13 @@ fig_dnorm <- function() {
     geom_function(
       fun = dnorm,
       linewidth = 1
+    ) +
+    draw_coordinate_system(
+      0,
+      0,
+      w2,
+      0.43,
+      -w2
     ) +
     annotate(
       "point",
@@ -243,8 +310,8 @@ fig_dnorm <- function() {
       label = TeX("$p = \\Phi(z_p$)$", output = "character"),
       parse = TRUE,
       x = zp,
-      y = 0.025,
-      hjust = -0.1
+      y = 0.03,
+      hjust = 1.1
     ) +
     annotate(
       "text",
@@ -265,6 +332,13 @@ fig_dnorm <- function() {
     geom_function(
       fun = pnorm,
       linewidth = 1
+    ) +
+    draw_coordinate_system(
+      0,
+      0,
+      w2,
+      1,
+      -w2
     ) +
     annotate(
       "text",
