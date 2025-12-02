@@ -74,7 +74,6 @@ ggplot(
   geom_rug()
 ```
 
-
 #### Lebenserwartung
 
 In den folgenden Plots ist die mittlere Lebenserwartung über

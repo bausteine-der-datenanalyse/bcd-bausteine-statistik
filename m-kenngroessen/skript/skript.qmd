@@ -4,6 +4,9 @@ source("../../bcd-setup.R")
 source("01-daten/kenngroessen.R")
 ```
 
+\newcommand{\SI}[2]{#1\,\mathrm{#2}}
+\newcommand{\si}[1]{\mathrm{#1}}
+
 # Kenngrößen und Beschreibung von Verteilungen
 
 ## Lagemaße {#sec-lagemaße}
@@ -469,9 +472,6 @@ Als letztes Lagemaß betrachten wir das harmonische Mittel. Es wird verwendet, w
 
 ::: beispiel
 **Beispiel Autofahrt:**
-
-\newcommand{\SI}[2]{#1\,\mathrm{#2}}
-\newcommand{\si}[1]{\mathrm{#1}}
 
 Bei einer Autofahrt werden zunächst $\SI{10}{km}$ mit einer Geschwindigkeit von $\SI{50}{km/h}$ zurückgelegt, danach weitere $\SI{60}{km}$ bei $\SI{110}{km/h}$. Wie groß ist die Durchschnittsgeschwindigkeit?
 
