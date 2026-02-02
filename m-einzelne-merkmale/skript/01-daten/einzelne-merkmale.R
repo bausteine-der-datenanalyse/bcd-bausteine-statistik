@@ -2,9 +2,12 @@ library(readxl)
 library(tidyverse)
 
 # Daten Energieträger
-
 import_energietrager <- function(range) {
-    read_excel("01-daten/energiedaten-gesamt-xls.xlsx", sheet = "4", range = range) |>
+    read_excel(
+        "01-daten/energiedaten-gesamt-xls.xlsx",
+        sheet = "4",
+        range = range
+    ) |>
         mutate(
             Energieträger = case_match(
                 Energieträger,
@@ -16,7 +19,11 @@ import_energietrager <- function(range) {
             Energieträger = factor(Energieträger, levels = Energieträger)
         ) |>
         filter(Energieträger != "Außenhandelssaldo Strom") |>
-        pivot_longer(cols = !Energieträger, names_to = "Jahr", values_to = "Wert")
+        pivot_longer(
+            cols = !Energieträger,
+            names_to = "Jahr",
+            values_to = "Wert"
+        )
 }
 
 d_energietraeger_pj <- import_energietrager("A8:AC17")
@@ -24,8 +31,14 @@ d_energietraeger_anteil <- import_energietrager("A21:AC30")
 d_energietraeger_anteil_2017 <- d_energietraeger_anteil |> filter(Jahr == 2017)
 
 c_energietraeger <- c(
-    "#107aa1", "#686868", "#a63910", "#fbd941",
-    "#dd326e", "#98dedd", "#5eab3c", "#98bade"
+    "#107aa1",
+    "#686868",
+    "#a63910",
+    "#fbd941",
+    "#dd326e",
+    "#98dedd",
+    "#5eab3c",
+    "#98bade"
 )
 
 
@@ -33,12 +46,18 @@ c_energietraeger <- c(
 
 d_pob_1 <- tibble(N = rev(c("A", "B", "C", "D")), W = c(16, 17.5, 19, 21.5))
 d_pob_2 <- tibble(N = rev(c("A", "B", "C", "D")), W = c(19, 17.5, 21.5, 16))
-d_pob_3 <- tibble(N = rev(c("A", "B", "C", "D")), W = rev(c(16, 17.5, 19, 21.5)))
+d_pob_3 <- tibble(
+    N = rev(c("A", "B", "C", "D")),
+    W = rev(c(16, 17.5, 19, 21.5))
+)
 
 plot_pob_pie <- function(d) {
     pos <- cumsum(d$W) - d$W / 2
     ggplot(data = d) +
-        geom_col(mapping = aes(x = factor(1), y = W, fill = N), show.legend = FALSE) +
+        geom_col(
+            mapping = aes(x = factor(1), y = W, fill = N),
+            show.legend = FALSE
+        ) +
         geom_text(aes(x = factor(1), y = pos, label = N)) +
         coord_polar(theta = "y") +
         scale_fill_brewer("Paired") +
@@ -56,14 +75,25 @@ plot_pob_bar <- function(d) {
 
 # Daten Beispiel Klausur
 
+# XXX
 d_klausur <- read_excel("01-daten/Klausurergebnis_Mathe2_SoSe2018.xls") |>
     mutate(prozente_g = round(prozente_g, 2))
-
-d_klausur_bestanden <- mutate(d_klausur,
+d_klausur_bestanden <- mutate(
+    d_klausur,
     prozente_g = round(prozente_g),
     b = prozente_g >= 50
 )
 
+d_klausur_m2 <-
+    read_excel(
+        "01-daten/Klausurergebnis_Mathe2_SoSe2018.xls"
+    ) |>
+    mutate(
+        note_dezimal = round(prozente_g, 2),
+        note_ganz = round(prozente_g),
+        bestanden = note_ganz >= 50
+    ) |>
+    select(note_dezimal, note_ganz, bestanden)
 
 # Plot charakterisierung von Verteilungen
 
