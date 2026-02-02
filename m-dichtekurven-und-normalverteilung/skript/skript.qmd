@@ -47,15 +47,12 @@ Um eine solche Funktion charakterisieren zu können, rufen wir uns nochmal die E
 
 Diese Eigenschaften werden auf die Dichtekurve übertragen und es ergibt sich die folgende Definition:
 
-::: definition
-**Definition: Dichtekurve** 
-
+::: {#def-dichtekurve}
+## Dichtekurve
 Eine stetige Funktion $f : \mathbb{R} \to \mathbb{R}$ heißt Dichtekurve, wenn für alle $x \in \mathbb{R}$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
-
 $$
   \int_{-\infty}^{\infty} f(x)\, dx = 1
 $$
-
 aufschreiben.
 :::
 
@@ -127,18 +124,15 @@ Eine besonders wichtige Klasse von Dichtekurven bilden die Normalverteilungen. S
 
 Definiert ist die Dichtekurve der Normalverteilung mithilfe der Exponentialfunktion.
 
-::: definition
-**Definition: Dichtekurven von Normalverteilungen** 
-
+::: {#def-dichtekurve}
+## Dichtekurven von Normalverteilungen
 Für $\mu, \sigma \in \mathbb{R}$ und $\sigma > 0$ ist die Dichte der Normalverteilung durch 
-
 $$
   f(x) 
   =
   \frac{1}{\sigma \sqrt{2\pi}}
   \exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)
 $$
-
 gegeben. Dabei heißt $\mu$ Mittelwert und $\sigma$ Standardabweichung der Verteilung.
 :::
 
@@ -324,11 +318,15 @@ Häufig lässt sich die Verteilung eines Merkmals nicht sinnvoll durch eine Norm
 
 Diese Nachteile lassen sich vermeiden, wenn man die Dichtekurve geeignet durch eine stetige Funktion approximiert.
 
-Die Idee dabei ist es, eine Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ zu definieren und diesen Kern über die Datenpunkte zu schieben. An jeder Stelle $x$ werden die Längen der Linien von den Werten $x_i$ bis zur Kernfunktion addiert und durch die Anzahl der Werte $n$ geteilt (siehe @fig-approximation-dichtekurve).
+Ausgangspunkt hierfür ist eine Kernfunktion $K : \mathbb{R} \to \mathbb{R}$, mit den Eigenschaften einer Dichtekurve, siehe @def-dichtekurve. Diese Kernfunktion wird über die Datenpunkte geschoben und dabei die Längen der Linien von den Beobachtungen $x_i$ bis zum Graphen der Kernfunktion bestimmt. Die Summe der Längen geteilt durch die Anzahl der Werte $n$ ist der Funktionswert der approximierten Dichtekurve (siehe @fig-approximation-dichtekurve).
 
-![Approximation einer Dichtekurve](00-bilder/approximation-dichtekurve.svg){#fig-approximation-dichtekurve width="85%"}
+```{r}
+#| label: fig-approximation-dichtekurve
+#| fig-cap: "Approximation einer Dichtekurve"
+fig_kerndichteschaetzer()
+```
 
-Am gebräuchlichsten Kerne mit den Funktionsgleichungen 
+Gebräuchlich sind die Kerne mit den Funktionsgleichungen 
 
 $$
   \begin{aligned}
@@ -389,17 +387,14 @@ p1 +
   labs(x = NULL, y = NULL)
 ```
 
-Für alle Kerne gilt, dass die vom zugehörigen Graphen überdeckte Fläche gleich 1 ist. Damit können wir den sogenannten Kern-Dichteschätzer definieren.
+Damit können wir den sogenannten Kerndichteschätzer definieren.
 
-::: definition
-**Definition: Kern-Dichteschätzer**
-
-Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$, gegebenen
+::: {#def-kerndichteschaetzer}
+## Kerndichteschätzer
+Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ und gegebenen
 Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
-
 $$
   \hat f(x) = \frac{1}{nh} \sum_{i=1}^n  K \left(\frac{x - x_i}{h}\right)
 $$
-
-ein [Kern-Dichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die Breite des Kerns fest.
+ein [Kerndichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die Breite des Kerns fest. Da $K$ eine Dichtekurve ist lässt sich leicht zeigen, dass $\hat f$ ebenfalls eine Dichtekurve sein muss.
 :::

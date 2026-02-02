@@ -438,7 +438,7 @@ fig_nq_plot <- function() {
       y = yp[4],
       label = "Theoretische \nVerteilungsfunktion",
       hjust = 0,
-      vjust = 1
+      vjust = 1.1
     ) +
     annotate(
       "text",
@@ -454,7 +454,7 @@ fig_nq_plot <- function() {
       y = yp[3] + 1,
       label = TeX("$\\Phi(z)$", output = "character"),
       hjust = 0,
-      vjust = 1,
+      vjust = 1.1,
       parse = TRUE
     ) +
 
@@ -552,8 +552,8 @@ fig_nq_plot <- function() {
 
     # Adjustments
     scale_x_continuous(
-      breaks = c(0, xp[3], xp[4]),
-      labels = c(0, 0, 1),
+      breaks = c(xp[3], xp[4]),
+      labels = c(0, 1),
       minor_breaks = NULL
     ) +
     scale_y_continuous(
@@ -563,4 +563,103 @@ fig_nq_plot <- function() {
     ) +
     labs(x = NULL, y = NULL) +
     coord_fixed()
+}
+
+fig_kerndichteschaetzer <- function() {
+  set.seed(10)
+
+  n <- 35
+  h <- 3 / 4
+  xs <- -1.73
+
+  d <- tibble(
+    x = sample_in(rnorm, n, -2.5, 2.5)
+  )
+
+  K <- \(u) if_else(abs(u) <= 1, 0.75 * (1 - u^2), 0)
+  Ks <- \(x) 1 / h * K((x - xs) / h)
+  fhat <- Vectorize(\(x) 1 / (n * h) * sum(K((x - pull(d, x)) / h)))
+
+  d2 <- d |>
+    mutate(y = Ks(x)) |>
+    filter(y > 0)
+
+  ggplot(data = d, aes(x = x)) +
+    draw_coordinate_system(
+      -3,
+      0,
+      3,
+      1.05,
+      arrowlength = 0.02,
+      linewidth = 0.55
+    ) +
+    geom_histogram(
+      mapping = aes(y = after_stat(density)),
+      binwidth = 0.4,
+      center = 0,
+      fill = 'wheat'
+    ) +
+    geom_segment(
+      data = d2,
+      mapping = aes(x = x, y = 0, yend = y),
+      color = 'chartreuse3'
+    ) +
+    annotate(
+      geom = 'segment',
+      x = xs,
+      y = 0,
+      yend = fhat(xs),
+      color = 'red',
+      linewidth = 1
+    ) +
+    annotate(
+      geom = 'segment',
+      x = xs,
+      y = 0,
+      yend = Ks(xs),
+      color = 'red',
+      linewidth = 0.25
+    ) +
+    geom_function(
+      fun = Ks,
+      color = 'steelblue',
+      linewidth = 1,
+      xlim = c(-3, 2.5),
+      n = 500
+    ) +
+    geom_function(
+      fun = fhat,
+      color = 'red',
+      linewidth = 1,
+      xlim = c(-3, 2.5),
+      n = 500
+    ) +
+    geom_point(
+      mapping = aes(y = 0),
+      size = 2.5
+    ) +
+    annotate(
+      geom = 'text',
+      x = xs,
+      y = 0,
+      label = "x",
+      parse = TRUE,
+      vjust = 1.5
+    ) +
+    annotate(
+      geom = 'text',
+      x = 1.5,
+      y = fhat(1.5),
+      label = TeX(r"($\hat{f}(x)$)"),
+      parse = TRUE,
+      vjust = -1.3
+    ) +
+    annotate(
+      geom = 'text',
+      x = -1.4,
+      y = 0.9,
+      label = "Kernfunktion K für die Stelle x",
+      hjust = 0,
+    ) +
+    theme_void()
 }
