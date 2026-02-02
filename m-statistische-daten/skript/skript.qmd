@@ -286,8 +286,8 @@ Für die Auswertung in einem Computerprogramm spielen diese Fragen keine Rolle. 
 
 Eine Größe, für die man sich in einer statistischen Untersuchung interessiert, heißt [Merkmal]{.neuerbegriff} oder auch [Variable]{.neuerbegriff}. Manchmal betrachtet man nur ein einzelnes Merkmal (wie etwa den Abfluss des Pegels), in der Regel werden jedoch für eine einzelne statistische Einheit mehrere Merkmale erhoben. Die Merkmale können dabei für jede statistische Einheit unterschiedliche [Werte]{.neuerbegriff} annehmen (klar, sonst müsste man sie ja nicht erheben). Diese Werte werden auch [Merkmalsausprägungen]{.neuerbegriff} oder kurz [Ausprägungen]{.neuerbegriff} genannt.
 
-::: definition
-**Definition: Statistische Grundbegriffe**
+::: {#def-statistische-grundbegriffe}
+## Statistische Grundbegriffe
 
 Statistische Einheiten:
 : Objekte, an denen interessierende Größen erfasst werden
@@ -380,8 +380,8 @@ Anmerkung: Es gibt auch Merkmale, die weder qualitativ noch quantitativ sind, zu
 
 In der Folgenden Definition sind die Arten von Merkmalen nochmals kompakt zusammengefasst.
 
-::: definition
-**Definition: Arten von Merkmalen**
+::: {#def-arten-von-merkmalen}
+## Arten von Merkmalen
 
 Diskret:
 : endlich oder abzählbar unendlich viele Ausprägungen

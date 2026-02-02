@@ -18,8 +18,8 @@ Um die Häufigkeitsverteilung zu bestimmen, muss zunächst geschaut werden, welc
 
 Als absolute Häufigkeit der Ausprägung $a_j$ bezeichnen wir nun die Anzahl der Werte aus der Urliste $x_1, x_2, \dots, x_n$, die mit $a_j$ übereinstimmen. Wird die absolute Häufigkeit durch den Stichprobenumfang $n$ geteilt, dann ergibt sich die relative Häufigkeit.
 
-::: definition
-**Definition: absolute und relative Häufigkeit** 
+::: {#def-absolute-und-relative-häufigkeit}
+## Absolute und relative Häufigkeit
 
 Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir die Bezeichnungen
 
@@ -97,8 +97,8 @@ free(p1 + p2 + plot_layout(axes = "collect")) /
 
 Die Eigenschaften der Diagramme sind in der folgenden Definition zusammengefasst.
 
-::: definition
-**Definition: Diagrammtypen**
+::: {#def-diagrammtypen}
+## Diagrammtypen
 
 Stabdiagramm:
 : Zahlenwerte für $h_1, h_2, \dots, h_n$ (oder $f_1, f_2, \dots, f_n$) werden mit einem senkrechten Strich angetragen.

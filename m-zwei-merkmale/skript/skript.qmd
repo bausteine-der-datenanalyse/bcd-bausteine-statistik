@@ -50,8 +50,8 @@ Welcher dieser Indikatoren hängt am stärksten mit der Lebenserwartung zusammen
 
 Die einfachste Möglichkeit zwei gemeinsame Messwerte $(x_i, y_i), i = 1, \dots, n$ darzustellen ist das so genannte Streudiagramm, das gegebenenfalls zu einem Blasendiagramm erweitert werden kann.
 
-::: definition
-**Definition: Streudiagramm**
+::: {#def-streudiagramm}
+## Streudiagramm
 
 Die Darstellung der Wertepaare $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ durch geometrische Objekte (Punkte, Kreise) in einem $xy$-Koordinatensystem heißt [Streudiagramm]{.neuerbegriff}. Werden die Symbole nach einem dritten Merkmal skaliert, dann spricht man von einem [Blasendiagramm]{.neuerbegriff}.
 :::
@@ -234,8 +234,8 @@ $$
   
 den wir nochmal formal festhalten wollen.
 
-::: definition
-**Definition: Bravais-Pearson-Korrelationskoeffizient**
+::: {#def-korrelationskoeffizient}
+## Bravais-Pearson-Korrelationskoeffizient
 
 Für die Werte $(x_i, y_i), i = 1, \dots, n$ heißt die Zahl 
 
@@ -290,7 +290,7 @@ Die Webseite <http://tylervigen.com> (mittlerweile auch als Buch erhältlich) ve
 
 Wir merken uns daher:
 
-::: definition
+::: {rem-korrelation-ungleich-kausalität}
 $$
   \text{Korrelation} \quad \neq \quad \text{Kausalität}
 $$
@@ -472,8 +472,8 @@ $$
 
 verwendet, die sich in einer einfachen Nebenrechnung nachweisen lassen. Zusammengefasst ergibt sich folgende Definition.
 
-::: definition
-**Definition: Lineare Regression und Kleinste-Quadrate-Schätzer**
+::: {#def-lineare-regression}
+## Lineare Regression und Kleinste-Quadrate-Schätzer
 
 Für die Werte $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ heißt der Zusammenhang
 
@@ -552,8 +552,8 @@ Zu den vier Datensätzen halten wir fest:
 
 Um die Güte des linearen Modells zu beurteilen, untersucht man, wie die Werte auf der Ausgleichsgeraden $\hat y_i = \hat \alpha + \hat \beta x_i$ und die ursprünglichen Werte $y_i$ um den Mittelwert $\bar{y}$ herum streuen. Hierzu werden die Differenzen zum Mittelwert quadriert und aufsummiert. Der Quotient aus den beiden Quadratsummen ist das so genannte Bestimmtheitsmaß. Je näher die Punkte an der Ausgleichsgeraden liegen, umso mehr stimmen die beiden Differenzen überein. Liegen alle Punkte exakt auf der Ausgleichsgeraden, dann ist das Bestimmtheitsmaß gleich eins.
 
-::: definition
-**Definition: Bestimmtheitsmaß**
+::: {#def-bestimmtheitsmaße}
+## Bestimmtheitsmaß
 
 Für die Werte
 $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ erfasst das Bestimmtheitsmaß

@@ -6,3 +6,10 @@ clean:
 	rm -rf m-*/skript/*.log
 	rm -rf m-*/skript/out
 	rm -rf m-*/skript/skript_files
+
+render:
+	for folder in m-*; do \
+		quarto render $$folder/skript -t html; \
+		quarto render $$folder/skript -t pdf; \
+	done
+
