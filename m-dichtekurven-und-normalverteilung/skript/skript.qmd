@@ -4,8 +4,9 @@ source("../../bcd-setup.R")
 source("01-daten/dichtekurven-und-normalverteilung.R")
 ```
 
-\newcommand{\SI}[2]{#1\,\mathrm{#2}}
-\newcommand{\si}[1]{\mathrm{#1}}
+::: {.content-hidden}
+{{< include /_bcd_macros.qmd >}}
+:::
 
 # Dichtekurven und Normalverteilung
 
