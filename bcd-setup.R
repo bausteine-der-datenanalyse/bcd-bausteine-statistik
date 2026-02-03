@@ -1,17 +1,15 @@
 library(gt)
 library(readxl)
-library(cowplot)
-library(wbstats)
-library(latex2exp)
-library(lubridate)
-library(patchwork)
 library(tidyverse)
-library(kableExtra)
+library(latex2exp)
+library(patchwork)
 library(rnaturalearth)
 library(rnaturalearthdata)
 
+# Man spricht Deutsch
 Sys.setlocale(category = "LC_ALL", locale = "de_DE.UTF-8")
 
+# Farben
 fill_box_color <- "lightblue"
 fill_point_color <- "white"
 outline_color <- "black"
@@ -51,8 +49,7 @@ if (knitr::is_latex_output()) {
     plot.title = element_text(size = 16)
   )
   update_geom_defaults(
-    "text",
-    list(size = 5)
+    "text", list(size = 5)
   )
 }
 
@@ -68,8 +65,10 @@ if (knitr::is_html_output()) {
   theme_set(
     theme_gray(base_size = 16)
   )
+  update_theme(
+    plot.title = element_text(size = 16)
+  )
 }
-
 
 # Transponieren mit Index als Merkmal
 transpose_df <- function(d, start = 1, col = NULL) {
