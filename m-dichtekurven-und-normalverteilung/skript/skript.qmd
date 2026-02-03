@@ -20,7 +20,7 @@ d_unistrasse |>
   select(-Fahrtrichtung, -Abstand, -`Länge (Radar)`, -`Länge (cm)`) |>
   gt_preview() |>
   tab_source_note(
-    source_note = md("Daten bereitgestellt von Iris Mühlenbruch")
+    source_note = md("Daten bereitgestellt von Prof. Iris Mühlenbruch")
   ) |>
   tab_options(latex.use_longtable = TRUE, table.font.size = 12)
 ```
@@ -56,13 +56,10 @@ $$
 $$
 aufschreiben.
 :::
-
 In @fig-dichtekurve dargestellt ist ein Beispiel für eine solche Dichtekurve. Da die Dichtekurve eine Approximation des Histogramms ist, approximiert die Fläche unter dem Graphen von $f$ zwischen $a$ und $b$ den Flächeninhalt des Rechtecks. Daher gilt
-
 $$
 \int_{a}^{b} f(x)\, dx \approx \text{Anteil der Werte zwischen $a$ und $b$}.
 $$
-
 Dieser Zusammenhang gilt sogar, wenn das Intervall von $a$ bis $b$ nicht mit Klassengrenzen des Histogramms übereinstimmt. Das Integral über die Dichtekurve spielt in verwandter Form eine besonders wichtige Rolle in der Wahrscheinlichkeitstheorie.
 
 ```{r}
@@ -149,20 +146,22 @@ Die Form der [Normalverteilung]{.neuerbegriff} ergibt sich aus dem Faktor $\exp(
 fig_normalverteilung()
 ```
 
-Der Vorfaktor $1 / (\sigma \sqrt{2\pi})$ in der Funktionsgleichung von $f$ sorgt dafür, dass die Fläche unter dem Graphen von $f$ gleich 1 ist. Interessanterweise besitzt die Normalverteilung keine Stammfunktion, so dass man numerisch integrieren muss (zum Glück gibt es Computer). 
+Der Vorfaktor $1 / (\sigma \sqrt{2\pi})$ in der Funktionsgleichung von $f$ sorgt dafür, dass die Fläche unter dem Graphen von $f$ gleich 1 ist.
 
 Für die Anteile in bestimmten Intervallen um den Mittelwert $\mu$ gilt die **68-95-99.7** Regel: Von der Gesamtfläche unter der Dichtekurve liegen 
-
 $$
 \begin{aligned}
-    68  \% & \qquad \text{im Intervall}  & [\mu -  \sigma &,\; \mu +  \sigma] \\[1em]
-    95  \% & \qquad \text{im Intervall}  & [\mu - 2\sigma &,\; \mu + 2\sigma] \\[1em]
-    99.7\% & \qquad \text{im Intervall}  & [\mu - 3\sigma &,\; \mu + 3\sigma]
+    68  \% & \qquad \text{im Intervall}  & [\mu -  \sigma &,\; \mu +  \sigma], \\[1em]
+    95  \% & \qquad \text{im Intervall}  & [\mu - 2\sigma &,\; \mu + 2\sigma], \\[1em]
+    99.7\% & \qquad \text{im Intervall}  & [\mu - 3\sigma &,\; \mu + 3\sigma].
 \end{aligned}
 $$
+Die Bereiche sind in @fig-normalverteilung-prozentregel farblich hervorgehoben.
 
 ```{r}
 #| fig-asp: 0.45
+#| label: fig-normalverteilung-prozentregel
+#| fig-cap: Flächen unter der Normalverteilung
 
 fig_normalverteilung_prozentregel()
 ```
@@ -170,11 +169,9 @@ fig_normalverteilung_prozentregel()
 ### Standardnormalverteilung
 
 Eine Normalverteilung mit dem Mittelwert $\mu = 0$ und der Standardabweichung $\sigma = 1$ heißt [Standardnormalverteilung]{.neuerbegriff}, siehe @fig-standardnormalverteilung. Die zugehörige Dichtekurve ist
-
 $$
   \phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).
 $$ 
-
 Das Quantil $p$ zu einem Wert $z_p$ ist, so haben wir das oben vereinbart, die Fläche unter der Dichtekurve $\phi(z)$ links von $z_p$. Natürlich kann man nun für beliebige Werte von $z$ den zugehörigen Flächeninhalt unter der Dichtekurve links davon bestimmen. Dies führt auf die Verteilungsfunktion $\Phi$, die unten rechts dargestellt ist. Aufgrund der Symmetrie von $\phi(z)$ und weil die gesamte Fläche unter $\phi(z)$ gleich 1 ist, muss $\Phi(0) = 0.5$ gelten. Für $z$ gegen $\infty$ nähert sich der Funktionswert dem Wert 1 an. Erstaunlich ist, dass sich die Stammfunktion $\Phi$ nicht geschlossen angeben lässt, in der Regel wird sie numerisch ausgewertet.
 
 ```{r}
@@ -189,22 +186,20 @@ fig_standardnormalverteilung()
 
 Um nun einen vorliegenden Datensatz durch eine Normalverteilung zu approximieren, liegt es nahe den Mittelwert $\bar{x}$ und die empirische Standardabweichung $\tilde{s}$ der Verteilung in die Normalverteilung einzusetzen. Mit $\mu = \bar{x}$ und $\sigma = \tilde{s}$ ergibt sich damit eine Approximation der Verteilung.
 
-Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
-
 ```{r}
 v = pull(d_unistrasse, Geschwindigkeit)
 mu = mean(v)
 sigma = sd(v)
 ```
 
+:::beispiel
+**Beispiel Geschwindigkeitsmessung (Fortsetzung):** Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
 $$
   \bar{x} = \SI{`r round(mu, 2)`}{km/h}
   \quad \text{und} \quad
   \tilde{s} = \SI{`r round(sigma, 3)`}{km/h}.
 $$ 
-
 Damit ergibt sich für die Dichtekurve die Funktionsgleichung
-
 $$
   f(x) = 
   `r signif(1 / (sigma * sqrt(2 * pi)), 4)` 
@@ -219,8 +214,8 @@ $$
     \right)^2 
   \right).
 $$
-
-Für die Dichtekurve ergibt sich zusammen mit dem Histogramm das in @fig-normalverteilung-angepasst dargestellte Bild. Es ist zu erkennen, dass die Normalverteilung den Verlauf des Histogramms zwar grob erfasst, insgesamt jedoch etwas breiter und dafür weniger hoch ausfällt. Offensichtlich lassen sich die gemessenen Geschwindigkeiten nur unzureichend mithilfe einer Normalverteilung abbilden. Um die Güte der Approximation besser beurteilen zu können, verwendet man so genannte Normal-Quantil-Plots.
+Für die Dichtekurve erhalten wir zusammen mit dem Histogramm das in @fig-normalverteilung-angepasst dargestellte Bild. Es ist zu erkennen, dass die Normalverteilung den Verlauf des Histogramms zwar grob erfasst, insgesamt jedoch etwas breiter und dafür weniger hoch ausfällt. Offensichtlich lassen sich die gemessenen Geschwindigkeiten nur unzureichend mithilfe einer Normalverteilung abbilden. Um die Güte der Approximation besser beurteilen zu können, verwendet man so genannte Normal-Quantil-Plots.
+:::
 
 ```{r}
 #| fig-asp: 0.45
@@ -297,7 +292,9 @@ p2 <- ggplot(data = d, mapping = aes(sample = wert, color = verteilung)) +
 p1 / p2
 ```
 
-Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
+:::beispiel
+**Beispiel Geschwindigkeitsmessung (Fortsetzung):** Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
+:::
 
 ```{r}
 #| label: fig-unistrasse-nq
@@ -327,8 +324,7 @@ Ausgangspunkt hierfür ist eine Kernfunktion $K : \mathbb{R} \to \mathbb{R}$, mi
 fig_kerndichteschaetzer()
 ```
 
-Gebräuchlich sind die Kerne mit den Funktionsgleichungen 
-
+Gebräuchlich sind die Kerne mit den Funktionsgleichungen
 $$
   \begin{aligned}
       K(u)
@@ -353,7 +349,6 @@ $$
       \text{Gauß-Kern.}
   \end{aligned}
 $$ 
-
 Eine Darstellung der Graphen der Kernfunktionen ist in @fig-kernfunktionen zu sehen.
 
 ```{r}
