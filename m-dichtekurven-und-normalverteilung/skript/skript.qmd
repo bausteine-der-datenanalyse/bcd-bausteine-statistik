@@ -30,7 +30,7 @@ Unten dargestellt ist das Histogramm der relativen Häufigkeiten der gemessenen 
 ```{r}
 #| fig-asp: 0.45
 
-fig_unistrasse()
+p_unistrasse()
 ```
 
 Man kann sich nun vorstellen, die Messung der Geschwindigkeiten mit einer höheren Genauigkeit durchzuführen und dabei über einen längeren Zeitraum zu messen. Dann wäre es durchaus möglich, das Histogramm mit einer kleineren Klassenbreite zu erstellen, zum Beispiel $\SI{0.1}{km/h}$. Damit nähert sich der Verlauf des Histogramms der kontinuierlichen Kurve an, die sich im Grenzübergang zu einer unendlich langen und gleichzeitig exakten Messung mit einer gegen Null gehenden Klassenbreite ergeben würde.
@@ -79,7 +79,7 @@ Zwei Größen, die sich unmittelbar von Häufigkeitsverteilungen auf Dichtekurve
 #| label: fig-dichtekurven-quantil
 #| fig-cap: Quantil und Median einer Dichtekurve
 
-p1 <- fig_quantile(1.1, TeX("$x_p$")) +
+p1 <- p_quantile(1.1, TeX("$x_p$")) +
   annotate(
     "text",
     x = 0.75,
@@ -95,7 +95,7 @@ p1 <- fig_quantile(1.1, TeX("$x_p$")) +
     parse = T
   )
 
-p2 <- fig_quantile(1.835, TeX("$x_{med}$")) +
+p2 <- p_quantile(1.835, TeX("$x_{med}$")) +
   annotate(
     "text",
     x = 1.1,
@@ -163,7 +163,7 @@ Die Bereiche sind in @fig-normalverteilung-prozentregel farblich hervorgehoben.
 #| label: fig-normalverteilung-prozentregel
 #| fig-cap: Flächen unter der Normalverteilung
 
-fig_normalverteilung_prozentregel()
+fig_prozentregel()
 ```
 
 ### Standardnormalverteilung
@@ -222,7 +222,7 @@ Für die Dichtekurve erhalten wir zusammen mit dem Histogramm das in @fig-normal
 #| label: fig-normalverteilung-angepasst
 #| fig-cap: An Geschwindigkeitsmessung angepasste Normalverteilung
 
-fig_unistrasse() +
+p_unistrasse() +
   geom_function(
     fun = dnorm,
     args = list(mean = mu, sd = sigma),

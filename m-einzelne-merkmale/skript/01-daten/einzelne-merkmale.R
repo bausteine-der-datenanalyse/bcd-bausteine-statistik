@@ -1,7 +1,11 @@
 library(readxl)
 library(tidyverse)
 
-# Daten Energieträger
+
+# -------------------------------------------------------------------------------------------------
+# Beispieldaten Energieträger
+# -------------------------------------------------------------------------------------------------
+
 import_energietrager <- function(range) {
     read_excel(
         "01-daten/energiedaten-gesamt-xls.xlsx",
@@ -39,6 +43,11 @@ c_energietraeger <- c(
     "#98bade"
 )
 
+
+# -------------------------------------------------------------------------------------------------
+# Beispieldaten Klausur
+# -------------------------------------------------------------------------------------------------
+
 d_klausur <- read_excel(
     "01-daten/klausur-mathematik.xls"
 ) |>
@@ -48,7 +57,12 @@ d_klausur <- read_excel(
     ) |>
     select(prozent = prozente_g, note, bestanden)
 
-fig_histogram <- function(x, q = 1) {
+
+# -------------------------------------------------------------------------------------------------
+# Histogram plotten
+# -------------------------------------------------------------------------------------------------
+
+p_histogram <- function(x, q = 1) {
     d <- tibble(x = x) |> filter(x < quantile(x, q))
     ggplot(d) +
         geom_histogram(mapping = aes(x = x), bins = 40) +

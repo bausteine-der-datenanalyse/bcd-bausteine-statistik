@@ -382,9 +382,9 @@ Eine Verteilung, die einen Gipfel aufweist, von dem die Häufigkeiten zu den Ran
 #| fig-alt: "Unimodale, bimodale und multimodale Verteilungen"
 
 set.seed(432)
-rnorm(15000) |> fig_histogram()
-c(rnorm(3500), rnorm(1500, 4)) |> fig_histogram()
-c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> fig_histogram()
+rnorm(15000) |> p_histogram()
+c(rnorm(3500), rnorm(1500, 4)) |> p_histogram()
+c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> p_histogram()
 ```
 
 **Symmetrische und schiefe Verteilungen.** Gibt es für eine Verteilung eine Symmetrieachse, so dass der Verlauf links und rechts von dieser Achse annähernd gleich ist, dann handelt es sich um eine [symmetrische Verteilung]{.neuerbegriff}. Wichtig ist dabei, dass die Verteilung nicht exakt symmetrisch verlaufen muss, um als symmetrisch zu gelten. Ist die Verteilung deutlich unsymmetrisch, dann handelt es sich um eine [schiefe Verteilung]{.neuerbegriff}. Eine unimodale Verteilung, die nach links hin sehr steil abfällt, wird [linkssteil]{.neuerbegriff} (oder [rechtsschief]{.neuerbegriff}) genannt. Entsprechend heißt eine Verteilung, die nach rechts hin steil abfällt [rechtssteil]{.neuerbegriff} (oder [linksschief]{.neuerbegriff}) (vergleiche @fig-schiefe).
@@ -399,9 +399,9 @@ c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> fig_histogram()
 #|   - "Rechtssteil bzw. linksschief"
 #| fig-alt: "Gegenüberstellung einer linkssteilen, einer symmetrischen und einer rechtssteilen Verteilung"
 
-rlnorm(10000) |> fig_histogram(q = 0.95)
-rnorm(10000) |> fig_histogram()
-rlnorm(10000) |> fig_histogram(q = 0.95) + scale_x_reverse()
+rlnorm(10000) |> p_histogram(q = 0.95)
+rnorm(10000) |> p_histogram()
+rlnorm(10000) |> p_histogram(q = 0.95) + scale_x_reverse()
 ```
 
 ## Kumulierte Häufigkeitsverteilung und empirische Verteilungsfunktion
