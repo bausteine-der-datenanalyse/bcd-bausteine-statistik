@@ -3,42 +3,5 @@
 		{
 			"path": "."
 		}
-	],
-	"settings": {
-		"cSpell.enableFiletypes": [
-			"quarto"
-		],
-		"cSpell.words": [
-			"BMDV",
-			"BMWK",
-			"Gesamtheit/en",
-			"Gewässerkunde",
-			"Intervallskala",
-			"intervallskaliert",
-			"intervallskalierte",
-			"intervallskalierten",
-			"Kardinalskala",
-			"Merkmalsausprägung",
-			"Merkmalsausprägungen",
-			"Mobilitätsbefragung",
-			"Mühlenbruch",
-			"nominalskaliert",
-			"nominalskalierten",
-			"nominalskalierter",
-			"ordinalskaliert",
-			"ordinalskalierten",
-			"ordinalskalierter",
-			"Pegels",
-			"Skalenart",
-			"Skalenarten",
-			"Statista",
-			"Verhältnisskala",
-			"Verhältnisskalen",
-			"Verhältnisskaliert",
-			"verhältnisskalierten",
-			"zahlenwertig",
-			"zahlenwertiger",
-			"zahlenwertiges"
-		]
-	}
+	]
 }
