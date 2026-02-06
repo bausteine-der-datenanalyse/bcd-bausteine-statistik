@@ -22,3 +22,12 @@
 .definition > :last-child {
     margin-bottom: 0 !important;
 }
+
+dt {
+  margin-top: 1.5rem;
+}
+
+dd {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1rem;
+}
