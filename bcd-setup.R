@@ -1,5 +1,6 @@
 library(gt)
 library(readxl)
+library(wbstats)
 library(tidyverse)
 library(latex2exp)
 library(patchwork)
