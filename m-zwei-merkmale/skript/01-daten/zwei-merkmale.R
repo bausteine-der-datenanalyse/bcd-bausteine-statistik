@@ -2,23 +2,21 @@
 # Hilfsfunktionen
 # -------------------------------------------------------------------------------------------------
 
-quadrant <- Vectorize(
-  function(x, y) {
-    if (x > 0) {
-      if (y > 0) {
-        "I"
-      } else {
-        "II"
-      }
+quadrant <- Vectorize(function(x, y) {
+  if (x > 0) {
+    if (y > 0) {
+      "I"
     } else {
-      if (y > 0) {
-        "IV"
-      } else {
-        "III"
-      }
+      "II"
+    }
+  } else {
+    if (y > 0) {
+      "IV"
+    } else {
+      "III"
     }
   }
-)
+})
 
 # Bestimmtheitsmaß R^2
 rsquare <- function(x, y) {
@@ -43,10 +41,7 @@ plot_rsquare_example <- function(y) {
 
 plot_anscombe <- function(d, ylims) {
   plotit <- function(n) {
-    ggplot(
-      data = d,
-      mapping = aes(x = .data[[paste0("x", n)]], y = .data[[paste0("y", n)]])
-    ) +
+    ggplot(data = d, mapping = aes(x = .data[[paste0("x", n)]], y = .data[[paste0("y", n)]])) +
       geom_smooth(
         method = "lm",
         formula = y ~ x,
@@ -67,29 +62,32 @@ plot_anscombe <- function(d, ylims) {
         minor_breaks = NULL
       ) +
       labs(title = n, x = NULL, y = NULL) +
-      theme(plot.title = element_text(margin = margin(t = 5, b = -30, l = 10)))
+      theme(
+        plot.title = element_text(
+          margin = margin(
+            t = 5,
+            b = -30,
+            l = 10
+          )
+        )
+      )
   }
   plotit(1) + plotit(2) + plotit(3) + plotit(4) + plot_layout(axes = "collect")
 }
 
 plot_linear_regression <- function(d, xdat, ydat, xlab, ylab, n, log = FALSE) {
-  #
-  # R^2
   x <- pull(d, {{ xdat }})
   y <- pull(d, {{ ydat }})
   if (log) {
-    R2 <- rsquare(log10(x), y)
+    R2 <- rsquare(log10(x), y) # nolint
   } else {
-    R2 <- rsquare(x, y)
+    R2 <- rsquare(x, y) # nolint
   }
   r <- sqrt(R2)
 
   # Plot
   p <- ggplot(data = d, mapping = aes(x = {{ xdat }}, y = {{ ydat }})) +
-    geom_point(
-      shape = 21,
-      fill = "light blue"
-    ) +
+    geom_point(shape = 21, fill = "light blue") +
     geom_smooth(
       method = "lm",
       formula = y ~ x,
@@ -110,24 +108,22 @@ plot_linear_regression <- function(d, xdat, ydat, xlab, ylab, n, log = FALSE) {
 
   # Logscale
   if (log) {
-    p + scale_x_log10(labels = function(x) paste0(x / 1000, "K"))
+    p +
+      scale_x_log10(
+        labels = function(x) {
+          paste0(x / 1000, "K")
+        }
+      )
   } else {
     p
   }
 }
 
 plot_life_expectancy <- function(xvar, xlabel, xlim, xlog = FALSE) {
-  special_countries <- c(
-    "United States",
-    "Sierra Leone",
-    "Germany",
-    "Sri Lanka"
-  )
+  special_countries <- c("United States", "Sierra Leone", "Germany", "Sri Lanka")
 
   d <- d_wb_latest |>
-    mutate(
-      special = country %in% special_countries
-    )
+    mutate(special = country %in% special_countries)
 
   p <- ggplot(mapping = aes(x = {{ xvar }}, y = le)) +
     geom_point(
@@ -144,16 +140,13 @@ plot_life_expectancy <- function(xvar, xlabel, xlim, xlog = FALSE) {
       size = label_fontsize,
       alpha = 0.5
     ) +
-    scale_fill_manual(
-      values = c("light blue", "red")
-    ) +
-    labs(
-      x = xlabel,
-      y = "Mittlere Lebenserwartung"
-    )
+    scale_fill_manual(values = c("light blue", "red")) +
+    labs(x = xlabel, y = "Mittlere Lebenserwartung")
 
   if (xlog) {
-    f <- function(x) paste0(x / 1000, "K")
+    f <- function(x) {
+      paste0(x / 1000, "K")
+    }
     p + scale_x_log10(limits = xlim, labels = f)
   } else {
     p + scale_x_continuous(limits = xlim)
@@ -166,23 +159,15 @@ plot_correlation_example <- function(x, y, t) {
   d <- tibble(X = x, Y = y, Quadrant = factor(quadrant(x, y)))
 
   ggplot(data = d) +
-    geom_vline(
-      xintercept = 0,
-      color = "gray60"
-    ) +
-    geom_hline(
-      yintercept = 0,
-      color = "gray60"
-    ) +
+    geom_vline(xintercept = 0, color = "gray60") +
+    geom_hline(yintercept = 0, color = "gray60") +
     geom_point(
       mapping = aes(x = X, y = Y, fill = Quadrant),
       color = "black",
       shape = 21,
       size = 2.5
     ) +
-    labs(
-      title = t
-    )
+    labs(title = t)
 }
 
 
@@ -196,7 +181,7 @@ tbl_wirtschaftswachstum <- function(s, e) {
     select(-Jahr) |>
     transpose_df(start = s) |>
     gt(rowname_col = "name") |>
-    tab_options(latex.use_longtable = TRUE)
+    tab_options(table.width = pct(75))
 }
 
 
@@ -219,34 +204,58 @@ fig_correlation_idea <- function() {
 
   ggplot(data = d) +
     geom_rect(
-      mapping = aes(xmin = 0, ymin = 0, xmax = x, ymax = y, fill = c),
+      mapping = aes(
+        xmin = 0,
+        ymin = 0,
+        xmax = x,
+        ymax = y,
+        fill = c
+      ),
       alpha = 0.5
     ) +
     geom_rect(
-      mapping = aes(xmin = x, ymin = 0, xmax = x1, ymax = y, fill = factor(3)),
+      mapping = aes(
+        xmin = x,
+        ymin = 0,
+        xmax = x1,
+        ymax = y,
+        fill = factor(3)
+      ),
       alpha = 0.25,
       linewidth = 0.25,
       color = "black"
     ) +
     geom_rect(
-      mapping = aes(xmin = 0, ymin = y, xmax = x, ymax = y1, fill = factor(4)),
+      mapping = aes(
+        xmin = 0,
+        ymin = y,
+        xmax = x,
+        ymax = y1,
+        fill = factor(4)
+      ),
       alpha = 0.25,
       linewidth = 0.25,
       color = "black"
     ) +
-    geom_vline(
-      xintercept = 0
-    ) +
-    geom_hline(
-      yintercept = 0
-    ) +
+    geom_vline(xintercept = 0) +
+    geom_hline(yintercept = 0) +
     geom_segment(
-      mapping = aes(x = x, y = 0, yend = y, color = factor(y < 0)),
+      mapping = aes(
+        x = x,
+        y = 0,
+        yend = y,
+        color = factor(y < 0)
+      ),
       arrow = arrow(length = unit(0.025, "npc"), angle = 20),
       linewidth = 0.75
     ) +
     geom_segment(
-      mapping = aes(x = 0, xend = x, y = y, color = factor(x < 0)),
+      mapping = aes(
+        x = 0,
+        xend = x,
+        y = y,
+        color = factor(x < 0)
+      ),
       arrow = arrow(length = unit(0.025, "npc"), angle = 20),
       linewidth = 0.75
     ) +
@@ -257,12 +266,8 @@ fig_correlation_idea <- function() {
       shape = 21,
       size = 2
     ) +
-    scale_fill_manual(
-      values = c("blue", "red", "yellow", "green")
-    ) +
-    scale_color_manual(
-      values = c("blue", "red")
-    ) +
+    scale_fill_manual(values = c("blue", "red", "yellow", "green")) +
+    scale_color_manual(values = c("blue", "red")) +
     annotate(
       geom = "text",
       x = xi,
@@ -320,10 +325,7 @@ set.seed(103)
 load("01-daten/pisa.Rdata")
 load("01-daten/data-wb.Rdata")
 
-d_wirtschaftswachstum <- read_csv(
-  "01-daten/wirtschaftswachstum.csv",
-  col_types = "idd"
-)
+d_wirtschaftswachstum <- read_csv("01-daten/wirtschaftswachstum.csv", col_types = "idd")
 
 d_wb_latest <- d_wb_latest |> ungroup()
 

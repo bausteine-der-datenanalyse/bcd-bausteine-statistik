@@ -4,7 +4,7 @@ source("../../bcd-setup.R")
 source("01-daten/zwei-merkmale.R")
 ```
 
-# Untersuchung von zwei Merkmalen {#sec-untersuchung-von-zwei-merkmalen}
+# Untersuchung von zwei Merkmalen
 
 Eine wichtige Anwendung statistischer Methoden besteht darin zu untersuchen, wie zwei Merkmale zusammenhängen. Zum Beispiel kann man sich fragen:
 
@@ -62,16 +62,16 @@ Unten dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums 
 
 ```{r}
 ggplot(
-    data = d_wirtschaftswachstum,
-    mapping = aes(x = Prognose, y = Wachstum)
+  data = d_wirtschaftswachstum,
+  mapping = aes(x = Prognose, y = Wachstum)
 ) +
-    geom_abline(
-        intercept = 0, slope = 1, color = "red", linewidth = 0.75
-    ) +
-    geom_point(
-        shape = 21, fill = "light blue", size = 2.5
-    ) +
-    geom_rug()
+  geom_abline(
+    intercept = 0, slope = 1, color = "red", linewidth = 0.75
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
+  geom_rug()
 ```
 
 #### Lebenserwartung
@@ -95,22 +95,22 @@ Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung
 
 ```{r}
 ggplot(data = d_wb_latest) +
-    geom_point(
-        mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
-        shape = 21, show.legend = FALSE, alpha = 0.8
-    ) +
-    scale_size(
-        range = c(0.1, 10)
-    ) +
-    scale_fill_distiller(
-        palette = "Reds", direction = 1
-    ) +
-    labs(
-        x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
-    )
+  geom_point(
+    mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
+    shape = 21, show.legend = FALSE, alpha = 0.8
+  ) +
+  scale_size(
+    range = c(0.1, 10)
+  ) +
+  scale_fill_distiller(
+    palette = "Reds", direction = 1
+  ) +
+  labs(
+    x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
+  )
 ```
 
-### Zweidimensionale Histogramme und Dichten {#sec-2d-histogramme}
+### Zweidimensionale Histogramme und Dichten
 
 Insbesondere wenn es sich um umfangreiche Datensätze handelt, überdecken
 sich in einem Streuplot häufig die Punkte. Diese Problematik lässt sich
@@ -119,13 +119,11 @@ zweidimensionalen Kerndichteschätzern umgehen.
 
 Für das zweidimensionale Histogramm Histogramm definiert man Klassen für
 beide zu betrachtende Merkmale $X$ und $Y$ 
-
 $$
-  [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
-  \quad \text{und} \quad
-  [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
+[c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
+\quad \text{und} \quad
+[c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
 $$ 
-
 und zählt für jedes Rechteck
 $[c^x_{i-1}, c^x_{i}) \times [c^y_{j-1}, c^y_{j})$ die Punkte, die in
 diesem Rechteck liegen. Damit ergeben sich die Klassenhäufigkeiten
@@ -137,17 +135,15 @@ Alternativ kann auch im zweidimensionalen Fall ein Kerndichteschätzer
 verwendet werden. Dieser funktioniert im Prinzip genauso wie für eine
 Variable, nur dass wir jetzt das Produkt von zwei Kernfunktionen
 verwenden: 
-
 $$
-  \hat f(x, y)
-  =
-  \frac{1}{n \, h_1 h_2} 
-  \;
-  \sum_{i=1}^n  
-  K\left(\frac{x-x_i}{h_1}\right)
-  K\left(\frac{y-y_i}{h_2}\right).
+\hat f(x, y)
+=
+\frac{1}{n \, h_1 h_2} 
+\;
+\sum_{i=1}^n  
+K\left(\frac{x-x_i}{h_1}\right)
+K\left(\frac{y-y_i}{h_2}\right).
 $$ 
-  
 Die Glättungseigenschaften des Schätzers hängen von den Parametern $h_1$ und $h_2$ sowie der Wahl der Kernfunktion $K$ ab (@sec-approximation-dichtekurven).
 
 In einer zweidimensionalen Darstellung des Histogramms oder der Dichtefunktion werden die Häufigkeiten farblich kodiert, siehe @fig-zwei-merkmale-2d. Eine weitere Möglichkeit besteht in einer dreidimensionalen Darstellung wie in @fig-zwei-merkmale-3d zu sehen. Die ebene Darstellung ist mit ggplot erstellt, die räumliche Darstellung mit dem Programm Mathematica.
@@ -157,31 +153,31 @@ In einer zweidimensionalen Darstellung des Histogramms oder der Dichtefunktion w
 #| label: fig-zwei-merkmale-2d
 
 p0 <- ggplot(
-    data = d_wb_latest,
-    mapping = aes(x = he, y = le)
+  data = d_wb_latest,
+  mapping = aes(x = he, y = le)
 )
 
 p1 <- p0 +
-    geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
-    scale_fill_distiller(palette = "Blues", direction = 1)
+  geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
+  scale_fill_distiller(palette = "Blues", direction = 1)
 
 p2 <- p0 +
-    geom_density_2d_filled(color = "black", linewidth = 0.25) +
-    scale_fill_brewer(palette = "Blues")
+  geom_density_2d_filled(color = "black", linewidth = 0.25) +
+  scale_fill_brewer(palette = "Blues")
 
 p1 + p2 + plot_layout(axes = "collect") &
-    xlim(0, 20) & ylim(45, 85) &
-    labs(
-        x = "Ausgaben Gesundheitswesen (% BIP)",
-        y = "Mittlere Lebenserwartung",
-        fill = "Anzahl"
-    ) &
-    theme(legend.position = "none")
+  xlim(0, 20) & ylim(45, 85) &
+  labs(
+    x = "Ausgaben Gesundheitswesen (% BIP)",
+    y = "Mittlere Lebenserwartung",
+    fill = "Anzahl"
+  ) &
+  theme(legend.position = "none")
 ```
 
 ![Histogramms (links) und geschätzte Verteilungsfunktion (rechts), räumliche Darstellung](00-bilder/weltbank-3d.svg){#fig-zwei-merkmale-3d}
 
-## Zusammenhangsmaß: Empirischer Korrelationskoeffizient von Bravais und Pearson {#sec-korrelationskoeffizient}
+## Zusammenhangsmaß: Empirischer Korrelationskoeffizient von Bravais und Pearson
 
 Mit der graphischen Darstellung in einem Streudiagramm oder einer Dichteschätzung lässt sich die Anordnung von Beobachtungen zu zwei Merkmalen veranschaulichen. Ist dabei zu sehen, dass mit wachsenden Werten des einen Merkmals die Werte des anderen Merkmals ebenfalls zunehmen (oder abnehmen), dann lässt sich vermuten, dass zwischen den beiden Merkmalen ein Zusammenhang besteht. Mit dem empirischen Korrelationskoeffizienten kann gemessen werden, inwieweit es sich dabei um einen linearen Zusammenhang handelt.
 
@@ -210,12 +206,15 @@ p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect") &
 Wie lässt sich nun eine solche Zahl bestimmen? Die grundlegende Idee besteht darin, dass im Streudiagramm ein Koordinatensystem in das Zentrum der Punktwolke gelegt wird. Für jeden Punkt $(x_i, y_i)$ lässt sich dann überprüfen, in welchem Quadrant des neuen Koordinatensystems der Punkt liegt. In @fig-korrelation ist dieser Zusammenhang farblich hervorgehoben.
 
 Fall A:
+
 : Die überwiegende Zahl der Punkte liegt in den Quadranten I und III
-          
+
 Fall B:
+
 : Hier liegen die allermeisten Punkte in den Quadranten II und IV
 
 Fälle C -- F:
+
 : Die Punkte verteilen sich auf alle Quadranten
 
 Für die Lage des neuen Koordinatensystems verwenden wir die Mittelwerte $\bar{x}$ und $\bar{y}$ der Merkmale $X$ und $Y$. Damit können wir uns nun überlegen, wie der Korrelationskoeffizient bestimmt werden kann.
@@ -225,54 +224,57 @@ fig_correlation_idea()
 ```
 
 Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis D werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
-
 $$
-  r = \frac
-    {\text{Summe der blauen und roten Flächen}}
-    {\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
+r = \frac
+{\text{Summe der blauen und roten Flächen}}
+{\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
 $$
-  
 den wir nochmal formal festhalten wollen.
 
 ::: {#def-korrelationskoeffizient}
 ## Bravais-Pearson-Korrelationskoeffizient
 
 Für die Werte $(x_i, y_i), i = 1, \dots, n$ heißt die Zahl 
-
 $$
-  r = \frac{
-      \displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
-    }{
-      \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
-    }
+r = \frac{
+\displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
+}{
+\displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
+}
 $$ 
-
 Bravais-Person-[Korrelationskoeffizient]{.neuerbegriff} . Der Wertebereich ist $-1 \leq r \leq 1$.
 :::
 
 Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgende Situationen vor.
 
 Falls $r > 0$:
+
 : Positive Korrelation, gleichsinniger linearer Zusammenhang. Die Werte $(x_i, y_i)$ liegen tendenziell um eine Gerade positiver Steigung.
 
 Falls $r < 0$:
+
 : Negative Korrelation, gegensinniger linearer Zusammenhang. Die Werte $(x_i, y_i)$ liegen tendenziell um eine Gerade negativer Steigung.
-  
+
 Entsprechend dem Zahlenwert von $r$ unterscheidet man grob die Korrelationsgrade
 
 Für $r \approx 0$:
+
 : Keine Korrelation, unkorreliert, kein linearer Zusammenhang.
 
 Für $|r| < 0.5$:
+
 : Schwache Korrelation.
 
 Für $0.5 \leq |r| < 0.8$:
+
 : Mittlere Korrelation.
 
 Für $0.8 \leq |r| < 1$:
+
 : Starke Korrelation.
 
 Für $|r| = 1$:
+
 : Die Werte liegen exakt auf einer Geraden.
 
 Neben dem Korrelationskoeffizienten von Bravais und Pearson gibt es noch weitere Zusammenhangsmaße, zum Beispiel den Spaerman-Korrelationskoeffizienten. Diese sind aber weniger gebräuchlich und werden hier nicht weiter diskutiert.
@@ -292,7 +294,7 @@ Wir merken uns daher:
 
 ::: {rem-korrelation-ungleich-kausalität}
 $$
-  \text{Korrelation} \quad \neq \quad \text{Kausalität}
+\text{Korrelation} \quad \neq \quad \text{Kausalität}
 $$
 :::
 
@@ -306,20 +308,20 @@ countries <- c("Singapore", "Finland", "Brazil", "Switzerland")
 d <- mutate(d_pisa, sel = country %in% countries)
 
 ggplot(data = d, mapping = aes(x = read, y = math)) +
-    geom_point(
-        mapping = aes(fill = sel), shape = 21, show.legend = FALSE
-    ) +
-    geom_label(
-        data = filter(d, country %in% countries),
-        mapping = aes(label = country),
-        hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
-    ) +
-    scale_fill_manual(
-        values = c("light blue", "red")
-    ) +
-    labs(
-        x = "Lesekompetenz", y = "Mathematische Kompetenz"
-    )
+  geom_point(
+    mapping = aes(fill = sel), shape = 21, show.legend = FALSE
+  ) +
+  geom_label(
+    data = filter(d, country %in% countries),
+    mapping = aes(label = country),
+    hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
+  ) +
+  scale_fill_manual(
+    values = c("light blue", "red")
+  ) +
+  labs(
+    x = "Lesekompetenz", y = "Mathematische Kompetenz"
+  )
 ```
 
 Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
@@ -328,32 +330,24 @@ Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. 
 ## Lineare Regression
 
 Mithilfe der Korrelationsanalyse lassen sich ungerichtete Zusammenhänge zwischen zwei Merkmalen $X$ und $Y$ untersuchen. In vielen Fällen legt allerdings der untersuchte Sachverhalt nahe, dass eine der beobachteten Größen von der anderen Größe abhängt. Allerdings handelt es sich in der Regel nicht um einen rein deterministischen Zusammenhang der Form
-
 $$
-  Y = f(X),
+Y = f(X),
 $$ 
-
 sondern es kommt noch eine zufällige Abweichung hinzu. Wenn wir von einem additiven Fehlerterm ausgehen, dann erhalten wir die Beziehung 
-
 $$
-  Y  = f(X) + \varepsilon,
+Y  = f(X) + \varepsilon,
 $$ 
-
 wobei $\varepsilon$ eine zufällige Größe ist. Ziel bei der Bestimmung der Funktion $f$ ist es
 dabei, einen möglichst großen Anteil an der Variabilität der Daten durch diese Funktion zu erklären. Eine Beziehung dieser Art wird [Regression]{.neuerbegriff} genannt, der Funktion $f$ fällt dabei die Rolle eines [Regressionsmodells]{.neuerbegriff} zu. In dieser Schreibweise verwenden wir die Großbuchstaben $X$ und $Y$ um zum Ausdruck zu bringen, dass wir über eine Eigenschaft des gesamten Datensatzes sprechen und nicht über einzelne Werte.
 
 Die einfachste Möglichkeit ist es, für die Funktion $f$ eine lineare Beziehung anzunehmen. Damit erhalten wir die Zuordnungsvorschrift 
-
 $$
-  f(x) = \alpha + \beta x,
+f(x) = \alpha + \beta x,
 $$ 
-
 wobei $\alpha$ der $y$-Achsenabschnitt und $\beta$ die Steigung der Geraden sind. Der Kleinbuchstabe $x$ steht jetzt für eine beliebige Zahl. Wenn wir die Datenpaare $(x_i, y_i), i = 1, \dots, n$ in die Funktionsgleichung einsetzen, dann ergibt sich die empirische Beziehung
-
 $$
-  y_i = \alpha + \beta x_i + \varepsilon_i,
+y_i = \alpha + \beta x_i + \varepsilon_i,
 $$ 
-
 wobei $\varepsilon_i$ den Fehler erfasst, der sich aus der Geradenanpassung ergibt. Der Zusammenhang ist in @fig-ausgleichsgerade dargestellt.
 
 ![Ausgleichsgerade](00-bilder/ausgleichsgerade.svg){#fig-ausgleichsgerade width=60%}
@@ -362,172 +356,142 @@ wobei $\varepsilon_i$ den Fehler erfasst, der sich aus der Geradenanpassung ergi
 
 Es stellt sich nun die Frage, wie die Parameter $\alpha$ und $\beta$ der Ausgleichsgeraden gewählt werden sollen. Ziel ist es, die Abstände $\varepsilon_i = y_i - (\alpha + \beta x_i)$, also die Länge der grünen Linien in @fig-ausgleichsgerade insgesamt möglichst klein werden zu lassen.
 
-Natürlich könnten wir wieder wie beim Median, die Beträge der Abstände summieren. Allerdings ist die Betragsfunktion in der Anwendung unhandlich und wir summieren stattdessen die Abstandsquadrate. Gesucht
-sind also Zahlen $\alpha$ und $\beta$, so dass die Summe
-
+Natürlich könnten wir wieder wie beim Median, die Beträge der Abstände summieren. Allerdings ist die Betragsfunktion in der Anwendung unhandlich und wir summieren stattdessen die Abstandsquadrate. Gesucht sind also Zahlen $\alpha$ und $\beta$, so dass die Summe
 $$
-  \sum_{i=1}^n \varepsilon_i^2 
-  = 
-  \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
+\sum_{i=1}^n \varepsilon_i^2 
+= 
+\sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
 $$
-
 möglichst klein wird. Die Werte von $\alpha$ und $\beta$, für die die Summe ihr Minimum annimmt, nennt man [Kleinste-Quadrate-Schätzer]{.neuerbegriff} und diese Methode zur Bestimmung der Ausgleichsgeraden die [Methode der kleinsten Quadrate]{.neuerbegriff}.
 
 Zur Bestimmung der Kleinste-Quadrate-Schätzer stellen wir die Funktion $Q : R^2 \to R$ mit
-
 $$
-  Q(\alpha, \beta) = \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
+Q(\alpha, \beta) = \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
 $$ 
-
 auf. Im Minimum der Funktion müssen die partiellen Ableitungen
-
 $$
-  \frac{\partial Q(\alpha, \beta)}{\partial \alpha} 
-  = 
-  -2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i))
+\frac{\partial Q(\alpha, \beta)}{\partial \alpha} 
+= 
+-2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i))
 $$
-
 und
-
 $$
-  \frac{\partial Q(\alpha, \beta)}{\partial \beta} 
-  = 
-  -2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))
+\frac{\partial Q(\alpha, \beta)}{\partial \beta} 
+= 
+-2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))
 $$
-
 beide gleich null sein. Wir formen die erste Gleichung um:
-
 $$
-  \begin{aligned}
-    -2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i)) 
-    & = 0 
-    & \iff \\
-    \sum_{i=1}^n y_i - \alpha n - \beta \sum_{i=1}^n x_i 
-    & = 0 
-    & \iff \\
-    \alpha 
-    & = \bar{y} - \beta \bar{x}.
-  \end{aligned}
+\begin{aligned}
+-2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i)) 
+& = 0 
+& \iff \\
+\sum_{i=1}^n y_i - \alpha n - \beta \sum_{i=1}^n x_i 
+& = 0 
+& \iff \\
+\alpha 
+& = \bar{y} - \beta \bar{x}.
+\end{aligned}
 $$ 
-
 Aus der zweiten Gleichung erhalten wir
-
 $$
-  \begin{aligned}
-    -2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))  
-    & = 0
-    & \iff \\
-    \sum_{i=1}^n x_i y_i - \alpha \sum_{i=1}^n x_i - \beta \sum_{i=1}^n x_i^2 
-    & = 0.
-  \end{aligned}
+\begin{aligned}
+-2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))  
+& = 0
+& \iff \\
+\sum_{i=1}^n x_i y_i - \alpha \sum_{i=1}^n x_i - \beta \sum_{i=1}^n x_i^2 
+& = 0.
+\end{aligned}
 $$
-
 Einsetzen von $\alpha = \bar{y} - \beta \bar{x}$ und $\sum_{i=1}^nx_i = n \bar{x}$ liefert
-
 $$
-  \begin{aligned}
-    \sum_{i=1}^n
-    x_i y_i - (\bar{y} - \beta \bar{x}) n \bar{x} - \beta \sum_{i=1}^n x_i^2 
-    & = 0
-    & \iff \\
-    \sum_{i=1}^n
-    x_i y_i - n \, \bar{x} \, \bar{y}  -  \beta \left(\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2 \right) 
-    & = 0,
-  \end{aligned}
+\begin{aligned}
+\sum_{i=1}^n
+x_i y_i - (\bar{y} - \beta \bar{x}) n \bar{x} - \beta \sum_{i=1}^n x_i^2 
+& = 0
+& \iff \\
+\sum_{i=1}^n
+x_i y_i - n \, \bar{x} \, \bar{y}  -  \beta \left(\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2 \right) 
+& = 0,
+\end{aligned}
 $$
-
 so dass 
-
 $$
-  \beta 
-  \; = \;
-  \frac{
-    \displaystyle \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}
-  }{
-    \displaystyle \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
-  }
-  \;\; = \;\;
-  \frac{
-    \displaystyle \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
-  }{
-    \displaystyle \sum_{i=1}^n (x_i - \bar{x})^2
-  }
+\beta 
+\; = \;
+\frac{
+\displaystyle \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}
+}{
+\displaystyle \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
+}
+\;\; = \;\;
+\frac{
+\displaystyle \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+}{
+\displaystyle \sum_{i=1}^n (x_i - \bar{x})^2
+}
 $$ 
-
 gelten muss. Für die letzte Umformung wurden die Beziehungen
-
 $$
-  \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) 
-  = 
-  \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}  
+\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) 
+= 
+\sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}  
 $$
-
 und
-
 $$
-  \sum_{i=1}^n (x_i - \bar{x})^2 
-  = 
-  \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
+\sum_{i=1}^n (x_i - \bar{x})^2 
+= 
+\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
 $$
-
 verwendet, die sich in einer einfachen Nebenrechnung nachweisen lassen. Zusammengefasst ergibt sich folgende Definition.
 
 ::: {#def-lineare-regression}
 ## Lineare Regression und Kleinste-Quadrate-Schätzer
 
 Für die Werte $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ heißt der Zusammenhang
-
 $$
-  y_i = \alpha + \beta x_i + \varepsilon_i
+y_i = \alpha + \beta x_i + \varepsilon_i
 $$ 
-
 lineare Einfachregression. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und $\varepsilon_i$ der Fehler.
 
 Die Kleinste-Quadrate-Schätzer 
-
 $$
-  \hat \alpha = \bar{y} - \hat \beta \bar{x}
-    \quad \text{und} \quad
-    \hat \beta 
-    =
-  \frac{
-    \displaystyle \sum_{i=1}^n(x_i - \bar{x})(y_i - \bar{y})
-  }{
-    \displaystyle \sum_{i=1}^n(x_i - \bar{x})^2
-  }
+\hat \alpha = \bar{y} - \hat \beta \bar{x}
+\quad \text{und} \quad
+\hat \beta 
+=
+\frac{
+\displaystyle \sum_{i=1}^n(x_i - \bar{x})(y_i - \bar{y})
+}{
+\displaystyle \sum_{i=1}^n(x_i - \bar{x})^2
+}
 $$ 
-
 minimiert die Summe der Fehlerquadrate.
 :::
 
 ::: beispiel
 **Beispiel PISA-Studie:** Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
-
 $$
-  \bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
+\bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
 $$ 
-
 die Parameter 
-
 $$
-  \hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875
+\hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875
 $$ 
-
 der unten dargestellten Ausgleichsgeraden.
 
 ```{r}
 ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
-    geom_smooth(
-        method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
-    ) +
-    geom_point(
-        shape = 21, fill = "light blue", size = 2.5
-    ) +
-    labs(
-        x = "Lesekompetenz", y = "Mathematische Kompetenz"
-    )
+  geom_smooth(
+    method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
+  labs(
+    x = "Lesekompetenz", y = "Mathematische Kompetenz"
+  )
 ```
-
 :::
 
 #### Anscombes Quartett
@@ -557,69 +521,61 @@ Um die Güte des linearen Modells zu beurteilen, untersucht man, wie die Werte a
 
 Für die Werte
 $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ erfasst das Bestimmtheitsmaß
-
 $$
-  R^2 
-    \; = \;
-    \frac{
-      \displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
-    }{
-      \displaystyle \sum_{i=1}^n(y_i - \bar{y})^2
-    }
+R^2 
+\; = \;
+\frac{
+\displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
+}{
+\displaystyle \sum_{i=1}^n(y_i - \bar{y})^2
+}
 $$ 
-
 mit $0 \leq R^2 \leq 1$ die Güte des linearen Modells. Dabei ist
-
 $$
-  \hat y_i = \hat \alpha + \hat \beta x_i.
+\hat y_i = \hat \alpha + \hat \beta x_i.
 $$
-
 Es lässt sich zeigen, dass es sich bei dem Bestimmtheitsmaß um das Quadrat des Korrelationskoeffizienten $r$ handelt, es gilt also $R = r^2$.
 :::
 
-Damit lässt sich der Korrelationskoeffizient auch in Bezug auf das lineare Regressionsmodell interpretieren: Der quadrierte Korrelationskoeffizient entspricht dem Anteil der Gesamtstreuung, der durch das lineare Modell erklärt werden kann.
+Damit kann der Korrelationskoeffizient auch in Bezug auf das lineare Regressionsmodell interpretiert werden: Der quadrierte Korrelationskoeffizient entspricht dem Anteil der Gesamtstreuung, der durch das lineare Modell erklärt werden kann.
 
 ::: beispiel
 Als Beispiel betrachten wir die beiden nachfolgend dargestellten Datensätze. Wir erhalten die Bestimmtheitsmaße links mit $R^2 = `r round(summary(lm(y1 ~ x, data = d_rsquare_example))$r.squared, 2)`$ und rechts mit $R^2 = `r round(summary(lm(y2 ~ x, data = d_rsquare_example))$r.squared, 2)`$. Die unterschiedliche Variabilität um die Ausgleichsgerade herum wird also sehr gut erfasst.
 
 ```{r}
+#| fig-asp: 0.45
+
 plot_rsquare_example(y1) + plot_rsquare_example(y2) + plot_layout(axes = "collect") &
-    scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
-    scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
-    labs(x = NULL, y = NULL)
+  scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
+  scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
+  labs(x = NULL, y = NULL)
 ```
 
 Gegenbeispiel: Für die Datensätze aus Anscombes Quartett ergeben sich in allen vier Fällen für das Bestimmtheitsmaß Werte von $R^2 = 0.67$, so dass wir hier keinerlei Aufschluss darüber erhalten, ob das lineare Modell sinnvoll ist oder nicht. Im Zweifelsfall sollte man daher immer die Residuen $\varepsilon_i$ plotten, wie das hier für das Anscombe-Quartett dargestellt ist. 
 
 ```{r}
 anscombe |>
-    mutate(
-        y1 = y1 - 3 - 0.5 * x1,
-        y2 = y2 - 3 - 0.5 * x2,
-        y3 = y3 - 3 - 0.5 * x3,
-        y4 = y4 - 3 - 0.5 * x4,
-    ) |>
-    plot_anscombe(c(-4, 4))
+  mutate(
+    y1 = y1 - 3 - 0.5 * x1,
+    y2 = y2 - 3 - 0.5 * x2,
+    y3 = y3 - 3 - 0.5 * x3,
+    y4 = y4 - 3 - 0.5 * x4,
+  ) |>
+  plot_anscombe(c(-4, 4))
 ```
-
 :::
 
 Anmerkung: Der Wertebereich für den Korrelationskoeffizienten $r$ und das Bestimmtheitsmaß $R^2$ ist jeweils das Intervall $[0, 1]$. Es liegt daher nahe, die Werte als prozentuale Größen zu interpretieren. Man spricht dann zum Beispiel davon, dass eine Korrelation von 40 % besteht, oder dass eine Variabilität zu 16 % durch das lineare Modell erklärt werden kann.
 
 ### Ausblick: Nichtlineare und lokale Regression
 
-Liegt den Daten ein nichtlinearer Zusammenhang zu Grunde, dann kann
-sinnvoll sein, mit nichtlinearen Funktionen zu arbeiten. Zum Beispiel
-kann ein quadratisches Modell
-
+Liegt den Daten ein nichtlinearer Zusammenhang zu Grunde, dann kann sinnvoll sein, mit nichtlinearen Funktionen zu arbeiten. Zum Beispiel kann ein quadratisches Modell
 $$
-  Y = \alpha + \beta X + \gamma X^2 + \varepsilon
+Y = \alpha + \beta X + \gamma X^2 + \varepsilon
 $$ 
-
 oder ein exponentieller Ansatz 
-
 $$
-  Y = \alpha \exp(\beta X) + \varepsilon
+Y = \alpha \exp(\beta X) + \varepsilon
 $$
 
 verwendet werden. Im quadratischen Fall bestimmen sich die Koeffizienten $\alpha, \beta, \gamma$ aus einem linearen Gleichungssystem mit drei unbekannten. Für das exponentielle Modell ist ein nichtlineares Gleichungssystem zu lösen.
@@ -628,20 +584,20 @@ Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, di
 
 ```{r}
 tibble(
-    x = 2 * pi * runif(300),
-    y = sin(x) + 0.2 * rnorm(length(x))
+  x = 2 * pi * runif(300),
+  y = sin(x) + 0.2 * rnorm(length(x))
 ) |>
-    ggplot(
-        mapping = aes(x = x, y = y)
-    ) +
-    geom_point(
-        shape = 21, fill = "light blue", size = 2.5
-    ) +
-    geom_smooth(
-        method = "loess", formula = y ~ x,
-        se = FALSE, color = "red", linewidth = 0.75
-    ) +
-    labs(x = NULL, y = NULL)
+  ggplot(
+    mapping = aes(x = x, y = y)
+  ) +
+  geom_point(
+    shape = 21, fill = "light blue", size = 2.5
+  ) +
+  geom_smooth(
+    method = "loess", formula = y ~ x,
+    se = FALSE, color = "red", linewidth = 0.75
+  ) +
+  labs(x = NULL, y = NULL)
 ```
 
 ## Beispiele
@@ -660,36 +616,36 @@ In den nachfolgend dargestellten Auswertungen zur mittleren Lebenserwartung auf 
 #| fig-asp: 1.2
 
 p1 <- plot_linear_regression(
-    d_wb_latest,
-    he,
-    le,
-    "Ausgaben Gesundheitswesen (% BIP)",
-    "Mittlere Lebenswerwartung"
+  d_wb_latest,
+  he,
+  le,
+  "Ausgaben Gesundheitswesen (% BIP)",
+  "Mittlere Lebenswerwartung"
 )
 
 p2 <- plot_linear_regression(
-    d_wb_latest,
-    edu,
-    le,
-    "Ausgaben Bildungswesen (% BIP)",
-    "Mittlere Lebenswerwartung"
+  d_wb_latest,
+  edu,
+  le,
+  "Ausgaben Bildungswesen (% BIP)",
+  "Mittlere Lebenswerwartung"
 )
 
 p3 <- plot_linear_regression(
-    d_wb_latest,
-    gini,
-    le,
-    "Gini-Koeffizient",
-    "Mittlere Lebenswerwartung"
+  d_wb_latest,
+  gini,
+  le,
+  "Gini-Koeffizient",
+  "Mittlere Lebenswerwartung"
 )
 
 p4 <- plot_linear_regression(
-    d_wb_latest,
-    gdppc,
-    le,
-    "BIP pro Kopf",
-    "Mittlere Lebenswerwartung",
-    log = TRUE
+  d_wb_latest,
+  gdppc,
+  le,
+  "BIP pro Kopf",
+  "Mittlere Lebenswerwartung",
+  log = TRUE
 )
 
 p1 + p2 + p3 + p4 + plot_layout(axes = "collect")
