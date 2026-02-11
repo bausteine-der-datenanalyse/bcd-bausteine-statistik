@@ -543,8 +543,9 @@ d_ns_bo_2008_2010_monat |>
 ```
 
 ```{r}
-#| fig-alt: "Monatliche Niederschläge in Bochum für die Jahre 2008 und 2012.
-#            Die Mittelwerte unterscheiden sich nur geringfügig."
+#| fig-alt: |
+# Monatliche Niederschläge in Bochum für die Jahre 2008 und 2012.
+# Die Mittelwerte unterscheiden sich nur geringfügig.
 
 ggplot(
   data = d_ns_bo_2008_2010_monat,
@@ -1007,8 +1008,9 @@ Das gebräuchlichste Konzentrationsmaß ist der Gini-Koeffizient, ein statistisc
 ```{r}
 #| fig-asp: 0.5
 #| label: fig-gini-world
-#| fig-cap: "Gini-Koeffizient der Einkommen
-#            (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))"
+#| fig-cap: |
+# Gini-Koeffizient der Einkommen
+# (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))
 
 ggplot(data = d_bsp_gini) +
   geom_sf(mapping = aes(fill = gini / 100)) +
@@ -1096,8 +1098,9 @@ die beiden Lorenzkurven
 
 ```{r}
 #| fig-asp: 0.55
-#| fig-alt: "Lorenzkurven für die Niederschläge in Bochum und Nha Trang.
-#            Der Bauch der Kurve ist für Nha Trang deutlich größer als für Bochum."
+#| fig-alt: |
+# Lorenzkurven für die Niederschläge in Bochum und Nha Trang. Der Bauch der Kurve ist für
+# Nha Trang deutlich größer als für Bochum.
 
 p1 <- p_lorenzkurve(d_ns_bo_2008_monat, "Niederschlag", "Bochum")
 p2 <- p_lorenzkurve(d_ns_nt_2015_monat, "Niederschlag", "Nha Trang")

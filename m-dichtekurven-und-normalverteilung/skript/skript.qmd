@@ -238,13 +238,14 @@ Für den zu einem empirisch erhobenen Merkmal $X$ gehen wir wieder von der geord
 ```{r}
 #| fig-asp: 1
 #| label: fig-nq-plot
-#| fig-cap: "Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen
-#|           Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte,
-#|           die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen.
-#|           Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der
-#|           Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten
-#|           und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte
-#|           im Normal-Quantil-Plot"
+#| fig-cap: |
+#|  Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen
+#|  Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte,
+#|  die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen.
+#|  Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der
+#|  Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten
+#|  und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte
+#|  im Normal-Quantil-Plot
 
 fig_nq_plot()
 ```
@@ -254,11 +255,12 @@ Mit dem Normal-Quantil-Plot wird also veranschaulicht, inwieweit die Verteilung 
 ```{r}
 #| fig-asp: 1.5
 #| label: fig-nq-beispiel-plots
-#| fig-cap: "Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das
-#|           näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden,
-#|           für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen
-#|           Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine
-#|           konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot"
+#| fig-cap: |
+#|  Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das
+#|  näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden,
+#|  für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen
+#|  Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine
+#|  konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot
 
 d <- d_nq_examples()
 
@@ -308,10 +310,11 @@ p1 / p2
 
 ```{r}
 #| label: fig-unistrasse-nq
-#| fig-cap: "NQ-Plot zur Geschwindigkeitsmesung. Da die wirkliche Verteilung steilere Flanken
-#|           besitzt als die angepasste Normalverteilung (@fig-normalverteilung-angepasst)
-#|           ergibt sich der hierfür charakteristische Verlauf der Punkte:
-#|           Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb"
+#| fig-cap: |
+#|  NQ-Plot zur Geschwindigkeitsmesung. Da die wirkliche Verteilung steilere Flanken
+#|  besitzt als die angepasste Normalverteilung (@fig-normalverteilung-angepasst)
+#|  ergibt sich der hierfür charakteristische Verlauf der Punkte: Kleine Werte
+#|  liegen unterhalb der Geraden, große Werte oberhalb
 
 ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
   geom_qq_line() +

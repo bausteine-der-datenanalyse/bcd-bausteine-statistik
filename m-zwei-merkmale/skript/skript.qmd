@@ -62,16 +62,16 @@ Unten dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums 
 
 ```{r}
 ggplot(
-  data = d_wirtschaftswachstum,
-  mapping = aes(x = Prognose, y = Wachstum)
+    data = d_wirtschaftswachstum,
+    mapping = aes(x = Prognose, y = Wachstum)
 ) +
-  geom_abline(
-    intercept = 0, slope = 1, color = "red", linewidth = 0.75
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  geom_rug()
+    geom_abline(
+        intercept = 0, slope = 1, color = "red", linewidth = 0.75
+    ) +
+    geom_point(
+        shape = 21, fill = "light blue", size = 2.5
+    ) +
+    geom_rug()
 ```
 
 #### Lebenserwartung
@@ -95,19 +95,19 @@ Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung
 
 ```{r}
 ggplot(data = d_wb_latest) +
-  geom_point(
-    mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
-    shape = 21, show.legend = FALSE, alpha = 0.8
-  ) +
-  scale_size(
-    range = c(0.1, 10)
-  ) +
-  scale_fill_distiller(
-    palette = "Reds", direction = 1
-  ) +
-  labs(
-    x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
-  )
+    geom_point(
+        mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
+        shape = 21, show.legend = FALSE, alpha = 0.8
+    ) +
+    scale_size(
+        range = c(0.1, 10)
+    ) +
+    scale_fill_distiller(
+        palette = "Reds", direction = 1
+    ) +
+    labs(
+        x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
+    )
 ```
 
 ### Zweidimensionale Histogramme und Dichten {#sec-2d-histogramme}
@@ -157,26 +157,26 @@ In einer zweidimensionalen Darstellung des Histogramms oder der Dichtefunktion w
 #| label: fig-zwei-merkmale-2d
 
 p0 <- ggplot(
-  data = d_wb_latest, 
-  mapping = aes(x = he, y = le)
+    data = d_wb_latest,
+    mapping = aes(x = he, y = le)
 )
 
 p1 <- p0 +
-  geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
-  scale_fill_distiller(palette = "Blues", direction = 1)
+    geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
+    scale_fill_distiller(palette = "Blues", direction = 1)
 
 p2 <- p0 +
-  geom_density_2d_filled(color = "black", linewidth = 0.25) +
-  scale_fill_brewer(palette = "Blues")
+    geom_density_2d_filled(color = "black", linewidth = 0.25) +
+    scale_fill_brewer(palette = "Blues")
 
-p1 + p2 + plot_layout(axes = 'collect') &
-  xlim(0, 20) & ylim(45, 85) &
-  labs(
-    x = "Ausgaben Gesundheitswesen (% BIP)",
-    y = "Mittlere Lebenserwartung",
-    fill = "Anzahl"
-  ) &
-  theme(legend.position = "none")
+p1 + p2 + plot_layout(axes = "collect") &
+    xlim(0, 20) & ylim(45, 85) &
+    labs(
+        x = "Ausgaben Gesundheitswesen (% BIP)",
+        y = "Mittlere Lebenserwartung",
+        fill = "Anzahl"
+    ) &
+    theme(legend.position = "none")
 ```
 
 ![Histogramms (links) und geschätzte Verteilungsfunktion (rechts), räumliche Darstellung](00-bilder/weltbank-3d.svg){#fig-zwei-merkmale-3d}
@@ -302,24 +302,24 @@ Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kaus
 **Beispiel Scheinkorrelation:** In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
 
 ```{r}
-countries = c("Singapore", "Finland", "Brazil", "Switzerland")
+countries <- c("Singapore", "Finland", "Brazil", "Switzerland")
 d <- mutate(d_pisa, sel = country %in% countries)
 
 ggplot(data = d, mapping = aes(x = read, y = math)) +
-  geom_point(
-    mapping = aes(fill = sel), shape = 21, show.legend = FALSE
-  ) +
-  geom_label(
-    data = filter(d, country %in% countries),
-    mapping = aes(label = country),
-    hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
-  ) +
-  scale_fill_manual(
-    values = c("light blue", "red")
-  ) +
-  labs(
-    x = "Lesekompetenz", y = "Mathematische Kompetenz"
-  )
+    geom_point(
+        mapping = aes(fill = sel), shape = 21, show.legend = FALSE
+    ) +
+    geom_label(
+        data = filter(d, country %in% countries),
+        mapping = aes(label = country),
+        hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
+    ) +
+    scale_fill_manual(
+        values = c("light blue", "red")
+    ) +
+    labs(
+        x = "Lesekompetenz", y = "Mathematische Kompetenz"
+    )
 ```
 
 Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
@@ -517,15 +517,15 @@ der unten dargestellten Ausgleichsgeraden.
 
 ```{r}
 ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
-  geom_smooth(
-    method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  labs(
-    x = "Lesekompetenz", y = "Mathematische Kompetenz"
-  )
+    geom_smooth(
+        method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
+    ) +
+    geom_point(
+        shape = 21, fill = "light blue", size = 2.5
+    ) +
+    labs(
+        x = "Lesekompetenz", y = "Mathematische Kompetenz"
+    )
 ```
 
 :::
@@ -584,22 +584,22 @@ Als Beispiel betrachten wir die beiden nachfolgend dargestellten Datensätze. Wi
 
 ```{r}
 plot_rsquare_example(y1) + plot_rsquare_example(y2) + plot_layout(axes = "collect") &
-  scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
-  scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
-  labs(x = NULL, y = NULL)
+    scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
+    scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
+    labs(x = NULL, y = NULL)
 ```
 
 Gegenbeispiel: Für die Datensätze aus Anscombes Quartett ergeben sich in allen vier Fällen für das Bestimmtheitsmaß Werte von $R^2 = 0.67$, so dass wir hier keinerlei Aufschluss darüber erhalten, ob das lineare Modell sinnvoll ist oder nicht. Im Zweifelsfall sollte man daher immer die Residuen $\varepsilon_i$ plotten, wie das hier für das Anscombe-Quartett dargestellt ist. 
 
 ```{r}
 anscombe |>
-  mutate(
-    y1 = y1 - 3 - 0.5 * x1,
-    y2 = y2 - 3 - 0.5 * x2,
-    y3 = y3 - 3 - 0.5 * x3,
-    y4 = y4 - 3 - 0.5 * x4,
-  ) |>
-  plot_anscombe(c(-4, 4))
+    mutate(
+        y1 = y1 - 3 - 0.5 * x1,
+        y2 = y2 - 3 - 0.5 * x2,
+        y3 = y3 - 3 - 0.5 * x3,
+        y4 = y4 - 3 - 0.5 * x4,
+    ) |>
+    plot_anscombe(c(-4, 4))
 ```
 
 :::
@@ -628,20 +628,20 @@ Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, di
 
 ```{r}
 tibble(
-  x = 2 * pi * runif(300),
-  y = sin(x) + 0.2 * rnorm(length(x))
+    x = 2 * pi * runif(300),
+    y = sin(x) + 0.2 * rnorm(length(x))
 ) |>
-  ggplot(
-    mapping = aes(x = x, y = y)
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  geom_smooth(
-    method = "loess", formula = y ~ x,
-    se = FALSE, color = "red", linewidth = 0.75
-  ) +
-  labs(x = NULL, y = NULL)
+    ggplot(
+        mapping = aes(x = x, y = y)
+    ) +
+    geom_point(
+        shape = 21, fill = "light blue", size = 2.5
+    ) +
+    geom_smooth(
+        method = "loess", formula = y ~ x,
+        se = FALSE, color = "red", linewidth = 0.75
+    ) +
+    labs(x = NULL, y = NULL)
 ```
 
 ## Beispiele
@@ -660,36 +660,36 @@ In den nachfolgend dargestellten Auswertungen zur mittleren Lebenserwartung auf 
 #| fig-asp: 1.2
 
 p1 <- plot_linear_regression(
-  d_wb_latest,
-  he,
-  le,
-  "Ausgaben Gesundheitswesen (% BIP)",
-  "Mittlere Lebenswerwartung"
+    d_wb_latest,
+    he,
+    le,
+    "Ausgaben Gesundheitswesen (% BIP)",
+    "Mittlere Lebenswerwartung"
 )
 
 p2 <- plot_linear_regression(
-  d_wb_latest,
-  edu,
-  le,
-  "Ausgaben Bildungswesen (% BIP)",
-  "Mittlere Lebenswerwartung"
+    d_wb_latest,
+    edu,
+    le,
+    "Ausgaben Bildungswesen (% BIP)",
+    "Mittlere Lebenswerwartung"
 )
 
 p3 <- plot_linear_regression(
-  d_wb_latest,
-  gini,
-  le,
-  "Gini-Koeffizient",
-  "Mittlere Lebenswerwartung"
+    d_wb_latest,
+    gini,
+    le,
+    "Gini-Koeffizient",
+    "Mittlere Lebenswerwartung"
 )
 
 p4 <- plot_linear_regression(
-  d_wb_latest,
-  gdppc,
-  le,
-  "BIP pro Kopf",
-  "Mittlere Lebenswerwartung",
-  log = TRUE
+    d_wb_latest,
+    gdppc,
+    le,
+    "BIP pro Kopf",
+    "Mittlere Lebenswerwartung",
+    log = TRUE
 )
 
 p1 + p2 + p3 + p4 + plot_layout(axes = "collect")

@@ -7,9 +7,17 @@ clean:
 	rm -rf m-*/skript/out
 	rm -rf m-*/skript/skript_files
 
-render:
+html:
 	for folder in m-*; do \
-		quarto render $$folder/skript -t html; \
-		quarto render $$folder/skript -t pdf; \
+		echo $$folder; \
+		quarto render $$folder/skript -t html || exit 1; \
 	done
+
+pdf:
+	for folder in m-*; do \
+		echo $$folder; \
+		quarto render $$folder/skript -t pdf || exit 1; \
+	done
+
+render: html pdf
 
