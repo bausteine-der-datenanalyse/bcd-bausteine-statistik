@@ -50,46 +50,48 @@ Die Häufigkeitsverteilungen lassen sich natürlich tabellarisch aufbereiten, h�
 ```{r}
 #| fig-asp: 1.3
 #| label: fig-diagrammtypen
-#| fig-cap: "Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm) zur Darstellung von Verteilungen (Energieträger Bundesrepublik Deutschland 2017, Datenquelle: BMWI)"
+#| fig-cap: "Gebräuchliche Diagrammtypen (Stab-, Säulen-, Balken-, Kreis- und Ringdiagramm)
+#|           zur Darstellung von Verteilungen (Energieträger Bundesrepublik Deutschland 2017,
+#|           Datenquelle: BMWI)"
 
 d <- import_energietrager("A21:AC30") |> filter(Jahr == 2017)
 
 p_col <- ggplot(data = d) +
-    geom_col(
-        mapping = aes(x = Energieträger, y = Wert),
-        width = 0.125
-    ) +
-    labs(
-        x = NULL,
-        y = "Anteil in Prozent"
-    )
+  geom_col(
+    mapping = aes(x = Energieträger, y = Wert),
+    width = 0.125
+  ) +
+  labs(
+    x = NULL,
+    y = "Anteil in Prozent"
+  )
 
 p_bar <- ggplot(data = d) +
-    geom_col(
-        mapping = aes(x = Energieträger, y = Wert, fill = Energieträger),
-        show.legend = FALSE
-    ) +
-    scale_fill_manual(
-        values = c_energietraeger
-    ) +
-    labs(
-        x = NULL,
-        y = "Anteil in Prozent"
-    )
+  geom_col(
+    mapping = aes(x = Energieträger, y = Wert, fill = Energieträger),
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(
+    values = c_energietraeger
+  ) +
+  labs(
+    x = NULL,
+    y = "Anteil in Prozent"
+  )
 
 p_pie <- ggplot(data = d) +
-    geom_col(
-        mapping = aes(x = 2, y = Wert, fill = Energieträger),
-        width = 1
-    ) +
-    coord_polar(
-        start = 0,
-        theta = "y"
-    ) +
-    scale_fill_manual(
-        values = c_energietraeger
-    ) +
-    theme_void()
+  geom_col(
+    mapping = aes(x = 2, y = Wert, fill = Energieträger),
+    width = 1
+  ) +
+  coord_polar(
+    start = 0,
+    theta = "y"
+  ) +
+  scale_fill_manual(
+    values = c_energietraeger
+  ) +
+  theme_void()
 
 p1 <- p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
 p2 <- p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1))
@@ -98,8 +100,8 @@ p4 <- p_pie
 p5 <- p_pie + xlim(0.125, 2.5)
 
 free(p1 + p2 + plot_layout(axes = "collect")) /
-    free(p3) /
-    (p4 + p5 + plot_layout(guides = "collect"))
+  free(p3) /
+  (p4 + p5 + plot_layout(guides = "collect"))
 ```
 
 Die Eigenschaften der Diagramme sind in der folgenden Definition zusammengefasst.
@@ -140,38 +142,41 @@ Letztlich ist die Entscheidung für oder gegen ein Kreis- oder Ringdiagramm aber
 
 ```{r}
 #| label: fig-diagramm-balken-jahre
-#| fig-cap: "Zeitliche Entwicklung einer Verteilung in einem Säulendiagramm (Energieträger Bundesrepublik Deutschland 1990 - 2017, Quelle: BMWI)"
+#| fig-cap: "Zeitliche Entwicklung einer Verteilung in einem Säulendiagramm
+#|           (Energieträger Bundesrepublik Deutschland 1990 - 2017, Quelle: BMWI)"
 
 ggplot(data = import_energietrager("A8:AC17")) +
-    geom_col(mapping = aes(x = Jahr, y = Wert, fill = Energieträger)) +
-    scale_fill_manual(values = c_energietraeger) +
-    scale_x_discrete(breaks = seq(1990, 2100, by = 5)) +
-    labs(x = NULL, y = "Verbrauch in PJ", fill = NULL) +
-    theme(legend.position = "top")
+  geom_col(mapping = aes(x = Jahr, y = Wert, fill = Energieträger)) +
+  scale_fill_manual(values = c_energietraeger) +
+  scale_x_discrete(breaks = seq(1990, 2100, by = 5)) +
+  labs(x = NULL, y = "Verbrauch in PJ", fill = NULL) +
+  theme(legend.position = "top")
 ```
 
 ```{r}
 #| label: fig-pie-or-bar
-#| fig-cap: "Drei Verteilungen jeweils in einem Kreis- und einem Säulendiagramm dargestellt. Die Kreisdiagramme unterscheiden sich auf den ersten Blick nur unwesentlich, die Eigenschaften der Verteilungen sind am Säulendiagramm besser ablesbar"
+#| fig-cap: "Drei Verteilungen jeweils in einem Kreis- und einem Säulendiagramm dargestellt.
+#|           Die Kreisdiagramme unterscheiden sich auf den ersten Blick nur unwesentlich,
+#|           die Eigenschaften der Verteilungen sind am Säulendiagramm besser ablesbar"
 
 set.seed(1)
 d <- tibble(n = LETTERS[4:1], x1 = c(16, 17.5, 19, 21.5), x2 = sample(x1), x3 = rev(x1))
 
 plot_pie <- function(v) {
-    ggplot(data = d, mapping = aes(x = "", y = {{ v }}, fill = n, label = n)) +
-        geom_col(show.legend = FALSE) +
-        geom_text(position = position_stack(vjust = 0.5)) +
-        coord_polar(theta = "y") +
-        scale_fill_brewer() +
-        theme_void()
+  ggplot(data = d, mapping = aes(x = "", y = {{ v }}, fill = n, label = n)) +
+    geom_col(show.legend = FALSE) +
+    geom_text(position = position_stack(vjust = 0.5)) +
+    coord_polar(theta = "y") +
+    scale_fill_brewer() +
+    theme_void()
 }
 
 plot_col <- function(v) {
-    ggplot(data = d, mapping = aes(x = n, y = {{ v }}, fill = n)) +
-        geom_col(show.legend = FALSE) +
-        scale_y_continuous(labels = NULL, breaks = NULL) +
-        scale_fill_brewer() +
-        labs(x = NULL, y = NULL)
+  ggplot(data = d, mapping = aes(x = n, y = {{ v }}, fill = n)) +
+    geom_col(show.legend = FALSE) +
+    scale_y_continuous(labels = NULL, breaks = NULL) +
+    scale_fill_brewer() +
+    labs(x = NULL, y = NULL)
 }
 
 plot_pie(x1) + plot_pie(x2) + plot_pie(x3) + plot_col(x1) + plot_col(x2) + plot_col(x3)
@@ -185,7 +190,7 @@ Wenn ein Merkmal viele verschiedene Ausprägungen besitzt, das heißt, wenn die 
 **Beispiel Klausurergebnisse:** Wir betrachten die Ergebnisse einer Klausur im Fach Mathematik mit 129 Teilnehmer:innen. Die erreichten Prozentpunkte bilden die Urliste
 
 $$
-  x_1 = 28.17,\; x_2 = 12.32,\; x_3 = 59.58,\; x_4 = 55.02, \dots,\; x_{129} = 87.34.
+x_1 = 28.17,\; x_2 = 12.32,\; x_3 = 59.58,\; x_4 = 55.02, \dots,\; x_{129} = 87.34.
 $$
 
 mit der nachfolgend dargestellten Häufigkeitsverteilung.
@@ -194,8 +199,8 @@ mit der nachfolgend dargestellten Häufigkeitsverteilung.
 #| fig-asp: 0.45
 
 ggplot(data = d_klausur) +
-    geom_bar(mapping = aes(x = prozent), width = 0.01) +
-    labs(x = "Prozentpunkte", y = "Anzahl")
+  geom_bar(mapping = aes(x = prozent), width = 0.01) +
+  labs(x = "Prozentpunkte", y = "Anzahl")
 ```
 
 Es ist zu erkennen, dass einzelne Werte zwei- oder dreimal vorkommen und dass es eine Häufung um $50\%$ herum gibt. Darüber hinaus ist das Diagramm nicht informativ.
@@ -207,7 +212,7 @@ Ein Histogramm entsteht in drei Schritten. Wir gehen dabei davon aus, dass es si
 
 1. Für die [Gruppierung]{.neuerbegriff} der Daten wählen wir als [Klassen]{.neuerbegriff} die $k$ benachbarten Intervalle 
 $$
-  [c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1},
+[c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1},
 $$ 
 die auf einer Seite geschlossen und auf der anderen Seite offen sind, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist. Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (also linksoffen) wählen können, das macht keinen grundlegenden Unterschied.
 
@@ -220,101 +225,101 @@ Das Prinzip der Flächentreue wird an einem Beispiel verdeutlicht.
 ::: beispiel
 **Beispiel Flächentreue:** Wir betrachten den Datensatz
 $$
-  x_1 = 3,\; x_2 = 4,\;, x_3 = 5, \; \dots \;, x_{20} = 27
+x_1 = 3,\; x_2 = 4,\;, x_3 = 5, \; \dots \;, x_{20} = 27
 $$
 mit insgesamt 20 Beobachtungen. TODO
 
 ```{r}
 d_pdf_beispiel <- tibble(
-    x = c(
-        3,
-        4,
-        6,
-        7,
-        7,
-        9,
-        10,
-        11,
-        12,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        22,
-        24,
-        27
-    )
+  x = c(
+    3,
+    4,
+    6,
+    7,
+    7,
+    9,
+    10,
+    11,
+    12,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    22,
+    24,
+    27
+  )
 )
 p5 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x),
-        binwidth = 5,
-        boundary = 0,
-        color = "black",
-        closed = "left"
-    ) +
-    labs(title = "Histogramme mit gleichen Klassenbreiten (5)") +
-    ylab("absolute Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x),
+    binwidth = 5,
+    boundary = 0,
+    color = "black",
+    closed = "left"
+  ) +
+  labs(title = "Histogramme mit gleichen Klassenbreiten (5)") +
+  ylab("absolute Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p6 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x, y = after_stat(density)),
-        binwidth = 5,
-        boundary = 0,
-        color = "black",
-        closed = "left"
-    ) +
-    ylab("relative Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x, y = after_stat(density)),
+    binwidth = 5,
+    boundary = 0,
+    color = "black",
+    closed = "left"
+  ) +
+  ylab("relative Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p7 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x),
-        binwidth = 10,
-        boundary = 0,
-        color = "black",
-        closed = "left"
-    ) +
-    labs(title = "Histogramme mit gleichen Klassenbreiten (10)") +
-    ylab("absolute Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x),
+    binwidth = 10,
+    boundary = 0,
+    color = "black",
+    closed = "left"
+  ) +
+  labs(title = "Histogramme mit gleichen Klassenbreiten (10)") +
+  ylab("absolute Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p8 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x, y = after_stat(density)),
-        binwidth = 10,
-        boundary = 0,
-        color = "black",
-        closed = "left"
-    ) +
-    ylab("relative Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x, y = after_stat(density)),
+    binwidth = 10,
+    boundary = 0,
+    color = "black",
+    closed = "left"
+  ) +
+  ylab("relative Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p9 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x),
-        breaks = c(0, 10, 15, 30),
-        color = "black",
-        closed = "left"
-    ) +
-    labs(title = "Histogramme mit ungleichen Klassenbreiten") +
-    ylab("absolute Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x),
+    breaks = c(0, 10, 15, 30),
+    color = "black",
+    closed = "left"
+  ) +
+  labs(title = "Histogramme mit ungleichen Klassenbreiten") +
+  ylab("absolute Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p10 <- ggplot(data = d_pdf_beispiel) +
-    geom_histogram(
-        mapping = aes(x = x, y = after_stat(density)),
-        breaks = c(0, 10, 15, 30),
-        color = "black",
-        closed = "left"
-    ) +
-    ylab("relative Häufigkeit") +
-    xlab("Beispielmerkmal")
+  geom_histogram(
+    mapping = aes(x = x, y = after_stat(density)),
+    breaks = c(0, 10, 15, 30),
+    color = "black",
+    closed = "left"
+  ) +
+  ylab("relative Häufigkeit") +
+  xlab("Beispielmerkmal")
 
 p5 + p6
 p7 + p8
@@ -337,27 +342,27 @@ Eine eckige Klammer zeigt ein geschlossenes Intervall und eine runde Klammer ein
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
 $$
-  k \approx \sqrt{n} \quad \text{oder} \quad k \approx 10 \log_{10} n,
+k \approx \sqrt{n} \quad \text{oder} \quad k \approx 10 \log_{10} n,
 $$
 aber letztlich entscheidet der subjektive Eindruck.
 
 ::: beispiel
 **Beispiel Klausurergebnisse (Fortsetzung):** Mit den Klassen 
 $$
-  [0, 5), [5, 10), \dots, [95, 100)
+[0, 5), [5, 10), \dots, [95, 100)
 $$ 
 ergibt sich für die Mathematikklausur folgendes Histogramm:
 
 ```{r}
 ggplot(data = d_klausur) +
-    geom_histogram(
-        mapping = aes(x = note, fill = bestanden),
-        binwidth = 5,
-        boundary = 0,
-        closed = "left",
-        show.legend = FALSE
-    ) +
-    labs(x = "Erreichte Prozentpunkte", y = "Anzahl")
+  geom_histogram(
+    mapping = aes(x = note, fill = bestanden),
+    binwidth = 5,
+    boundary = 0,
+    closed = "left",
+    show.legend = FALSE
+  ) +
+  labs(x = "Erreichte Prozentpunkte", y = "Anzahl")
 ```
 
 Die Notenverteilung ist jetzt am Histogramm deutlich abzulesen.
@@ -397,7 +402,8 @@ c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> p_histogram()
 #|   - "Linkssteil bzw. rechtsschief"
 #|   - "Symmetrisch"
 #|   - "Rechtssteil bzw. linksschief"
-#| fig-alt: "Gegenüberstellung einer linkssteilen, einer symmetrischen und einer rechtssteilen Verteilung"
+#| fig-alt: "Gegenüberstellung einer linkssteilen, einer symmetrischen und einer
+#|           rechtssteilen Verteilung"
 
 rlnorm(10000) |> p_histogram(q = 0.95)
 rnorm(10000) |> p_histogram()
@@ -413,71 +419,71 @@ An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegeb
 :::: beispiel
 **Beispiel Häufigkeitsverteilung:** Wir betrachten ein Merkmal mit den Werten
 $$
-  x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4.
+x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4.
 $$
 Aus der tabellarischen Zusammenstellung der Häufigkeiten und der kumullierten Häufigkeiten
 
 ```{r}
 d1 <- tibble(a = c(1.1, 1.3, 1.9, 2.5, 2.1, 1.3, 4)) |>
-    arrange(a) |>
-    group_by(a) |>
-    summarize(h = n()) |>
-    mutate(
-        i = row_number(),
-        H = cumsum(h)
-    )
+  arrange(a) |>
+  group_by(a) |>
+  summarize(h = n()) |>
+  mutate(
+    i = row_number(),
+    H = cumsum(h)
+  )
 
 d1 |>
-    gt(rowname_col = "i") |>
-    cols_label(
-        a = md("Ausprägung $a_i$"),
-        h = md("Häufigkeit $h_i$"),
-        H = md("Kumulierte Häufigkeit $H_i$")
-    ) |>
-    cols_align("center") |>
-    tab_stubhead(label = md("$i$")) |>
-    tab_options(latex.use_longtable = TRUE)
+  gt(rowname_col = "i") |>
+  cols_label(
+    a = md("Ausprägung $a_i$"),
+    h = md("Häufigkeit $h_i$"),
+    H = md("Kumulierte Häufigkeit $H_i$")
+  ) |>
+  cols_align("center") |>
+  tab_stubhead(label = md("$i$")) |>
+  tab_options(latex.use_longtable = TRUE)
 ```
 
 lässt sich sofort die Zuordnungsvorschrift der absoluten kumulierten Häufigkeitsverteilung
 $$
-  H(x) = \begin{cases}
-    \; 0 & \text{für} \quad x < 1.1 \\
-    \; 1 & \text{für} \quad 1.1 \leq x < 1.3 \\
-    \; 3 & \text{für} \quad 1.3 \leq x < 1.9 \\
-    \; 4 & \text{für} \quad 1.9 \leq x < 2.1 \\
-    \; 5 & \text{für} \quad 2.1 \leq x < 2.5 \\
-    \; 6 & \text{für} \quad 2.5 \leq x < 4 \\
-    \; 7 & \text{für} \quad x \geq 4
-  \end{cases}
+H(x) = \begin{cases}
+\; 0 & \text{für} \quad x < 1.1 \\
+\; 1 & \text{für} \quad 1.1 \leq x < 1.3 \\
+\; 3 & \text{für} \quad 1.3 \leq x < 1.9 \\
+\; 4 & \text{für} \quad 1.9 \leq x < 2.1 \\
+\; 5 & \text{für} \quad 2.1 \leq x < 2.5 \\
+\; 6 & \text{für} \quad 2.5 \leq x < 4 \\
+\; 7 & \text{für} \quad x \geq 4
+\end{cases}
 $$
 angeben. Sie sagt uns zu jeder Zahl $x$, wie viele Ausprägungen kleiner oder gleich diesem Wert sind. In der folgenden Grafik sind die Häufigkeitsverteilung sowie der Graph der absoluten kumulierten Häufigkeitsverteilung $H$ dargestellt.
 
 ```{r}
 d2 <- d1 |>
-    rename(start = a) |>
-    add_row(start = 0.8, H = 0, .before = 1) |>
-    mutate(end = lead(start, default = 4.3))
+  rename(start = a) |>
+  add_row(start = 0.8, H = 0, .before = 1) |>
+  mutate(end = lead(start, default = 4.3))
 
 sx <- scale_x_continuous(
-    breaks = pull(d1, a),
-    limit = c(min(pull(d2, start)), max(pull(d2, end))),
-    minor_breaks = NULL
+  breaks = pull(d1, a),
+  limit = c(min(pull(d2, start)), max(pull(d2, end))),
+  minor_breaks = NULL
 )
 
 p1 <- ggplot(data = d1) +
-    geom_col(mapping = aes(x = a, y = h)) +
-    sx +
-    scale_y_continuous(breaks = 0:2, minor_breaks = NULL) +
-    labs(x = NULL, y = NULL)
+  geom_col(mapping = aes(x = a, y = h)) +
+  sx +
+  scale_y_continuous(breaks = 0:2, minor_breaks = NULL) +
+  labs(x = NULL, y = NULL)
 
 p2 <- ggplot() +
-    geom_segment(data = d2, mapping = aes(x = start, xend = end, y = H)) +
-    geom_point(data = d2 |> tail(n = -1), mapping = aes(x = start, y = H)) +
-    geom_point(data = d2 |> head(n = -1), mapping = aes(x = end, y = H), shape = 21) +
-    sx +
-    scale_y_continuous(breaks = 0:7, minor_breaks = NULL) +
-    labs(x = NULL, y = NULL)
+  geom_segment(data = d2, mapping = aes(x = start, xend = end, y = H)) +
+  geom_point(data = d2 |> tail(n = -1), mapping = aes(x = start, y = H)) +
+  geom_point(data = d2 |> head(n = -1), mapping = aes(x = end, y = H), shape = 21) +
+  sx +
+  scale_y_continuous(breaks = 0:7, minor_breaks = NULL) +
+  labs(x = NULL, y = NULL)
 
 p1 / p2 + plot_layout(axes = "collect")
 ```
@@ -487,21 +493,21 @@ Am Graphen von $H$ lässt sich nun unmittelbar ablesen, dass es (zum Beispiel) 4
 
 Wie wir an dem Beispiel gesehen haben, ist die absolute Häufigkeitsverteilung $H : \mathbb{R} \to \mathbb{N}$ also eine Funktion mit der Zuordnungsvorschrift
 $$
-  H(x) = \text{'Anzahl der Werte $x_i$ mit $x_i \leq x$'}
+H(x) = \text{'Anzahl der Werte $x_i$ mit $x_i \leq x$'}
 $$
 beziehungsweise in mathematischer Schreibweise
 $$
-  H(x) = h(a_1) + h(a_2) + \dots + h(a_j) = \sum_{i: \; a_i \leq x} h(a_i).
+H(x) = h(a_1) + h(a_2) + \dots + h(a_j) = \sum_{i: \; a_i \leq x} h(a_i).
 $$
 Dabei ist $a_j$ die größte Ausprägung mit $a_j \leq x$.
 
 **Empirische Verteilungsfunktion.** In der Praxis wird meistens mit der [empirischen Verteilungsfunktion]{.neuerbegriff} oder der [relative kumulierte Häufigkeitsverteilung]{.neuerbegriff} gearbeitet. Diese Funktion wird mit $F$ bezeichnet und gibt nicht die Anzahl der Ausprägungen an, die kleiner gleich dem Wert $x$ sind, sondern den Anteil dieser Werte an der gesamten Stichprobe. Der Funktionswert ist daher
 $$
-  F(x) = \text{'Anteil der Werte $x_i$ mit $x_i \leq x$' = H(x) / n}
+F(x) = \text{'Anteil der Werte $x_i$ mit $x_i \leq x$' = H(x) / n}
 $$
 beziehungsweise
 $$
-  F(x) = f(a_1) + f(a_2) + \dots + f(a_j) = \sum_{i: \; a_i \leq x} f(a_i)
+F(x) = f(a_1) + f(a_2) + \dots + f(a_j) = \sum_{i: \; a_i \leq x} f(a_i)
 $$
 wobei $a_j$ wieder die größte Ausprägung mit $a_j \leq x$ ist.
 
@@ -509,24 +515,25 @@ wobei $a_j$ wieder die größte Ausprägung mit $a_j \leq x$ ist.
 **Beispiel Klausurergebnisse (Fortsetzung ):** Für die Mathematikklausur erhalten wir (mit den auf ganze Zahlen gerundeten Prozentpunkten) folgende empirische Verteilungsfunktion:
 
 ```{r}
-#| fig-alt: "Treppenfunktion der erreichten Prozentpunkte. Der Funktionswert $F(49)$ entspricht den 32% der Teilnehmenden, die nicht bestanden haben."
+#| fig-alt: "Treppenfunktion der erreichten Prozentpunkte. Der Funktionswert $F(49)$
+#|           entspricht den 32% der Teilnehmenden, die nicht bestanden haben."
 
-F <- ecdf(pull(d_klausur, note))
-pp <- tibble(x = c(0, 49), y = c(F(49), 0))
+f <- ecdf(pull(d_klausur, note))
+pp <- tibble(x = c(0, 49), y = c(f(49), 0))
 
 ggplot(data = d_klausur) +
-    geom_step(data = pp, mapping = aes(x = x, y = y), linewidth = 1, color = 'hotpink1') +
-    geom_step(mapping = aes(x = note), stat = "ecdf", linewidth = 1) +
-    scale_x_continuous(breaks = c(0, 25, 50, 75, 100), minor_breaks = -10:110) +
-    scale_y_continuous(breaks = c(0, round(F(49), 2), 1), minor_breaks = NULL) +
-    labs(x = "Erreichte Prozentpunkte", y = "F(x)")
+  geom_step(data = pp, mapping = aes(x = x, y = y), linewidth = 1, color = "hotpink1") +
+  geom_step(mapping = aes(x = note), stat = "ecdf", linewidth = 1) +
+  scale_x_continuous(breaks = c(0, 25, 50, 75, 100), minor_breaks = -10:110) +
+  scale_y_continuous(breaks = c(0, round(f(49), 2), 1), minor_breaks = NULL) +
+  labs(x = "Erreichte Prozentpunkte", y = "F(x)")
 ```
 
 Beachten Sie, dass der Graph von $F$ hier in Form einer Treppenfunktion dargestellt ist. Auf die Punkte, die den Funktionswert an einer Sprungstelle verdeutlichen, wird der Übersichtlichkeit halber verzichtet.
 
 Die Durchfallquote bei der Klausur entspricht damit genau dem Funktionswert von $F$ für $x = 49$. Der Wert lässt sich mit dem Programm R einfach berechnen, es ist
 $$
-  F(49) = `r round(F(49), 2)`
+F(49) = `r round(F(49), 2)`
 $$
 und die Durchfallquote beträgt 32%.
 :::
@@ -536,9 +543,9 @@ und die Durchfallquote beträgt 32%.
 - Beide Funktionen sind monoton wachsend.
 
 - Für $x < a_1$ ist der Funktionswert gleich null, es gilt also
-    $$
-      H(x) = F(x) = 0 \quad \text{für} \quad x < a_1.
-    $$
+$$
+H(x) = F(x) = 0 \quad \text{für} \quad x < a_1.
+$$
 
 - Für $x \geq a_k$ ist der Funktionswert von $H$ gleich der Anzahl der Beobachtungen und für $F$ gleich eins, so dass $$H(x) = n  \quad \text{beziehungsweise} \quad F(x) = 1 \quad \text{für} \quad x \geq a_k$$ gilt.
 

@@ -19,19 +19,19 @@ set.seed(106)
 t1 <- c("2" = "C", "1" = "D", "3" = "B", "4" = "A")
 
 plot_hist <- function(d, n) {
-    ggplot(data = d) +
-        geom_histogram(mapping = aes(x = X), bins = 40) +
-        scale_x_continuous(breaks = NULL) +
-        scale_y_continuous(breaks = NULL) +
-        labs(title = n, x = NULL, y = NULL)
+  ggplot(data = d) +
+    geom_histogram(mapping = aes(x = X), bins = 40) +
+    scale_x_continuous(breaks = NULL) +
+    scale_y_continuous(breaks = NULL) +
+    labs(title = n, x = NULL, y = NULL)
 }
 
 plot_ecdf <- function(d, n) {
-    ggplot(data = d) +
-        geom_step(mapping = aes(x = X), stat = "ecdf") +
-        scale_x_continuous(breaks = NULL) +
-        scale_y_continuous(breaks = NULL) +
-        labs(title = t1[n], x = NULL, y = NULL)
+  ggplot(data = d) +
+    geom_step(mapping = aes(x = X), stat = "ecdf") +
+    scale_x_continuous(breaks = NULL) +
+    scale_y_continuous(breaks = NULL) +
+    labs(title = t1[n], x = NULL, y = NULL)
 }
 
 d1 <- tibble(X = rnorm(1.5 * n0))
@@ -40,9 +40,9 @@ d3 <- tibble(X = c(rnorm(3.5 * n0), rnorm(1.5 * n0, 4), rnorm(2.5 * n0, 10)))
 d4 <- tibble(X = (100 + runif(35 * n0, min = -0.1, max = 0.1)))
 
 plot_grid(
-    plot_hist(d1, "1"), plot_hist(d2, "2"), plot_hist(d3, "3"), plot_hist(d4, "4"),
-    plot_ecdf(d4, "4"), plot_ecdf(d3, "3"), plot_ecdf(d2, "2"), plot_ecdf(d1, "1"), 
-    ncol = 4
+  plot_hist(d1, "1"), plot_hist(d2, "2"), plot_hist(d3, "3"), plot_hist(d4, "4"),
+  plot_ecdf(d4, "4"), plot_ecdf(d3, "3"), plot_ecdf(d2, "2"), plot_ecdf(d1, "1"),
+  ncol = 4
 )
 ```
 

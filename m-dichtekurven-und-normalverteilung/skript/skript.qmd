@@ -52,7 +52,7 @@ Diese Eigenschaften werden auf die Dichtekurve übertragen und es ergibt sich di
 ## Dichtekurve
 Eine stetige Funktion $f : \mathbb{R} \to \mathbb{R}$ heißt Dichtekurve, wenn für alle $x \in \mathbb{R}$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
 $$
-  \int_{-\infty}^{\infty} f(x)\, dx = 1
+\int_{-\infty}^{\infty} f(x)\, dx = 1
 $$
 aufschreiben.
 :::
@@ -85,14 +85,14 @@ p1 <- p_quantile(1.1, TeX("$x_p$")) +
     x = 0.75,
     y = 0.05,
     label = TeX("$p$", output = "character"),
-    parse = T
+    parse = TRUE
   ) +
   annotate(
     "text",
     x = 2,
     y = 0.05,
     label = TeX("$1 - p$", output = "character"),
-    parse = T
+    parse = TRUE
   )
 
 p2 <- p_quantile(1.835, TeX("$x_{med}$")) +
@@ -101,14 +101,14 @@ p2 <- p_quantile(1.835, TeX("$x_{med}$")) +
     x = 1.1,
     y = 0.05,
     label = TeX("$1/2$", output = "character"),
-    parse = T
+    parse = TRUE
   ) +
   annotate(
     "text",
     x = 2.45,
     y = 0.05,
     label = TeX("$1/2$", output = "character"),
-    parse = T
+    parse = TRUE
   )
 
 p1 + p2
@@ -126,10 +126,10 @@ Definiert ist die Dichtekurve der Normalverteilung mithilfe der Exponentialfunkt
 ## Dichtekurven von Normalverteilungen
 Für $\mu, \sigma \in \mathbb{R}$ und $\sigma > 0$ ist die Dichte der Normalverteilung durch 
 $$
-  f(x) 
-  =
-  \frac{1}{\sigma \sqrt{2\pi}}
-  \exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)
+f(x) 
+=
+\frac{1}{\sigma \sqrt{2\pi}}
+\exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)
 $$
 gegeben. Dabei heißt $\mu$ Mittelwert und $\sigma$ Standardabweichung der Verteilung.
 :::
@@ -151,9 +151,9 @@ Der Vorfaktor $1 / (\sigma \sqrt{2\pi})$ in der Funktionsgleichung von $f$ sorgt
 Für die Anteile in bestimmten Intervallen um den Mittelwert $\mu$ gilt die **68-95-99.7** Regel: Von der Gesamtfläche unter der Dichtekurve liegen 
 $$
 \begin{aligned}
-    68  \% & \qquad \text{im Intervall}  & [\mu -  \sigma &,\; \mu +  \sigma], \\[1em]
-    95  \% & \qquad \text{im Intervall}  & [\mu - 2\sigma &,\; \mu + 2\sigma], \\[1em]
-    99.7\% & \qquad \text{im Intervall}  & [\mu - 3\sigma &,\; \mu + 3\sigma].
+68  \% & \qquad \text{im Intervall}  & [\mu -  \sigma &,\; \mu +  \sigma], \\[1em]
+95  \% & \qquad \text{im Intervall}  & [\mu - 2\sigma &,\; \mu + 2\sigma], \\[1em]
+99.7\% & \qquad \text{im Intervall}  & [\mu - 3\sigma &,\; \mu + 3\sigma].
 \end{aligned}
 $$
 Die Bereiche sind in @fig-normalverteilung-prozentregel farblich hervorgehoben.
@@ -170,7 +170,7 @@ fig_prozentregel()
 
 Eine Normalverteilung mit dem Mittelwert $\mu = 0$ und der Standardabweichung $\sigma = 1$ heißt [Standardnormalverteilung]{.neuerbegriff}, siehe @fig-standardnormalverteilung. Die zugehörige Dichtekurve ist
 $$
-  \phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).
+\phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).
 $$ 
 Das Quantil $p$ zu einem Wert $z_p$ ist, so haben wir das oben vereinbart, die Fläche unter der Dichtekurve $\phi(z)$ links von $z_p$. Natürlich kann man nun für beliebige Werte von $z$ den zugehörigen Flächeninhalt unter der Dichtekurve links davon bestimmen. Dies führt auf die Verteilungsfunktion $\Phi$, die unten rechts dargestellt ist. Aufgrund der Symmetrie von $\phi(z)$ und weil die gesamte Fläche unter $\phi(z)$ gleich 1 ist, muss $\Phi(0) = 0.5$ gelten. Für $z$ gegen $\infty$ nähert sich der Funktionswert dem Wert 1 an. Erstaunlich ist, dass sich die Stammfunktion $\Phi$ nicht geschlossen angeben lässt, in der Regel wird sie numerisch ausgewertet.
 
@@ -187,32 +187,32 @@ fig_standardnormalverteilung()
 Um nun einen vorliegenden Datensatz durch eine Normalverteilung zu approximieren, liegt es nahe den Mittelwert $\bar{x}$ und die empirische Standardabweichung $\tilde{s}$ der Verteilung in die Normalverteilung einzusetzen. Mit $\mu = \bar{x}$ und $\sigma = \tilde{s}$ ergibt sich damit eine Approximation der Verteilung.
 
 ```{r}
-v = pull(d_unistrasse, Geschwindigkeit)
-mu = mean(v)
-sigma = sd(v)
+v <- pull(d_unistrasse, Geschwindigkeit)
+mu <- mean(v)
+sigma <- sd(v)
 ```
 
 :::beispiel
 **Beispiel Geschwindigkeitsmessung (Fortsetzung):** Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
 $$
-  \bar{x} = \SI{`r round(mu, 2)`}{km/h}
-  \quad \text{und} \quad
-  \tilde{s} = \SI{`r round(sigma, 3)`}{km/h}.
+\bar{x} = \SI{`r round(mu, 2)`}{km/h}
+\quad \text{und} \quad
+\tilde{s} = \SI{`r round(sigma, 3)`}{km/h}.
 $$ 
 Damit ergibt sich für die Dichtekurve die Funktionsgleichung
 $$
-  f(x) = 
-  `r signif(1 / (sigma * sqrt(2 * pi)), 4)` 
-  \cdot 
-  \exp 
-  \left(
-    - 
-    `r signif(1 / (2 * sigma^2), 4)` 
-    \cdot
-    \left(
-      x - `r signif(mu, 4)` 
-    \right)^2 
-  \right).
+f(x) = 
+`r signif(1 / (sigma * sqrt(2 * pi)), 4)` 
+\cdot 
+\exp 
+\left(
+- 
+`r signif(1 / (2 * sigma^2), 4)` 
+\cdot
+\left(
+x - `r signif(mu, 4)` 
+\right)^2 
+\right).
 $$
 Für die Dichtekurve erhalten wir zusammen mit dem Histogramm das in @fig-normalverteilung-angepasst dargestellte Bild. Es ist zu erkennen, dass die Normalverteilung den Verlauf des Histogramms zwar grob erfasst, insgesamt jedoch etwas breiter und dafür weniger hoch ausfällt. Offensichtlich lassen sich die gemessenen Geschwindigkeiten nur unzureichend mithilfe einer Normalverteilung abbilden. Um die Güte der Approximation besser beurteilen zu können, verwendet man so genannte Normal-Quantil-Plots.
 :::
@@ -238,7 +238,13 @@ Für den zu einem empirisch erhobenen Merkmal $X$ gehen wir wieder von der geord
 ```{r}
 #| fig-asp: 1
 #| label: fig-nq-plot
-#| fig-cap: "Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte, die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen. Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte im Normal-Quantil-Plot"
+#| fig-cap: "Entstehung des Normal-Quantil-Plots: Die roten Punkte sind die empirisch erhobenen
+#|           Werte $x_{(i)}$. Zu jedem Wert kann man das zugehörige $p_i$ (den Anteil der Werte,
+#|           die kleiner gleich $x_{(i)}$ sind) aus der empirischen Verteilungsfunktion ablesen.
+#|           Nun wird für jedes $p_i$ das zugehörige Quantil $z_{p_i}$ der
+#|           Standardnormalverteilung bestimmt. Das sind die blauen Punkte. Die Lage der roten
+#|           und blauen Punkte auf der $x$-Achse und der $z$-Achse bestimmt die Lage der Punkte
+#|           im Normal-Quantil-Plot"
 
 fig_nq_plot()
 ```
@@ -248,7 +254,11 @@ Mit dem Normal-Quantil-Plot wird also veranschaulicht, inwieweit die Verteilung 
 ```{r}
 #| fig-asp: 1.5
 #| label: fig-nq-beispiel-plots
-#| fig-cap: "Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden, für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot"
+#| fig-cap: "Verteilungen von Beobachtungen (oben) und zugehörige NQ-Plots (unten). Für das
+#|           näherungsweise normalverteilte Merkmal liegen die Punkte fast auf einer Geraden,
+#|           für die Gleichverteilung ober- und unterhalb der Geraden. Die asymetrischen
+#|           Verteilungen ergeben eine konkave (linkssteile Verteilung) beziehungsweise eine
+#|           konvexe (rechtssteile Verteilung) Anordnung der Punkte im NQ-Plot"
 
 d <- d_nq_examples()
 
@@ -298,7 +308,10 @@ p1 / p2
 
 ```{r}
 #| label: fig-unistrasse-nq
-#| fig-cap: "NQ-Plot zur Geschwindigkeitsmesung. Da die wirkliche Verteilung steilere Flanken besitzt als die angepasste Normalverteilung (@fig-normalverteilung-angepasst) ergibt sich der hierfür charakteristische Verlauf der Punkte: Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb"
+#| fig-cap: "NQ-Plot zur Geschwindigkeitsmesung. Da die wirkliche Verteilung steilere Flanken
+#|           besitzt als die angepasste Normalverteilung (@fig-normalverteilung-angepasst)
+#|           ergibt sich der hierfür charakteristische Verlauf der Punkte:
+#|           Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb"
 
 ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
   geom_qq_line() +
@@ -326,28 +339,28 @@ fig_kerndichteschaetzer()
 
 Gebräuchlich sind die Kerne mit den Funktionsgleichungen
 $$
-  \begin{aligned}
-      K(u)
-      & = 
-        \begin{cases}
-          \displaystyle \frac{3}{4}(1 - u^2) & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
-          0 & \text{sonst}
-        \end{cases}
-      && \text{Epachenikov-Kern,} 
-      \\[1em]
-      K(u)
-      & =
-        \begin{cases}
-          \displaystyle \frac{15}{16}(1 - u^2)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
-          0 & \text{sonst}
-        \end{cases}    
-      && 
-      \text{Bisquare-Kern,} 
-      \\[1em]
-      K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
-      && 
-      \text{Gauß-Kern.}
-  \end{aligned}
+\begin{aligned}
+K(u)
+& = 
+\begin{cases}
+\displaystyle \frac{3}{4}(1 - u^2) & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
+0 & \text{sonst}
+\end{cases}
+&& \text{Epachenikov-Kern,} 
+\\[1em]
+K(u)
+& =
+\begin{cases}
+\displaystyle \frac{15}{16}(1 - u^2)^2 & \text{für} \quad -1 \leq u \leq 1 \\[1ex]
+0 & \text{sonst}
+\end{cases}    
+&& 
+\text{Bisquare-Kern,} 
+\\[1em]
+K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
+&& 
+\text{Gauß-Kern.}
+\end{aligned}
 $$ 
 Eine Darstellung der Graphen der Kernfunktionen ist in @fig-kernfunktionen zu sehen.
 
@@ -390,7 +403,7 @@ Damit können wir den sogenannten Kerndichteschätzer definieren.
 Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ und gegebenen
 Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
 $$
-  \hat f(x) = \frac{1}{nh} \sum_{i=1}^n  K \left(\frac{x - x_i}{h}\right)
+\hat f(x) = \frac{1}{nh} \sum_{i=1}^n  K \left(\frac{x - x_i}{h}\right)
 $$
 ein [Kerndichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die Breite des Kerns fest. Da $K$ eine Dichtekurve ist lässt sich leicht zeigen, dass $\hat f$ ebenfalls eine Dichtekurve sein muss.
 :::
