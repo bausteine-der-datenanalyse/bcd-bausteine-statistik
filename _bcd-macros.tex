@@ -2,7 +2,16 @@
 \renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textit{#1}}
 
 % Environments
-\newenvironment{beispiel}{\begin{leftbar}}{\end{leftbar}}
+\newenvironment{beispiel}{
+    \begin{leftbar}
+    \renewenvironment{table}{
+      \hfill
+    }{
+      \hfill
+    }        
+}{
+    \end{leftbar}
+}
 
 % Commands
 \newcommand{\neuerbegriff}[1]{\textcolor{BrickRed}{#1}\index{#1}}

@@ -13,3 +13,5 @@ m-*/**/*.rmarkdown
 *_files
 xxx.R
 tmp*tex
+.Rproj.user
+xxx-lint.R

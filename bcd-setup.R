@@ -50,7 +50,8 @@ if (knitr::is_latex_output()) {
     plot.title = element_text(size = 16)
   )
   update_geom_defaults(
-    "text", list(size = 5)
+    "text",
+    list(size = 5)
   )
 }
 
