@@ -531,15 +531,15 @@ Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist nahel
 Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich dazu in einem "normalen'' Jahr? Wir betrachten hierzu die Monatssumme der täglichen Niederschlagshöhe in Bochum für die Jahre 2008 und 2010 (Quelle: Deutscher Wetterdienst). Die Werte sind in Millimetern angegeben.
 
 ```{r}
-# TODO d_ns_bo_2008_2010_monat |>
-#   filter(Monat <= "Juni") |>
-#   tab_niederschlag()
+d_ns_bo_2008_2010_monat |>
+  filter(Monat <= "Juni") |>
+  tab_niederschlag()
 ```
 
 ```{r}
-# TODO d_ns_bo_2008_2010_monat |>
-#   filter(Monat >= "Juli") |>
-#   tab_niederschlag()
+d_ns_bo_2008_2010_monat |>
+  filter(Monat >= "Juli") |>
+  tab_niederschlag()
 ```
 
 ```{r}
@@ -632,15 +632,15 @@ Um zu einem robusteren Maß für die Variabilität der Daten zu gelangen, müsse
 Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der monatlichen Niederschläge vom Mittelwert.
 
 ```{r}
-# TODO d_niederschlag_am |>
-#   filter(Monat <= "Juni") |>
-#   tab_niederschlag()
+d_niederschlag_am |>
+  filter(Monat <= "Juni") |>
+  tab_niederschlag()
 ```
 
 ```{r}
-# TODO d_niederschlag_am |>
-#   filter(Monat >= "Juli") |>
-#   tab_niederschlag()
+d_niederschlag_am |>
+  filter(Monat >= "Juli") |>
+  tab_niederschlag()
 ```
 
 ```{r}
