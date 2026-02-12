@@ -538,7 +538,7 @@ d_ns_bo_2008_2010_monat |>
 
 ```{r}
 d_ns_bo_2008_2010_monat |>
-  filter(Monat >= month(6, label = TRUE)) |>
+  filter(Monat >= month(7, label = TRUE)) |>
   tab_niederschlag()
 ```
 
@@ -633,13 +633,13 @@ Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der m
 
 ```{r}
 d_niederschlag_am |>
-  filter(Monat <= "Juni") |>
+  filter(Monat <= month(6, label = TRUE)) |>
   tab_niederschlag()
 ```
 
 ```{r}
 d_niederschlag_am |>
-  filter(Monat >= "Juli") |>
+  filter(Monat <= month(6, label = TRUE)) |>
   tab_niederschlag()
 ```
 
