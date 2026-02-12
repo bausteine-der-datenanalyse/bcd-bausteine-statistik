@@ -17,11 +17,12 @@ modes <- function(x) {
 }
 
 tab_niederschlag <- function(d) {
-  d |>
-    pivot_wider(names_from = Monat, values_from = Niederschlag) |>
-    gt(rowname_col = "Jahr") |>
-    tab_stubhead("Jahr") |>
-    tab_options(table.width = pct(90))
+  # d |>
+  #   pivot_wider(names_from = Monat, values_from = Niederschlag) |>
+  #   gt(rowname_col = "Jahr") |>
+  #   tab_stubhead("Jahr") |>
+  #   tab_options(table.width = pct(90))
+  d
 }
 
 tab_niederschlag_sortiert <- function(d) {
