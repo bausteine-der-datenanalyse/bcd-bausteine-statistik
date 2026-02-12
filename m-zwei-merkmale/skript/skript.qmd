@@ -18,15 +18,15 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 **Prognose des Sachverständigenrats:** Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
-tbl_wirtschaftswachstum(1975, 1983)
+# TODO tbl_wirtschaftswachstum(1975, 1983)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1983, 1991)
+# TODO tbl_wirtschaftswachstum(1983, 1991)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1991, 2000)
+# TODO tbl_wirtschaftswachstum(1991, 2000)
 ```
 
 Es liegt in der Natur von Prognosen, dass sie von der später beobachteten Wirklichkeit abweichen. Interessant ist es jedoch zu fragen, in welchem Grad die Vorhersagen zutreffen. Ein Stück weit lässt sich bereits an der Tabelle ablesen, dass die Prognosen in vielen Fällen die wirtschaftliche Entwicklung gut vorhergesagt haben. Es gibt aber auch Vorhersagen, die weit danebenlagen, zum Beispiel in den Jahren 1975 oder 1982.
@@ -117,12 +117,12 @@ sich in einem Streuplot häufig die Punkte. Diese Problematik lässt sich
 mithilfe von zweidimensionalen Histogrammen oder
 zweidimensionalen Kerndichteschätzern umgehen.
 
-Für das zweidimensionale Histogramm Histogramm definiert man Klassen für
+Für das zweidimensionale Histogramm definiert man Klassen für
 beide zu betrachtende Merkmale $X$ und $Y$ 
 $$
-[c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
-\quad \text{und} \quad
-[c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
+  [c^x_0, c^x_1), [c^x_1, c^x_2), \dots, [c^x_{k-1}, c^x_k) 
+  \quad \text{und} \quad
+  [c^y_0, c^y_1), [c^y_1, c^y_2), \dots, [c^y_{m-1}, c^y_m) 
 $$ 
 und zählt für jedes Rechteck
 $[c^x_{i-1}, c^x_{i}) \times [c^y_{j-1}, c^y_{j})$ die Punkte, die in
@@ -136,13 +136,13 @@ verwendet werden. Dieser funktioniert im Prinzip genauso wie für eine
 Variable, nur dass wir jetzt das Produkt von zwei Kernfunktionen
 verwenden: 
 $$
-\hat f(x, y)
-=
-\frac{1}{n \, h_1 h_2} 
-\;
-\sum_{i=1}^n  
-K\left(\frac{x-x_i}{h_1}\right)
-K\left(\frac{y-y_i}{h_2}\right).
+  \hat f(x, y)
+  =
+  \frac{1}{n \, h_1 h_2} 
+  \;
+  \sum_{i=1}^n  
+  K\left(\frac{x-x_i}{h_1}\right)
+  K\left(\frac{y-y_i}{h_2}\right).
 $$ 
 Die Glättungseigenschaften des Schätzers hängen von den Parametern $h_1$ und $h_2$ sowie der Wahl der Kernfunktion $K$ ab (@sec-approximation-dichtekurven).
 
@@ -225,9 +225,9 @@ fig_correlation_idea()
 
 Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis D werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
 $$
-r = \frac
-{\text{Summe der blauen und roten Flächen}}
-{\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
+  r = \frac
+  {\text{Summe der blauen und roten Flächen}}
+  {\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
 $$
 den wir nochmal formal festhalten wollen.
 
@@ -236,11 +236,11 @@ den wir nochmal formal festhalten wollen.
 
 Für die Werte $(x_i, y_i), i = 1, \dots, n$ heißt die Zahl 
 $$
-r = \frac{
-\displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
-}{
-\displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
-}
+  r = \frac{
+  \displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
+  }{
+  \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
+  }
 $$ 
 Bravais-Person-[Korrelationskoeffizient]{.neuerbegriff} . Der Wertebereich ist $-1 \leq r \leq 1$.
 :::
@@ -294,7 +294,7 @@ Wir merken uns daher:
 
 ::: {rem-korrelation-ungleich-kausalität}
 $$
-\text{Korrelation} \quad \neq \quad \text{Kausalität}
+  \text{Korrelation} \quad \neq \quad \text{Kausalität}
 $$
 :::
 
@@ -331,22 +331,22 @@ Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. 
 
 Mithilfe der Korrelationsanalyse lassen sich ungerichtete Zusammenhänge zwischen zwei Merkmalen $X$ und $Y$ untersuchen. In vielen Fällen legt allerdings der untersuchte Sachverhalt nahe, dass eine der beobachteten Größen von der anderen Größe abhängt. Allerdings handelt es sich in der Regel nicht um einen rein deterministischen Zusammenhang der Form
 $$
-Y = f(X),
+  Y = f(X),
 $$ 
 sondern es kommt noch eine zufällige Abweichung hinzu. Wenn wir von einem additiven Fehlerterm ausgehen, dann erhalten wir die Beziehung 
 $$
-Y  = f(X) + \varepsilon,
+  Y  = f(X) + \varepsilon,
 $$ 
 wobei $\varepsilon$ eine zufällige Größe ist. Ziel bei der Bestimmung der Funktion $f$ ist es
 dabei, einen möglichst großen Anteil an der Variabilität der Daten durch diese Funktion zu erklären. Eine Beziehung dieser Art wird [Regression]{.neuerbegriff} genannt, der Funktion $f$ fällt dabei die Rolle eines [Regressionsmodells]{.neuerbegriff} zu. In dieser Schreibweise verwenden wir die Großbuchstaben $X$ und $Y$ um zum Ausdruck zu bringen, dass wir über eine Eigenschaft des gesamten Datensatzes sprechen und nicht über einzelne Werte.
 
 Die einfachste Möglichkeit ist es, für die Funktion $f$ eine lineare Beziehung anzunehmen. Damit erhalten wir die Zuordnungsvorschrift 
 $$
-f(x) = \alpha + \beta x,
+  f(x) = \alpha + \beta x,
 $$ 
 wobei $\alpha$ der $y$-Achsenabschnitt und $\beta$ die Steigung der Geraden sind. Der Kleinbuchstabe $x$ steht jetzt für eine beliebige Zahl. Wenn wir die Datenpaare $(x_i, y_i), i = 1, \dots, n$ in die Funktionsgleichung einsetzen, dann ergibt sich die empirische Beziehung
 $$
-y_i = \alpha + \beta x_i + \varepsilon_i,
+  y_i = \alpha + \beta x_i + \varepsilon_i,
 $$ 
 wobei $\varepsilon_i$ den Fehler erfasst, der sich aus der Geradenanpassung ergibt. Der Zusammenhang ist in @fig-ausgleichsgerade dargestellt.
 
@@ -358,90 +358,90 @@ Es stellt sich nun die Frage, wie die Parameter $\alpha$ und $\beta$ der Ausglei
 
 Natürlich könnten wir wieder wie beim Median, die Beträge der Abstände summieren. Allerdings ist die Betragsfunktion in der Anwendung unhandlich und wir summieren stattdessen die Abstandsquadrate. Gesucht sind also Zahlen $\alpha$ und $\beta$, so dass die Summe
 $$
-\sum_{i=1}^n \varepsilon_i^2 
-= 
-\sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
+  \sum_{i=1}^n \varepsilon_i^2 
+  = 
+  \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
 $$
 möglichst klein wird. Die Werte von $\alpha$ und $\beta$, für die die Summe ihr Minimum annimmt, nennt man [Kleinste-Quadrate-Schätzer]{.neuerbegriff} und diese Methode zur Bestimmung der Ausgleichsgeraden die [Methode der kleinsten Quadrate]{.neuerbegriff}.
 
 Zur Bestimmung der Kleinste-Quadrate-Schätzer stellen wir die Funktion $Q : R^2 \to R$ mit
 $$
-Q(\alpha, \beta) = \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
+  Q(\alpha, \beta) = \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
 $$ 
 auf. Im Minimum der Funktion müssen die partiellen Ableitungen
 $$
-\frac{\partial Q(\alpha, \beta)}{\partial \alpha} 
-= 
--2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i))
+  \frac{\partial Q(\alpha, \beta)}{\partial \alpha} 
+  = 
+  -2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i))
 $$
 und
 $$
-\frac{\partial Q(\alpha, \beta)}{\partial \beta} 
-= 
--2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))
+  \frac{\partial Q(\alpha, \beta)}{\partial \beta} 
+  = 
+  -2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))
 $$
 beide gleich null sein. Wir formen die erste Gleichung um:
 $$
-\begin{aligned}
--2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i)) 
-& = 0 
-& \iff \\
-\sum_{i=1}^n y_i - \alpha n - \beta \sum_{i=1}^n x_i 
-& = 0 
-& \iff \\
-\alpha 
-& = \bar{y} - \beta \bar{x}.
-\end{aligned}
+  \begin{aligned}
+    -2 \sum_{i=1}^n (y_i - (\alpha + \beta x_i)) 
+    & = 0 
+    & \iff \\
+    \sum_{i=1}^n y_i - \alpha n - \beta \sum_{i=1}^n x_i 
+    & = 0 
+    & \iff \\
+    \alpha 
+    & = \bar{y} - \beta \bar{x}.
+  \end{aligned}
 $$ 
 Aus der zweiten Gleichung erhalten wir
 $$
-\begin{aligned}
--2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))  
-& = 0
-& \iff \\
-\sum_{i=1}^n x_i y_i - \alpha \sum_{i=1}^n x_i - \beta \sum_{i=1}^n x_i^2 
-& = 0.
-\end{aligned}
+  \begin{aligned}
+    -2 \sum_{i=1}^n x_i(y_i - (\alpha + \beta x_i))  
+    & = 0
+    & \iff \\
+    \sum_{i=1}^n x_i y_i - \alpha \sum_{i=1}^n x_i - \beta \sum_{i=1}^n x_i^2 
+    & = 0.
+  \end{aligned}
 $$
 Einsetzen von $\alpha = \bar{y} - \beta \bar{x}$ und $\sum_{i=1}^nx_i = n \bar{x}$ liefert
 $$
-\begin{aligned}
-\sum_{i=1}^n
-x_i y_i - (\bar{y} - \beta \bar{x}) n \bar{x} - \beta \sum_{i=1}^n x_i^2 
-& = 0
-& \iff \\
-\sum_{i=1}^n
-x_i y_i - n \, \bar{x} \, \bar{y}  -  \beta \left(\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2 \right) 
-& = 0,
-\end{aligned}
+  \begin{aligned}
+    \sum_{i=1}^n
+    x_i y_i - (\bar{y} - \beta \bar{x}) n \bar{x} - \beta \sum_{i=1}^n x_i^2 
+    & = 0
+    & \iff \\
+    \sum_{i=1}^n
+    x_i y_i - n \, \bar{x} \, \bar{y}  -  \beta \left(\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2 \right) 
+    & = 0,
+  \end{aligned}
 $$
 so dass 
 $$
-\beta 
-\; = \;
-\frac{
-\displaystyle \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}
-}{
-\displaystyle \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
-}
-\;\; = \;\;
-\frac{
-\displaystyle \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
-}{
-\displaystyle \sum_{i=1}^n (x_i - \bar{x})^2
-}
+  \beta 
+  \; = \;
+  \frac{
+    \displaystyle \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}
+  }{
+    \displaystyle \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
+  }
+  \;\; = \;\;
+  \frac{
+    \displaystyle \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+  }{
+    \displaystyle \sum_{i=1}^n (x_i - \bar{x})^2
+  }
 $$ 
 gelten muss. Für die letzte Umformung wurden die Beziehungen
 $$
-\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) 
-= 
-\sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}  
+  \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) 
+  = 
+  \sum_{i=1}^n x_i y_i - n \, \bar{x} \, \bar{y}  
 $$
 und
 $$
-\sum_{i=1}^n (x_i - \bar{x})^2 
-= 
-\sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
+  \sum_{i=1}^n (x_i - \bar{x})^2 
+  = 
+  \sum_{i=1}^n x_i^2 - \, n \, \bar{x}^2
 $$
 verwendet, die sich in einer einfachen Nebenrechnung nachweisen lassen. Zusammengefasst ergibt sich folgende Definition.
 
@@ -450,21 +450,21 @@ verwendet, die sich in einer einfachen Nebenrechnung nachweisen lassen. Zusammen
 
 Für die Werte $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ heißt der Zusammenhang
 $$
-y_i = \alpha + \beta x_i + \varepsilon_i
+  y_i = \alpha + \beta x_i + \varepsilon_i
 $$ 
 lineare Einfachregression. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und $\varepsilon_i$ der Fehler.
 
 Die Kleinste-Quadrate-Schätzer 
 $$
-\hat \alpha = \bar{y} - \hat \beta \bar{x}
-\quad \text{und} \quad
-\hat \beta 
-=
-\frac{
-\displaystyle \sum_{i=1}^n(x_i - \bar{x})(y_i - \bar{y})
-}{
-\displaystyle \sum_{i=1}^n(x_i - \bar{x})^2
-}
+  \hat \alpha = \bar{y} - \hat \beta \bar{x}
+  \quad \text{und} \quad
+  \hat \beta 
+  =
+  \frac{
+    \displaystyle \sum_{i=1}^n(x_i - \bar{x})(y_i - \bar{y})
+  }{
+    \displaystyle \sum_{i=1}^n(x_i - \bar{x})^2
+  }
 $$ 
 minimiert die Summe der Fehlerquadrate.
 :::
@@ -472,11 +472,11 @@ minimiert die Summe der Fehlerquadrate.
 ::: beispiel
 **Beispiel PISA-Studie:** Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
 $$
-\bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
+  \bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
 $$ 
 die Parameter 
 $$
-\hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875
+  \hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875
 $$ 
 der unten dargestellten Ausgleichsgeraden.
 
@@ -522,17 +522,17 @@ Um die Güte des linearen Modells zu beurteilen, untersucht man, wie die Werte a
 Für die Werte
 $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ erfasst das Bestimmtheitsmaß
 $$
-R^2 
-\; = \;
-\frac{
-\displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
-}{
-\displaystyle \sum_{i=1}^n(y_i - \bar{y})^2
-}
+  R^2 
+  \; = \;
+  \frac{
+    \displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
+  }{
+    \displaystyle \sum_{i=1}^n(y_i - \bar{y})^2
+  }
 $$ 
 mit $0 \leq R^2 \leq 1$ die Güte des linearen Modells. Dabei ist
 $$
-\hat y_i = \hat \alpha + \hat \beta x_i.
+  \hat y_i = \hat \alpha + \hat \beta x_i.
 $$
 Es lässt sich zeigen, dass es sich bei dem Bestimmtheitsmaß um das Quadrat des Korrelationskoeffizienten $r$ handelt, es gilt also $R = r^2$.
 :::
@@ -571,11 +571,11 @@ Anmerkung: Der Wertebereich für den Korrelationskoeffizienten $r$ und das Besti
 
 Liegt den Daten ein nichtlinearer Zusammenhang zu Grunde, dann kann sinnvoll sein, mit nichtlinearen Funktionen zu arbeiten. Zum Beispiel kann ein quadratisches Modell
 $$
-Y = \alpha + \beta X + \gamma X^2 + \varepsilon
+  Y = \alpha + \beta X + \gamma X^2 + \varepsilon
 $$ 
 oder ein exponentieller Ansatz 
 $$
-Y = \alpha \exp(\beta X) + \varepsilon
+  Y = \alpha \exp(\beta X) + \varepsilon
 $$
 
 verwendet werden. Im quadratischen Fall bestimmen sich die Koeffizienten $\alpha, \beta, \gamma$ aus einem linearen Gleichungssystem mit drei unbekannten. Für das exponentielle Modell ist ein nichtlineares Gleichungssystem zu lösen.
