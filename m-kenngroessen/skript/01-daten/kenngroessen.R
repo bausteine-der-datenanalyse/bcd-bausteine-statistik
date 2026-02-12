@@ -21,7 +21,10 @@ tab_niederschlag <- function(d) {
     pivot_wider(names_from = Monat, values_from = Niederschlag) |>
     gt(rowname_col = "Jahr") |>
     tab_stubhead("Jahr") |>
-    tab_options(table.width = pct(90))
+    tab_options(
+      quarto.disable_processing = TRUE,
+      table.width = pct(90)
+    )
 }
 
 tab_niederschlag_sortiert <- function(d) {
@@ -31,7 +34,10 @@ tab_niederschlag_sortiert <- function(d) {
     transpose_df(col = "Rang") |>
     gt(rowname_col = "name") |>
     cols_label_with(fn = \(x) md(paste0("$x_{(", x, ")}$"))) |>
-    tab_options(table.width = pct(75))
+    tab_options(
+      quarto.disable_processing = TRUE,
+      table.width = pct(75)
+    )
 }
 
 

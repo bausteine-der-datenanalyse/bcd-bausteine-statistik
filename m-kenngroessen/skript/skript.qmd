@@ -79,6 +79,7 @@ d_bsp_mittelwert |>
   gt(rowname_col = "name") |>
   tab_options(
     column_labels.hidden = TRUE,
+    quarto.disable_processing = TRUE,
     table.width = pct(90)
   )
 ```
@@ -169,7 +170,10 @@ Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte M
 d_bsp_median |>
   transpose_df() |>
   gt(rowname_col = "name") |>
-  tab_options(table.width = pct(90))
+  tab_options(
+    quarto.disable_processing = TRUE,
+    table.width = pct(90)
+  )
 ```
 
 mit dem Umfang $n = 12$. Der Median liegt daher zwischen $x_{(6)} = \text{B}$ und $x_{(7)} = \text{B}$. Beide Werte sind gleich, also ist $x_\mathrm{med} = \text{B}$.
@@ -284,7 +288,10 @@ d_reservoir_w |>
     align = "center",
     columns = everything()
   ) |>
-  tab_options(table.width = pct(75))
+  tab_options(
+    quarto.disable_processing = TRUE,
+    table.width = pct(75)
+  )
 ```
 
 Der Wachstumsfaktor $x_i$ ist das Verhältnis der Wasserstände an zwei aufeinanderfolgenden Tagen $i-1$ und $i$, also
@@ -303,7 +310,10 @@ d_reservoir_x |>
     align = "center",
     columns = everything()
   ) |>
-  tab_options(table.width = pct(75))
+  tab_options(
+    quarto.disable_processing = TRUE,
+    table.width = pct(75)
+  )
 ```
 
 Grafisch stellt sich die Situation so dar:
@@ -1182,7 +1192,10 @@ Wir betrachten hierzu als Beispiel zwei Gruppen von je zehn Personen, die jeweil
 d_bsp_gini_reduktion |>
   transpose_df() |>
   gt(rowname_col = "name") |>
-  tab_options(table.width = pct(75))
+  tab_options(
+    quarto.disable_processing = TRUE,
+    table.width = pct(75)
+  )
 ```
 
 Die Summe der Beträge beläuft sich auf $5 \cdot 9 + 5 \cdot 81 = 9 \cdot 25 + 225 = 450$. Damit liegt folgende Situation vor:

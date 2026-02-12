@@ -18,15 +18,15 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 **Prognose des Sachverständigenrats:** Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
-tbl_wirtschaftswachstum(1975, 1983)
+tab_wirtschaftswachstum(1975, 1983)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1983, 1991)
+tab_wirtschaftswachstum(1983, 1991)
 ```
 
 ```{r}
-tbl_wirtschaftswachstum(1991, 2000)
+tab_wirtschaftswachstum(1991, 2000)
 ```
 
 Es liegt in der Natur von Prognosen, dass sie von der später beobachteten Wirklichkeit abweichen. Interessant ist es jedoch zu fragen, in welchem Grad die Vorhersagen zutreffen. Ein Stück weit lässt sich bereits an der Tabelle ablesen, dass die Prognosen in vielen Fällen die wirtschaftliche Entwicklung gut vorhergesagt haben. Es gibt aber auch Vorhersagen, die weit danebenlagen, zum Beispiel in den Jahren 1975 oder 1982.

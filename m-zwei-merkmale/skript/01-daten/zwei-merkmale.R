@@ -175,13 +175,16 @@ plot_correlation_example <- function(x, y, t) {
 # Funktionen Abbildungen
 # -------------------------------------------------------------------------------------------------
 
-tbl_wirtschaftswachstum <- function(s, e) {
+tab_wirtschaftswachstum <- function(s, e) {
   d_wirtschaftswachstum |>
     filter(Jahr >= s, Jahr < e) |>
     select(-Jahr) |>
     transpose_df(start = s) |>
     gt(rowname_col = "name") |>
-    tab_options(table.width = pct(75))
+    tab_options(
+      quarto.disable_processing = TRUE,
+      table.width = pct(75)
+    )
 }
 
 

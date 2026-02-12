@@ -21,8 +21,7 @@ d_unistrasse |>
   gt_preview() |>
   tab_source_note(
     source_note = md("Daten bereitgestellt von Prof. Iris Mühlenbruch")
-  ) |>
-  tab_options(latex.use_longtable = TRUE, table.font.size = 12)
+  )
 ```
 
 Unten dargestellt ist das Histogramm der relativen Häufigkeiten der gemessenen Geschwindigkeiten, die Klassenbreite wurde dabei mit $\SI{2}{km/h}$ gewählt.
