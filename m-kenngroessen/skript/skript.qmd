@@ -532,13 +532,13 @@ Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich d
 
 ```{r}
 d_ns_bo_2008_2010_monat |>
-  filter(Monat <= month(6, label = T)) |>
+  filter(Monat <= month(6, label = TRUE)) |>
   tab_niederschlag()
 ```
 
 ```{r}
 d_ns_bo_2008_2010_monat |>
-  filter(Monat >= month(6, label = T)) |>
+  filter(Monat >= month(6, label = TRUE)) |>
   tab_niederschlag()
 ```
 
