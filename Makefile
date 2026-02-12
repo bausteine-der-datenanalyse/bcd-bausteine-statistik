@@ -10,13 +10,13 @@ clean:
 html:
 	for folder in m-*; do \
 		echo $$folder; \
-		quarto render $$folder/skript -t html || exit 1; \
+		quarto render $$folder -t html || exit 1; \
 	done
 
 pdf:
 	for folder in m-*; do \
 		echo $$folder; \
-		quarto render $$folder/skript -t pdf || exit 1; \
+		quarto render $$folder -t pdf || exit 1; \
 	done
 
 render: html pdf
