@@ -632,15 +632,15 @@ Um zu einem robusteren Maß für die Variabilität der Daten zu gelangen, müsse
 Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der monatlichen Niederschläge vom Mittelwert.
 
 ```{r}
-d_niederschlag_am |>
-  filter(Monat <= "Juni") |>
-  tab_niederschlag()
+# TODO d_niederschlag_am |>
+#   filter(Monat <= "Juni") |>
+#   tab_niederschlag()
 ```
 
 ```{r}
-d_niederschlag_am |>
-  filter(Monat >= "Juli") |>
-  tab_niederschlag()
+# TODO d_niederschlag_am |>
+#   filter(Monat >= "Juli") |>
+#   tab_niederschlag()
 ```
 
 ```{r}
