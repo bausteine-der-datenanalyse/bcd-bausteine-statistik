@@ -13,12 +13,11 @@ import_energietrager <- function(range) {
     range = range
   ) |>
     mutate(
-      Energieträger = case_match(
+      Energieträger = replace_values(
         Energieträger,
         "andere Erneuerbare 2)" ~ "Andere Erneuerbare",
         "Wasser- und Windkraft 1) 3)" ~ "Wasser- und Windkraft",
-        "Sonstige 4)" ~ "Sonstige",
-        .default = Energieträger
+        "Sonstige 4)" ~ "Sonstige"
       ),
       Energieträger = factor(Energieträger, levels = Energieträger)
     ) |>
@@ -31,6 +30,7 @@ import_energietrager <- function(range) {
       values_to = "Wert"
     )
 }
+
 
 c_energietraeger <- c(
   "#107aa1",
