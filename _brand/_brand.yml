@@ -1,4 +1,4 @@
 logo: 
-  small: _brand/favicon.svg
-  medium: _brand/logo.svg
+  small: ../../_brand/favicon.svg
+  medium: ../../_brand/logo.svg
 
