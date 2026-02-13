@@ -1,11 +1,11 @@
 ```{r}
 #| include: false
-source("../../bcd-setup.R")
+source("../../_bcd-setup.R")
 source("01-daten/kenngroessen.R")
 ```
 
 ::: {.content-hidden}
-{{< include /_bcd_macros.qmd >}}
+{{< include /_bcd-setup.qmd >}}
 :::
 
 # Kenngrößen und Beschreibung von Verteilungen

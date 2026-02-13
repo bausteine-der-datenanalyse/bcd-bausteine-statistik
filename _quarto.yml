@@ -34,12 +34,7 @@ format:
       - _brand
   pdf:
     include-in-header:
-      - text: |
-          \usepackage{framed}
-          \usepackage{siunitx}
-          \usepackage{makeidx}
-          \makeindex          
-      - _bcd-macros.tex
+      - _bcd-setup.tex
     include-after-body:
       text: |
         \printindex

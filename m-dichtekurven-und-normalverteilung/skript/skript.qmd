@@ -1,11 +1,11 @@
 ```{r}
 #| include: false
-source("../../bcd-setup.R")
+source("../../_bcd-setup.R")
 source("01-daten/dichtekurven-und-normalverteilung.R")
 ```
 
 ::: {.content-hidden}
-{{< include /_bcd_macros.qmd >}}
+{{< include /_bcd-setup.qmd >}}
 :::
 
 # Dichtekurven und Normalverteilung

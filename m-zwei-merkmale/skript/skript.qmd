@@ -1,6 +1,6 @@
 ```{r}
 #| include: false
-source("../../bcd-setup.R")
+source("../../_bcd-setup.R")
 source("01-daten/zwei-merkmale.R")
 ```
 

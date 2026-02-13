@@ -1,19 +1,23 @@
-% Customize appearance
-\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textit{#1}}
+\usepackage{framed}
+\usepackage{siunitx}
+\usepackage{makeidx}
 
-% Environments
+\makeindex
+
+% Umgebungen
 \newenvironment{beispiel}{
-    \begin{leftbar}
+  \begin{leftbar}
     \renewenvironment{table}{
       \hfill
     }{
       \hfill
-    }        
-}{
-    \end{leftbar}
+    }
+    }{
+  \end{leftbar}
 }
 
-% Commands
+% Befehle
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textit{#1}}
 \newcommand{\neuerbegriff}[1]{\textcolor{BrickRed}{#1}\index{#1}}
 
 % TODO: Make it work
