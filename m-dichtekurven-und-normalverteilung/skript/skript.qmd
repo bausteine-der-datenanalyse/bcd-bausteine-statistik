@@ -321,7 +321,7 @@ ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
   labs(x = "Theoretischer Wert", y = "Geschwindigkeit")
 ```
 
-## Approximation von Dichtekurven
+## Approximation von Dichtekurven {#sec-approximation-dichtekurven}
 
 Häufig lässt sich die Verteilung eines Merkmals nicht sinnvoll durch eine Normalverteilung darstellen. Allerdings ist es für eine kontinuierliche Variable trotzdem häufig wünschenswert, die Verteilung durch eine Dichtekurve darzustellen. Hierfür sprechen folgende Gründe:
 
