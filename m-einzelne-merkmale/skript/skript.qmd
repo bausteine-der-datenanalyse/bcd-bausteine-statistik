@@ -1,6 +1,6 @@
 ```{r}
 #| include: false
-source("../../_bcd-setup.R")
+source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
 source("01-daten/einzelne-merkmale.R")
 ```
 
