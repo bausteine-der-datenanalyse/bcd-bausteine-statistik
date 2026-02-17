@@ -11,6 +11,8 @@ source("01-daten/dichtekurven-und-normalverteilung.R")
 
 # Dichtekurven und Normalverteilung
 
+## Dichtekurven
+
 Dichtekurven sind eine Alternative zu Histogrammen für die Darstellung einzelner Merkmale. Die Grundidee soll am Beispiel einer Geschwindigkeitsmessung erläutert werden.
 
 :::beispiel
@@ -35,8 +37,6 @@ p_unistrasse()
 
 Man kann sich nun vorstellen, die Messung der Geschwindigkeiten mit einer höheren Genauigkeit durchzuführen und dabei über einen längeren Zeitraum zu messen. Dann wäre es durchaus möglich, das Histogramm mit einer kleineren Klassenbreite zu erstellen, zum Beispiel $\SI{0.1}{km/h}$. Damit nähert sich der Verlauf des Histogramms der kontinuierlichen Kurve an, die sich im Grenzübergang zu einer unendlich langen und gleichzeitig exakten Messung mit einer gegen Null gehenden Klassenbreite ergeben würde.
 :::
-
-## Dichtekurven
 
 Mit einer [Dichtekurve]{.neuerbegriff} wird dieser Grenzübergang vorweggenommen: Die Idee dabei ist es, das Histogramm durch eine kontinuierliche Funktion $f : \mathbb{R} \to \mathbb{R}$ zu approximieren. Die zugehörige Dichtekurve $y = f(x)$ approximiert und glättet das Histogramm. Dabei gehen gegebenenfalls Details verloren. Dafür ergibt sich eine optisch klare Darstellung, die sich manchmal sogar mit einer einfachen Formel für die Zuordnungsvorschrift von $f$ angeben lässt.
 
