@@ -183,7 +183,7 @@ tab_wirtschaftswachstum <- function(s, e) {
     gt(rowname_col = "name") |>
     tab_options(
       quarto.disable_processing = TRUE,
-      table.width = pct(75)
+      table.width = pct(90)
     )
 }
 
