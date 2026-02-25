@@ -219,6 +219,9 @@ $$
 $$ 
 die auf einer Seite geschlossen und auf der anderen Seite offen sind, so dass jeder Wert $x_j$ in genau einer Klasse enthalten ist. Wichtig ist, dass $c_0$ kleiner gleich der kleinsten Ausprägung und $c_k$ größer als die größte Ausprägung des betrachteten Merkmals ist. Die Intervalle hätten wir genauso gut in der Form $(c_j, c_{j+1}]$ (also linksoffen) wählen können, das macht keinen grundlegenden Unterschied.
 
+**Hinweis**:
+Eine eckige Klammer zeigt ein geschlossenes Intervall und eine runde Klammer ein offenes Intervall an.
+
 1. Wir zählen für jede Klasse, wie viele Ausprägungen sie enthält und erhalten die absolute Häufigkeitsverteilung $h_1, h_2, \dots, h_k$. Die Werte können natürlich auch noch auf den Umfang der Stichprobe bezogen werden, dann ist $f_j = h_j / n$ die relative Häufigkeitsverteilung der Klassen.
 
 1. Die Zahlenwerte werden in einem Säulendiagramm dargestellt. Am einfachsten wäre es jetzt, die Höhe der Säulen proportional zu $h_j$ beziehungsweise $f_j$ anzutragen. Allerdings würde das zu einer verzerrten Wahrnehmung der Daten führen, falls die Klassen nicht alle gleich breit sind. Das liegt daran, dass unser Auge für ein Rechteck primär die Fläche und nicht die Höhe wahrnimmt. Wir wählen daher die Höhe des Rechtecks so, dass die Fläche der Säule proportional zur jeweiligen Häufigkeit ist. Aus der Beziehung "Fläche = Breite $\times$ Höhe'' und mit der Klassenbreite $d_j = c_j - c_{j-1}$ entspricht die Höhe dann dem Wert $h_j / d_j$ oder $f_j / d_j$. Damit ist das Histogramm nach dem [Prinzip der Flächentreue]{.neuerbegriff} konstruiert.
@@ -226,121 +229,77 @@ die auf einer Seite geschlossen und auf der anderen Seite offen sind, so dass je
 Das Prinzip der Flächentreue wird an einem Beispiel verdeutlicht.
 
 ::: beispiel
-**Beispiel Flächentreue:** Wir betrachten den Datensatz
+**Beispiel Flächentreue:** Wir betrachten einen Datensatz
 $$
-x_1 = 3,\; x_2 = 4,\;, x_3 = 5, \; \dots \;, x_{20} = 27
+x_1 = 3,\; x_2 = 4,\; x_3 = 6, \; \dots \;, x_{20} = 27
 $$
-mit insgesamt 20 Beobachtungen. TODO
+mit insgesamt $n = 20$ Beobachtungen. Ein Histogramm teilt den
+Wertebereich in Klassen (Intervalle) ein und stellt die Häufigkeiten
+als Balkenflächen dar. Die folgenden drei Histogramme zeigen dieselben
+Daten mit unterschiedlichen Klasseneinteilungen. Die Punkte am unteren
+Rand markieren die einzelnen Beobachtungen. Auf der y-Achse ist die
+**Häufigkeitsdichte** (= relative Häufigkeit / Klassenbreite)
+abgetragen.
 
 ```{r}
+#| fig-width: 9
+#| fig-height: 3
+#| label: fig-histogramm-flaechentreue
+
 d_pdf_beispiel <- tibble(
-  x = c(
-    3,
-    4,
-    6,
-    7,
-    7,
-    9,
-    10,
-    11,
-    12,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    22,
-    24,
-    27
-  )
+  x = c(3, 4, 6, 7, 7, 9, 10, 11, 12, 12,
+        13, 14, 15, 16, 17, 18, 19, 22, 24, 27)
 )
-p5 <- ggplot(data = d_pdf_beispiel) +
-  geom_histogram(
-    mapping = aes(x = x),
-    binwidth = 5,
-    boundary = 0,
-    color = "black",
-    closed = "left"
-  ) +
-  labs(title = "Histogramme mit gleichen Klassenbreiten (5)") +
-  ylab("absolute Häufigkeit") +
-  xlab("Beispielmerkmal")
 
-p6 <- ggplot(data = d_pdf_beispiel) +
+p1 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
   geom_histogram(
-    mapping = aes(x = x, y = after_stat(density)),
-    binwidth = 5,
-    boundary = 0,
-    color = "black",
-    closed = "left"
+    aes(y = after_stat(density)),
+    binwidth = 5, boundary = 0,
+    color = "black", closed = "left"
   ) +
-  ylab("relative Häufigkeit") +
-  xlab("Beispielmerkmal")
+  geom_point(mapping = aes(y = 0), color = "red") +
+  labs(title = "Klassenbreite 5", y = "Häufigkeitsdichte", x = NULL)
 
-p7 <- ggplot(data = d_pdf_beispiel) +
+p2 <- ggplot(d_pdf_beispiel,mapping = aes(x = x)) +
   geom_histogram(
-    mapping = aes(x = x),
-    binwidth = 10,
-    boundary = 0,
-    color = "black",
-    closed = "left"
+    aes(y = after_stat(density)),
+    binwidth = 10, boundary = 0,
+    color = "black", closed = "left"
   ) +
-  labs(title = "Histogramme mit gleichen Klassenbreiten (10)") +
-  ylab("absolute Häufigkeit") +
-  xlab("Beispielmerkmal")
+  geom_point(mapping = aes(y = 0), color = "red") +
+  labs(title = "Klassenbreite 10", y = NULL, x = NULL)
 
-p8 <- ggplot(data = d_pdf_beispiel) +
+p3 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
   geom_histogram(
-    mapping = aes(x = x, y = after_stat(density)),
-    binwidth = 10,
-    boundary = 0,
-    color = "black",
-    closed = "left"
-  ) +
-  ylab("relative Häufigkeit") +
-  xlab("Beispielmerkmal")
-
-p9 <- ggplot(data = d_pdf_beispiel) +
-  geom_histogram(
-    mapping = aes(x = x),
+    aes(y = after_stat(density)),
     breaks = c(0, 10, 15, 30),
-    color = "black",
-    closed = "left"
+    color = "black", closed = "left"
   ) +
-  labs(title = "Histogramme mit ungleichen Klassenbreiten") +
-  ylab("absolute Häufigkeit") +
-  xlab("Beispielmerkmal")
+  geom_point(mapping = aes(y = 0), color = "red") +
+  labs(title = "Ungleiche Klassenbreiten", y = NULL, x = NULL)
 
-p10 <- ggplot(data = d_pdf_beispiel) +
-  geom_histogram(
-    mapping = aes(x = x, y = after_stat(density)),
-    breaks = c(0, 10, 15, 30),
-    color = "black",
-    closed = "left"
-  ) +
-  ylab("relative Häufigkeit") +
-  xlab("Beispielmerkmal")
-
-p5 + p6
-p7 + p8
-p9 + p10
+p1 + p2 + p3
 ```
 
-Im linken Histogramm mit ungleichen Klassenbreiten sehen wir, dass sich ggplot hier nicht an das Prinzip der Flächentreue hält und die Höhe der Balken der absoluten Häufigkeit entspricht. Das erleichtert zwar das Ablesen, die Flächen der Balken ist nun aber nicht proportional zur Häufigkeit. Dies verzerrt unsere Wahrnehmung der Daten. Daher verwenden wir die relative Häufigkeit (rechts).
+Obwohl die drei Histogramme unterschiedlich aussehen, stellen sie
+dieselben Daten dar. Das **Prinzip der Flächentreue** sorgt dafür, dass
+die **Fläche** (nicht die Höhe!) eines Balkens der relativen Häufigkeit
+der jeweiligen Klasse entspricht. Das ist besonders bei ungleichen
+Klassenbreiten wichtig: Ein breiterer Balken muss eine geringere Höhe
+haben, damit seine Fläche die richtige Häufigkeit widerspiegelt.
 
-Betrachten wir nur das Intervall $[0;10) = \{ x \mid 0 \leq x < 10 \}$: 
+Wir prüfen dies am Intervall $[0, 10)$, in das 6 der 20 Beobachtungen
+fallen (relative Häufigkeit: $6/20 = 0{,}3$):
 
-- Bei der Klassenbreite = 5 besteht es aus zwei Intervallen mit den relativen Häufigkeiten 0.02 und 0.04. Der Flächeninhalt beider Balken ist folglich $5*0.02 + 5*0.04 = 0.3$.
+| Klasseneinteilung | Klassen in $[0, 10)$ | Fläche |
+|---|---|---|
+| Breite 5 | $[0,5)$ und $[5,10)$ | $5 \cdot 0{,}02 + 5 \cdot 0{,}04 = 0{,}3$ |
+| Breite 10 | $[0, 10)$ | $10 \cdot 0{,}03 = 0{,}3$ |
+| Ungleich | $[0, 10)$ | $10 \cdot 0{,}03 = 0{,}3$ |
 
-- Gemäß dem Prinzip der Flächentreue muss die Fläche bei anderen Klassenbreiten ebenfalls gelten.
+Unabhängig von der Klasseneinteilung ergibt die Fläche über $[0, 10)$
+stets $0{,}3$ — die relative Häufigkeit bleibt erhalten.
 
-- Das prüfen wir: Wir haben einen Balken mit der Klassenbreite = 10 und der relativen Häufigkeit = 0.03. Das ergibt $10*0.03 = 0.3$. 
-
-**Hinweis**:
-Eine eckige Klammer zeigt ein geschlossenes Intervall und eine runde Klammer ein offenes Intervall an.
 :::
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
@@ -424,7 +383,7 @@ An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegeb
 $$
 x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4.
 $$
-Aus der tabellarischen Zusammenstellung der Häufigkeiten und der kumullierten Häufigkeiten
+Aus der tabellarischen Zusammenstellung der Häufigkeiten und der kumulierten Häufigkeiten
 
 ```{r}
 d1 <- tibble(a = c(1.1, 1.3, 1.9, 2.5, 2.1, 1.3, 4)) |>

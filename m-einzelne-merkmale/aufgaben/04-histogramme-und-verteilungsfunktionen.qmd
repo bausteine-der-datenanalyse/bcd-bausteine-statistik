@@ -46,4 +46,4 @@ d4 <- tibble(X = (100 + runif(35 * n0, min = -0.1, max = 0.1)))
     plot_ecdf(d1, "1"))
 ```
 
-Begründen Sie ihre Antwort!
+Begründen Sie Ihre Antwort!

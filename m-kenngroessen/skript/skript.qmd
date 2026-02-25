@@ -115,10 +115,10 @@ Anhand der beiden oben festgehaltenen Eigenschaften des arithmetischen Mittels l
 Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabefehler handelt: Es wurden aus Versehen die nebeneinanderliegenden Tasten 2 und 1 anstatt nur der Taste 2 gedrückt. In diesem Fall verzerrt der einzelne falsche Wert den Mittelwert stark.
 :::
 
-**Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genausogut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
+**Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genauso gut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
 
 ::: beispiel
-**Beispiel Ozonloch:** Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersateliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satelitendaten das gesamte Ausmaß des Problems. [@ludwig2006]
+**Beispiel Ozonloch:** Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satellitendaten das gesamte Ausmaß des Problems. [@ludwig2006]
 
 Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
 :::
@@ -135,7 +135,7 @@ $$
 x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(i)} \leq \dots \leq x_{(n)}
 $$
 
-gelten soll. Für eine ungerade Anzahl an Beobachtungen ist der Median $x_\mathrm{med}$ nun der Wert, der in der geordneten Urliste in der Mitte steht; ist die Anzahl ungerade, dann ist es der Mittelwert der beiden in der Mitte stehenden Werte. Entsprechend definieren wir den Median für mindestens intervallskalierte Merkmale.
+gelten soll. Für eine ungerade Anzahl an Beobachtungen ist der Median $x_\mathrm{med}$ nun der Wert, der in der geordneten Urliste in der Mitte steht; ist die Anzahl gerade, dann ist es der Mittelwert der beiden in der Mitte stehenden Werte. Entsprechend definieren wir den Median für mindestens intervallskalierte Merkmale.
 
 ::: {#def-median}
 ## Median
@@ -159,7 +159,7 @@ Darüber hinaus besitzt der Median $x_\mathrm{med}$ folgende Eigenschaften:
 
 1. Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_\mathrm{med}$ und mindestens 50% der Daten sind größer oder gleich dem Median $x_\mathrm{med}$.
 
-An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich zum arithmetischen Mittel ein resistentes Lagemaß darstellt: In den Betrag des Modus geht eine extrem große Abweichung vom Mittelwert wesentlich weniger stark ein als in das Quadrat des arithmetischen Mittels.
+An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich zum arithmetischen Mittel ein resistentes Lagemaß darstellt: In die Summe der Beträge der Abweichungen geht ein extrem großer Wert wesentlich weniger stark ein als in die Summe der quadrierten Abweichungen — denn das Quadrieren verstärkt große Abweichungen überproportional.
 
 Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte Merkmale angegeben werden. Bei einer geraden Anzahl von Stichproben liegt der Median dann gegebenenfalls zwischen zwei Ausprägungen.
 
@@ -476,7 +476,7 @@ B_n
 = 
 (\bar{x}_\mathrm{geom})^n B_0.
 $$ 
-Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_\mathrm{geom}$ die adäquate Mittelung der Wachstumsfaktoren.
+Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_\mathrm{geom}$ die adäquate Mittlung der Wachstumsfaktoren.
 
 ### Das harmonische Mittel
 
@@ -538,7 +538,7 @@ Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist nahel
 
 ![](00-bilder/sommer-2010.svg){fig-alt="Elbe mit sehr niedrigem Wasserstand und Elbe bei Hochwasser (Dresden)"}
 
-Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich dazu in einem "normalen'' Jahr? Wir betrachten hierzu die Monatssumme der täglichen Niederschlagshöhe in Bochum für die Jahre 2008 und 2010 (Quelle: Deutscher Wetterdienst). Die Werte sind in Millimetern angegeben.
+Wie war es in diesem Jahr 2010 in Bochum und wie verhält es sich im Vergleich dazu in einem "normalen" Jahr? Wir betrachten hierzu die Monatssumme der täglichen Niederschlagshöhe in Bochum für die Jahre 2008 und 2010 (Quelle: Deutscher Wetterdienst). Die Werte sind in Millimetern angegeben.
 
 ```{r}
 d_ns_bo_2008_2010_monat |>

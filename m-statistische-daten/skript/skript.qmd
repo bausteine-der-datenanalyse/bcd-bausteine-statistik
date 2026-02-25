@@ -44,7 +44,7 @@ fig-alt="Geschwindigkeitsmessung mit Seitenradar an einem ankommenden PKW"
 
 #### Abfluss der Donau bei Hofkirchen
 
-Historische Daten über den Abfluss und den Wasserstand eines Flusses bilden die Grundlage für die Beurteilung des Hochwasserrisikos und die Planung entsprechender Maßnahmen. Wir betrachten hier Messdaten der Donau am Pegel Hofkirchen, dargestellt in @fig-hofkirchen. Es handelt sich um Messwerte des Abflusses in m^3^/s (Quelle: [*The Global Runoff Data Base*]{.lang-eng} der Bundesanstalt für Gewässerkunde. Die Daten mit einer Beobachtung pro Tag liegen in Textform vor, die einzelnen Werte sind durch Semikolons voneinander getrennt. Solche Dateien werden auch als CSV-Dateien bezeichnet ([*Comma Separated Values*]{.lang-eng}). Der Datensatz umfasst mehr als hundert Jahre und beinhaltet somit gut 40000 Werte.
+Historische Daten über den Abfluss und den Wasserstand eines Flusses bilden die Grundlage für die Beurteilung des Hochwasserrisikos und die Planung entsprechender Maßnahmen. Wir betrachten hier Messdaten der Donau am Pegel Hofkirchen, dargestellt in @fig-hofkirchen. Es handelt sich um Messwerte des Abflusses in m^3^/s (Quelle: [*The Global Runoff Data Base*]{.lang-eng} der Bundesanstalt für Gewässerkunde). Die Daten mit einer Beobachtung pro Tag liegen in Textform vor, die einzelnen Werte sind durch Semikolons voneinander getrennt. Solche Dateien werden auch als CSV-Dateien bezeichnet ([*Comma Separated Values*]{.lang-eng}). Der Datensatz umfasst mehr als hundert Jahre und beinhaltet somit gut 40000 Werte.
 
 ```{r}
 #| label: fig-hofkirchen
@@ -252,14 +252,14 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
     ist sinnvoll, auch wenn man sich über ein allgemeines Tempolimit durchaus streiten kann.
 
-Intervall- und Verhältnisskalen werden unter den Oberbegriffen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff} zusammengefasst. In der folgenden Tabelle sind Skalenarten und zugehörige sinnvolle Operationen nochmals kompakt dargestellt.
+Intervall- und Verhältnisskalen werden unter den Oberbegriffen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff} zusammengefasst. In der folgenden Tabelle sind Skalenniveaus und zugehörige sinnvolle Operationen nochmals kompakt dargestellt.
 
-| Skalenart  | auszählen | ordnen | Differenzen bilden | Quotienten bilden |
-|:----------:|:---------:|:------:|:------------------:|:-----------------:|
-|  nominal   |    Ja     |  Nein  |        Nein        |       Nein        |
-|  ordinal   |    Ja     |   Ja   |        Nein        |       Nein        |
-| Intervall  |    Ja     |   Ja   |         Ja         |       Nein        |
-| Verhältnis |    Ja     |   Ja   |         Ja         |        Ja         |
+| Skalenniveau  | auszählen | ordnen | Differenzen bilden | Quotienten bilden |
+|:-------------:|:---------:|:------:|:------------------:|:-----------------:|
+|   nominal     |    Ja     |  Nein  |        Nein        |       Nein        |
+|    ordinal    |    Ja     |   Ja   |        Nein        |       Nein        |
+|   Intervall   |    Ja     |   Ja   |         Ja         |       Nein        |
+|   Verhältnis  |    Ja     |   Ja   |         Ja         |        Ja         |
 
 #### (c) Qualitative und quantitative Merkmale
 

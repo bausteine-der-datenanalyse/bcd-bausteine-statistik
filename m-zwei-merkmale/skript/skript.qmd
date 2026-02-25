@@ -58,7 +58,7 @@ Die Darstellung der Wertepaare $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ durch
 
 #### Sachverständigenrat
 
-Unten dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständienrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Könnte der Sachverständigenrat in die Zukunft sehen, lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. In der Wirklichkeit ist das nicht der Fall und je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
+Unten dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständigenrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Könnte der Sachverständigenrat in die Zukunft sehen, lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. In der Wirklichkeit ist das nicht der Fall und je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
 
 ```{r}
 ggplot(
