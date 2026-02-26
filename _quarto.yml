@@ -32,6 +32,8 @@ format:
     default-image-extension: svg
     resources:
       - _brand
+    repo-url: "https://github.com/bausteine-der-datenanalyse/bcd-bausteine-statistik"
+    repo-actions: [source]
   pdf:
     include-in-header:
       - _bcd-setup.tex
