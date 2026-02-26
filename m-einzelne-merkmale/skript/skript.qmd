@@ -233,22 +233,16 @@ Das Prinzip der Flächentreue wird an einem Beispiel verdeutlicht.
 $$
 x_1 = 3,\; x_2 = 4,\; x_3 = 6, \; \dots \;, x_{20} = 27
 $$
-mit insgesamt $n = 20$ Beobachtungen. Ein Histogramm teilt den
-Wertebereich in Klassen (Intervalle) ein und stellt die Häufigkeiten
-als Balkenflächen dar. Die folgenden drei Histogramme zeigen dieselben
-Daten mit unterschiedlichen Klasseneinteilungen. Die Punkte am unteren
-Rand markieren die einzelnen Beobachtungen. Auf der y-Achse ist die
-**Häufigkeitsdichte** (= relative Häufigkeit / Klassenbreite)
-abgetragen.
+mit insgesamt $n = 20$ Beobachtungen. Ein Histogramm teilt den Wertebereich in Klassen (Intervalle) ein und stellt die Häufigkeiten als Balkenflächen dar. Die folgenden drei Histogramme zeigen dieselben Daten mit unterschiedlichen Klasseneinteilungen. Die Punkte am unteren Rand markieren die einzelnen Beobachtungen. Auf der y-Achse ist die **Häufigkeitsdichte** (= relative Häufigkeit / Klassenbreite) abgetragen.
 
 ```{r}
-#| fig-width: 9
-#| fig-height: 3
-#| label: fig-histogramm-flaechentreue
+#| fig-asp: 0.3
 
 d_pdf_beispiel <- tibble(
-  x = c(3, 4, 6, 7, 7, 9, 10, 11, 12, 12,
-        13, 14, 15, 16, 17, 18, 19, 22, 24, 27)
+  x = c(
+    3, 4, 6, 7, 7, 9, 10, 11, 12, 12,
+    13, 14, 15, 16, 17, 18, 19, 22, 24, 27
+  )
 )
 
 p1 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
@@ -260,7 +254,7 @@ p1 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
   geom_point(mapping = aes(y = 0), color = "red") +
   labs(title = "Klassenbreite 5", y = "Häufigkeitsdichte", x = NULL)
 
-p2 <- ggplot(d_pdf_beispiel,mapping = aes(x = x)) +
+p2 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
   geom_histogram(
     aes(y = after_stat(density)),
     binwidth = 10, boundary = 0,
@@ -281,25 +275,17 @@ p3 <- ggplot(d_pdf_beispiel, mapping = aes(x = x)) +
 p1 + p2 + p3
 ```
 
-Obwohl die drei Histogramme unterschiedlich aussehen, stellen sie
-dieselben Daten dar. Das **Prinzip der Flächentreue** sorgt dafür, dass
-die **Fläche** (nicht die Höhe!) eines Balkens der relativen Häufigkeit
-der jeweiligen Klasse entspricht. Das ist besonders bei ungleichen
-Klassenbreiten wichtig: Ein breiterer Balken muss eine geringere Höhe
-haben, damit seine Fläche die richtige Häufigkeit widerspiegelt.
+Obwohl die drei Histogramme unterschiedlich aussehen, stellen sie dieselben Daten dar. Das **Prinzip der Flächentreue** sorgt dafür, dass die **Fläche** (nicht die Höhe!) eines Balkens der relativen Häufigkeit der jeweiligen Klasse entspricht. Das ist besonders bei ungleichen Klassenbreiten wichtig: Ein breiterer Balken muss eine geringere Höhe haben, damit seine Fläche die richtige Häufigkeit widerspiegelt.
 
-Wir prüfen dies am Intervall $[0, 10)$, in das 6 der 20 Beobachtungen
-fallen (relative Häufigkeit: $6/20 = 0{,}3$):
+Wir prüfen dies am Intervall $[0, 10)$, in das 6 der 20 Beobachtungen fallen (relative Häufigkeit: $6/20 = 0.3$):
 
-| Klasseneinteilung | Klassen in $[0, 10)$ | Fläche |
-|---|---|---|
-| Breite 5 | $[0,5)$ und $[5,10)$ | $5 \cdot 0{,}02 + 5 \cdot 0{,}04 = 0{,}3$ |
-| Breite 10 | $[0, 10)$ | $10 \cdot 0{,}03 = 0{,}3$ |
-| Ungleich | $[0, 10)$ | $10 \cdot 0{,}03 = 0{,}3$ |
+| Klasseneinteilung | Klassen in $[0, 10)$   | Fläche                              |
+|-------------------|------------------------|-------------------------------------|
+| Breite 5          | $[0, 5)$ und $[5, 10)$ | $5 \cdot 0.02 + 5 \cdot 0.04 = 0.3$ |
+| Breite 10         | $[0, 10)$              | $10 \cdot 0.03 = 0.3$               |
+| Ungleich          | $[0, 10)$              | $10 \cdot 0.03 = 0.3$               |
 
-Unabhängig von der Klasseneinteilung ergibt die Fläche über $[0, 10)$
-stets $0{,}3$ — die relative Häufigkeit bleibt erhalten.
-
+Unabhängig von der Klasseneinteilung ergibt die Fläche über $[0, 10)$ stets $0.3$ — die relative Häufigkeit bleibt erhalten.
 :::
 
 Für die Wahl der Klassen gibt es keine festen Vorgaben, letztlich geht es einfach darum, dass die Eigenschaften der Daten anhand des Diagramms möglichst gut zu erkennen sind. In der Regel wird man versuchen, die Klassenbreiten $d_j$ gleich groß zu wählen. Für die Anzahl der Klassen gibt es die Faustregeln
