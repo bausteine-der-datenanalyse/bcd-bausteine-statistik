@@ -34,7 +34,7 @@ $$
 \bar{x} = \underset{a}{\operatorname{argmin}}  \sum_{j=1}^n (x_j - a)^2.
 $$
 
-1. Wenn man sich vorstellt, dass jedem Wert $x_j$ einer Kugel entspricht, die an der Stelle $x_j$ an eine gewichtslose Stange gehängt wird, dann ist $\bar{x}$ die Stelle, an der man die Stange auf einem Finger balancieren kann (also der Schwerpunkt).
+1. Wenn man sich vorstellt, dass jedem Wert $x_j$ eine Kugel entspricht, die an der Stelle $x_j$ an eine gewichtslose Stange gehängt wird, dann ist $\bar{x}$ die Stelle, an der man die Stange auf einem Finger balancieren kann (also der Schwerpunkt).
 
 ```{r}
 #| fig-asp: 0.2
