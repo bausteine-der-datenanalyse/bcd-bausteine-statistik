@@ -18,3 +18,4 @@ tmp*tex
 x.R
 xxx.R
 xxx-lint.R
+*_cache

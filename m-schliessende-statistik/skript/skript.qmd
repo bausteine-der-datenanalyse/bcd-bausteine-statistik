@@ -1,0 +1,441 @@
+```{r}
+#| include: false
+source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
+source("01-daten/schliessende-statistik.R")
+```
+
+# Schließende Statistik
+
+## Einführung
+
+In einer Umfrage zu den Verkehrsmitteln an der Hochschule Bochum (Prof. Iris Mühlenbruch) wurde unter anderem nach dem Studienfach gefragt. Wie aussagekräftig sind diese Ergebnisse? Wir betrachten hierzu folgendes Computerexperiment. Aus der Grundgesamtheit
+
+```{r}
+d_fb |>
+  count(fb) |>
+  mutate(Anteil = 100 * n / sum(n)) |>
+  transpose_df(col = "fb") |>
+  mutate(name = c("Studierende", "Anteil in Prozent")) |>
+  gt(rowname_col = "name") |>
+  fmt_number(rows = 2, decimals = 1) |>
+  fmt_number(rows = 1, decimals = 0) |>
+  tab_stubhead("Fachbereich")
+```
+
+werden in einem R-Programm in drei simulierten Umfragen jeweils 250 Studierende zufällig ausgewählt. Die Ergebnisse sind nachfolgend graphisch und tabellarisch dargestellt.
+
+```{r}
+#| fig-asp: 0.3
+
+p_stichprobe(d_fb1, "1") + p_stichprobe(d_fb2, "2") + p_stichprobe(d_fb3, "3")
+```
+
+```{r}
+to_table(list(d_fb1, d_fb2, d_fb3), c("Umfrage 1", "Umfrage 2", "Umfrage 3"))
+```
+
+Wir stellen fest:
+
+- Die Werte weichen deutlich voneinander ab.
+
+- Prozentual am stärksten für Fachbereiche mit kleiner Studierendenzahl.
+
+Wie können wir von diesen Umfrageergebnissen auf die Grundgesamtheit schließen und dabei die Unsicherheit quantifizieren? Mit Fragen wie diesen befasst sich die schließende Statistik.
+
+## Schätzung von Parametern
+
+Schätzprobleme in der Praxis [@mittag_statistik_2017]:
+
+- In der Klimaforschung verwendet man Zeitreihen für Schadstoffkonzentrationen in der Atmosphäre, um Veränderungen der Luftverschmutzung abzuschätzen (Gewinnung empirisch fundierter Prognosen).
+
+- In der Marktforschung verwertet man u. a. Stichprobendaten zum Fernsehverhalten von Zuschauern. Aus diesen will man z. B. den mittleren Fernsehkonsum oder die Verweildauer bei Werbeblöcken für verschiedene Altersgruppen schätzen.
+
+- Bei den ersten Hochrechnungen bei Bundestagswahlen geht es darum, auf der Basis einzelner Wahlkreise eine Schätzung des Anteils von Wählern zu erhalten, die eine bestimmte Partei gewählt haben.
+
+- Bei der industriellen Serienfertigung schätzt man auf der Basis von Stichproben die mittlere Ausprägung von Qualitätsmerkmalen.
+
+Konkrete Anwendung: Schätzung der Parameter von Verteilungen
+
+1. Das Werfen der Reißzwecken entspricht einem Bernoulli-Experiment (0 – Rücken, 1 – Spitze). Wie groß ist der Parameter $p$ der Bernoulli-Verteilung?
+
+    Wir vermuten richtig: Der Wert
+    $$
+    \hat{p} = \frac{\text{Anzahl Würfe Spitze}}{\text{Anzahl Würfe gesamt}}
+    $$
+    ist eine gute Abschätzung. Aber warum ist das eigentlich so?
+
+1. Wie sind die Parameter $\mu, \sigma^2$ anzunehmen, wenn bei der Produktion von Schrauben von einer Normalverteilung $N(\mu, \sigma^2)$ der Schraubenlängen auszugehen ist?
+
+    Richtig, wir verwenden einfach die empirischen Werte für Mittelwert und Varianz, aber auch das gehört (streng genommen) hinterfragt.
+
+1. Die Windgeschwindigkeit an einer Windkraftanlage soll durch eine Weibull-Verteilung modelliert werden. Wie sind die zugehörigen Parameter $\lambda, k$ zu wählen?
+
+→ Wir betrachten einige Grundlagen zu diesen Fragen.
+
+Für die Schätzung von Parametern gibt es zwei verschiedene Ansätze:
+
+Punktschätzung
+
+: Ein unbekannter Parameter soll möglichst gut durch einen Schätzwert „getroffen" werden. Der Schätzwert ist ein Punkt auf dem Zahlenstrahl, daher nennt man diese Art der Schätzung Punktschätzung.
+
+Intervallschätzung
+
+: Bereich festlegen, in dem der Parameter mit einer Wahrscheinlichkeit von $1 - \alpha$ liegt. Dabei heißt $\alpha$ Irrtumswahrscheinlichkeit. Der Bereich wird auch [Konfidenzintervall]{.neuerbegriff} oder [Vertrauensbereich]{.neuerbegriff} genannt.
+
+### Punktschätzungen {#sec-punktschaetzungen}
+
+Ausgangspunkt einer Punktschätzung sind Stichprobendaten
+$$
+x_1, x_2, \dots, x_n \quad \text{mit} \quad x_i \in \mathbb{R}, \; i = 1, \dots, n,
+$$
+die zum Beispiel aus einer Messung stammen können. Bei der Punktschätzung geht man nun von der Vorstellung aus, dass die Stichprobendaten Realisierungen von $n$ Zufallsvariablen
+$$
+X_1, X_2, \dots, X_n
+$$
+sind. Dabei wird angenommen, dass diese Zufallsvariablen
+
+1. unabhängig voneinander sind und dabei
+
+1. durch eine gemeinsame Verteilungsfunktion beschrieben werden können.
+
+Ziel ist es nun, aus den Stichprobendaten Parameter (zum Beispiel den Mittelwert $\mu$ oder die Standardabweichung $\sigma$) der gemeinsamen Verteilungsfunktion zu bestimmen. Wir verwenden hier für die gesuchten Parameter stellvertretend die Variable $\theta$.
+
+Eine Punktschätzung für einen Parameter $\theta$ ist nun eine Funktion $g : \mathbb{R}^n \to \mathbb{R}$, die den Stichprobendaten eine Zahl
+$$
+t = g(x_1, x_2, \dots, x_n)
+$$
+zuordnet. Wenn wir nun die Funktion $g$ auf zwei verschiedene Stichproben anwenden, so werden wir im Allgemeinen auch zwei verschiedene Zahlenwerte für den gesuchten Parameter erhalten. Wir können also eine neue Zufallsvariable
+$$
+T = g(X_1, X_2, \dots, X_n)
+$$
+definieren und so die stochastischen Eigenschaften der Schätzfunktion $g$ untersuchen.
+
+::: {#def-schaetzfunktion}
+## Schätzfunktion, Schätzstatistik
+
+Eine [Schätzfunktion]{.neuerbegriff} oder [Schätzstatistik]{.neuerbegriff} für den Parameter $\theta$ ist eine Funktion $g : \mathbb{R}^n \to \mathbb{R}$,
+$$
+T = g(X_1, X_2, \dots, X_n)
+$$
+der Stichprobenvariablen $X_1, X_2, \dots, X_n$. Der aus den Realisierungen $x_1, x_2, \dots, x_n$ resultierende Zahlenwert
+$$
+t = g(x_1, x_2, \dots, x_n)
+$$
+ist der zugehörige [Schätzwert]{.neuerbegriff} für $\theta$.
+:::
+
+::: beispiel
+**Beispiel empirische Kenngrößen:** Wir haben mit den empirischen Kenngrößen von Stichproben bereits Schätzfunktionen kennengelernt.
+
+Erwartungswert: Mit
+$$
+\overline{X} = g(X_1, X_2, \dots, X_n) = \frac{1}{n} \sum_{i=1}^n X_i
+$$
+erhalten wir die Schätzfunktion für den Erwartungswert $\mu = \operatorname{E}(X)$. Das arithmetische Mittel der Stichprobe $\bar{x}$ ist die zugehörige Realisierung.
+
+Varianz: Die Funktion
+$$
+S^2 = g(X_1, X_2, \dots, X_n) = \frac{1}{n} \sum_{i=1}^n \left(\overline{X} - X_i\right)^2
+$$
+liefert die Varianz $\sigma^2 = \operatorname{Var}(X)$.
+:::
+
+#### Eigenschaften von Schätzfunktionen
+
+Im Prinzip kommt jede Funktion $\mathbb{R}^n \to \mathbb{R}$ als Schätzfunktion in Frage. Allerdings gibt es gewisse Anforderungen an eine sinnvolle Schätzfunktion. Am wichtigsten ist, dass der Erwartungswert der Zufallsvariablen korrekt erfasst wird.
+
+::: {#def-erwartungstreue}
+## Erwartungstreue und Verzerrung (Bias)
+
+Eine Schätzstatistik $T = g(X_1, X_2, \dots, X_n)$ heißt [erwartungstreu]{.neuerbegriff} für $\theta$, wenn
+$$
+\operatorname{E}(T) = \theta
+$$
+gilt. Man spricht von [asymptotisch erwartungstreu]{.neuerbegriff}, falls gilt
+$$
+\lim_{n \to \infty} \operatorname{E}(T) = \theta.
+$$
+Falls eine Schätzstatistik nicht erwartungstreu ist, dann wird die Abweichung
+$$
+\operatorname{Bias}(T) = \operatorname{E}(T) - \theta
+$$
+als [Bias]{.neuerbegriff} bezeichnet. Die Standardabweichung
+$$
+\sigma_T = \sqrt{\operatorname{Var}(T)}
+$$
+wird in diesem Zusammenhang [Standardfehler]{.neuerbegriff} genannt.
+:::
+
+Weiterhin wird von einer Schätzstatistik erwartet, dass die mittlere quadratische Abweichung für eine wachsende Stichprobengröße immer kleiner wird.
+
+::: {#def-mse}
+## Mittlere quadratische Abweichung (MSE) und Konsistenz
+
+Die [erwartete mittlere quadratische Abweichung]{.neuerbegriff} (*mean squared error*) ist definiert als
+$$
+\operatorname{MSE} = \operatorname{E}((T - \theta)^2) = \operatorname{Var}(T) + \operatorname{Bias}(T)^2.
+$$
+Eine Schätzstatistik heißt [konsistent im quadratischen Mittel]{.neuerbegriff}, wenn die erwartete mittlere quadratische Abweichung für größere Stichproben immer kleiner wird. Das heißt, falls gilt
+$$
+\lim_{n \to \infty} \operatorname{MSE} = 0.
+$$
+:::
+
+::: beispiel
+**Beispiel Mittelwert:** In einem Computerexperiment wird aus $n$ Realisierungen einer normalverteilten Zufallsvariablen $X \sim N(2, 4)$ der Mittelwert gebildet. Das Experiment wird für $n = 5$ und $n = 100$ jeweils 100000-mal wiederholt. Für die Mittelwerte erhalten wir folgende Histogramme:
+
+```{r}
+#| fig-asp: 0.5
+#| cache: true
+
+d1 <- tibble(n = factor(5), x = experiment(100000, 5))
+d2 <- tibble(n = factor(100), x = experiment(100000, 100))
+d <- rbind(d1, d2)
+
+ggplot() +
+  geom_histogram(
+    data = filter(d, n == 5),
+    mapping = aes(x = x, fill = n),
+    center = mu, binwidth = 0.02, alpha = 0.8
+  ) +
+  geom_histogram(
+    data = filter(d, n == 100),
+    mapping = aes(x = x, fill = n),
+    center = mu, binwidth = 0.02, alpha = 0.8
+  )
+```
+
+Offenbar nimmt die Streuung des Mittelwertes mit zunehmendem Stichprobenumfang ab (so wie wir das erwarten). Lässt sich diese Beobachtung mathematisch nachvollziehen?
+
+Wir betrachten hierzu allgemein eine $N(\mu, \sigma^2)$-verteilte Zufallsvariable und untersuchen den Mittelwert
+$$
+\overline{X} = \frac{1}{n} \sum_{i=1}^n X_i \quad \text{mit} \quad X_i \sim N(\mu, \sigma^2).
+$$
+Für den Erwartungswert des Mittelwerts ergibt sich mit den Rechenregeln für Zufallsvariablen
+$$
+\operatorname{E}(\overline{X})
+= \operatorname{E}\left(\frac{1}{n} \sum_{i=1}^n X_i\right)
+= \frac{1}{n} \sum_{i=1}^n \operatorname{E}\left(X_i\right)
+= \frac{1}{n} \sum_{i=1}^n \mu
+= \frac{1}{n} \, n \, \mu
+= \mu.
+$$
+Die Schätzfunktion ist demnach erwartungstreu. In den Histogrammen zeigt sich das daran, dass beide Verteilungen ihr Maximum ungefähr bei $x = 2$ annehmen.
+
+Für die Varianz erhalten wir
+$$
+\operatorname{Var}(\overline{X})
+= \operatorname{Var}\left(\frac{1}{n} \sum_{i=1}^n X_i\right)
+= \frac{1}{n^2} \sum_{i=1}^n \operatorname{Var}\left( X_i\right)
+= \frac{1}{n^2} \, n \, \sigma^2
+= \frac{1}{n} \sigma^2.
+$$
+Für $n \to \infty$ geht die Varianz des Mittelwerts gegen null, die Schätzfunktion ist also konsistent im quadratischen Mittel. In den Histogrammen erkennen wir diesen Zusammenhang an der kleineren Streuung der Werte für $n = 100$ im Vergleich zu den Werten für $n = 5$.
+:::
+
+#### Konstruktion von Schätzfunktionen
+
+Problem:
+
+- Woher kommen eigentlich die Schätzfunktionen?
+
+- Intuitiv häufig klar, aber wie motivieren?
+
+Möglichkeiten:
+
+- Maximum-Likelihood-Schätzung (die klassische Methode)
+
+- Kleinste-Quadrate-Schätzung (Regressionsanalyse, hatten wir schon)
+
+- Bayes-Schätzung (Grundlage vieler Computerverfahren)
+
+#### Maximum-Likelihood-Schätzung
+
+Die Maximum-Likelihood-Methode ist das wohl bedeutendste Verfahren zur Gewinnung von Schätzfunktionen für unbekannte Parameter einer Verteilung. Die Grundidee besteht darin, den (oder die) gesuchten Parameter auf Grundlage einer geschickt formulierten Maximierungsaufgabe zu bestimmen.
+
+::: beispiel
+**Beispiel Reißzwecken:** Wir erinnern uns an das Experiment mit den in die Luft geworfenen Reißzwecken. In einem entsprechenden Experiment hat sich ergeben, dass bei $n = 319$ Würfen insgesamt $x = 133$-mal das Ergebnis $U$ (Reißzwecke landet auf der Spitze) auftritt.
+
+Aus wahrscheinlichkeitstheoretischer Sicht handelt es sich um ein Bernoulli-Experiment, das durch die Zufallsvariable $X : \{O, U\} \to \{0, 1\}$ mit
+$$
+X(\omega) =
+\begin{cases}
+0 & \text{falls} \quad \omega = O \\
+1 & \text{falls} \quad \omega = U
+\end{cases}
+$$
+beschrieben werden kann. Die Wahrscheinlichkeit für den Wert $1$ setzen wir gleich $p$ (das ist unser unbekannter Parameter) und erhalten damit die Wahrscheinlichkeitsfunktion
+$$
+f(x) =
+\begin{cases}
+1-p & \text{für } x = 0 \\
+p & \text{für } x = 1 \\
+0 & \text{sonst}
+\end{cases}
+$$
+(vergleiche @sec-verteilungen-diskret). Wie haben wir nun den Parameter $p$ zu wählen? Wir nehmen intuitiv an, dass wir $p$ durch den Anteil der Würfe $U$ an der Gesamtzahl der Würfe abschätzen können, dass wir also
+$$
+p = \frac{133}{319} = 0.41\dots
+$$
+setzen können. Dies ist in der Tat der Fall. Wir wollen dieses Ergebnis nun mithilfe der Maximum-Likelihood-Methode untermauern.
+
+Wir fragen uns hierzu, wie groß die Wahrscheinlichkeit ist, dass wir bei 319 Würfen 133-mal das Ergebnis $U$ erhalten. Wir definieren hierzu eine neue Zufallsvariable
+$$
+Y = \text{Anzahl des Ergebnisses } U \text{ bei } 319 \text{ Würfen}
+$$
+und stellen fest, dass es sich hierbei um eine binomialverteilte Variable handelt. Demzufolge ist die Wahrscheinlichkeit für das beobachtete Ergebnis
+$$
+P(Y = 133) = \binom{319}{133} p^{133} (1-p)^{319-133},
+$$
+wobei wir hier noch keinen konkreten Wert für $p$ eingesetzt haben. Wir können mit diesem Ausdruck eine Funktion
+$$
+L(p) = \binom{319}{133} p^{133} (1-p)^{186}
+$$
+definieren, die uns für jeden Wert von $p$ zwischen $0$ und $1$ sagt, wie wahrscheinlich das beobachtete Ergebnis unter dieser Voraussetzung ist. Die Funktion $L$ heißt Likelihood-Funktion, hier der Graph von $L$:
+
+```{r}
+#| fig-asp: 0.5
+
+d <- tibble(p = seq(0, 1, length.out = 501), L = dbinom(x = 133, size = 319, prob = p))
+ggplot(data = d) +
+  geom_line(mapping = aes(x = p, y = L), color = "red") +
+  geom_vline(xintercept = 133 / 319, color = "gray") +
+  scale_x_continuous(breaks = c(0, 0.25, 0.75, 1, 0.42)) +
+  labs(y = "L(p)") +
+  theme(panel.grid.minor = element_blank())
+```
+
+Aus dem Plot können wir ablesen, dass die Funktion $L$ ihr Maximum circa bei $p = 0.42$ annimmt, also genau den Wert, den wir uns oben schon überlegt haben. Den Wert $p$ so zu bestimmen, dass die Wahrscheinlichkeit für das beobachtete Ergebnis maximiert wird, ist der Kerngedanke der Maximum-Likelihood-Methode.
+
+Für eine binomialverteilte Zufallsvariable erhalten wir allgemein die Likelihood-Funktion
+$$
+L(p) = \binom{n}{x} p^x \cdot (1-p)^{n-x}.
+$$
+Um die Extremstelle zu bestimmen, verwenden wir die Ableitung
+$$
+\begin{aligned}
+L'(p)
+& = \binom{n}{x}
+\left(
+x \cdot p^{x-1} \cdot (1-p)^{n-x}
+-
+(n-x) \cdot p^x \cdot (1-p)^{n-x-1}
+\right)
+\\[1em]
+& = \binom{n}{x}
+p^{x-1} \cdot (1-p)^{n-x-1}
+\left(
+x \cdot (1-p)
+-
+(n-x) p
+\right).
+\end{aligned}
+$$
+Mit
+$$
+L'(p) = 0
+\iff
+x \cdot (1-p) - (n-x) p = 0
+\iff
+x - px - np + px = 0
+$$
+erhalten wir den „optimalen Wert"
+$$
+p = \frac{x}{n}
+$$
+als Abschätzung für den Parameter $p$ einer Bernoulli-Verteilung, wenn bei $n$ Versuchen $x$-mal das Ergebnis $\omega$ mit $X(\omega) = 1$ eingetreten ist.
+:::
+
+Allgemein:
+
+::: {#def-maximum-likelihood}
+## Likelihood-Funktion und Maximum-Likelihood-Prinzip
+
+[Likelihood-Funktion]{.neuerbegriff} $L : \mathbb{R} \to \mathbb{R}$: Der Wert $L(\theta)$ gibt an, wie wahrscheinlich die beobachteten Daten $x_1, x_2, \dots, x_n$ für den gegebenen Wert von $\theta$ sind. Für stetige Variablen ist die Dichtefunktion einzusetzen.
+
+Das [Maximum-Likelihood-Prinzip]{.neuerbegriff} besagt: Wähle zu $x_1, x_2, \dots, x_n$ die Parameterschätzung $\hat{\theta}$ so, dass die Likelihood-Funktion maximiert wird. Es soll also gelten
+$$
+L(\hat{\theta}) \geq L(\theta) \quad \text{für alle möglichen Werte von } \theta.
+$$
+:::
+
+Mithilfe der Maximum-Likelihood-Methode lassen sich die Parameter unterschiedlichster Verteilungsfunktionen bestimmen (unter anderem auch die Parameter der Normalverteilung, die wir bereits kennengelernt haben). In Computerprogrammen wird die zugehörige Maximierungsaufgabe meistens mithilfe numerischer Optimierungsverfahren gelöst.
+
+### Intervallschätzung
+
+Für die Schätzung von Intervallen für stochastische Parameter wird auf die entsprechenden Kapitel in @fahrmeir_statistik_2016 und @mittag_statistik_2017 verwiesen.
+
+## Testen von Hypothesen
+
+### Einführung
+
+::: beispiel
+**Beispiel Würfelspiel:** Stellen Sie sich folgendes Spiel vor: Zwei Spieler würfeln mit ihrem eigenen Würfel 100-mal. Wer die meisten Sechsen geworfen hat, gewinnt. Wenn Sie an diesem Spiel teilnehmen, dann nehmen Sie zunächst an, dass bei beiden Würfeln die Wahrscheinlichkeit für eine Sechs bei $P(X = 6) = 1/6$ liegt. Hat dann aber der andere Spieler $95$-mal eine Sechs gewürfelt, dann werden Sie sich ziemlich sicher sein, dass der Würfel manipuliert ist. Sie springen erbost vom Tisch auf und beschweren sich! Aber warum eigentlich?
+
+Um das Problem zu formalisieren, werden zwei Hypothesen formuliert:
+
+- $H_0$: Die Nullhypothese besagt, dass die Würfel nicht manipuliert sind.
+
+- $H_1$: Die Alternative hierzu ist, dass der Würfel manipuliert ist.
+
+Wichtig ist, dass sich die beiden Hypothesen gegenseitig ausschließen.
+
+Man fragt sich nun, wie groß die Wahrscheinlichkeit dafür ist, dass mit einem fairen Würfel bei 100 Würfen $n$-mal die Sechs gewürfelt wird. Es ist klar, dass dieser Wert für $n = 95$ sehr, sehr klein ist (wir könnten das ohne Probleme ausrechnen, aber das ist gar nicht wichtig). Wir werden die Hypothese $H_0$ in diesem Fall also verwerfen und davon ausgehen, dass die Alternative $H_1$ zutrifft. Sie beschweren sich also zu Recht.
+:::
+
+In dem Beispiel haben Sie angenommen, dass der Würfel mit sehr hoher Wahrscheinlichkeit manipuliert ist. Die Grundlage hierfür, nämlich die verschwindend kleine Wahrscheinlichkeit dafür, dass das Ergebnis mit einem fairen Würfel zustande gekommen ist, heißt $p$-Wert.
+
+::: {#def-p-wert}
+## $p$-Wert
+
+Die Wahrscheinlichkeit dafür, einen vorliegenden Wert (oder einen größeren bzw. kleineren Wert) unter der Annahme der Nullhypothese $H_0$ zu beobachten, heißt [$p$-Wert]{.neuerbegriff} eines Signifikanztests.
+
+Ist der $p$-Wert kleiner oder gleich einem vorgegebenen Signifikanzniveau, so wird die Nullhypothese $H_0$ verworfen. Andernfalls behält man $H_0$ bei. Häufig verwendet man die Wertebereiche
+
+- $p < 0.01$: Äußerst signifikant
+
+- $0.01 \leq p < 0.05$: Stark signifikant
+
+- $0.05 \leq p < 0.1$: Signifikant
+
+- $0.1 \leq p < 0.2$: Tendenz
+
+- $p \geq 0.2$: Trend ist statistisch nicht relevant
+
+um die Signifikanz zu bewerten, die der Alternative $H_1$ zugemessen wird.
+:::
+
+### Mann-Kendall-Test
+
+In vielen Anwendungen werden Zeitreihen untersucht, in denen bestimmte Größen (zum Beispiel Niederschläge) in (meistens regelmäßigen) Zeitabständen gemessen und aufgezeichnet wurden. Mithilfe einer linearen Regression (siehe @def-lineare-regression) können wir dann einen in den Daten gegebenenfalls vorhandenen linearen Trend feststellen. Dabei stellt sich jedoch die Frage, ob sich hinter diesem Trend eine tiefere Ursache versteckt oder ob die Zu- oder Abnahme zufällig zustande gekommen ist. Dies kann mit dem [Mann-Kendall-Test]{.neuerbegriff} statistisch überprüft werden.
+
+Der Mann-Kendall-Test setzt als nicht parametrischer Test keine normalverteilten Daten voraus und ist daher gut für die Untersuchung klimatologischer Zeitreihen (Wind, Niederschlag, Abflüsse etc.) geeignet. Darüber hinaus ist der Test rangbasiert (siehe unten) und somit unempfindlich gegenüber Ausreißern. Nachteilig ist eine gewisse Anfälligkeit gegenüber autokorrelierten Zeitreihen.
+
+Den Ausgangspunkt zu unseren Überlegungen zum Mann-Kendall-Test bilden die Messdaten
+$$
+x_1, x_2, \dots, x_n,
+$$
+wobei wir davon ausgehen wollen, dass $i < j$ bedeutet, dass $x_i$ zeitlich gesehen vor $x_j$ aufgezeichnet wurde.
+
+Wir formulieren nun die beiden Hypothesen
+
+- $H_0$: Die Nullhypothese besagt, dass es keinen Trend in den Daten gibt. Es ist also gleich wahrscheinlich, ob ein späterer Wert größer oder kleiner als ein vorangegangener Wert ist. Dann gilt für $j > i$, dass $P(x_j > x_i) = 0.5$ ist.
+
+- $H_1$: Die Alternative lautet, dass ein Trend vorliegt. Dann gilt $P(x_j > x_i) \neq 0.5$ für $j > i$ und es wird eine Richtung (An- oder Abstieg) bevorzugt.
+
+Grundlage zur Bestätigung oder Ablehnung der Nullhypothese ist die Mann-Kendall-Teststatistik
+$$
+S = \sum_{j=1}^{n-1} \sum_{k = j+1}^n \operatorname{sgn}(x_k - x_j),
+$$
+in der mithilfe der Vorzeichenfunktion
+$$
+\operatorname{sgn}(x) =
+\begin{cases}
+1 & \text{falls} \; x > 0 \\
+0 & \text{falls} \; x = 0 \\
+-1 & \text{falls} \; x < 0
+\end{cases}
+$$
+bewertet wird, ob Werte zu späteren Zeitpunkten tendenziell größer oder kleiner als vorangegangene Werte sind. Trifft die Nullhypothese zu, dann ist der Erwartungswert von $S$ gleich null. Ein positiver oder ein negativer Wert deutet auf einen Trend in den Daten hin.
+
+Zur Beurteilung ist wieder der $p$-Wert des Tests maßgebend, der mithilfe von $S$ und der Varianz von $S$ bestimmt wird. Für den Mann-Kendall-Test ist der $p$-Wert die Wahrscheinlichkeit dafür, dass der berechnete Wert $S$ mit der zutreffenden Nullhypothese zustande gekommen ist. Kleine Werte von $p$ weisen also auf einen Trend in den Daten hin.

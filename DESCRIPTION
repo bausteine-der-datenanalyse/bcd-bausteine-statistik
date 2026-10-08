@@ -30,6 +30,7 @@ Imports:
     wbstats,
     webshot2,
     RcppRoll,
+    ggforce,
     ggridges,
     latex2exp,
     patchwork,
