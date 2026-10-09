@@ -2,7 +2,7 @@
 
 Offene Punkte zur Umstellung des Skripts (Kapitel 6–12). Hintergrund und Details in `umstellung-skript.md`.
 
-- [ ] Committen in dieser Reihenfolge: zuerst dieses Repo (neue Module, `DESCRIPTION`, `.gitignore`) committen und
+- [x] Committen in dieser Reihenfolge: zuerst dieses Repo (neue Module, `DESCRIPTION`, `.gitignore`) committen und
   pushen, dann im Hauptrepo den Submodul-Stand zusammen mit `lernpfad/skript/content.yml`,
   `lernpfad/skript/_quarto.yml`, `lernpfad/skript/literatur.qmd`, `DESCRIPTION`, `todo.md`, `CLAUDE.md`.
   Umgekehrt bricht `collect-content.R` in der CI ab, weil die Modulordner fehlen.

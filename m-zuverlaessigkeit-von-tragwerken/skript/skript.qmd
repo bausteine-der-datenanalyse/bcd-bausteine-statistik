@@ -5,6 +5,11 @@ source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
 
 # Zuverlässigkeit von Tragwerken
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 In der Planung von Tragwerken spielen eine Vielzahl von Unsicherheiten eine Rolle:
 
 - Die Einwirkungen auf das Tragwerk sind zum Planungszeitpunkt nicht genau bekannt. Darüber hinaus können sich durch Nutzungsänderungen neue Beanspruchungssituationen ergeben, im Zuge des Klimawandels werden extreme Wetterereignisse und damit einhergehende außergewöhnliche Einwirkungen häufiger.

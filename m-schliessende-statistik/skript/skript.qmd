@@ -6,6 +6,11 @@ source("01-daten/schliessende-statistik.R")
 
 # Schließende Statistik
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 ## Einführung
 
 In einer Umfrage zu den Verkehrsmitteln an der Hochschule Bochum (Prof. Iris Mühlenbruch) wurde unter anderem nach dem Studienfach gefragt. Wie aussagekräftig sind diese Ergebnisse? Wir betrachten hierzu folgendes Computerexperiment. Aus der Grundgesamtheit

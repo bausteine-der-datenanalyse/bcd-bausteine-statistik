@@ -6,6 +6,11 @@ source("01-daten/rechnen-mit-wahrscheinlichkeiten.R")
 
 # Rechnen mit Wahrscheinlichkeiten
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 ## Bedingte Wahrscheinlichkeiten
 
 ```{r}

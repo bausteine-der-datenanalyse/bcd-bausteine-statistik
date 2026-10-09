@@ -6,6 +6,11 @@ source("01-daten/zufallsvariablen.R")
 
 # Zufallsvariablen
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 In @sec-axiomatische-definition hatten wir festgehalten, dass wir Zufallsvorgänge mathematisch beschreiben können, wenn wir das Tripel $(\Omega, \mathcal{A}, P)$ angeben können. Bislang ist uns das aber nur für sehr einfach strukturierte Aufgaben gelungen, nämlich für die Beispiele aus der Kombinatorik.
 
 Wie können wir aber mit Wahrscheinlichkeiten rechnen, wenn es sich um Vorgänge handelt, bei denen die interessierenden Größen Zahlen sind? Mögliche Fragen könnten hier zum Beispiel lauten:

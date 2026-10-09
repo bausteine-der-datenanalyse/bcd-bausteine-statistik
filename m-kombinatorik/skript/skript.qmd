@@ -6,6 +6,11 @@ source("01-daten/kombinatorik.R")
 
 # Zufallsstichproben und Kombinatorik
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 Die Auswahl zufälliger Stichproben ist eine der Aufgaben in der abzählenden Kombinatorik. Hier geht es darum, die Anzahl möglicher Anordnungen oder Auswahlen zu bestimmen. Ein klassisches Gedankenexperiment ist hier das Urnenmodell, auf das sich viele verschiedene Zufallsexperimente zurückführen lassen. Wir gehen dabei davon aus, dass bei jedem Zug alle in der Urne befindlichen Kugeln die gleiche Wahrscheinlichkeit haben, gezogen zu werden.
 
 ![](00-bilder/urnenmodell.svg){width=30%}

@@ -1,5 +1,10 @@
 # Grundbegriffe der Wahrscheinlichkeitsrechnung
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 ## Zufallsvorgang und Zufallsexperiment {#sec-zufallsvorgang}
 
 Im Leben hat man es ständig mit Geschehnissen zu tun, deren Ausgang nicht vorhersehbar ist.

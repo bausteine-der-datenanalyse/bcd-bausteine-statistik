@@ -6,6 +6,11 @@ source("01-daten/wahrscheinlichkeit.R")
 
 # Wahrscheinlichkeit
 
+::: {.callout-warning}
+## Entwurf
+Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+:::
+
 Im Alltag denken wir ständig in Begriffen wie:
 
 - Der Wetterbericht sagt für morgen eine Regenwahrscheinlichkeit von 40 % voraus. Das Picknick sage ich nicht ab, aber einen Regenschirm werde ich einpacken.
