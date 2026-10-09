@@ -8,7 +8,7 @@ source("01-daten/schliessende-statistik.R")
 
 ::: {.callout-warning}
 ## Entwurf
-Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist noch nicht durchgesehen.
+Dieses Kapitel wird noch grundlegend überarbeitet.
 :::
 
 ## Einführung
