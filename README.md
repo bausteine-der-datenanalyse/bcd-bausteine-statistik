@@ -1,6 +1,6 @@
 # Methodenbausteine Statistik
 
-Die Grundlagen Statistik bestehen aus verschiedenen Methodenbausteinen, die als Gesamtdokument (https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/skript/index.html) oder einzeln abrufbar sind. Alle Bausteine haben ein Skript, manche haben zusätzlich noch Aufgaben.
+Die Grundlagen Statistik bestehen aus verschiedenen Methodenbausteinen, die als Gesamtdokument (https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/statistik-skript/index.html) oder einzeln abrufbar sind. Alle Bausteine haben ein Skript, manche haben zusätzlich noch Aufgaben.
 
 ## Dokumente
 
