@@ -26,3 +26,6 @@
     ...
     :::
     ```
+
+- Gendern: Neutrale Formen, wo es geht (Studierende, Angehörige, Befragte, Person), sonst Doppelpunkt
+  (Absolvent:innen). Keine Paarformen wie „Student oder Studentin“.
