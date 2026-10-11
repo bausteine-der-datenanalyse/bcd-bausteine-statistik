@@ -12,9 +12,9 @@ Grundlage jeder statistischen Untersuchung sind Daten, die auf unterschiedliche 
 
 Heute sind viele Daten frei im Internet zugänglich. Hier einige Beispiele:
 
-- Ministerien (etwa [BMV](https://bmv.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html) oder [BMWE](https://www.bundeswirtschaftsministerium.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien)) und Bundesämter ([Bundesanstalt für Straßen- und Verkehrswesen](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de)).
+- Ministerien (etwa [BMV](https://bmv.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html) oder [BMWE](https://www.bundeswirtschaftsministerium.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien)) und Bundesbehörden ([Bundesanstalt für Straßen- und Verkehrswesen](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de))
 
-- Die Berichte der Vereinten Nationen über die Entwicklung der Menschheit (*Human Development Reports*) <http://hdr.undp.org>
+- Die Berichte der Vereinten Nationen über die Entwicklung der Menschheit (*Human Development Reports*) <https://hdr.undp.org>
 
 - Wetterdaten des [Deutschen Wetterdienstes](https://www.dwd.de/DE/klimaumwelt/cdc/cdc_node.html)
 
@@ -35,7 +35,7 @@ fig-alt="Befragungsbogen zu Verkehrsmitteln und Ergebnisse in Tabelle"
 
 #### Geschwindigkeitsmessung Universitätsstraße
 
-Mit einem Seitenradar kann die Geschwindigkeit und die Länge der auf einer Straße vorbeifahrenden Fahrzeuge gemessen werden. Eine solche Messung ist von Prof. Mühlenbruch über zwei Tage im Jahr 2017 an der Universitätsstraße durchgeführt worden. Die Daten werden nach der Messung aus dem Messgerät ausgelesen und auf dem Computer in Form einer Excel-Datei gespeichert, siehe @fig-seitenradar. 
+Mit einem Seitenradar können die Geschwindigkeit und die Länge der auf einer Straße vorbeifahrenden Fahrzeuge gemessen werden. Eine solche Messung ist von Prof. Mühlenbruch über zwei Tage im Jahr 2017 an der Universitätsstraße durchgeführt worden. Die Daten werden nach der Messung aus dem Messgerät ausgelesen und auf dem Computer in Form einer Excel-Datei gespeichert, siehe @fig-seitenradar. 
 
 ![Funktionsweise eines Seitenradars und aufgezeichnete Daten](00-bilder/seitenradar.svg){
 #fig-seitenradar
@@ -44,15 +44,15 @@ fig-alt="Geschwindigkeitsmessung mit Seitenradar an einem ankommenden PKW"
 
 #### Abfluss der Donau bei Hofkirchen
 
-Historische Daten über den Abfluss und den Wasserstand eines Flusses bilden die Grundlage für die Beurteilung des Hochwasserrisikos und die Planung entsprechender Maßnahmen. Wir betrachten hier Messdaten der Donau am Pegel Hofkirchen, dargestellt in @fig-hofkirchen. Es handelt sich um Messwerte des Abflusses in m^3^/s (Quelle: [*The Global Runoff Data Base*]{.lang-eng} der Bundesanstalt für Gewässerkunde). Die Daten mit einer Beobachtung pro Tag liegen in Textform vor, die einzelnen Werte sind durch Semikolons voneinander getrennt. Solche Dateien werden auch als CSV-Dateien bezeichnet ([*Comma Separated Values*]{.lang-eng}). Der Datensatz umfasst mehr als hundert Jahre und beinhaltet somit gut 40000 Werte.
+Historische Daten über den Abfluss und den Wasserstand eines Flusses bilden die Grundlage für die Beurteilung des Hochwasserrisikos und die Planung entsprechender Maßnahmen. Wir betrachten hier Messdaten der Donau am Pegel Hofkirchen, dargestellt in @fig-hofkirchen. Es handelt sich um Messwerte des Abflusses in m^3^/s (Quelle: [*Global Runoff Data Centre*]{.lang-eng} (GRDC) der Bundesanstalt für Gewässerkunde). Die Daten mit einer Beobachtung pro Tag liegen in Textform vor, die einzelnen Werte sind durch Semikolons voneinander getrennt. Solche Dateien werden auch als CSV-Dateien bezeichnet ([*Comma Separated Values*]{.lang-eng}), auch dann, wenn ein anderes Trennzeichen als das Komma verwendet wird. Der Datensatz umfasst mehr als hundert Jahre und beinhaltet somit gut 40000 Werte.
 
 ```{r}
 #| label: fig-hofkirchen
 #| fig-cap: |
 #|  Abfluss der Donau am Pegel Hofkirchen
 #| fig-alt: |
-#|  Zeitraum von 100 Jahren auf der X-Achse, Abfluss gemessen in m³/s auf der Y-Achse.
-#|  Jeder Tag stellt einen Datenpunkt dar."
+#|  Zeitraum von gut 110 Jahren auf der X-Achse, Abfluss gemessen in m³/s auf der Y-Achse.
+#|  Jeder Tag stellt einen Datenpunkt dar.
 
 ggplot(data = d_donau) +
   geom_point(
@@ -67,10 +67,10 @@ ggplot(data = d_donau) +
 
 ## Organisation von Datensätzen
 
-In den Beispielen oben haben wir gesehen, in welcher Form Rohdaten vorliegen können. Um effizient statistische Untersuchungen durchführen zu können, ist es hilfreich, die Daten in einer einfach zu verarbeitenden Form zu darzustellen. Bei umfangreichen Daten geschieht das natürlich auf dem Computer. Die Entscheidung darüber, wie die einzelnen Werte angeordnet werden sollen, kann man dabei aber nicht dem Computer überlassen. Dass es hier durchaus Wahlmöglichkeiten gibt, sehen wir an dem folgenden Beispiel.
+In den Beispielen oben haben wir gesehen, in welcher Form Rohdaten vorliegen können. Um effizient statistische Untersuchungen durchführen zu können, ist es hilfreich, die Daten in einer einfach zu verarbeitenden Form darzustellen. Bei umfangreichen Daten geschieht das natürlich auf dem Computer. Die Entscheidung darüber, wie die einzelnen Werte angeordnet werden sollen, kann man dabei aber nicht dem Computer überlassen. Dass es hier durchaus Wahlmöglichkeiten gibt, sehen wir an dem folgenden Beispiel.
 
 ::: beispiel
-**Beispiel:** Wir betrachten einen fiktiven Datensatz zu Bevölkerungszahlen und das Auftreten von Krankheitsfällen in drei verschiedenen Ländern für die Jahre 1999 und 2000 (in Anlehnung an [@wickham_r_2016]). Nachfolgend dargestellt sind verschiedene Lösungen, wie die Daten in Tabellen zusammengestellt werden können.
+**Beispiel:** Wir betrachten einen fiktiven Datensatz zu Bevölkerungszahlen und zum Auftreten von Krankheitsfällen in drei verschiedenen Ländern für die Jahre 1999 und 2000 (in Anlehnung an [@wickham_r_2016]). Nachfolgend dargestellt sind verschiedene Lösungen, wie die Daten in Tabellen zusammengestellt werden können.
 
 ```{r}
 d_tidydata_1 |> tab_tidydata()
@@ -105,15 +105,15 @@ d_tidydata_42 |>
 Lösung 4: Jeweils eine Tabelle für Fälle und Bevölkerung
 :::
 
-Statistische Datensätze liegen in der Regel in Form rechteckiger Tabellen vor, die aus Zeilen und Spalten bestehen. Spalten sind dabei in der Regel mit einer Spaltenüberschrift versehen. Dabei hat es sich gezeigt, dass es häufig zielführend ist die Daten so aufzubereiten, dass die folgenden drei Anforderungen erfüllt sind:
+Statistische Datensätze liegen in der Regel in Form rechteckiger Tabellen vor, die aus Zeilen und Spalten bestehen. Spalten sind meist mit einer Spaltenüberschrift versehen. Es hat sich gezeigt, dass es häufig zielführend ist, die Daten so aufzubereiten, dass die folgenden drei Anforderungen erfüllt sind:
 
 1. Jede Variable erhält eine eigene Spalte.
 
-1. Jeder Beobachtung entspricht einer Zeile.
+1. Jede Beobachtung entspricht einer Zeile.
 
 1. Jeder Wert steht in einer eigenen Zelle.
 
-In @fig-tidy-data ist zu erkennen, dass für das Beispiel oben mit Lösung 2 diesem Schema entsprochen wird.
+In @fig-tidy-data ist zu erkennen, dass Lösung 2 aus dem Beispiel oben diesem Schema entspricht.
 
 ![Organisation eines Datensatzes in einer Tabelle](00-bilder/tidy-data.svg){
 #fig-tidy-data 
@@ -130,7 +130,7 @@ In den folgenden Abschnitten lernen wir einige in der Statistik übliche Begriff
 
 In der Statistik wird meist davon ausgegangen, dass Daten an gewissen Objekten beobachtet werden. In unseren Beispielen:
 
-- Student oder Studentin in der Mobilitätsbefragung
+- Person in der Mobilitätsbefragung
 
 - Fahrzeug, das am Seitenradar vorbeifährt
 
@@ -138,17 +138,17 @@ Ein solches Objekt wird in der Statistik als [statistische Einheit]{.neuerbegrif
 
 - Was ist die statistische Einheit in der Geschwindigkeitsmessung, wenn ein Fahrzeug innerhalb eines Messzeitraums zweimal am Seitenradar vorbeifährt?
 
-- Bei der Durchflussmessung geht es immer um dasselbe Objekt, nämlich die Donau bei Hofkirchen.
+- Bei der Abflussmessung geht es immer um dasselbe Objekt, nämlich die Donau bei Hofkirchen.
 
-Daher: Manchmal macht es Sinn, von statistischen Einheiten zu sprechen, den Begriff Beobachtung können wir aber immer verwenden.
+Daher: Manchmal ist es sinnvoll, von statistischen Einheiten zu sprechen, den Begriff Beobachtung können wir aber immer verwenden.
 
 #### Grundgesamtheit
 
-Bei den in der Mobilitätsbefragung befragten Studierenden handelt es sich um eine Auswahl aller zum Zeitpunkt der Befragung an der BO eingeschriebenen Studierenden. Die Gesamtheit aller Studierenden bildet dabei die sogenannte [Grundgesamtheit]{.neuerbegriff}. Als Grundgesamtheit wird somit die Menge aller statistischen Einheiten bezeichnet, über die man Aussagen treffen möchte. In der Mobilitätsbefragung ist die Grundgesamtheit endlich groß und bekannt. Das ist nicht immer so:
+Bei den in der Mobilitätsbefragung befragten Personen handelt es sich um eine Auswahl aller Angehörigen der BO zum Zeitpunkt der Befragung, also Studierende und Beschäftigte. Die Gesamtheit aller Angehörigen bildet dabei die sogenannte [Grundgesamtheit]{.neuerbegriff}. Als Grundgesamtheit wird somit die Menge aller statistischen Einheiten bezeichnet, über die man Aussagen treffen möchte. In der Mobilitätsbefragung ist die Grundgesamtheit endlich groß und bekannt. Das ist nicht immer so:
 
 - Die Geschwindigkeitsmessung lässt sich im Prinzip beliebig fortsetzen, es handelt sich hier um eine unendlich große Grundgesamtheit.
 
-- Wenn man über die Abschlussnoten für Bauingenieursabsolvent:innen der BO im Jahr 2095 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
+- Wenn man über die Abschlussnoten der Absolvent:innen des Bauingenieurwesens an der BO im Jahr 2095 nachdenkt, dann ist die Grundgesamtheit hypothetisch, da nicht bekannt ist, wer in Zukunft studieren wird.
 
 ```{r}
 #| label: fig-stichprobe
@@ -162,15 +162,15 @@ fig_stichprobe()
 
 #### Stichprobe
 
-In den allermeisten Fällen ist es nicht möglich oder nicht notwendig in einer statistischen Untersuchung alle statistischen Einheiten der Grundgesamtheit einzubeziehen. Man beschränkt sich auf einen Teil der Grundgesamtheit und spricht dabei von einer [Stichprobe]{.neuerbegriff}. @fig-stichprobe zeigt ein entsprechendes Beispiel.
+In den allermeisten Fällen ist es nicht möglich oder nicht notwendig, in einer statistischen Untersuchung alle statistischen Einheiten der Grundgesamtheit einzubeziehen. Man beschränkt sich auf einen Teil der Grundgesamtheit und spricht dabei von einer [Stichprobe]{.neuerbegriff}. @fig-stichprobe zeigt ein entsprechendes Beispiel.
 
 Dass die Planung einer Erhebung keine triviale Aufgabe ist, sehen wir an zwei Beispielen:
 
 - @fig-stichprobe zeigt zwei Stichproben. Welche der beiden Stichproben können wir verwenden, um Aussagen über die Verteilung der Farben in der Grundgesamtheit zu treffen? Wie groß ist dann groß genug? Mit diesen Fragen befasst sich die schließende Statistik.
 
-- Um eine aussagekräftige Stichprobe zu erhalten ist es notwendig, dass jede statistische Einheit mit gleicher Wahrscheinlichkeit in die Stichprobe aufgenommen wird. Wenn zum Beispiel die Befragung zur Mobilität auf dem Bahnsteig der U35 durchgeführt wird, dann ist die Stichprobe keinesfalls repräsentativ.
+- Damit eine Stichprobe aussagekräftig ist, darf die Auswahl nicht systematisch bestimmte Einheiten bevorzugen. Am einfachsten erreicht man das, wenn jede statistische Einheit mit gleicher Wahrscheinlichkeit in die Stichprobe aufgenommen wird. Wird die Befragung zur Mobilität zum Beispiel auf dem Bahnsteig der U35 durchgeführt, dann erreicht man fast nur Personen, die mit der U-Bahn kommen. Der Anteil der U-Bahn-Fahrenden wird dadurch deutlich überschätzt.
 
-Für die Auswertung in einem Computerprogramm spielen diese Fragen keine Rolle. Hier entspricht die Stichprobe einfach dem statistischen Datensatz.
+Für die Berechnung in einem Computerprogramm spielen diese Fragen keine Rolle, für die Interpretation der Ergebnisse aber sehr wohl. Im Programm entspricht die Stichprobe einfach dem statistischen Datensatz.
 
 #### Merkmale
 
@@ -179,9 +179,9 @@ Eine Größe, für die man sich in einer statistischen Untersuchung interessiert
 ::: {#def-statistische-grundbegriffe}
 ## Statistische Grundbegriffe
 
-Statistische Einheiten:
+Statistische Einheit:
 
-: Objekte, an denen interessierende Größen erfasst werden
+: Objekt, an dem interessierende Größen erfasst werden
 
 Grundgesamtheit:
 
@@ -202,7 +202,7 @@ Merkmalsausprägung:
 
 ### Typen von Merkmalen
 
-Für die statistische Auswertung von Daten ist es hilfreich und nützlich, Merkmale entsprechend bestimmter Eigenschaften in Kategorien einzuteilen. Dabei gibt es drei wesentliche Fragen:
+Für die statistische Auswertung von Daten ist es hilfreich, Merkmale nach bestimmten Eigenschaften in Kategorien einzuteilen. Dabei gibt es drei wesentliche Fragen:
 
 a. Ist ein Merkmal stetig oder diskret?
 
@@ -210,19 +210,19 @@ a. Auf welcher Skala wird ein Merkmal gemessen?
 
 a. Beschreibt das Merkmal eine Qualität oder eine Größe, die in Zahlen messbar ist?
 
-Beachten Sie, dass diese Einordnungen nicht immer exakt gleich verwendet werden. Es handelt sich nicht um mathematische Definitionen sondern eher um eine Orientierungshilfe.
+Beachten Sie, dass diese Einordnungen nicht immer exakt gleich verwendet werden. Es handelt sich nicht um mathematische Definitionen, sondern eher um eine Orientierungshilfe.
 
 #### (a) Diskrete und stetige Merkmale
 
 Eine wichtige Unterscheidung von Merkmalen betrifft die Anzahl möglicher Ausprägungen.
 
-*Diskret:* Ein Merkmal heißt [diskret]{.neuerbegriff}, wenn es nur endlich viele oder abzählbar unendlich viele mögliche Ausprägungen gibt.
+*Diskret:* Ein Merkmal heißt [diskret]{.neuerbegriff}, wenn es nur endlich viele oder abzählbar unendlich viele mögliche Ausprägungen hat.
 
 *Stetig:* Ein Merkmal heißt [stetig]{.neuerbegriff}, wenn es alle Werte eines Intervalls annehmen kann.
 
-In der Regel ist es so, dass ausschließlich Merkmale, die sinnvollerweise durch reelle Zahlen repräsentiert werden, stetig sind. Alle anderen Merkmale sind diskret.
+Stetig sind in der Regel nur Merkmale, die sinnvollerweise durch reelle Zahlen repräsentiert werden. Alle anderen Merkmale sind diskret.
 
-In der praktischen Anwendung werden stetige Merkmale durch Dezimalzahlen oder auch ganze Zahlen repräsentiert. In unserem Beispiel ist etwa die Körpergröße in ganzen Zentimetern erfasst. Obwohl das Merkmal stetig ist, haben wir es in der Auswertung mit diskreten Daten zu tun.
+In der praktischen Anwendung werden stetige Merkmale durch Dezimalzahlen oder auch ganze Zahlen repräsentiert. So wird zum Beispiel die Körpergröße häufig in ganzen Zentimetern erfasst. Obwohl das Merkmal stetig ist, haben wir es in der Auswertung mit diskreten Daten zu tun.
 
 #### (b) Skalen von Merkmalen
 
@@ -230,7 +230,7 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
 1. [Nominalskala]{.neuerbegriff}: Ein Merkmal heißt nominalskaliert, wenn die Ausprägungen Namen oder Kategorien sind. Für Werte nominalskalierter Merkmale gibt es keine natürliche Rangfolge (im Sinn von besser, größer, schneller und so weiter).
 
-1. [Ordinalskala]{.neuerbegriff}: Wenn es für die Ausprägungen eines Merkmals eine natürliche Ordnung gibt, es aber keinen Sinn macht, Abstände zwischen den Werten zu bestimmen, dann ist das Merkmal ordinalskaliert.
+1. [Ordinalskala]{.neuerbegriff}: Wenn es für die Ausprägungen eines Merkmals eine natürliche Ordnung gibt, es aber nicht sinnvoll ist, Abstände zwischen den Werten zu bestimmen, dann ist das Merkmal ordinalskaliert.
 
 1. [Intervallskala]{.neuerbegriff}: Man spricht von einem intervallskalierten Merkmal, wenn die Ausprägungen
 
@@ -240,38 +240,38 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
     a) keinen natürlichen Nullpunkt gibt.
 
-    Dadurch, dass es keinen Nullpunkt gibt, lassen sich keine Quotienten von Ausprägungen berechnen. Ein typisches Beispiel für eine intervallskalierte Größe ist die Temperatur in Grad Celsius: Die Aussage
+    Dadurch, dass es keinen natürlichen Nullpunkt gibt, lassen sich Quotienten von Ausprägungen nicht sinnvoll interpretieren. Ein typisches Beispiel für eine intervallskalierte Größe ist die Temperatur in Grad Celsius: Die Aussage
 
-    > "Gestern Mittag waren es 10° C, heute sind es 20°C. Es ist also doppelt so warm.''
+    > „Gestern Mittag waren es 10 °C, heute sind es 20 °C. Es ist also doppelt so warm.“
 
-    macht wenig Sinn.
+    ist nicht sinnvoll.
 
 1. [Verhältnisskala]{.neuerbegriff}: Gibt es für ein zahlenwertiges Merkmal zusätzlich noch einen natürlichen Nullpunkt, dann lassen sich Quotienten bilden und man spricht von einem verhältnisskalierten Merkmal. Zum Beispiel gibt es für die Geschwindigkeit einen natürlichen Nullpunkt und der Satz
 
-    > "Mein Porsche fährt mehr als doppelt so schnell wie dein Smart''
+    > „Mein Porsche fährt mehr als doppelt so schnell wie dein Smart.“
 
     ist sinnvoll, auch wenn man sich über ein allgemeines Tempolimit durchaus streiten kann.
 
-Intervall- und Verhältnisskalen werden unter den Oberbegriffen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff} zusammengefasst. In der folgenden Tabelle sind Skalenniveaus und zugehörige sinnvolle Operationen nochmals kompakt dargestellt.
+Intervall- und Verhältnisskalen werden unter den Oberbegriffen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff} zusammengefasst. In @tbl-skalenniveaus sind Skalenniveaus und zugehörige sinnvolle Operationen nochmals kompakt dargestellt.
 
-| Skalenniveau  | auszählen | ordnen | Differenzen bilden | Quotienten bilden |
-|:-------------:|:---------:|:------:|:------------------:|:-----------------:|
-|   nominal     |    Ja     |  Nein  |        Nein        |       Nein        |
-|    ordinal    |    Ja     |   Ja   |        Nein        |       Nein        |
-|   Intervall   |    Ja     |   Ja   |         Ja         |       Nein        |
-|   Verhältnis  |    Ja     |   Ja   |         Ja         |        Ja         |
+| Skalenniveau    | auszählen | ordnen    | Differenzen bilden | Quotienten bilden |
+|:---------------:|:---------:|:---------:|:------------------:|:-----------------:|
+| Nominalskala    |  []{.ja}  | []{.nein} |     []{.nein}      |     []{.nein}     |
+| Ordinalskala    |  []{.ja}  |  []{.ja}  |     []{.nein}      |     []{.nein}     |
+| Intervallskala  |  []{.ja}  |  []{.ja}  |      []{.ja}       |     []{.nein}     |
+| Verhältnisskala |  []{.ja}  |  []{.ja}  |      []{.ja}       |      []{.ja}      |
+
+: Skalenniveaus und sinnvolle Operationen {#tbl-skalenniveaus}
 
 #### (c) Qualitative und quantitative Merkmale
 
-Eine weiterer Aspekt, nach dem Merkmale unterschieden werden können, betrifft den Typ der Merkmalsausprägung: Handelt es sich um eine Kategorie oder um eine Größe, die in Zahlen messbar ist?
+Ein weiterer Aspekt, nach dem Merkmale unterschieden werden können, betrifft den Typ der Merkmalsausprägung: Handelt es sich um eine Kategorie oder um eine Größe, die in Zahlen messbar ist?
 
-1. [Qualitative Merkmale]{.neuerbegriff}: Wenn ein Merkmal endlich viele Ausprägungen besitzt und nominal- oder ordinalskaliert ist, dann nennt man es ein qualitatives Merkmal. Wesentlich dabei ist, dass die Ausprägungen einer Qualität oder einer Kategorie entspricht.
+1. [Qualitative Merkmale]{.neuerbegriff}: Wenn ein Merkmal endlich viele Ausprägungen besitzt und nominal- oder ordinalskaliert ist, dann nennt man es ein qualitatives Merkmal. Wesentlich dabei ist, dass die Ausprägungen einer Qualität oder einer Kategorie entsprechen.
 
 1. [Quantitative Merkmale]{.neuerbegriff}: Lässt sich ein Merkmal auf einer Intervall- oder Verhältnisskala messen, dann spricht man von einem quantitativen Merkmal. Eine Ausprägung ist hier eine Zahl, die eine Menge, Intensität oder ein Ausmaß wiedergibt.
 
-Anmerkung: Es gibt auch Merkmale, die weder qualitativ noch quantitativ sind, zum Beispiel Eigennamen.
-
-In der Folgenden Definition sind die Arten von Merkmalen nochmals kompakt zusammengefasst.
+In der folgenden Definition sind die Arten von Merkmalen nochmals kompakt zusammengefasst.
 
 ::: {#def-arten-von-merkmalen}
 ## Arten von Merkmalen
@@ -298,7 +298,7 @@ Intervallskaliert:
 
 Verhältnisskaliert:
 
-: Wie intervallskaliert, aber mit absolutem Nullpunkt
+: Wie intervallskaliert, aber mit natürlichem Nullpunkt
 
 Qualitativ:
 
