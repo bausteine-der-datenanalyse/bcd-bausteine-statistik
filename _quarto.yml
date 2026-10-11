@@ -17,7 +17,7 @@ number-sections: false
 
 filters: 
   - latex-environment
-commands: [neuerbegriff]
+commands: [neuerbegriff, ja, nein]
 environments: [beispiel]
 
 format: 
