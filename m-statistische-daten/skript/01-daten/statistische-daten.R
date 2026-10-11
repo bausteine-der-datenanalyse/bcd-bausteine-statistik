@@ -19,7 +19,7 @@ d_donau <- read_delim(
 # Tidy Data
 # -------------------------------------------------------------------------------------------------
 
-tab_tidydata <- function(d) gt(d) |> tab_options(table.width = pct(75))
+tab_tidydata <- function(d) tt(d) |> style_tt(j = which(sapply(d, is.numeric)), align = "r")
 
 
 d_tidydata_1 <- tribble(

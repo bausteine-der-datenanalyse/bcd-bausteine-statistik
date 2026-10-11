@@ -93,13 +93,13 @@ Lösung 3: Kombination von Werten
 ```{r}
 d_tidydata_41 |>
   tab_tidydata() |>
-  tab_spanner(label = "Fälle", columns = c("1999", "2000"))
+  group_tt(j = list("Fälle" = 2:3))
 ```
 
 ```{r}
 d_tidydata_42 |>
   tab_tidydata() |>
-  tab_spanner(label = "Bevölkerung", columns = c("1999", "2000"))
+  group_tt(j = list("Bevölkerung" = 2:3))
 ```
 
 Lösung 4: Jeweils eine Tabelle für Fälle und Bevölkerung
