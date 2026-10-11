@@ -11,6 +11,7 @@ m-*/**/*.md
 m-*/**/*.rmarkdown
 
 skript.tex
+folien.typ
 skript_files
 *_files
 tmp*tex

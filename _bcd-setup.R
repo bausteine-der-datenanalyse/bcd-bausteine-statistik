@@ -1,5 +1,6 @@
 library(gt)
 library(readxl)
+library(tinytable)
 library(wbstats)
 library(tidyverse)
 library(latex2exp)
@@ -69,6 +70,20 @@ if (knitr::is_html_output()) {
   )
   update_theme(
     plot.title = element_text(size = 16)
+  )
+}
+
+# Optionen fuer Typst-Ausgabe
+if (knitr::pandoc_to("typst")) {
+  knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.asp = 0.45,
+    fig.align = "center",
+    out.width = "80%",
+    echo = FALSE
+  )
+  theme_set(
+    theme_gray(base_size = 16)
   )
 }
 
