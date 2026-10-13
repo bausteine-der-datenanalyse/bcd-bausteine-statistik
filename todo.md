@@ -1,7 +1,12 @@
 # TODO
 
-Offene Punkte zur Umstellung des Skripts (Kapitel 6–12). Hintergrund und Details in `umstellung-skript.md`.
+Offene Punkte zu den Modulen (Skript, Aufgaben, Folien). Hintergrund und Details zur Umstellung des Skripts in
+`umstellung-skript.md`.
 
+- [ ] Kapitel 1 (`m-statistische-daten`): Aufgabe `aufgaben/10-organisation-von-daten.qmd` nutzt dasselbe Beispiel
+  wie Skript und Folien (Länder, Fälle, Bevölkerung, vier Lösungen). Für die Aufgabe ein neues Beispiel nehmen,
+  dazu `01-daten/beispiel-rohdaten.xlsx`, `beispiel-rohdaten-loesung.xlsx`, Kontrollwerte und Lösungsbild
+  `l-sd-10.jpg` anpassen.
 - [x] Committen in dieser Reihenfolge: zuerst dieses Repo (neue Module, `DESCRIPTION`, `.gitignore`) committen und
   pushen, dann im Hauptrepo den Submodul-Stand zusammen mit `lernpfad/skript/content.yml`,
   `lernpfad/skript/_quarto.yml`, `lernpfad/skript/literatur.qmd`, `DESCRIPTION`, `todo.md`, `CLAUDE.md`.
