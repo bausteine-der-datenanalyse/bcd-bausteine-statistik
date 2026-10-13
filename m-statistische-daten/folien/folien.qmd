@@ -1,16 +1,25 @@
 ---
 title: "Statistische Daten"
+subtitle: "Mathematik B"
+author: "Matthias Baitsch"
+brand: {}
+date: ""
 format:
   touying-typst:
     include-in-header:
       - text: |
           #import "@preview/touying-quarto-clean:0.2.1": *
+          #show table: set text(size: 0.8em)
       - ../../_bcd-setup.typ
     theme-typst: clean-theme
-commands: [neuerbegriff, ja, nein]
+commands: [neuerbegriff, ja, nein, down10, down20, down30, down40, down50]
+execute:
+  echo: false
+  cache: true
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
 # Daten und Hilfsfunktionen aus dem Skript
@@ -40,21 +49,21 @@ Grundlage jeder statistischen Untersuchung sind Daten, zum Beispiel aus
 - Weltweite Wetterdaten der *National Oceanic and Atmospheric Administration*
   <https://www.ncdc.noaa.gov/cdo-web/datasets>
 
-## Mobilitätsbefragung – Wege zur BO
+## Mobilitätsbefragung – Wege zur BO (Prof. Mühlenbruch)
 
-- Befragung unter Angehörigen der BO im Modul „Methoden der Verkehrsplanung“ (Prof. Mühlenbruch)
+![](../skript/00-bilder/mobilitaetsbefragung.svg){fig-align="center" height="70%"}
+
+- Befragung unter Angehörigen der BO im Modul „Methoden der Verkehrsplanung“ 
 - Von wo und mit welchen Verkehrsmitteln kommen die Befragten zur Hochschule?
 - Knapp 300 Fragebögen, Antworten zur einfacheren Übertragung mit Ziffern codiert
 
-![](../skript/00-bilder/mobilitaetsbefragung.svg){fig-align="center" height="55%"}
-
 ## Geschwindigkeitsmessung Universitätsstraße
 
-- Seitenradar misst Geschwindigkeit und Länge vorbeifahrender Fahrzeuge
-- Messung über zwei Tage im Jahr 2017 (Prof. Mühlenbruch)
-- Daten werden aus dem Messgerät ausgelesen und als Excel-Datei gespeichert
+![](../skript/00-bilder/seitenradar.svg){fig-align="center" height="70%"}
 
-![](../skript/00-bilder/seitenradar.svg){fig-align="center" height="55%"}
+- Seitenradar misst Geschwindigkeit und Länge vorbeifahrender Fahrzeuge
+- Messung über zwei Tage im Jahr 2017 
+- Daten werden aus dem Messgerät ausgelesen und als Excel-Datei gespeichert
 
 ## Abfluss der Donau bei Hofkirchen
 
@@ -140,7 +149,10 @@ Nicht immer eindeutig:
 - Fahrzeug fährt im Messzeitraum zweimal am Seitenradar vorbei?
 - Abflussmessung: Es geht immer um dieselbe Donau bei Hofkirchen
 
-→ Den Begriff Beobachtung können wir immer verwenden
+. . .
+
+Immer passend: [Beobachtung]{.neuerbegriff}, also die Werte, die zu einer Einheit bzw. zu einem Zeitpunkt erfasst
+werden. Im Datensatz entspricht eine Beobachtung einer Zeile.
 
 ## Grundgesamtheit
 
@@ -160,10 +172,20 @@ fig_stichprobe()
 
 ## Planung einer Erhebung
 
+:::: {layout="[55,45]" layout-valign="center"}
+::: {}
 - Welche der beiden Stichproben eignet sich für Aussagen über die Verteilung der Farben? Wie groß ist groß
   genug?
 
   → Schließende Statistik
+:::
+
+::: {}
+```{r}
+fig_stichprobe()
+```
+:::
+::::
 
 . . .
 
@@ -174,19 +196,37 @@ fig_stichprobe()
 
 . . .
 
-- Für die Berechnung im Computer spielen diese Fragen keine Rolle, für die Interpretation sehr wohl
+[]{.down20}
+
+Anmerkung: Für die Berechnung im Computer spielen diese Fragen keine Rolle, für die Interpretation sehr wohl.
 
 ## Merkmale
+
+[]{.down20}
 
 - Eine Größe, für die man sich interessiert, heißt [Merkmal]{.neuerbegriff} oder [Variable]{.neuerbegriff}
 - Meist werden für jede statistische Einheit mehrere Merkmale erhoben
 - Die Werte eines Merkmals heißen [Merkmalsausprägungen]{.neuerbegriff} oder kurz [Ausprägungen]{.neuerbegriff}
+
+. . .
+
+[]{.down20}
+
+Beispiele:
+
+- Mobilitätsbefragung: Verkehrsmittel mit den Ausprägungen Auto, Bus, Fahrrad, …; Entfernung zur BO
+- Seitenradar: Geschwindigkeit in km/h mit Ausprägungen wie 32, 47, 51; Länge des Fahrzeugs in m
+- Donau: Datum, Abfluss in m³/s mit Ausprägungen wie 412 oder 1250
 
 ## Zusammenfassung
 
 Statistische Einheit:
 
 : Objekt, an dem interessierende Größen erfasst werden
+
+Beobachtung:
+
+: Werte zu einer Einheit bzw. einem Zeitpunkt, eine Zeile im Datensatz
 
 Grundgesamtheit:
 
@@ -208,6 +248,8 @@ Merkmalsausprägung:
 
 ## Drei Fragen
 
+[]{.down50}
+
 (a) Ist ein Merkmal stetig oder diskret?
 
 (b) Auf welcher Skala wird ein Merkmal gemessen?
@@ -216,31 +258,43 @@ Merkmalsausprägung:
 
 . . .
 
+[]{.down20}
 → Keine mathematischen Definitionen, sondern eine Orientierungshilfe
 
 ## (a) Diskrete und stetige Merkmale
 
+[]{.down50}
+
 - **Diskret:** endlich viele oder abzählbar unendlich viele mögliche Ausprägungen
 - **Stetig:** alle Werte eines Intervalls möglich
 
+[]{.down20}
 Stetig sind in der Regel nur Merkmale, die sinnvollerweise durch reelle Zahlen repräsentiert werden.
 
 . . .
 
+[]{.down20}
 In der Praxis werden stetige Merkmale gerundet erfasst, zum Beispiel die Körpergröße in ganzen Zentimetern.
 
-→ Das Merkmal ist stetig, die Daten sind diskret
+→ Das Merkmal ist stetig, die Daten sind diskret, im Einzelfall entscheiden
 
 ## (b) Skalenniveaus
 
-1. **Nominalskala:** Ausprägungen sind Namen oder Kategorien, keine natürliche Rangfolge
+[]{.down50}
+
+1. **Nominalskala:** Ausprägungen sind Namen oder Kategorien, keine Rangfolge
 1. **Ordinalskala:** natürliche Ordnung, Abstände nicht sinnvoll
 1. **Intervallskala:** Zahlen, Differenzen sinnvoll, kein natürlicher Nullpunkt
 1. **Verhältnisskala:** wie Intervallskala, aber mit natürlichem Nullpunkt
 
+. . .
+
+[]{.down20}
 Intervall- und Verhältnisskala heißen zusammen [Kardinalskala]{.neuerbegriff} oder [metrische Skala]{.neuerbegriff}.
 
 ## Intervall- oder Verhältnisskala?
+
+[]{.down20}
 
 Temperatur in Grad Celsius ist intervallskaliert:
 
@@ -250,6 +304,8 @@ Temperatur in Grad Celsius ist intervallskaliert:
 
 . . .
 
+[]{.down20}
+
 Geschwindigkeit ist verhältnisskaliert:
 
 > „Mein Porsche fährt mehr als doppelt so schnell wie dein Smart.“
@@ -257,6 +313,8 @@ Geschwindigkeit ist verhältnisskaliert:
 → sinnvoll
 
 ## Sinnvolle Operationen
+
+[]{.down50}
 
 | Skalenniveau    | auszählen | ordnen    | Differenzen bilden | Quotienten bilden |
 |:---------------:|:---------:|:---------:|:------------------:|:-----------------:|
@@ -266,6 +324,8 @@ Geschwindigkeit ist verhältnisskaliert:
 | Verhältnisskala |  []{.ja}  |  []{.ja}  |      []{.ja}       |      []{.ja}      |
 
 ## (c) Qualitative und quantitative Merkmale
+
+[]{.down50}
 
 - **Qualitativ:** endlich viele Ausprägungen, nominal- oder ordinalskaliert; Ausprägungen entsprechen einer
   Qualität oder Kategorie
