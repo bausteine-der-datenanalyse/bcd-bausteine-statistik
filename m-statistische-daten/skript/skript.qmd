@@ -140,7 +140,7 @@ Ein solches Objekt wird in der Statistik als [statistische Einheit]{.neuerbegrif
 
 - Bei der Abflussmessung geht es immer um dasselbe Objekt, nämlich die Donau bei Hofkirchen.
 
-Daher: Manchmal ist es sinnvoll, von statistischen Einheiten zu sprechen, den Begriff Beobachtung können wir aber immer verwenden.
+Daher: Manchmal ist es sinnvoll, von statistischen Einheiten zu sprechen. Immer passend ist dagegen der Begriff [Beobachtung]{.neuerbegriff}. Damit sind die Werte gemeint, die zu einer Einheit bzw. zu einem Zeitpunkt erfasst werden. Im Datensatz entspricht eine Beobachtung einer Zeile.
 
 #### Grundgesamtheit
 
@@ -222,7 +222,7 @@ Eine wichtige Unterscheidung von Merkmalen betrifft die Anzahl möglicher Auspr�
 
 Stetig sind in der Regel nur Merkmale, die sinnvollerweise durch reelle Zahlen repräsentiert werden. Alle anderen Merkmale sind diskret.
 
-In der praktischen Anwendung werden stetige Merkmale durch Dezimalzahlen oder auch ganze Zahlen repräsentiert. So wird zum Beispiel die Körpergröße häufig in ganzen Zentimetern erfasst. Obwohl das Merkmal stetig ist, haben wir es in der Auswertung mit diskreten Daten zu tun.
+In der praktischen Anwendung werden stetige Merkmale durch Dezimalzahlen oder auch ganze Zahlen repräsentiert. So wird zum Beispiel die Körpergröße häufig in ganzen Zentimetern erfasst. Obwohl das Merkmal stetig ist, haben wir es in der Auswertung mit diskreten Daten zu tun. Wie man ein solches Merkmal behandelt, ist im Einzelfall zu entscheiden.
 
 #### (b) Skalen von Merkmalen
 

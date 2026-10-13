@@ -181,9 +181,11 @@ fig_stichprobe <- function() {
     plot_spacer() +
     (plot_spacer() /
        p21 /
+       plot_spacer() /
        p22 /
+       plot_spacer() /
        p23 /
        plot_spacer() +
-       plot_layout(heights = c(0.5, 1, 1, 1, 0.25))) +
+       plot_layout(heights = c(0.5, 1, 0.4, 1, 0.4, 1, 0.25))) +
     plot_layout(widths = c(1, 0.1, 1))
 }
