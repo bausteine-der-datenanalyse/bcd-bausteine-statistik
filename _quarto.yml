@@ -15,32 +15,12 @@ date: today
 
 number-sections: false
 
-filters: 
-  - latex-environment
-commands: [neuerbegriff, ja, nein]
-environments: [beispiel]
-
 format: 
-  html: 
-    toc: true
-    toc-depth: 4
-    toc-title: |
-      ![](../../_brand/logo.svg)
-
-      Methodenbaustein
-    css: bcd-style-notes.css
-    default-image-extension: svg
-    resources:
-      - _brand
+  tinh-notes-html: 
+    toc-title: Methodenbaustein
     repo-url: "https://github.com/bausteine-der-datenanalyse/bcd-bausteine-statistik"
     repo-actions: [source]
-  pdf:
-    include-in-header:
-      - _bcd-setup.tex
-    include-after-body:
-      text: |
-        \printindex
-    default-image-extension: pdf
+  tinh-notes-pdf: default
 
 citation:
   type: document

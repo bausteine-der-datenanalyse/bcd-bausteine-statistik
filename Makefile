@@ -9,15 +9,15 @@ clean:
 	rm -rf m-*/skript/skript_files
 
 html:
-	for folder in m-*; do \
+	for folder in m-*/skript m-*/aufgaben; do \
 		echo $$folder; \
-		quarto render $$folder -t html || exit 1; \
+		quarto render $$folder -t tinh-notes-html || exit 1; \
 	done
 
 pdf:
-	for folder in m-*; do \
+	for folder in m-*/skript m-*/aufgaben; do \
 		echo $$folder; \
-		quarto render $$folder -t pdf || exit 1; \
+		quarto render $$folder -t tinh-notes-pdf || exit 1; \
 	done
 
 render: html pdf
