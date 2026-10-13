@@ -35,14 +35,10 @@ Grundlage jeder statistischen Untersuchung sind Daten, zum Beispiel aus
 
 ## Datenquellen im Internet
 
-- Ministerien ([BMV](https://bmv.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html),
-  [BMWE](https://www.bundeswirtschaftsministerium.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien))
-  und Bundesbehörden ([BASt](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de))
-- Berichte der Vereinten Nationen über die menschliche Entwicklung (*Human Development Reports*)
-  <https://hdr.undp.org>
+- Ministerien ([BMV](https://bmv.de/SharedDocs/DE/Artikel/G/verkehr-in-zahlen.html), [BMWE](https://www.bundeswirtschaftsministerium.de/Navigation/DE/Themen/themen.html?cl2Categories_LeadKeyword=energiedaten-und-szenarien)) und Bundesbehörden ([BASt](https://www.bast.de), [Statistisches Bundesamt](https://www.destatis.de))
+- Berichte der Vereinten Nationen über die menschliche Entwicklung (*Human Development Reports*) <https://hdr.undp.org>
 - Wetterdaten des [Deutschen Wetterdienstes](https://www.dwd.de/DE/klimaumwelt/cdc/cdc_node.html)
-- Weltweite Wetterdaten der *National Oceanic and Atmospheric Administration*
-  <https://www.ncdc.noaa.gov/cdo-web/datasets>
+- Weltweite Wetterdaten der *National Oceanic and Atmospheric Administration* <https://www.ncdc.noaa.gov/cdo-web/datasets>
 
 ## Mobilitätsbefragung – Wege zur BO (Prof. Mühlenbruch)
 
@@ -81,8 +77,7 @@ ggplot(data = d_donau) +
 
 ## Beispiel: Krankheitsfälle in drei Ländern
 
-Fiktiver Datensatz zu Bevölkerung und Krankheitsfällen in drei Ländern für 1999 und 2000 (nach Wickham und Grolemund,
-*R for Data Science*). Wie lassen sich die Daten in Tabellen anordnen?
+Fiktiver Datensatz zu Bevölkerung und Krankheitsfällen in drei Ländern für 1999 und 2000 (nach Wickham und Grolemund, *R for Data Science*). Wie lassen sich die Daten in Tabellen anordnen?
 
 ## Lösung 1: Eine Spalte mit Beschreibung, eine mit Werten
 
@@ -146,8 +141,7 @@ Nicht immer eindeutig:
 
 . . .
 
-Immer passend: [Beobachtung]{.neuerbegriff}, also die Werte, die zu einer Einheit bzw. zu einem Zeitpunkt erfasst
-werden. Im Datensatz entspricht eine Beobachtung einer Zeile.
+Immer passend: [Beobachtung]{.neuerbegriff}, also die Werte, die zu einer Einheit bzw. zu einem Zeitpunkt erfasst werden. Im Datensatz entspricht eine Beobachtung einer Zeile.
 
 ## Grundgesamtheit
 
@@ -169,8 +163,7 @@ fig_stichprobe()
 
 :::: {layout="[55,45]" layout-valign="center"}
 ::: {}
-- Welche der beiden Stichproben eignet sich für Aussagen über die Verteilung der Farben? Wie groß ist groß
-  genug?
+- Welche der beiden Stichproben eignet sich für Aussagen über die Verteilung der Farben? Wie groß ist groß genug?
 
   → Schließende Statistik
 :::
@@ -184,8 +177,7 @@ fig_stichprobe()
 
 . . .
 
-- Die Auswahl darf nicht systematisch bestimmte Einheiten bevorzugen. Am einfachsten: Jede Einheit kommt mit
-  gleicher Wahrscheinlichkeit in die Stichprobe.
+- Die Auswahl darf nicht systematisch bestimmte Einheiten bevorzugen. Am einfachsten: Jede Einheit kommt mit gleicher Wahrscheinlichkeit in die Stichprobe.
 
   → Befragung zur Mobilität auf dem Bahnsteig der U35?
 
@@ -322,10 +314,8 @@ Geschwindigkeit ist verhältnisskaliert:
 
 []{.down50}
 
-- **Qualitativ:** endlich viele Ausprägungen, nominal- oder ordinalskaliert; Ausprägungen entsprechen einer
-  Qualität oder Kategorie
-- **Quantitativ:** auf einer Intervall- oder Verhältnisskala messbar; Ausprägung ist eine Zahl, die eine Menge,
-  Intensität oder ein Ausmaß wiedergibt
+- **Qualitativ:** endlich viele Ausprägungen, nominal- oder ordinalskaliert; Ausprägungen entsprechen einer Qualität oder Kategorie
+- **Quantitativ:** auf einer Intervall- oder Verhältnisskala messbar; Ausprägung ist eine Zahl, die eine Menge, Intensität oder ein Ausmaß wiedergibt
 
 ## Zusammenfassung
 
