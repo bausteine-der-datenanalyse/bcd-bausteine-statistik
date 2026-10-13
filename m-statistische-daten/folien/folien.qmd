@@ -2,17 +2,12 @@
 title: "Statistische Daten"
 subtitle: "Mathematik B"
 author: "Matthias Baitsch"
-brand: {}
 date: ""
 format:
-  touying-typst:
+  tinh-slides-typst:
     include-in-header:
       - text: |
-          #import "@preview/touying-quarto-clean:0.2.1": *
           #show table: set text(size: 0.8em)
-      - ../../_bcd-setup.typ
-    theme-typst: clean-theme
-commands: [neuerbegriff, ja, nein, down10, down20, down30, down40, down50]
 execute:
   echo: false
   cache: true
