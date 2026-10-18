@@ -83,7 +83,7 @@ if (knitr::pandoc_to("typst")) {
     echo = FALSE
   )
   theme_set(
-    theme_gray(base_size = 16)
+    theme_gray(base_size = 12)
   )
 }
 
