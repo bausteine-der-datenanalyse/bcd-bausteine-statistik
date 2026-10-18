@@ -68,3 +68,24 @@ p_histogram <- function(x, q = 1) {
     geom_histogram(mapping = aes(x = x), bins = 40) +
     theme_void()
 }
+
+
+# -------------------------------------------------------------------------------------------------
+# Empirische Verteilungsfunktion plotten (nur waagerechte Linien, Punkt am Anfang, Kreis am Ende)
+# -------------------------------------------------------------------------------------------------
+
+p_ecdf_exakt <- function(x, linewidth = 1, size = 2, pad = 0.05) {
+  xs <- sort(unique(x))
+  fs <- ecdf(x)(xs)
+  n <- length(xs)
+  dx <- pad * max(diff(range(xs)), 1)
+
+  d_linien <- tibble(x = c(xs[1] - dx, xs), xend = c(xs, xs[n] + dx), y = c(0, fs))
+  d_punkte <- tibble(x = xs, y = fs)
+  d_kreise <- tibble(x = xs, y = c(0, fs[-n]))
+
+  ggplot() +
+    geom_segment(data = d_linien, mapping = aes(x = x, xend = xend, y = y, yend = y), linewidth = linewidth) +
+    geom_point(data = d_kreise, mapping = aes(x = x, y = y), shape = 21, fill = "white", size = size) +
+    geom_point(data = d_punkte, mapping = aes(x = x, y = y), size = size)
+}
