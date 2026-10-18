@@ -1,0 +1,417 @@
+---
+title: "Untersuchung einzelner Merkmale"
+execute: 
+  cache: true
+---
+
+```{r}
+#| cache: false
+#| include: false
+source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
+withr::with_dir("../skript", source("01-daten/einzelne-merkmale.R"))
+```
+
+## Beispiele
+
+. . .
+
+[]{.down10}
+
+Mobilitätsbefragung, Verkehrsmittel auf dem Weg zur BO
+
+$$
+x_1 = \text{Bus},\: x_2 = \text{Auto},\: x_3 = \text{Fahrrad},\: x_4 = \text{Auto},\: x_5 = \text{Zug},\: \dots
+$$
+
+. . .
+
+[]{.down10}
+
+Klausur Mathematik mit 129 Teilnehmenden (erreichte Prozentpunkte)
+
+$$
+x_1 = 28.17,\: x_2 = 12.32,\: x_3 = 59.58,\: x_4 = 55.02,\: \dots,\: x_{129} = 87.34
+$$
+
+. . .
+
+[]{.down10}
+
+Temperaturdaten Essen-Bredeney seit 1935 (mittlere Tagestemperatur in °C)
+
+$$
+x_1 = 7.1,\: x_2 = 6.1,\: x_3 = 5.3,\: x_4 = 5.6,\: x_5 = 3.6,\: \dots
+$$
+
+. . .
+
+
+[]{.down10}
+
+→ Wie lässt sich die Verteilung der Werte eines Merkmals beschreiben und darstellen?
+
+## Inhalt
+
+[]{.down50}
+
+- Häufigkeitsverteilungen
+
+- Histogramme
+
+- Grobe Charakterisierung von Häufigkeitsverteilungen
+
+- Verteilungsfunktionen
+
+# Häufigkeitsverteilungen
+
+## Absolute und relative Häufigkeitsverteilung
+
+Für die Werte eines Merkmals $x_1, x_2, \dots, x_n$ mit den unterschiedlichen Ausprägungen $a_1, a_2, \dots, a_k$ verwenden wir folgende Bezeichnungen:
+
+$h(a_j)$:
+
+: Absolute Häufigkeit gibt an, wie oft die Ausprägung $a_j$ in den Werten vorkommt
+
+$f(a_j) = h(a_j)/n$:
+
+: Relative Häufigkeit der Ausprägung $a_j$
+
+Mit den Abkürzungen $h_j = h(a_j)$ und $f_j = f(a_j)$ heißen die Zahlenfolgen
+
+$h_1, h_2, \dots, h_k$:
+
+: [Absolute Häufigkeitsverteilung]{.neuerbegriff}
+
+$f_1, f_2, \dots, f_k$:
+
+: [Relative Häufigkeitsverteilung]{.neuerbegriff}
+
+## Diagrammtypen für Verteilungen
+
+```{r}
+#| fig-asp: 0.5
+#| fig-width: 12
+
+d <- import_energietrager("A21:AC30") |> filter(Jahr == 2017)
+
+p_col <- ggplot(data = d) +
+    geom_col(
+        mapping = aes(x = Energieträger, y = Wert),
+        width = 0.125
+    ) +
+    labs(x = NULL, y = "Anteil in Prozent", title = "Stabdiagramm")
+
+p_bar <- ggplot(data = d) +
+    geom_col(
+        mapping = aes(x = Energieträger, y = Wert, fill = Energieträger),
+        show.legend = FALSE
+    ) +
+    scale_fill_manual(values = c_energietraeger) +
+    labs(x = NULL, y = "Anteil in Prozent")
+
+p_pie <- ggplot(data = d) +
+    geom_col(
+        mapping = aes(x = 2, y = Wert, fill = Energieträger),
+        width = 1
+    ) +
+    coord_polar(start = 0, theta = "y") +
+    scale_fill_manual(values = c_energietraeger) +
+    theme_void()
+
+p1 <- p_col + theme(axis.text.x = element_text(angle = 25, hjust = 1))
+p2 <- p_bar + theme(axis.text.x = element_text(angle = 25, hjust = 1)) + labs(title = "Säulendiagramm")
+p3 <- p_bar + coord_flip() + labs(title = "Balkendiagramm")
+p4 <- p_pie + labs(title = "Kreisdiagramm")
+p5 <- p_pie + xlim(0.125, 2.5) + labs(title = "Ringdiagramm")
+
+(p1 + p2 + p3) / (p4 + p5 + plot_layout(guides = "collect")) &
+    theme(plot.margin = margin(t = 10, r = 20, b = 10, l = 20))
+```
+
+Energieträger Deutschland 2017, Datenquelle BMWI
+
+## Diagrammtypen
+
+Stabdiagramm:
+
+: Zahlenwerte für $h_1, h_2, \dots, h_k$ (oder $f_1, f_2, \dots, f_k$) mit einem senkrechten Strich antragen
+
+Säulendiagramm:
+
+: Wie das Stabdiagramm, aber mit Rechtecken anstatt Strichen
+
+Balkendiagramm:
+
+: Das Säulendiagramm um 90° gedreht
+
+Kreisdiagramm:
+
+: Der vom $j$-ten Kreissektor eingeschlossene Winkel beträgt $\alpha_j = f_j \cdot 360°$, Flächen der Kreissektoren damit proportional zu den Häufigkeiten
+
+## Kritik an Kreisdiagrammen
+
+```{r}
+#| include: false
+set.seed(1)
+d <- tibble(n = LETTERS[4:1], x1 = c(16, 17.5, 19, 21.5), x2 = sample(x1), x3 = rev(x1))
+
+plot_pie <- function(v) {
+    ggplot(data = d, mapping = aes(x = "", y = {{ v }}, fill = n, label = n)) +
+        geom_col(show.legend = FALSE) +
+        geom_text(position = position_stack(vjust = 0.5)) +
+        coord_polar(theta = "y") +
+        scale_fill_brewer() +
+        theme_void()
+}
+
+plot_col <- function(v) {
+    ggplot(data = d, mapping = aes(x = n, y = {{ v }}, fill = n)) +
+        geom_col(show.legend = FALSE) +
+        scale_y_continuous(labels = NULL, breaks = NULL) +
+        scale_fill_brewer() +
+        labs(x = NULL, y = NULL)
+}
+```
+
+[]{.down10}
+
+Drei verschiedene Verteilungen als Kreisdiagramm dargestellt
+
+```{r}
+#| fig-asp: 0.4
+plot_pie(x1) + plot_pie(x2) + plot_pie(x3)
+```
+
+. . .
+
+→ Beschreiben Sie die Eigenschaften der drei Verteilungen
+
+## Kritik an Kreisdiagrammen
+
+Dieselben Daten als Balkendiagramm
+
+```{r}
+#| fig-asp: 0.25
+
+plot_col(x1) + plot_col(x2) + plot_col(x3)
+```
+
+- Längen leichter zu unterscheiden als Winkel
+- Kreisdiagramme bei vielen Merkmalsausprägungen unübersichtlich
+- Keine Darstellung einer zeitlichen Entwicklung
+- Vergleich von Verteilungen: Zwei Kreisdiagramme
+
+. . .
+
+→ Entscheidung für oder gegen ein Kreisdiagramm letztlich abhängig vom Kontext
+
+## Zeitliche Entwicklung in einem Säulendiagramm
+
+```{r}
+ggplot(data = import_energietrager("A8:AC17")) +
+    geom_col(mapping = aes(x = Jahr, y = Wert, fill = Energieträger)) +
+    scale_fill_manual(values = c_energietraeger) +
+    scale_x_discrete(breaks = seq(1990, 2100, by = 5)) +
+    labs(x = NULL, y = "Verbrauch in PJ", fill = NULL) +
+    theme(legend.position = "top")
+```
+
+Energieträger Deutschland 1990 – 2017, Datenquelle BMWI
+
+# Histogramme
+
+## Beispiel: Klausur Mathematik mit 129 Teilnehmenden
+
+Urliste
+
+$$
+x_1 = 28.17,\: x_2 = 12.32,\: x_3 = 59.58,\: x_4 = 55.02,\: \dots,\: x_{129} = 87.34
+$$
+
+Absolute Häufigkeitsverteilung
+
+```{r}
+#| fig-asp: 0.4
+
+ggplot(data = d_klausur) +
+    geom_bar(mapping = aes(x = prozent), width = 0.01) +
+    labs(x = "Prozentpunkte", y = "Anzahl")
+```
+
+## Lösung: Histogramm
+
+```{r}
+ggplot(data = d_klausur) +
+    geom_histogram(
+        mapping = aes(x = note, fill = bestanden),
+        binwidth = 5,
+        boundary = 0,
+        closed = "left",
+        show.legend = FALSE
+    ) +
+    labs(x = "Erreichte Prozentpunkte", y = "Anzahl")
+```
+
+## Ein Histogramm entsteht in drei Schritten
+
+1. Gruppierung in $k$ benachbarte Intervalle (die [Klassen]{.neuerbegriff})
+   $$
+   [c_0, c_1), [c_1, c_2), \dots, [c_{k-1}, c_k) \quad \text{mit} \quad c_j < c_{j+1}
+   $$
+   - Intervalle auch linksoffen
+   - Jeder Wert $x_j$ in genau einer Klasse, alle Werte müssen erfasst werden
+
+1. Werte pro Klasse Zählen und absolute oder relative Häufigkeitsverteilung bestimen
+
+1. Darstellung in Säulendiagramm, Fläche der Säule proportional zur Häufigkeit 
+
+   - „Fläche = Breite $\times$ Höhe“ mit Höhe $h_j / d_j$ oder $f_j / d_j$
+
+   → [Prinzip der Flächentreue]{.neuerbegriff}
+
+## Beispiel Histogramm
+
+## Wahl der Klassenbreite
+
+Histogramme für 100 zufällige Werte
+
+```{r}
+#| fig-asp: 0.25
+
+set.seed(1)
+x_kb <- rnorm(100)
+p_kb <- function(k) {
+    ggplot(data = tibble(x = x_kb), mapping = aes(x = x)) +
+        geom_histogram(bins = k) +
+        geom_point(mapping = aes(y = 0), size = 0.5, color = "red") +
+        labs(x = NULL, y = NULL, title = paste(k, "Klassen"))
+}
+p_kb(5) + p_kb(10) + p_kb(20)
+```
+
+- Wahl der Klassenbreite hat großen Einfluss auf die Darstellung
+- Faustregeln für Anzahl der Klassen: $k \approx \sqrt{n}$ oder $k \approx 10 \log_{10} n$
+- Letztlich entscheidet der subjektive Eindruck
+
+# Grobe Charakterisierung von Häufigkeitsverteilungen
+
+## Unimodale und multimodale Verteilungen
+
+```{r}
+#| fig-asp: 0.25
+
+set.seed(432)
+(rnorm(15000) |> p_histogram() + labs(title = "unimodal")) +
+    (c(rnorm(3500), rnorm(1500, 4)) |> p_histogram() + labs(title = "bimodal")) +
+    (c(rnorm(3500), rnorm(1500, 4), rnorm(2500, 10)) |> p_histogram() + labs(title = "multimodal"))
+```
+
+Eine Verteilung, die einen Gipfel aufweist, von dem die Häufigkeiten zu den Randbereichen hin abfallen, ohne dass ein weiterer deutlich ausgeprägter Gipfel hervortritt, heißt [unimodal]{.neuerbegriff} (eingipfelig). Treten weitere Gipfel deutlich hervor, so spricht man von einer [multimodalen]{.neuerbegriff} Verteilung. Sind es genau zwei Gipfel, dann nennt man die Verteilung [bimodal]{.neuerbegriff}.
+
+## Symmetrische und schiefe Verteilungen
+
+```{r}
+#| fig-asp: 0.25
+
+(rlnorm(10000) |> p_histogram(q = 0.95) + labs(title = "linkssteil bzw. rechtsschief")) +
+    (rnorm(10000) |> p_histogram() + labs(title = "symmetrisch")) +
+    (rlnorm(10000) |> p_histogram(q = 0.95) + scale_x_reverse() + labs(title = "rechtssteil bzw. linksschief"))
+```
+
+Gibt es für eine Verteilung eine Symmetrieachse, so dass der Verlauf links und rechts von dieser Achse annähernd gleich ist, dann handelt es sich um eine [symmetrische Verteilung]{.neuerbegriff}. Die Verteilung muss nicht exakt symmetrisch verlaufen, um als symmetrisch zu gelten. Ist die Verteilung deutlich unsymmetrisch, dann handelt es sich um eine [schiefe Verteilung]{.neuerbegriff}. Eine unimodale Verteilung, die nach links hin sehr steil abfällt, wird [linkssteil]{.neuerbegriff} (oder [rechtsschief]{.neuerbegriff}) genannt. Entsprechend heißt eine Verteilung, die nach rechts hin steil abfällt, [rechtssteil]{.neuerbegriff} (oder [linksschief]{.neuerbegriff}).
+
+# Verteilungsfunktionen
+
+## Beispiel 1/2
+
+Wir betrachten den Datensatz
+
+$$
+x_1 = 1.5,\: x_2 = 0.75,\: x_3 = 2,\: x_4 = 2.5,\: x_5 = 0.5,\: x_6 = 0.75,\: x_7 = 2,\: x_8 = 0.75.
+$$
+Gesucht:
+
+1. Skizze für das Stabdiagramm der absoluten Häufigkeitsverteilung
+
+1. Funktion $H : \mathbb{R} \to \mathbb{N}$, die zu jeder Zahl $x$ angibt, wie viele Werte aus dem Datensatz kleiner oder gleich $x$ sind
+
+    - Skizze für den Graphen von $H$
+
+    - Zuordnungsvorschrift der Funktion
+
+## Beispiel 2/2
+
+## Absolute kumulierte Häufigkeitsverteilung
+
+Die Funktion $H : \mathbb{R} \to \mathbb{N}$ mit
+
+$$
+H(x) = \text{„Anzahl der Werte $x_i$ mit $x_i \leq x$“}
+$$
+
+beziehungsweise in mathematischer Schreibweise
+
+$$
+H(x) = h(a_1) + h(a_2) + \dots + h(a_j) = \sum_{i: \: a_i \leq x} h(a_i)
+$$
+
+heißt [absolute kumulierte Häufigkeitsverteilung]{.neuerbegriff}. Dabei ist $a_j$ die größte Ausprägung mit $a_j \leq x$.
+
+## Empirische Verteilungsfunktion
+
+Die Funktion $F : \mathbb{R} \to \mathbb{R}$ mit
+
+$$
+F(x) = \text{„Anteil der Werte $x_i$ mit $x_i \leq x$“} = H(x) / n
+$$
+
+beziehungsweise
+
+$$
+F(x) = f(a_1) + f(a_2) + \dots + f(a_j) = \sum_{i: \: a_i \leq x} f(a_i)
+$$
+
+heißt [empirische Verteilungsfunktion]{.neuerbegriff} oder [relative kumulierte Häufigkeitsverteilung]{.neuerbegriff}. Dabei ist $a_j$ wieder die größte Ausprägung mit $a_j \leq x$.
+
+## Empirische Verteilungsfunktion Klausur Mathematik
+
+```{r}
+f <- ecdf(pull(d_klausur, note))
+
+p_ecdf <- p_ecdf_exakt(pull(d_klausur, note), linewidth = 0.5, size = 1) +
+    scale_x_continuous(breaks = c(0, 25, 50, 75, 100), minor_breaks = -10:110) +
+    labs(x = "Erreichte Prozentpunkte", y = "F(x)")
+```
+
+::: {.only options="1"}
+```{r}
+#| fig-asp: 0.52
+p_ecdf + scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), minor_breaks = NULL)
+```
+:::
+
+::: {.only options="2"}
+```{r}
+#| fig-asp: 0.52
+pp <- tibble(x = c(0, 49), y = c(f(49), 0))
+
+p_ecdf +
+    geom_step(data = pp, mapping = aes(x = x, y = y), linewidth = 1, color = "hotpink1") +
+    scale_y_continuous(breaks = c(0, round(f(49), 2), 1), minor_breaks = NULL)
+```
+
+Durchfallquote: Funktionswert für $x = 49$, also $F(49) = `r round(f(49), 2)`$ und damit 32%
+:::
+
+## Eigenschaften der Funktionen $H$ und $F$
+
+- Beide Funktionen monoton wachsend
+- Funktionswert null für $x < a_1$
+  $$
+  H(x) = F(x) = 0 \quad \text{für} \quad x < a_1
+  $$
+- Für $x \geq a_k$ Funktionswert von $H$ gleich Anzahl der Beobachtungen, von $F$ gleich eins
+  $$
+  H(x) = n \quad \text{beziehungsweise} \quad F(x) = 1 \quad \text{für} \quad x \geq a_k
+  $$
+- Sprünge an den Stellen $a_j$ um $h_j$ beziehungsweise $f_j$
