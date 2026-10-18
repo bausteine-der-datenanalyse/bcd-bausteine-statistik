@@ -2,7 +2,7 @@
 #| echo: false
 #| output: false
 library(tidyverse)
-library(kableExtra)
+library(gt)
 ```
 
 ## Messung mit dem Seitenradar {#sec-seitenradar}
@@ -45,12 +45,12 @@ tibble(
     "PKW", "PKW", "LKW", "PKW", "PKW", "Zweirad", "PKW"
   )
 ) |>
-  kable(
-    booktabs = TRUE,
-    align = c("l", "c", "c", "c", "c", "r")
-  ) |>
-  row_spec(0, bold = TRUE) |>
-  kable_styling(font_size = 7)
+  gt() |>
+  cols_align("left", columns = Datum) |>
+  cols_align("center", columns = 2:5) |>
+  cols_align("right", columns = Fahrzeug) |>
+  tab_style(cell_text(weight = "bold"), cells_column_labels()) |>
+  tab_options(table.font.size = px(9))
 ```
 
 Bearbeiten Sie folgende Punkte:

@@ -7,7 +7,7 @@ In den drei Städten A, B und C teilen sich Bauleistungen auf jeweils fünf Firm
 #| warning: false
 
 library(tidyverse)
-library(kableExtra)
+library(gt)
 
 d <- tibble(
   Stadt = c("A", "B", "C"),
@@ -18,8 +18,9 @@ d <- tibble(
   `5` = c(2, 1, 12)
 )
 
-kable(d, align = rep("c", 6)) |>
-  add_header_above(c(" " = 1, "Baufirma" = 5))
+gt(d) |>
+  cols_align("center") |>
+  tab_spanner(label = "Baufirma", columns = -Stadt)
 ```
 
 Aufgaben:

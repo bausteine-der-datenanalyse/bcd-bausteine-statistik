@@ -39,7 +39,6 @@ Imports:
     rprojroot,
     tidyverse,
     this.path,
-    kableExtra,
     reticulate,
     rnaturalearth,
     rnaturalearthdata
