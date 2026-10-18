@@ -1,16 +1,5 @@
 ---
 title: "Statistische Daten"
-subtitle: "Mathematik B"
-author: "Matthias Baitsch"
-date: ""
-format:
-  tinh-slides-typst:
-    include-in-header:
-      - text: |
-          #show table: set text(size: 0.8em)
-execute:
-  echo: false
-  cache: true
 ---
 
 ```{r}
