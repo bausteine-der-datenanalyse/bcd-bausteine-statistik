@@ -7,7 +7,7 @@ execute:
 ```{r}
 #| cache: false
 #| include: false
-source(rprojroot::is_quarto_project$find_file("_bcd-setup.R"))
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 withr::with_dir("../skript", source("01-daten/einzelne-merkmale.R"))
 ```
 
