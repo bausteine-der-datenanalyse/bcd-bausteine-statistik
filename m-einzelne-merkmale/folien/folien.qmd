@@ -90,7 +90,7 @@ $f_1, f_2, \dots, f_k$:
 
 ```{r}
 #| fig-asp: 0.5
-#| fig-width: 12
+#| fig-width: 15
 
 d <- import_energietrager("A21:AC30") |> filter(Jahr == 2017)
 
@@ -312,10 +312,11 @@ Eine Verteilung, die einen Gipfel aufweist, von dem die Häufigkeiten zu den Ran
 
 ```{r}
 #| fig-asp: 0.25
+p1 <- rlnorm(10000) |> p_histogram(q = 0.95) + labs(title = "linkssteil bzw. rechtsschief")
+p2 <- rnorm(10000) |> p_histogram() + labs(title = "symmetrisch")
+p3 <- rlnorm(10000) |> p_histogram(q = 0.95) + scale_x_reverse() + labs(title = "rechtssteil bzw. linksschief")
 
-(rlnorm(10000) |> p_histogram(q = 0.95) + labs(title = "linkssteil bzw. rechtsschief")) +
-    (rnorm(10000) |> p_histogram() + labs(title = "symmetrisch")) +
-    (rlnorm(10000) |> p_histogram(q = 0.95) + scale_x_reverse() + labs(title = "rechtssteil bzw. linksschief"))
+p1 + p2 + p3
 ```
 
 Gibt es für eine Verteilung eine Symmetrieachse, so dass der Verlauf links und rechts von dieser Achse annähernd gleich ist, dann handelt es sich um eine [symmetrische Verteilung]{.neuerbegriff}. Die Verteilung muss nicht exakt symmetrisch verlaufen, um als symmetrisch zu gelten. Ist die Verteilung deutlich unsymmetrisch, dann handelt es sich um eine [schiefe Verteilung]{.neuerbegriff}. Eine unimodale Verteilung, die nach links hin sehr steil abfällt, wird [linkssteil]{.neuerbegriff} (oder [rechtsschief]{.neuerbegriff}) genannt. Entsprechend heißt eine Verteilung, die nach rechts hin steil abfällt, [rechtssteil]{.neuerbegriff} (oder [linksschief]{.neuerbegriff}).
@@ -329,6 +330,7 @@ Wir betrachten den Datensatz
 $$
 x_1 = 1.5,\: x_2 = 0.75,\: x_3 = 2,\: x_4 = 2.5,\: x_5 = 0.5,\: x_6 = 0.75,\: x_7 = 2,\: x_8 = 0.75.
 $$
+
 Gesucht:
 
 1. Skizze für das Stabdiagramm der absoluten Häufigkeitsverteilung
