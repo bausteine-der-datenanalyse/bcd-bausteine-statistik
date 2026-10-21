@@ -51,7 +51,7 @@ tibble(
   cols_align("center", columns = 2:5) |>
   cols_align("right", columns = Fahrzeug) |>
   tab_style(cell_text(weight = "bold"), cells_column_labels()) |>
-  tab_options(table.font.size = px(9))
+  tab_options(table.font.size = px(11))
 ```
 
 Bearbeiten Sie folgende Punkte:
