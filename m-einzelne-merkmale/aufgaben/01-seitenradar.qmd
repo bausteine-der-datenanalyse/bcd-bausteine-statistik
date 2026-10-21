@@ -5,7 +5,8 @@ library(tidyverse)
 library(gt)
 ```
 
-## Messung mit dem Seitenradar {#sec-seitenradar}
+::: {#exr-seitenradar}
+## Messung mit dem Seitenradar
 
 Dargestellt ist ein Ausschnitt einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum.
 
@@ -59,3 +60,4 @@ Bearbeiten Sie folgende Punkte:
 1. Stellen Sie die absolute Häufigkeitsverteilung in einem Säulen- und einem Kreisdiagramm dar (Skizze)
 1. Wie würde das Stabdiagramm für die absolute Häufigkeitsverteilung des Abstandes prinzipiell aussehen (Skizze)? Macht diese Darstellung hier Sinn?
 1. Erstellen Sie ein Histogramm für die Geschwindigkeit mit geeigneten Klassen (Skizze)
+:::

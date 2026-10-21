@@ -1,3 +1,4 @@
+::: {#exr-eigenschaften-von-merkmalen}
 ## Eigenschaften von Merkmalen
 
 Eine Firma interessiert sich im Rahmen der Planung von Parkplätzen und dem Einsatz von firmeneigenen Bussen dafür, in welcher Entfernung ihre Beschäftigten von der Arbeitsstätte wohnen und mit welchen Beförderungsmitteln die Arbeitsstätte überwiegend erreicht wird. Sie greift dazu auf eine Untersuchung zurück, die zur Erfassung der wirtschaftlichen Lage der Mitarbeiterinnen und Mitarbeiter durchgeführt wurde. Bei der Untersuchung wurden an einem Stichtag 50 Beschäftige ausgewählt und befragt hinsichtlich
@@ -19,3 +20,4 @@ Aufgaben:
 Es bietet sich an, die Angaben in tabellarischer Form zusammenzustellen.
 
 Quelle: Fahrmeir, L., Heumann, C., Künstler, R., Pigeot, I., & Tutz, G. (2016). Statistik, Der Weg zur Datenanalyse (8. Auflage).
+:::

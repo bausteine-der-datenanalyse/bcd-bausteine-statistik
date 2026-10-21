@@ -1,3 +1,4 @@
+::: {#exr-mittelwert}
 ## Mittelwert
 
 Bestimmen Sie zu den Werten $x_1, x_2, \dots, x_n$ die Zahl $a$, so dass
@@ -10,3 +11,4 @@ Bestimmen Sie zu den Werten $x_1, x_2, \dots, x_n$ die Zahl $a$, so dass
 ![](00-bilder/mittelwert-stange-ue.svg){fig-align="center" width=60%}
 
 <br/>
+:::

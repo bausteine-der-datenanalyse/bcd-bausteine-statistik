@@ -1,3 +1,4 @@
+::: {#exr-korrelationskoeffizient}
 ## Korrelationskoeffizient
 
 Bestimmen Sie für die Merkmale $X$ und $Y$ mit den Werten
@@ -8,3 +9,4 @@ Bestimmen Sie für die Merkmale $X$ und $Y$ mit den Werten
 | Y   | 2.0 | 3.0 | 3.5 | 5.5 |
 
 den Korrelationskoeffizienten $r$. Verwenden Sie hierzu eine Skizze.
+:::

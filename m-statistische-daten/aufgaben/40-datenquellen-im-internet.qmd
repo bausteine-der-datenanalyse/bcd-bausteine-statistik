@@ -1,3 +1,4 @@
+::: {#exr-datenquellen-im-internet}
 ## Datenquellen im Internet
 
 Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren Sie zu einem Thema, das **Sie** interessiert. 
@@ -20,3 +21,4 @@ Falls Sie Inspiration brauchen, können Sie beispielsweise zu folgenden Themen r
 - Entwicklung der Baupreise in Deutschland
 - Entwicklungsindikatoren (Weltbank)
 - Entwicklung des Energiesplits in Deutschland
+:::

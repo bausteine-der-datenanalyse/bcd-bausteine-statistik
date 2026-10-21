@@ -1,3 +1,4 @@
+::: {#exr-gini-koeffizient}
 ## Gini-Koeffizient
 
 Gegeben sei folgende Einkommensverteilung, bei der in jeder Einkommensklasse das Gesamteinkommen 80.000 € beträgt.
@@ -14,3 +15,4 @@ Aufgaben:
 1.  Bestimmen Sie die Lorenzkurve und den Gini-Koeffizient.
 2.  Berechnen Sie den arithmetischen Mittelwert und die Standardabweichung.
 3.  Wie groß ist der Anteil der 25% reichsten Einkommensbezieher am Gesamteinkommen?
+:::

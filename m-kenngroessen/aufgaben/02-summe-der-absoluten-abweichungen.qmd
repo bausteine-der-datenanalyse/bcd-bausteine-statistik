@@ -1,3 +1,4 @@
+::: {#exr-summe-der-absoluten-abweichungen}
 ## Summe der absoluten Abweichungen
 
 Skizzieren Sie für die Werte $x_1 = 1, x_2 = 2, x_3 = 3$ den Verlauf der Funktion 
@@ -13,3 +14,4 @@ $$
 $$ 
 
 die Funktionsgleichung von $d$.
+:::

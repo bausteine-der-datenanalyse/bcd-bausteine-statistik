@@ -1,3 +1,4 @@
+::: {#exr-rechnen-mit-summen}
 ## Rechnen mit Summen
 
 Zeigen Sie, dass die Beziehungen
@@ -9,3 +10,4 @@ $$
 $$ 
 
 gelten.
+:::

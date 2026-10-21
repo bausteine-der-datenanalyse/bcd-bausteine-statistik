@@ -1,3 +1,4 @@
+::: {#exr-lorenzkurve}
 ## Lorenzkurve
 
 In den drei Städten A, B und C teilen sich Bauleistungen auf jeweils fünf Firmen wie folgt auf (in 100000 Euro):
@@ -35,4 +36,5 @@ Aufgaben:
 ![](00-bilder/lorenzkurve-e.svg)
 
 ![](00-bilder/lorenzkurve-e.svg)
+:::
 :::

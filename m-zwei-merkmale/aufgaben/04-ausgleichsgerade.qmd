@@ -1,3 +1,4 @@
+::: {#exr-ausgleichsgerade}
 ## Ausgleichsgerade
 
 Bestimmen Sie zu den gegebenen Daten die Ausgleichsgerade und skizzieren Sie diese!
@@ -6,3 +7,4 @@ Bestimmen Sie zu den gegebenen Daten die Ausgleichsgerade und skizzieren Sie die
 |-----|-----|-----|-----|
 | X   | 1.0 | 2.0 | 3.0 |
 | Y   | 1.0 | 5.0 | 3.0 |
+:::
