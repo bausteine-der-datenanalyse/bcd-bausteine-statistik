@@ -113,8 +113,9 @@ $$
 
 Hierzu noch ein Beispiel.
 
-::: beispiel
-**Beispiel Mäxchen:** Wie groß ist beim Mäxchen die Wahrscheinlichkeit für
+::: {#exm-maexchen}
+## Mäxchen
+Wie groß ist beim Mäxchen die Wahrscheinlichkeit für
 $$
 A = \text{„Besser als Zweierpasch"},
 $$
@@ -166,8 +167,9 @@ $$
 
 ## Stochastische Unabhängigkeit
 
-::: beispiel
-**Beispiel Sally Clark:** Im November 1999 wurde Sally Clark in England für schuldig befunden, ihre beiden Söhne getötet zu haben. Das erste Kind starb 1996 wenige Wochen nach der Geburt, das zweite 1998 unter ähnlichen Umständen. Das Urteil stützte sich im Wesentlichen auf das Gutachten eines Kinderarztes. Dieser hatte, ausgehend von einer Wahrscheinlichkeit von $1/8543$ für das Auftreten des plötzlichen Kindstodes, auf eine Wahrscheinlichkeit von $1 / 8543^2 = 1 / 72982849$ für das zufällige Auftreten von zwei solchen Ereignissen geschlossen. Das Urteil wurde 2003 aufgehoben, nachdem die Königliche Statistische Gesellschaft (Zusammenschluss der Statistiker in Großbritannien) darauf hingewiesen hat, dass die Einschätzung des Kinderarztes keine statistische Basis besitzt und dass die Jury darüber hinaus noch falsche Schlussfolgerungen gezogen hat.
+::: {#exm-sally-clark}
+## Sally Clark
+Im November 1999 wurde Sally Clark in England für schuldig befunden, ihre beiden Söhne getötet zu haben. Das erste Kind starb 1996 wenige Wochen nach der Geburt, das zweite 1998 unter ähnlichen Umständen. Das Urteil stützte sich im Wesentlichen auf das Gutachten eines Kinderarztes. Dieser hatte, ausgehend von einer Wahrscheinlichkeit von $1/8543$ für das Auftreten des plötzlichen Kindstodes, auf eine Wahrscheinlichkeit von $1 / 8543^2 = 1 / 72982849$ für das zufällige Auftreten von zwei solchen Ereignissen geschlossen. Das Urteil wurde 2003 aufgehoben, nachdem die Königliche Statistische Gesellschaft (Zusammenschluss der Statistiker in Großbritannien) darauf hingewiesen hat, dass die Einschätzung des Kinderarztes keine statistische Basis besitzt und dass die Jury darüber hinaus noch falsche Schlussfolgerungen gezogen hat.
 
 Wir werden uns nun überlegen, wie der Kinderarzt zu seiner Einschätzung gelangt ist und wo in dem gesamten Verfahren die Denkfehler lagen.
 :::
@@ -250,8 +252,9 @@ Den Zusammenhang kann man sich an folgendem Gedankenexperiment klarmachen: Sie s
 
 *Anmerkung:* In diesem Beispiel war $P(A|B) = P(B|A)$. Dies ist im Allgemeinen nicht der Fall!
 
-::: beispiel
-**Fortsetzung Beispiel Sally Clark:** Wir können nun verstehen, von welchem Gedanken der Kinderarzt in dem Gutachten zum Fall Sally Clark ausgegangen ist. Zunächst setzt er für die beiden Ereignisse
+::: {#exm-fortsetzung-sally-clark}
+## Fortsetzung Sally Clark
+Wir können nun verstehen, von welchem Gedanken der Kinderarzt in dem Gutachten zum Fall Sally Clark ausgegangen ist. Zunächst setzt er für die beiden Ereignisse
 $$
 \begin{aligned}
 A & = \text{„Das erste Kind stirbt am plötzlichen Kindstod"}, \\[1em]
@@ -279,8 +282,9 @@ Auf Grundlage der Intervention der Königlichen Statistischen Gesellschaft wurde
 
 Es gibt Situationen, in denen nur Wahrscheinlichkeiten für das Eintreten eines Ereignisses unter bestimmten Bedingungen bekannt sind. Wie kann dann die gesamte Wahrscheinlichkeit bestimmt werden?
 
-::: beispiel
-**Beispiel drei Urnen:** Wir betrachten hierzu ein Zufallsexperiment mit drei Urnen.
+::: {#exm-drei-urnen}
+## drei Urnen
+Wir betrachten hierzu ein Zufallsexperiment mit drei Urnen.
 
 ![](00-bilder/totale-wahrscheinlichkeit-beispiel.svg){width=50%}
 
@@ -382,8 +386,9 @@ $$
 
 ## Der Satz von Bayes
 
-::: beispiel
-**Beispiel HIV-Test:** In den späten 1980er Jahren gab es eine umfassende öffentliche Debatte um das Vorhaben der damaligen Bayerischen Landesregierung, verpflichtende HIV-Tests einzuführen. Hierzu sollte die ELISA-Methode (Enzyme Linked Immunosorbent Assay) als Suchtest verwendet werden. Wir werden uns nun mit den statistischen Fragen befassen, die mit dieser Testmethode verbunden sind.
+::: {#exm-hiv-test}
+## HIV-Test
+In den späten 1980er Jahren gab es eine umfassende öffentliche Debatte um das Vorhaben der damaligen Bayerischen Landesregierung, verpflichtende HIV-Tests einzuführen. Hierzu sollte die ELISA-Methode (Enzyme Linked Immunosorbent Assay) als Suchtest verwendet werden. Wir werden uns nun mit den statistischen Fragen befassen, die mit dieser Testmethode verbunden sind.
 
 Die Genauigkeit diagnostischer Testverfahren wird durch die beiden Größen Sensitivität und Spezifität beschrieben. Die [Sensitivität]{.neuerbegriff} gibt an, bei welchem Prozentsatz eine Infektion durch den Test erkannt wird. Demgegenüber bezeichnet die [Spezifität]{.neuerbegriff} die Wahrscheinlichkeit, dass der Test bei einer nicht infizierten Person negativ ausfällt. Eine wichtige Rolle spielt darüber hinaus die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person mit dem HI-Virus infiziert ist.
 

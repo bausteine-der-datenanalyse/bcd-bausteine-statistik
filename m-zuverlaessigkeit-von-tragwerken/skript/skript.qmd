@@ -55,8 +55,9 @@ Die Entwicklung von Methoden zur Bestimmung von Versagenswahrscheinlichkeiten f�
 
 Die Grundidee bei der Berechnung von Versagenswahrscheinlichkeiten besteht darin, die im Tragsystem vorhandenen Unsicherheiten durch geeignete Zufallsvariablen zu erfassen. Damit werden Einwirkungen und Tragwiderstand selber zu Zufallsvariablen, auf deren Grundlage die Versagenswahrscheinlichkeit bestimmt werden kann. In einfachen Fällen gelingt das sogar auf dem Papier.
 
-::: beispiel
-**Beispiel Zugstab:** Wir betrachten einen Zugstab aus Baustahl S235 der Fläche $A = 100\,\mathrm{mm^2}$, an dem eine Kraft $F = 21000\,\mathrm{N}$ angreift.
+::: {#exm-zugstab}
+## Zugstab
+Wir betrachten einen Zugstab aus Baustahl S235 der Fläche $A = 100\,\mathrm{mm^2}$, an dem eine Kraft $F = 21000\,\mathrm{N}$ angreift.
 
 ![](00-bilder/zugstab.svg){width=50%}
 
@@ -142,8 +143,9 @@ Die Grundidee der [Monte-Carlo-Methode]{.neuerbegriff} zur Ermittlung der Versag
 
 Der große Vorteil dieser Methode ist, dass sie für alle Aufgabenstellungen funktioniert. Problematisch ist, dass eine sehr große Anzahl an Simulationsrechnungen durchgeführt werden muss. Der Aufwand steigt dabei mit der Anzahl der involvierten Zufallsvariablen und kleiner werdenden Versagenswahrscheinlichkeiten.
 
-::: beispiel
-**Fortsetzung Beispiel Zugstab:** Im Beispiel des Zugstabes können wir das einfach in R umsetzen, da für die Analyse des Tragwerks keine aufwändige Berechnung notwendig ist. Die Realisierungen des Tragsystems lassen sich mit folgender Anweisung erzeugen:
+::: {#exm-fortsetzung-zugstab}
+## Fortsetzung Zugstab
+Im Beispiel des Zugstabes können wir das einfach in R umsetzen, da für die Analyse des Tragwerks keine aufwändige Berechnung notwendig ist. Die Realisierungen des Tragsystems lassen sich mit folgender Anweisung erzeugen:
 
 ```{r}
 #| echo: true

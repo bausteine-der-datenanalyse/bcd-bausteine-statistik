@@ -69,8 +69,8 @@ ggplot(data = d_donau) +
 
 In den Beispielen oben haben wir gesehen, in welcher Form Rohdaten vorliegen können. Um effizient statistische Untersuchungen durchführen zu können, ist es hilfreich, die Daten in einer einfach zu verarbeitenden Form darzustellen. Bei umfangreichen Daten geschieht das natürlich auf dem Computer. Die Entscheidung darüber, wie die einzelnen Werte angeordnet werden sollen, kann man dabei aber nicht dem Computer überlassen. Dass es hier durchaus Wahlmöglichkeiten gibt, sehen wir an dem folgenden Beispiel.
 
-::: beispiel
-**Beispiel:** Wir betrachten einen fiktiven Datensatz zu Bevölkerungszahlen und zum Auftreten von Krankheitsfällen in drei verschiedenen Ländern für die Jahre 1999 und 2000 (in Anlehnung an [@wickham_r_2016]). Nachfolgend dargestellt sind verschiedene Lösungen, wie die Daten in Tabellen zusammengestellt werden können.
+::: {#exm-statistische-daten-1}
+Wir betrachten einen fiktiven Datensatz zu Bevölkerungszahlen und zum Auftreten von Krankheitsfällen in drei verschiedenen Ländern für die Jahre 1999 und 2000 (in Anlehnung an [@wickham_r_2016]). Nachfolgend dargestellt sind verschiedene Lösungen, wie die Daten in Tabellen zusammengestellt werden können.
 
 ```{r}
 d_tidydata_1 |> tab_tidydata()

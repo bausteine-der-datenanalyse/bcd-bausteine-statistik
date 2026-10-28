@@ -189,8 +189,9 @@ plot_pie(x1) + plot_pie(x2) + plot_pie(x3) + plot_col(x1) + plot_col(x2) + plot_
 
 Wenn ein Merkmal viele verschiedene Ausprägungen besitzt, das heißt, wenn die meisten Ausprägungen nur ein oder zwei mal vorkommen, dann ist die Darstellung einer Verteilung nicht informativ. Das ist zum Beispiel fast immer dann der Fall, wenn es sich um stetige oder quasi-stetige Merkmale handelt.
 
-::: beispiel
-**Beispiel Klausurergebnisse:** Wir betrachten die Ergebnisse einer Klausur im Fach Mathematik mit 129 Teilnehmer:innen. Die erreichten Prozentpunkte bilden die Urliste
+::: {#exm-klausurergebnisse}
+## Klausurergebnisse
+Wir betrachten die Ergebnisse einer Klausur im Fach Mathematik mit 129 Teilnehmer:innen. Die erreichten Prozentpunkte bilden die Urliste
 
 $$
 x_1 = 28.17,\; x_2 = 12.32,\; x_3 = 59.58,\; x_4 = 55.02, \dots,\; x_{129} = 87.34.
@@ -228,8 +229,9 @@ Eine eckige Klammer zeigt ein geschlossenes Intervall und eine runde Klammer ein
 
 Das Prinzip der Flächentreue wird an einem Beispiel verdeutlicht.
 
-::: beispiel
-**Beispiel Flächentreue:** Wir betrachten einen Datensatz
+::: {#exm-flaechentreue}
+## Flächentreue
+Wir betrachten einen Datensatz
 $$
 x_1 = 3,\; x_2 = 4,\; x_3 = 6, \; \dots \;, x_{20} = 27
 $$
@@ -294,8 +296,9 @@ k \approx \sqrt{n} \quad \text{oder} \quad k \approx 10 \log_{10} n,
 $$
 aber letztlich entscheidet der subjektive Eindruck.
 
-::: beispiel
-**Beispiel Klausurergebnisse (Fortsetzung):** Mit den Klassen 
+::: {#exm-klausurergebnisse-fortsetzung}
+## Klausurergebnisse (Fortsetzung)
+Mit den Klassen 
 $$
 [0, 5), [5, 10), \dots, [95, 100)
 $$ 
@@ -364,8 +367,9 @@ An der empirischen Verteilungsfunktion eines Merkmals lässt sich zu einem gegeb
 
 **Absolute kumulierte Häufigkeitsverteilung.** Häufig stellt sich für ein bestimmtes Merkmal einer Erhebung die Frage, wie viele der Werte $x_1, x_2, \dots, x_n$ kleiner oder gleich einem bestimmten Grenzwert $x$ sind. So kann man zum Beispiel bei einer Klausur fragen, wie viele Studierende durchgefallen sind, das heißt in der Prüfung $49$ oder weniger Prozentpunkte erreicht haben. Selbstverständlich könnte man die entsprechenden Werte einfach zählen, einen bildhaften Eindruck liefert jedoch eine Darstellung der absoluten kumulierten Häufigkeitsverteilung des Merkmals. Es handelt sich dabei um eine Funktion, die üblicherweise mit $H$ bezeichnet wird. Am einfachsten ist das an einem Beispiel zu sehen.
 
-:::: beispiel
-**Beispiel Häufigkeitsverteilung:** Wir betrachten ein Merkmal mit den Werten
+:::: {#exm-haeufigkeitsverteilung}
+## Häufigkeitsverteilung
+Wir betrachten ein Merkmal mit den Werten
 $$
 x_1 = 1.1, x_2 = 1.3, x_3 = 1.9, x_4 = 2.5, x_5 = 2.1, x_6 = 1.3, x_7 = 4.
 $$
@@ -459,8 +463,9 @@ F(x) = f(a_1) + f(a_2) + \dots + f(a_j) = \sum_{i: \; a_i \leq x} f(a_i)
 $$
 wobei $a_j$ wieder die größte Ausprägung mit $a_j \leq x$ ist.
 
-::: beispiel
-**Beispiel Klausurergebnisse (Fortsetzung ):** Für die Mathematikklausur erhalten wir (mit den auf ganze Zahlen gerundeten Prozentpunkten) folgende empirische Verteilungsfunktion:
+::: {#exm-klausurergebnisse-fortsetzung-2}
+## Klausurergebnisse (Fortsetzung)
+Für die Mathematikklausur erhalten wir (mit den auf ganze Zahlen gerundeten Prozentpunkten) folgende empirische Verteilungsfunktion:
 
 ```{r}
 #| fig-alt: |

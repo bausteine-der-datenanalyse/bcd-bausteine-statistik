@@ -14,8 +14,9 @@ Eine wichtige Anwendung statistischer Methoden besteht darin zu untersuchen, wie
 
 Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusammenhänge dargestellt und berechnet werden können. Wir konzentrieren uns dabei auf metrische Merkmale und den zweidimensionalen Fall. Das heißt, wir betrachten Datensätze der Form $(x_i, y_i), \; i = 1, \dots, n$ wobei $x_i, y_i \in \mathbb{R}$ vorliegende Zahlenwerte sind.
 
-::: beispiel
-**Prognose des Sachverständigenrats:** Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
+::: {#exm-prognose-des-sachverstaendigenrats}
+## Prognose des Sachverständigenrats
+Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
 tab_wirtschaftswachstum(1975, 1983)
@@ -300,8 +301,9 @@ $$
 
 Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kausalen Zusammenhang verstehen, der näher zu untersuchen ist. Dazu sind stets sachlogische Überlegungen erforderlich. Zusätzlich ist immer zu bedenken, dass weitere wesentliche Merkmale unter Umständen übersehen wurden. Dies kann zu so genannten [Scheinkorrelationen]{.neuerbegriff} oder auch zu [verdeckten Korrelationen]{.neuerbegriff} führen. [@fahrmeir_statistik_2016]
 
-::: beispiel
-**Beispiel Scheinkorrelation:** In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
+::: {#exm-scheinkorrelation}
+## Scheinkorrelation
+In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
 
 ```{r}
 countries <- c("Singapore", "Finland", "Brazil", "Switzerland")
@@ -469,8 +471,9 @@ $$
 minimiert die Summe der Fehlerquadrate.
 :::
 
-::: beispiel
-**Beispiel PISA-Studie:** Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
+::: {#exm-pisa-studie}
+## PISA-Studie
+Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
 $$
   \bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
 $$ 
@@ -539,7 +542,7 @@ Es lässt sich zeigen, dass es sich bei dem Bestimmtheitsmaß um das Quadrat des
 
 Damit kann der Korrelationskoeffizient auch in Bezug auf das lineare Regressionsmodell interpretiert werden: Der quadrierte Korrelationskoeffizient entspricht dem Anteil der Gesamtstreuung, der durch das lineare Modell erklärt werden kann.
 
-::: beispiel
+::: {#exm-zwei-merkmale-4}
 Als Beispiel betrachten wir die beiden nachfolgend dargestellten Datensätze. Wir erhalten die Bestimmtheitsmaße links mit $R^2 = `r round(summary(lm(y1 ~ x, data = d_rsquare_example))$r.squared, 2)`$ und rechts mit $R^2 = `r round(summary(lm(y2 ~ x, data = d_rsquare_example))$r.squared, 2)`$. Die unterschiedliche Variabilität um die Ausgleichsgerade herum wird also sehr gut erfasst.
 
 ```{r}

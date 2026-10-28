@@ -57,8 +57,9 @@ P(\{\omega_i\}) = \frac{1}{|\Omega|} = \frac{1}{N}
 $$
 für jedes Elementarereignis $\{\omega_i\}, \; i = 1, \dots, N$.
 
-::: beispiel
-**Beispiel Mäxchen:** Beim Mäxchen liegt $(5,5)$ auf dem Tisch und wir hoffen, dass bei unserem Wurf das Ereignis
+::: {#exm-maexchen-2}
+## Mäxchen
+Beim Mäxchen liegt $(5,5)$ auf dem Tisch und wir hoffen, dass bei unserem Wurf das Ereignis
 $$
 \{(6,6), (1,2), (2,1)\}
 $$
@@ -94,8 +95,9 @@ gilt und wir daher mit der Laplace-Wahrscheinlichkeit nicht weiterkommen. Dabei 
 
 ![Drei Würfe von je 24 Reißzwecken](00-bilder/IMG_2563.jpg){#fig-reisszwecken width=70%}
 
-::: beispiel
-**Beispiel Reißzwecken:** Wie kann man nun die Wahrscheinlichkeit dafür bestimmen, dass eine Reißzwecke mit der Spitze auf dem Boden landet (und somit keine Gefahr für die Füße darstellt)?
+::: {#exm-reisszwecken-2}
+## Reißzwecken
+Wie kann man nun die Wahrscheinlichkeit dafür bestimmen, dass eine Reißzwecke mit der Spitze auf dem Boden landet (und somit keine Gefahr für die Füße darstellt)?
 
 Zunächst werten wir das Experiment aus und erhalten die Sequenz
 
@@ -156,8 +158,8 @@ Problematisch dabei ist, dass Versuche in der Praxis natürlich nicht unendlich 
 
 Von der Vorstellung, dass es sich bei der Wahrscheinlichkeit um eine quasi physikalische Größe handelt, hat man sich bei dem subjektiven Wahrscheinlichkeitsbegriff befreit. Die Wahrscheinlichkeit quantifiziert hier den Grad, in dem ein Betrachter an das Eintreten eines bestimmten Ereignisses glaubt. Die subjektivistische Schule geht vor allem zurück auf Bruno de Finetti (1906–1986) und Leonard J. Savage (1917–1971), wird aber auch mit Thomas Bayes (1701–1761, Mathematiker, Philosoph und Pfarrer) in Verbindung gebracht und wird daher auch bayesscher Wahrscheinlichkeitsbegriff genannt.
 
-::: beispiel
-**Beispiele für subjektive Wahrscheinlichkeiten:**
+::: {#exm-beispiele-fuer-subjektive-wahrscheinlichkeiten}
+## Beispiele für subjektive Wahrscheinlichkeiten
 
 a. Die Aussage, dass sich jemand nach der Hinrunde zu 90 % sicher ist, dass ein bestimmter Club deutscher Meister wird, ist ein Beispiel für eine subjektive Wahrscheinlichkeit.
 
@@ -242,8 +244,9 @@ Aus den Axiomen von Kolmogoroff lassen sich die folgenden Rechenregeln ableiten.
 
 1. $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
 
-::: beispiel
-**Beispiel Glücksrad:** Ein faires Glücksrad ist in vier Felder unterteilt, die mit den Zahlen 1–4 bezeichnet sind. Damit ist $\Omega = \{1, 2, 3, 4\}$ die Ergebnismenge des Zufallsexperiments. Für die Ereignismenge setzen wir die Potenzmenge von $\Omega$ ein, so dass
+::: {#exm-gluecksrad}
+## Glücksrad
+Ein faires Glücksrad ist in vier Felder unterteilt, die mit den Zahlen 1–4 bezeichnet sind. Damit ist $\Omega = \{1, 2, 3, 4\}$ die Ergebnismenge des Zufallsexperiments. Für die Ereignismenge setzen wir die Potenzmenge von $\Omega$ ein, so dass
 $$
 \mathcal{A} = \mathcal{P}(\Omega) = \{\varnothing, \{1\}, \{2\}, \{3\}, \{1, 2\}, \dots, \{1, 2, 3, 4\}\} \quad \text{mit} \quad |\mathcal{A}| = 2^4 = 16
 $$

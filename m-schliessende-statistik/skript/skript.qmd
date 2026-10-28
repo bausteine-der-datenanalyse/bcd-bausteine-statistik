@@ -129,8 +129,9 @@ $$
 ist der zugehörige [Schätzwert]{.neuerbegriff} für $\theta$.
 :::
 
-::: beispiel
-**Beispiel empirische Kenngrößen:** Wir haben mit den empirischen Kenngrößen von Stichproben bereits Schätzfunktionen kennengelernt.
+::: {#exm-empirische-kenngroessen}
+## empirische Kenngrößen
+Wir haben mit den empirischen Kenngrößen von Stichproben bereits Schätzfunktionen kennengelernt.
 
 Erwartungswert: Mit
 $$
@@ -186,8 +187,9 @@ $$
 $$
 :::
 
-::: beispiel
-**Beispiel Mittelwert:** In einem Computerexperiment wird aus $n$ Realisierungen einer normalverteilten Zufallsvariablen $X \sim N(2, 4)$ der Mittelwert gebildet. Das Experiment wird für $n = 5$ und $n = 100$ jeweils 100000-mal wiederholt. Für die Mittelwerte erhalten wir folgende Histogramme:
+::: {#exm-mittelwert}
+## Mittelwert
+In einem Computerexperiment wird aus $n$ Realisierungen einer normalverteilten Zufallsvariablen $X \sim N(2, 4)$ der Mittelwert gebildet. Das Experiment wird für $n = 5$ und $n = 100$ jeweils 100000-mal wiederholt. Für die Mittelwerte erhalten wir folgende Histogramme:
 
 ```{r}
 #| fig-asp: 0.5
@@ -258,8 +260,9 @@ Möglichkeiten:
 
 Die Maximum-Likelihood-Methode ist das wohl bedeutendste Verfahren zur Gewinnung von Schätzfunktionen für unbekannte Parameter einer Verteilung. Die Grundidee besteht darin, den (oder die) gesuchten Parameter auf Grundlage einer geschickt formulierten Maximierungsaufgabe zu bestimmen.
 
-::: beispiel
-**Beispiel Reißzwecken:** Wir erinnern uns an das Experiment mit den in die Luft geworfenen Reißzwecken. In einem entsprechenden Experiment hat sich ergeben, dass bei $n = 319$ Würfen insgesamt $x = 133$-mal das Ergebnis $U$ (Reißzwecke landet auf der Spitze) auftritt.
+::: {#exm-reisszwecken}
+## Reißzwecken
+Wir erinnern uns an das Experiment mit den in die Luft geworfenen Reißzwecken. In einem entsprechenden Experiment hat sich ergeben, dass bei $n = 319$ Würfen insgesamt $x = 133$-mal das Ergebnis $U$ (Reißzwecke landet auf der Spitze) auftritt.
 
 Aus wahrscheinlichkeitstheoretischer Sicht handelt es sich um ein Bernoulli-Experiment, das durch die Zufallsvariable $X : \{O, U\} \to \{0, 1\}$ mit
 $$
@@ -374,8 +377,9 @@ Für die Schätzung von Intervallen für stochastische Parameter wird auf die en
 
 ### Einführung
 
-::: beispiel
-**Beispiel Würfelspiel:** Stellen Sie sich folgendes Spiel vor: Zwei Spieler würfeln mit ihrem eigenen Würfel 100-mal. Wer die meisten Sechsen geworfen hat, gewinnt. Wenn Sie an diesem Spiel teilnehmen, dann nehmen Sie zunächst an, dass bei beiden Würfeln die Wahrscheinlichkeit für eine Sechs bei $P(X = 6) = 1/6$ liegt. Hat dann aber der andere Spieler $95$-mal eine Sechs gewürfelt, dann werden Sie sich ziemlich sicher sein, dass der Würfel manipuliert ist. Sie springen erbost vom Tisch auf und beschweren sich! Aber warum eigentlich?
+::: {#exm-wuerfelspiel}
+## Würfelspiel
+Stellen Sie sich folgendes Spiel vor: Zwei Spieler würfeln mit ihrem eigenen Würfel 100-mal. Wer die meisten Sechsen geworfen hat, gewinnt. Wenn Sie an diesem Spiel teilnehmen, dann nehmen Sie zunächst an, dass bei beiden Würfeln die Wahrscheinlichkeit für eine Sechs bei $P(X = 6) = 1/6$ liegt. Hat dann aber der andere Spieler $95$-mal eine Sechs gewürfelt, dann werden Sie sich ziemlich sicher sein, dass der Würfel manipuliert ist. Sie springen erbost vom Tisch auf und beschweren sich! Aber warum eigentlich?
 
 Um das Problem zu formalisieren, werden zwei Hypothesen formuliert:
 

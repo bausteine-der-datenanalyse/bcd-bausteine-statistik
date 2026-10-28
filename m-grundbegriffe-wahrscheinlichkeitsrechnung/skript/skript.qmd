@@ -9,8 +9,8 @@ Dieses Kapitel wurde automatisch aus dem alten LaTeX-Skript übertragen und ist 
 
 Im Leben hat man es ständig mit Geschehnissen zu tun, deren Ausgang nicht vorhersehbar ist.
 
-::: beispiel
-**Beispiele für Zufallsvorgänge:**
+::: {#exm-beispiele-fuer-zufallsvorgaenge}
+## Beispiele für Zufallsvorgänge
 
 a. Sie interessieren sich für Fußball. Wer wird in der laufenden Saison Meister?
 
@@ -53,8 +53,8 @@ Den Ausgang eines Zufallsvorgangs nennen wir [Ergebnis]{.neuerbegriff} und verwe
 
 Wir haben oben schon festgehalten, dass man sich bei einem Zufallsvorgang vorab klar darüber werden kann, welche Ergebnisse zu erwarten sind. Wir bezeichnen diese Menge aller möglichen Ergebnisse mit dem griechischen Buchstaben $\Omega$ (großes Omega) und sagen dazu [Ergebnisraum]{.neuerbegriff}, [Ergebnismenge]{.neuerbegriff}, [Grundraum]{.neuerbegriff} oder [Stichprobenraum]{.neuerbegriff}. Beachten Sie, dass Menge hier wirklich in einem allgemeinen Sinn verwendet wird, $\Omega$ kann natürlich Zahlen enthalten, aber eben auch Fußballvereine.
 
-::: beispiel
-**Beispiele für Ergebnisse und Ergebnismengen:**
+::: {#exm-beispiele-fuer-ergebnisse-und-ergebnismengen}
+## Beispiele für Ergebnisse und Ergebnismengen
 
 a. Am Ende der Saison ist Fortuna Düsseldorf Meister. Dann ist das (eher unwahrscheinliche) Ergebnis $\omega = \text{Fortuna Düsseldorf}$. Die Ergebnismenge enthält natürlich alle Clubs, die in der 1. Bundesliga spielen. In der Saison 2018/19 sind das $\Omega = \{$Hoffenheim, Leverkusen, Bayern München, Dortmund, Mönchengladbach, Frankfurt, Augsburg, Schalke, Fortuna Düsseldorf, Mainz, Hannover, Hertha BSC, Nürnberg, Leipzig, Freiburg, Stuttgart, Wolfsburg, Bremen$\}$.
 
@@ -91,8 +91,8 @@ a. Übungsaufgabe.
 
 In vielen Situationen interessiert man sich bei einem Zufallsvorgang nicht dafür, ob ein ganz bestimmtes Ergebnis eingetroffen ist, sondern ob das Ergebnis bestimmten Erwartungen genügt oder bestimmte Eigenschaften hat. Dies lässt sich in der Sprache der Mathematik als Menge formulieren. Eine Teilmenge der Ergebnismenge definiert man als ein Ereignis. Man sagt, dass ein Ereignis eingetroffen ist, wenn das Ergebnis in dieser Menge enthalten ist.
 
-::: beispiel
-**Beispiele für Ereignisse:**
+::: {#exm-beispiele-fuer-ereignisse}
+## Beispiele für Ereignisse
 
 a. Es gibt Menschen, die sich nicht für Fußball interessieren, aber eine Abneigung gegen Bayern München hegen. Sie sind schon zufrieden, wenn der Meister in der Menge $A = \{$Hoffenheim, Leverkusen, Dortmund, Mönchengladbach, Frankfurt, Augsburg, Schalke, Fortuna Düsseldorf, Mainz, Hannover, Hertha BSC, Nürnberg, Leipzig, Freiburg, Stuttgart, Wolfsburg, Bremen$\}$ enthalten ist. Dann ist nämlich das Ereignis $A$: „Bayern München ist nicht deutscher Meister" eingetreten.
 

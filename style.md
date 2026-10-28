@@ -18,11 +18,12 @@
 
 - Leerzeilen bei Aufzählungslisten und nummerierten Listen, s.o.
 
-- Beispiele mit
+- Beispiele wie Definitionen (`#def-`) mit Quartos Beispiel-Umgebung, der Titel ohne "Beispiel"
 
     ```qmd
-    :::beispiel
-    **Beispiel Bezeichnung:** Text zum Beispiel
+    ::: {#exm-bezeichnung}
+    ## Bezeichnung
+    Text zum Beispiel
     ...
     :::
     ```

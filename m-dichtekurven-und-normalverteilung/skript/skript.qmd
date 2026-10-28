@@ -15,8 +15,9 @@ source("01-daten/dichtekurven-und-normalverteilung.R")
 
 Dichtekurven sind eine Alternative zu Histogrammen für die Darstellung einzelner Merkmale. Die Grundidee soll am Beispiel einer Geschwindigkeitsmessung erläutert werden.
 
-:::beispiel
-**Beispiel Geschwindigkeitsmessung:** In einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum wurden innerhalb von zwei Tagen die Geschwindigkeiten von `r nrow(d_unistrasse)` Fahrzeugen gemessen. 
+::: {#exm-geschwindigkeitsmessung}
+## Geschwindigkeitsmessung
+In einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum wurden innerhalb von zwei Tagen die Geschwindigkeiten von `r nrow(d_unistrasse)` Fahrzeugen gemessen. 
 
 ```{r}
 d_unistrasse |>
@@ -192,8 +193,9 @@ mu <- mean(v)
 sigma <- sd(v)
 ```
 
-:::beispiel
-**Beispiel Geschwindigkeitsmessung (Fortsetzung):** Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
+::: {#exm-geschwindigkeitsmessung-fortsetzung}
+## Geschwindigkeitsmessung (Fortsetzung)
+Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
 $$
 \bar{x} = \SI{`r round(mu, 2)`}{km/h}
 \quad \text{und} \quad
@@ -304,8 +306,9 @@ p2 <- ggplot(data = d, mapping = aes(sample = wert, color = verteilung)) +
 p1 / p2
 ```
 
-:::beispiel
-**Beispiel Geschwindigkeitsmessung (Fortsetzung):** Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
+::: {#exm-geschwindigkeitsmessung-fortsetzung-2}
+## Geschwindigkeitsmessung (Fortsetzung)
+Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
 :::
 
 ```{r}

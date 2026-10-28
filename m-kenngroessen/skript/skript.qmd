@@ -70,8 +70,9 @@ ggplot(data = data) +
   theme_void()
 ```
 
-::: beispiel
-**Beispiel arithmetisches Mittel:** Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ und $Y$ mit den Werten
+::: {#exm-arithmetisches-mittel}
+## arithmetisches Mittel
+Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ und $Y$ mit den Werten
 
 ```{r}
 d_bsp_mittelwert |>
@@ -117,8 +118,9 @@ Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabef
 
 **Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genauso gut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
 
-::: beispiel
-**Beispiel Ozonloch:** Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satellitendaten das gesamte Ausmaß des Problems. [@ludwig2006]
+::: {#exm-ozonloch}
+## Ozonloch
+Über die Entdeckung des Ozonlochs kursiert folgende Geschichte: Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Allerdings wurden diese Werte bei der automatischen Auswertung der Daten als Messfehler ausgesondert und nicht weiter beachtet. Erst 1984 wurde von Forschungsstationen die Existenz des Ozonlochs durch Beobachtungen belegt. Daraufhin zeigte eine Neuauswertung der Satellitendaten das gesamte Ausmaß des Problems. [@ludwig2006]
 
 Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
 :::
@@ -163,8 +165,9 @@ An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich
 
 Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte Merkmale angegeben werden. Bei einer geraden Anzahl von Stichproben liegt der Median dann gegebenenfalls zwischen zwei Ausprägungen.
 
-::: beispiel
-**Beispiel Güteklasse: ** Die Erhebung eines Merkmals "Güteklasse" ergibt
+::: {#exm-gueteklasse}
+## Güteklasse
+Die Erhebung eines Merkmals "Güteklasse" ergibt
 
 ```{r}
 d_bsp_median |>
@@ -194,8 +197,9 @@ Der Modus lässt sich für alle Arten von Merkmalen bestimmen, auch wenn es sich
 
 Falls es sich um eine unimodale Verteilung handelt, kann aus den Zahlenwerten von arithmetischem Mittel, Median und Modus auf die Schiefe der Verteilung geschlossen werden. Hierzu zunächst ein Beispiel aus @fahrmeir_statistik_2016.
 
-::: beispiel
-**Beispiel Lageregeln:** Wir betrachten drei Verteilungen, für die bereits die drei oben besprochenen Lagemaße bestimmt wurden.
+::: {#exm-lageregeln}
+## Lageregeln
+Wir betrachten drei Verteilungen, für die bereits die drei oben besprochenen Lagemaße bestimmt wurden.
 
 ```{r}
 mmean <- function(d) mean(rep(1:9, d))
@@ -275,8 +279,9 @@ Beachten Sie dabei, dass die Verwendung der Begriffe unimodal, linkssteil, symme
 
 Das [geometrische Mittel]{.neuerbegriff} wird verwendet, wenn es sich bei den Werten eines Merkmals um Wachstumsfaktoren handelt.
 
-::: beispiel
-**Beispiel Wasserreservoir:** Wir betrachten ein Wasserreservoir mit den Wasserständen $W_i$ an den Tagen $i = 0, \dots, 6$:
+::: {#exm-wasserreservoir}
+## Wasserreservoir
+Wir betrachten ein Wasserreservoir mit den Wasserständen $W_i$ an den Tagen $i = 0, \dots, 6$:
 
 ```{r}
 d_reservoir_w |>
@@ -482,8 +487,9 @@ Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden erm
 
 Als letztes Lagemaß betrachten wir das harmonische Mittel. Es wird verwendet, wenn das zu mittelnde Merkmal eine Verhältnisgröße ist, bei der die Häufigkeit im Zähler steht. Beispiele sind die Geschwindigkeit (Weg/Zeit) oder die Dichte (Masse/Volumen).
 
-::: beispiel
-**Beispiel Autofahrt:** Bei einer Autofahrt werden zunächst $\SI{10}{km}$ mit einer Geschwindigkeit von $\SI{50}{km/h}$ zurückgelegt, danach weitere $\SI{60}{km}$ bei $\SI{110}{km/h}$. Wie groß ist die Durchschnittsgeschwindigkeit?
+::: {#exm-autofahrt}
+## Autofahrt
+Bei einer Autofahrt werden zunächst $\SI{10}{km}$ mit einer Geschwindigkeit von $\SI{50}{km/h}$ zurückgelegt, danach weitere $\SI{60}{km}$ bei $\SI{110}{km/h}$. Wie groß ist die Durchschnittsgeschwindigkeit?
 
 Zunächst bestimmen wir hierzu die Gesamtstrecke und die gesamte Fahrzeit:
 $$    
@@ -533,8 +539,9 @@ Mit den verschiedenen Lagemaßen lässt sich die ungefähre Lage der Werte auf d
 
 Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist naheliegend zu erwarten, dass wir eine Variabilität von Null erhalten, wenn alle betrachteten Werte identisch sind. Demzufolge wächst die Zahl mit zunehmender Variabilität an, so dass eine negative Variabilität keinen Sinn ergibt. Darüber hinaus soll das Maß für die Variabilität nicht vom Umfang der Stichprobe abhängen. Das soll an einem Beispiel verdeutlicht werden
 
-::: beispiel
-**Beispiel Niederschläge in Bochum 2008 und 2010:** Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken, einen Vergleich aus der Stadt Dresden zeigen die fogenden Bilder (Quelle: spiegel.de). Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts). 
+::: {#exm-niederschlaege-in-bochum-2008-und-2010}
+## Niederschläge in Bochum 2008 und 2010
+Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken, einen Vergleich aus der Stadt Dresden zeigen die fogenden Bilder (Quelle: spiegel.de). Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts). 
 
 ![](00-bilder/sommer-2010.svg){fig-alt="Elbe mit sehr niedrigem Wasserstand und Elbe bei Hochwasser (Dresden)"}
 
@@ -605,7 +612,7 @@ $$
 
 Die Spannweite ist zwar einfach zu berechnen, allerdings hat sie den Nachteil, dass sie allein von zwei Werten abhängt und daher kein robustes Maß darstellt.
 
-::: beispiel
+::: {#exm-kenngroessen-8}
 Für die Niederschläge der Jahre 2008 und 2010 betragen die Spannweiten der monatlichen Mittelwerte
 
 $$
@@ -638,7 +645,7 @@ Wie es sein muss ergibt sich für die beiden Jahre ein deutlicher Unterschied.
 
 Um zu einem robusteren Maß für die Variabilität der Daten zu gelangen, müssen wir alle Werte in die Berechnung einbeziehen. Als Grundlage hierfür dient die Abweichung der einzelnen Beobachtungen vom arithmetischen Mittel, also die Zahlenwerte $(x_i - \bar{x}), \;\; i = 1, \dots, n$. Streuungsmaße auf Basis des Medians sind nicht üblich.
 
-::: beispiel
+::: {#exm-kenngroessen-9}
 Für die Situation in Bochum bestimmen wir also zunächst die Abweichungen der monatlichen Niederschläge vom Mittelwert.
 
 ```{r}
@@ -723,7 +730,7 @@ $$
 
 heißt [empirische Standardabweichung]{.neuerbegriff}. Die Einheit der Standardabweichung stimmt wieder mit der Einheit des Merkmals überein.
 
-::: beispiel
+::: {#exm-kenngroessen-10}
 Für die Niederschläge in den Jahren 2008 und 2010 in Bochum erhalten wir die empirischen Varianzen
 
 $$
@@ -764,7 +771,7 @@ v = \frac{\tilde{s}}{\bar{x}}  \text{,}
 $$
 der angibt, wie groß die Variabilität im Verhältnis zum Mittelwert ist.
 
-::: beispiel
+::: {#exm-kenngroessen-11}
 Für die Niederschlagsmengen erhalten wir
 $$
 v_{2008} \approx \frac{21.29}{72.45} \approx 0.29
@@ -938,7 +945,7 @@ Ein Box-Plot entsteht in fünf Schritten:
 
 Die hier beschriebene Art von Box-Plots wird manchmal auch als modifizierter Box-Plot bezeichnet.
 
-::: beispiel
+::: {#exm-kenngroessen-12}
 Unten dargestellt sind die Box-Plots der monatlichen Niederschläge in Bochum für die Jahre 2008 und 2010. Um zu verdeutlichen, wie die Box-Plots entstehen, sind seitlich jeweils noch die Niederschlagsmengen für die einzelnen Monate als Punkte dargestellt.
 
 ```{r}
@@ -997,7 +1004,7 @@ ggplot(data = d_ns_bo_2008_2010) +
 
 Für eine gegebene Stichprobe kann man sich neben der Lage und der Streuung auch noch danach fragen, in welchem Maß einzelne Werte zur Summe aller Werte beitragen. Wir betrachten das am Beispiel von Niederschlägen. 
 
-::: beispiel
+::: {#exm-kenngroessen-13}
 In Abbildung unten sind die monatlichen Niederschläge des Jahres 2008 in Bochum und des Jahres 2010 in Nha Trang (Vietnam) zu sehen. Insgesamt sind in Bochum $\SI{869}{mm}$ und in Nha Trang $\SI{`r sum(pull(d_ns_nt_2015_monat, Niederschlag))`}{mm}$ Niederschläge gefallen. Allerdings konzentrieren sich die Niederschläge in Vietnam auf drei Monate, in allen anderen Monaten regnet es sogar weniger als in Bochum. Eine solche Konzentration von großen Beiträgen zu einer Gesamtsumme auf wenige Merkmalen wird mithilfe eines Konzentrationsmaßes quantifiziert.
 
 ```{r}
@@ -1040,7 +1047,7 @@ ggplot(data = d_bsp_gini) +
 
 In der Lorenzkurve wird dargestellt, wie viel jeder einzelne Wert einer Stichprobe zur Summe der Werte beiträgt. Dabei werden die Beiträge ihrer Größe nach geordnet und in dieser Reihenfolge in einem $uv$-Koordinatensystem aufgetragen. Die Lorenzkurve verbindet diese Punkte zu einem Polygonzug. Um zu einer Darstellung zu gelangen, die nicht von der Anzahl der Beobachtungen und der Größe der Werte abhängt, werden die Daten in den Bereich von 0 bis 1 skaliert. Das folgende Beispiel illustriert die Vorgehensweise.
 
-::: beispiel
+::: {#exm-kenngroessen-14}
 Wir betrachten den Datensatz
 
 ```{r}
@@ -1084,7 +1091,7 @@ $$
 Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
 :::
 
-::: beispiel
+::: {#exm-kenngroessen-15}
 Für die Niederschläge in Bochum und Nha Trang erhalten wir mit den sortierten Monatswerten
 
 ```{r}
@@ -1172,7 +1179,7 @@ $$
 mit dem Wertebereich $G^* \in [0, 1]$, der manchmal auch als [Lorenz-Münzer-Koeffizient]{.neuerbegriff} bezeichnet wird.
 :::
 
-::: beispiel
+::: {#exm-kenngroessen-16}
 Für die Jahresniederschläge aus dem einleitenden Beispiel erhalten wir die Zahlenwerte der normierten Gini-Koeffizienten für
 $$
 \begin{aligned}
@@ -1185,7 +1192,7 @@ Hier ist an einer Zahl unmittelbar zu erkennen, dass die Niederschläge in Bochu
 
 **Informationsverlust**. Wie bei allen Maßzahlen für Verteilungen stellt auch der Gini-Koeffizient eine Vereinfachung dar, die mit einem Verlust an Informationen verbunden ist. Insbesondere können zwei völlig unterschiedliche Verteilungen zum selben Gini-Koeffizienten führen.
 
-::: beispiel
+::: {#exm-kenngroessen-17}
 Wir betrachten hierzu als Beispiel zwei Gruppen von je zehn Personen, die jeweils den angegebenen Betrag im Geldbeutel haben.
 
 ```{r}
