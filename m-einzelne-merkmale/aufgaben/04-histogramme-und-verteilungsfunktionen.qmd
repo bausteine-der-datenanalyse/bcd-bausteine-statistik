@@ -50,4 +50,12 @@ d4 <- tibble(X = (100 + runif(35 * n0, min = -0.1, max = 0.1)))
 ```
 
 Begründen Sie Ihre Antwort!
+
+::: {.tinh-solution}
+
+- 1 - D
+- 2 - C
+- 3 - B
+- 4 - A
+:::
 :::

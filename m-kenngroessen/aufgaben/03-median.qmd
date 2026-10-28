@@ -24,4 +24,8 @@ Geben Sie eine Vorschrift zur Bestimmung der $x$-Koordinate des blauen Punktes a
 ![](00-bilder/median-funktion-9.svg){}
 
 :::
+
+::: {.tinh-solution}
+![](00-bilder/l-kenngroessen-03-median.png)
+:::
 :::

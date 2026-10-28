@@ -1,7 +1,0 @@
-Excel-Tabelle
-
-[beispiel-rohdaten-loesung.xlsx](01-daten/beispiel-rohdaten-loesung.xlsx)
-
-Bewertung der Lösungen
-
-![](00-bilder/l-sd-10.jpg)

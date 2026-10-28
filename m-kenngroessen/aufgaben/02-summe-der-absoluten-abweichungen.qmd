@@ -14,4 +14,8 @@ $$
 $$ 
 
 die Funktionsgleichung von $d$.
+
+::: {.tinh-solution}
+![](00-bilder/l-kenngroessen-02-summe-der-absoluten-abweichungen.png)
+:::
 :::

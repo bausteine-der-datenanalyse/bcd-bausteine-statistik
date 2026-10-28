@@ -11,4 +11,14 @@ Aufgaben:
 
 1. Skizzieren Sie das Stabdiagramm der absoluten Häufigkeitsverteilung.
 1. Wie lautet die Zuordnungsvorschrift der Funktion $H : \mathbb{R} \to \mathbb{N}$, die zu jeder Zahl $x$ angibt, wie viele der Werte aus dem Datensatz kleiner oder gleich $x$ sind. Skizzieren Sie den Graphen von $H$.
+
+::: {.tinh-solution}
+1. Stabdiagramm
+
+   ![](00-bilder/l-em-02.1.png)
+
+1. Funktion $H$
+
+   ![](00-bilder/l-em-02.2.png)
+:::
 :::

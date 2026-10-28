@@ -9,4 +9,18 @@ Bestimmen Sie für die Merkmale $X$ und $Y$ mit den Werten
 | Y   | 2.0 | 3.0 | 3.5 | 5.5 |
 
 den Korrelationskoeffizienten $r$. Verwenden Sie hierzu eine Skizze.
+
+::: {.tinh-solution}
+Skizze
+
+![](00-bilder/l-zm-02-korrelationskoeffizient.jpeg)
+
+Summe blau = $\frac{9}{2} + \frac{1}{2} + 8 = 13$
+
+Summe grün = $1 + 9 + 16 = 26$
+
+Summe gelb = $\frac{9}{4} + \frac{1}{4} + 4 = \frac{13}{2}$
+
+Korrelationskoeffizient r = $\frac{13}{\sqrt{26 * \frac{13}{2}}} = \frac{13}{\sqrt{13 * 13}} = \frac{13}{13}  = 1$
+:::
 :::

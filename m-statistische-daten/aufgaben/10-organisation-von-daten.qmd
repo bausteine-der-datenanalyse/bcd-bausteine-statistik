@@ -9,4 +9,14 @@ In der Excel-Datei [beispiel-rohdaten.xlsx](01-daten/beispiel-rohdaten.xlsx) fin
 In welcher der vier Lösungen ist die Aufgabe am einfachsten? Wodurch zeichnet sich diese Lösung aus?
 
 Zur Kontrolle: Richtig sind 547660 Fälle sowie ein Anteil von 0.019% an der Gesamtbevölkerung.
+
+::: {.tinh-solution}
+Excel-Tabelle
+
+[beispiel-rohdaten-loesung.xlsx](01-daten/beispiel-rohdaten-loesung.xlsx)
+
+Bewertung der Lösungen
+
+![](00-bilder/l-sd-10.jpg)
+:::
 :::
