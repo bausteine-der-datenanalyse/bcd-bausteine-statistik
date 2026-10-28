@@ -30,3 +30,9 @@ Offene Punkte zu den Modulen (Skript, Aufgaben, Folien). Hintergrund und Details
   (z. B. DejaVu Sans, Befehl wie `\wuerfel{⚂⚀}`), in Formeln in `\text{…}`. Betrifft
   `m-grundbegriffe-wahrscheinlichkeitsrechnung`, `m-wahrscheinlichkeit`, `m-kombinatorik` und
   `m-rechnen-mit-wahrscheinlichkeiten`.
+- [ ] Alle Kapitel (Skripte): Die 54 `::: beispiel` auf Quartos Beispiel-Umgebung `::: {#exm-…}` mit Titel
+  (`## …`) umstellen, analog zu den Definitionen (`#def-`). `tinh-notes` hat die eigene Umgebung `beispiel`
+  nicht mehr (kein Balken in HTML und PDF), dafür bekommen `#exm-` (Balken links) und `#def-` (Kasten) dort ihr
+  Aussehen. Vorher die Extension in `_extensions/matthiasbaitsch/tinh-notes` aktualisieren. Die meisten in
+  `m-kenngroessen` (17) und `m-zufallsvariablen` (6). Tabellen in Beispielen haben im PDF keine untere Linie
+  (longtable in einer Box), vermutlich auch mit `#exm-`.

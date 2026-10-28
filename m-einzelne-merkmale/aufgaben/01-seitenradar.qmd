@@ -1,17 +1,14 @@
-```{r}
-#| echo: false
-#| output: false
-library(tidyverse)
-library(gt)
-```
-
 ::: {#exr-seitenradar}
 ## Messung mit dem Seitenradar
 
 Dargestellt ist ein Ausschnitt einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum.
 
-```{r}
+```{r keep-me}
 #| echo: false
+
+library(tidyverse)
+library(gt)
+
 tibble(
   Datum = c(
     "13.12.2017 09:15:25", "13.12.2017 09:15:30", "13.12.2017 09:15:31", "13.12.2017 09:15:33",

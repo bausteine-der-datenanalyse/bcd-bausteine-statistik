@@ -4,6 +4,8 @@ library(patchwork)
 library(tidyverse)
 ```
 
+{{< pagebreak >}}
+
 ::: {#exr-histogramme-und-verteilungsfunktionen}
 ## Histogramme und Verteilungsfunktionen
 
