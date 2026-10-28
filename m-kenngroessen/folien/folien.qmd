@@ -26,7 +26,7 @@ tab_monate <- function(d) {
   d |>
     mutate(Niederschlag = round(Niederschlag, 2)) |>
     pivot_wider(names_from = Monat, values_from = Niederschlag) |>
-    tt()
+    gt()
 }
 ```
 
@@ -54,9 +54,7 @@ $$
 
 [arithmetisches Mittel]{.neuerbegriff} oder kurz [Mittelwert]{.neuerbegriff} genannt.
 
-. . .
-
-Eigenschaften
+## Eigenschaften des arithmetischen Mittels
 
 1. Der Wert $\bar{x}$ minimiert die Summe der quadrierten Abstände:
    $$
@@ -103,13 +101,14 @@ Datensatz mit den Merkmalen $X$ und $Y$
 d_bsp_mittelwert |>
   transpose_df() |>
   rename(" " = name) |>
-  tt()
+  gt()
 ```
 
 . . .
 
 ```{r}
-#| fig-asp: 0.35
+#| fig-asp: 0.3
+#| out-width: 65%
 
 mtitle <- function(l) {
   annotate(geom = "text", label = l, x = 21, y = 1, hjust = "right", vjust = "top")
@@ -123,11 +122,11 @@ p1 / p2 + plot_layout(axes = "collect")
 
 . . .
 
-→ Arithmetisches Mittel wird durch den einzelnen Wert $y_{13} = 21$ stark beeinflusst
+→ Das arithmetische Mittel wird durch den einzelnen Wert $y_{13} = 21$ stark beeinflusst
 
-## Ausreißer und Lagemaße
+## Ausreißer
 
-Was versteht man unter Ausreißern?
+[]{.down20}
 
 - Der Wert $y_{13} = 21$ fällt aus dem Wertebereich der anderen Beobachtungen heraus
 - Eine solche extreme Beobachtung heißt [Ausreißer]{.neuerbegriff}
@@ -135,11 +134,9 @@ Was versteht man unter Ausreißern?
 - Ob ein Ausreißer ein extremer, aber richtiger Wert oder ein Fehler ist, muss im Einzelfall sorgfältig geprüft
   werden
 
-. . .
+## Empfindliche und robuste Lagemaße
 
 []{.down20}
-
-Empfindliche und robuste Lagemaße
 
 - Das arithmetische Mittel ist gegenüber Ausreißern sehr empfindlich: Einzelne fehlerhafte Werte können den
   Mittelwert stark verfälschen
@@ -149,21 +146,23 @@ Empfindliche und robuste Lagemaße
 ## Die Entdeckung des Ozonlochs
 
 ::: {layout-ncol="2"}
-![](../skript/00-bilder/nimbus7-satellit.jpg){height="35%"}
+![](../skript/00-bilder/nimbus7-satellit.jpg){height="60%"}
 
-![](../skript/00-bilder/nimbus7-ozon.jpg){height="35%"}
+![](../skript/00-bilder/nimbus7-ozon.jpg){height="60%"}
 :::
+
+## Die Entdeckung des Ozonlochs
+
+[]{.down20}
 
 Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Bei
 der automatischen Auswertung wurden diese Werte als Messfehler ausgesondert. Erst 1984 belegten Forschungsstationen
-das Ozonloch durch Beobachtungen, eine Neuauswertung der Satellitendaten zeigte dann das gesamte Ausmaß.
-
-Nach: K.-H. Ludwig. Eine kurze Geschichte des Klimas. C. H. Beck, 2006
+das Ozonloch durch Beobachtungen. Eine Neuauswertung der Satellitendaten zeigte dann das gesamte Ausmaß.
+[@ludwig2006]
 
 . . .
 
-Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe F. Pukelsheim. Robustness of statistical gossip and the
-antarctic ozone hole. The IMS Bulletin, 1990
+Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
 
 ## Robustes Lagemaß: Der Median
 
@@ -222,10 +221,8 @@ Modus ist nur dann eindeutig bestimmt, wenn die Verteilung ein eindeutiges Maxim
 
 ## Lageregeln 1/2
 
-Drei unimodale Verteilungen mit ihren Lagemaßen
-
 ```{r}
-#| fig-asp: 0.3
+#| fig-asp: 0.22
 
 p1 <- p_lageregeln(d_bsp_lageregeln, I)
 p2 <- p_lageregeln(d_bsp_lageregeln, II)
@@ -330,7 +327,7 @@ $i = 1, \dots, n$ den Zusammenhang
 
 $$
 B_n = \underbrace{\bar{x}_\mathrm{geom} \cdot \; \dots \; \cdot \bar{x}_\mathrm{geom}}_{n\text{-mal}} \cdot B_0
-= (\bar{x}_\mathrm{geom})^n B_0
+= \left(\bar{x}_\mathrm{geom}\right)^{n} B_0
 $$
 
 → Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ergibt sich derselbe Bestand $B_n$
@@ -366,11 +363,11 @@ Häufigkeit im Zähler steht. Beispiele sind die Geschwindigkeit (Weg/Zeit) oder
 > veröffentlichte Statistiken enthalten Rekorde in Serie – von tropischen Temperaturen bis hin zum nassesten August
 > seit Beginn der Aufzeichnungen 1881.
 
-. . .
+## Die Elbe in Dresden
 
-Die Elbe in Dresden am 12. Juli und am 16. August 2010
+![](../skript/00-bilder/sommer-2010.svg){fig-align="center" height="70%"}
 
-![](../skript/00-bilder/sommer-2010.svg){fig-align="center" height="40%"}
+12\. Juli und 16. August 2010
 
 ## Die Jahre 2008 und 2010 in Bochum
 
@@ -381,7 +378,8 @@ tab_monate(d_ns_bo_2008_2010_monat)
 ```
 
 ```{r}
-#| fig-asp: 0.3
+#| fig-asp: 0.22
+#| out-width: 60%
 
 ggplot(
   data = d_ns_bo_2008_2010_monat,
@@ -397,12 +395,8 @@ ggplot(
 ```
 
 Arithmetische Mittelwerte
-
-$$
-\bar{x}_{2008} = \frac{1}{12}(91.8 + 48.9 + \cdots + 43.9) = `r kg(d_streuung, "Mittelwert", 1)`\,\mathrm{mm}
-\qquad
-\bar{x}_{2010} = \frac{1}{12}(48.6 + 73.0 + \cdots + 84.8) = `r kg(d_streuung, "Mittelwert", 2)`\,\mathrm{mm}
-$$
+$\bar{x}_{2008} = `r kg(d_streuung, "Mittelwert", 1)`\,\mathrm{mm}$ und
+$\bar{x}_{2010} = `r kg(d_streuung, "Mittelwert", 2)`\,\mathrm{mm}$
 
 ## Streuungsmaß: Ein Maß für die Variabilität
 
@@ -420,7 +414,7 @@ Eigenschaften
 
 - Streuungsmaß gleich null $\iff$ alle Werte identisch
 - Wird mit zunehmender Variabilität der Werte größer
-- Negativer Wert ergibt keinen Sinn
+- Negative Werte ergeben keinen Sinn
 - Unabhängig vom Umfang der Stichprobe
 
 ## Spannweite
@@ -462,7 +456,7 @@ tab_monate(d_niederschlag_am)
 ```
 
 ```{r}
-#| fig-asp: 0.3
+#| fig-asp: 0.2
 
 ggplot(mapping = aes(x = Monat, y = Niederschlag, fill = Jahr, color = Jahr, group = Jahr)) +
   geom_hline(yintercept = 0) +
@@ -477,16 +471,13 @@ ggplot(mapping = aes(x = Monat, y = Niederschlag, fill = Jahr, color = Jahr, gro
   labs(x = NULL, y = NULL)
 ```
 
-Idee: Alle Werte in die Berechnung der Variabilität einbeziehen
-
-- Abweichungen $x_i - \bar{x}$ aller Werte vom arithmetischen Mittel
-- Streuungsmaße auf Basis des Medians sind nicht üblich
+→ Idee: Abweichungen $x_i - \bar{x}$ aller Werte einbeziehen (Streuungsmaße auf Basis des Medians sind unüblich)
 
 ## AD-Streuung
 
 []{.down20}
 
-Die mittlere Summe der Beträge der Abweichungen
+Der Mittelwert der Beträge der Abweichungen
 
 $$
 AD = \frac{1}{n} \left( |x_1 - \bar{x}| + \dots + |x_n - \bar{x}| \right) = \frac{1}{n} \cdot \sum_{i=1}^n |x_i - \bar{x}|
@@ -505,7 +496,7 @@ Aber
 
 ## Varianz und Standardabweichung
 
-Die mittlere Summe der quadrierten Abweichungen
+Der Mittelwert der quadrierten Abweichungen
 
 $$
 \tilde{s}^2 = \frac{1}{n} \left( (x_1 - \bar{x})^2 + \dots + (x_n - \bar{x})^2 \right)
@@ -524,7 +515,7 @@ wird [empirische Standardabweichung]{.neuerbegriff} genannt.
 
 []{.down20}
 
-- Die Einheit der Varianz $\tilde{s}^2$ stimmt durch das Quadrieren nicht mit der Einheit des Merkmals überein
+- Die Einheit der Varianz $\tilde{s}^2$ stimmt wegen des Quadrierens nicht mit der Einheit des Merkmals überein
 - Die Standardabweichung $\tilde{s}$ hat wieder die Einheit des Merkmals
 
 ## Niederschläge in Bochum
@@ -555,7 +546,9 @@ $$
 - Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in den Streuungsmaßen deutlich zum Ausdruck
 - Die Standardabweichung ist einfacher zu interpretieren, da sie im selben Wertebereich wie die Beobachtungen liegt
 
-## Variationskoeffizient und Stichprobenvarianz
+## Variationskoeffizient
+
+[]{.down20}
 
 Für ein Merkmal mit nichtnegativen Ausprägungen und $\bar{x} > 0$ heißt die dimensionslose Zahl
 
@@ -574,7 +567,7 @@ v_{2010} \approx \frac{`r kg(d_streuung, "Standardabweichung", 2)`}{`r kg(d_stre
 \approx `r kg(d_streuung, "Variationskoeffizient", 2)`
 $$
 
-. . .
+## Stichprobenvarianz
 
 []{.down20}
 
@@ -609,7 +602,7 @@ $$
 x <- pull(d_random_sample, X)
 ```
 
-Der Median teilt die Stichprobe in zwei gleich große Teile, hier 20 Werte
+Der Median teilt eine Stichprobe (hier mit 20 Werten) in zwei gleich große Teile
 
 ```{r}
 #| fig-asp: 0.12
@@ -618,10 +611,10 @@ p_stichprobe() |>
   p_stichprobe_marker(median(x), "x[med]")
 ```
 
-. . .
-
-Das $p$-Quantil $x_p$ teilt so, dass $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und $(1 - p) \cdot 100\%$
+Das $p$-Quantil $x_p$ teilt die Stichprobe so, dass $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und $(1 - p) \cdot 100\%$
 größer oder gleich $x_p$ sind
+
+## Beispiel: Lage von Quantilen
 
 | $p$ | kleiner gleich $x_p$  | größer gleich $x_p$         | Lage von $x_p$                     |
 |:---:|:---------------------:|:---------------------------:|:----------------------------------:|
@@ -670,7 +663,8 @@ Die empirische Verteilungsfunktion $F$ gibt zu $x$ den Anteil der Werte kleiner 
 → Zu vorgegebenem $p$ lässt sich das Quantil $x_p$ am Graphen von $F$ ablesen
 
 ```{r}
-#| fig-asp: 0.5
+#| fig-asp: 0.4
+#| out-width: 65%
 
 p <- c(0.05, 0.33, 0.75)
 xp <- quantile(pull(d_random_sample, "X"), p, type = 2)
@@ -692,7 +686,9 @@ p_stichprobe_raw() +
   labs(x = NULL, y = "F(x)")
 ```
 
-## Quartile und Fünf-Punkte-Zusammenfassung
+## Quartile
+
+[]{.down20}
 
 - Quartile: Quantilwerte mit eigenen Namen
   - 25%-Quantil $x_{0.25}$ heißt [unteres Quartil]{.neuerbegriff}
@@ -703,11 +699,19 @@ p_stichprobe_raw() +
   d_\mathrm{Q} = x_{0.75} - x_{0.25}
   $$
 
-- [Fünf-Punkte-Zusammenfassung]{.neuerbegriff}
-  $$
-  x_{\mathrm{min}}, \; x_{0.25}, \; x_\mathrm{med}, \; x_{0.75}, \; x_{\mathrm{max}}
-  $$
-  Aufteilung in vier Bereiche mit jeweils gleich vielen Werten
+## Fünf-Punkte-Zusammenfassung
+
+[]{.down20}
+
+Die [Fünf-Punkte-Zusammenfassung]{.neuerbegriff}
+
+$$
+x_{\mathrm{min}}, \; x_{0.25}, \; x_\mathrm{med}, \; x_{0.75}, \; x_{\mathrm{max}}
+$$
+
+teilt die Stichprobe in vier Bereiche mit jeweils gleich vielen Werten
+
+[]{.down20}
 
 ```{r}
 #| fig-asp: 0.12
@@ -718,12 +722,10 @@ p_fuenfpunkt_zusammenfassung(d_random_sample)
 ## Box-Plot
 
 ```{r}
-#| fig-asp: 0.3
+#| fig-asp: 0.2
 
 fig_boxplot()
 ```
-
-Fünf Schritte zum Box-Plot
 
 1. Ein Rechteck ([box]{.eng}) zwischen den Quartilen $x_{0.25}$ und $x_{0.75}$
 1. Ein Strich markiert den Median $x_\mathrm{med}$
@@ -731,7 +733,7 @@ Fünf Schritte zum Box-Plot
 1. Linien (die [whiskers]{.eng}) zur kleinsten und größten normalen Beobachtung
 1. Werte außerhalb der normalen Beobachtungen werden als Punkte eingezeichnet
 
-→ Manchmal auch: Modifizierter Box-Plot
+→ Diese Form heißt manchmal auch modifizierter Box-Plot
 
 ## Die Jahre 2008 und 2010 in Bochum
 
@@ -770,7 +772,7 @@ ggplot(data = d_ns_bo_2008_2010) +
 ## Niederschläge in Bochum und Nha Trang (Vietnam)
 
 ```{r}
-#| fig-asp: 0.35
+#| fig-asp: 0.25
 
 d_ns_bo_nt |>
   mutate(Ort = if_else(Ort == "Bochum", "Bochum 2008", "Nha Trang 2015")) |>
@@ -783,11 +785,9 @@ d_ns_bo_nt |>
   labs(fill = NULL, x = NULL, y = "Niederschlag in mm")
 ```
 
-Charakteristik der Niederschläge
-
 - Gesamt: Bochum `r sum(pull(d_ns_bo_2008_monat, Niederschlag))` mm und Nha Trang
   `r sum(pull(d_ns_nt_2015_monat, Niederschlag))` mm
-- In Nha Trang von Oktober bis Dezember, in Bochum über das Jahr verteilt
+- Niederschläge in Nha Trang vor allem von Oktober bis Dezember, in Bochum über das Jahr verteilt
 
 . . .
 
@@ -801,7 +801,8 @@ Merkmalsträger konzentrieren
 ## Gini-Koeffizient
 
 ```{r}
-#| fig-asp: 0.45
+#| fig-asp: 0.4
+#| out-width: 65%
 
 ggplot(data = d_bsp_gini) +
   geom_sf(mapping = aes(fill = gini / 100)) +
@@ -819,8 +820,6 @@ ggplot(data = d_bsp_gini) +
 
 Gini-Koeffizient der Einkommen (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))
 
-Hintergrund
-
 - M. O. Lorenz (1876 – 1959): Kurve, die die Konzentration einer Verteilung veranschaulicht
 - C. Gini (1884 – 1965): Koeffizient zur Ungleichverteilung von Einkommen in Volkswirtschaften
 
@@ -832,11 +831,12 @@ Datensatz mit den Merkmalen $A$, $B$ und $C$
 d_bsp_lorenzkurve |>
   transpose_df() |>
   rename(" " = name) |>
-  tt()
+  gt()
 ```
 
 ```{r}
-#| fig-asp: 0.4
+#| fig-asp: 0.33
+#| out-width: 70%
 
 p1 <- p_lorenzkurve(d_bsp_lorenzkurve, "A", mb = seq(0, 1, by = 0.05))
 p2 <- p_lorenzkurve(d_bsp_lorenzkurve, "B", mb = seq(0, 1, by = 0.05))
@@ -848,13 +848,7 @@ p1 + p2 + p3 + plot_layout(axes = "collect")
 ## Lorenzkurve
 
 Für die geordnete Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ist die [Lorenzkurve]{.neuerbegriff} der Polygonzug
-durch die Punkte
-
-$$
-(0, 0), (u_1, v_1), (u_2, v_2), \dots, (u_n, v_n)
-$$
-
-mit den Koordinaten
+durch die Punkte $(0, 0), (u_1, v_1), (u_2, v_2), \dots, (u_n, v_n)$ mit den Koordinaten
 
 $$
 u_j = \frac{1}{n} \cdot j
@@ -886,12 +880,10 @@ G & = \frac{\text{Fläche zwischen Diagonale und Lorenzkurve}}{\text{Fläche zwi
 \end{aligned}
 $$
 
-. . .
-
-Extremfälle
+## Extremfälle
 
 ```{r}
-#| fig-asp: 0.4
+#| fig-asp: 0.45
 #| out-width: 60%
 
 p1 <- p_lorenzkurve(d_bsp_gini_grenzfaelle, "A", "Alle Werte gleich")
@@ -914,7 +906,7 @@ Der maximale Gini-Koeffizient hängt von der Anzahl $n$ der Beobachtungen ab.
 
 []{.down20}
 
-Multipliziert mit dem Faktor $n / (n - 1)$ ergibt sich der [normierte Gini-Koeffizient]{.neuerbegriff}
+Die Multiplikation mit dem Faktor $n / (n - 1)$ ergibt den [normierten Gini-Koeffizienten]{.neuerbegriff}
 
 $$
 G^* = \frac{n}{n-1} G
@@ -933,12 +925,12 @@ d_ns_bo_nt |>
   ungroup() |>
   pivot_wider(names_from = Rang, values_from = Niederschlag) |>
   rename(" " = Ort) |>
-  tt()
+  gt()
 ```
 
 ```{r}
 #| fig-asp: 0.4
-#| out-width: 70%
+#| out-width: 55%
 
 p1 <- p_lorenzkurve(d_ns_bo_2008_monat, "Niederschlag", "Bochum, G* = 0.18")
 p2 <- p_lorenzkurve(d_ns_nt_2015_monat, "Niederschlag", "Nha Trang, G* = 0.79")
@@ -956,7 +948,7 @@ Zwei Gruppen von je zehn Personen mit dem angegebenen Betrag im Geldbeutel
 d_bsp_gini_reduktion |>
   transpose_df() |>
   rename(Gruppe = name) |>
-  tt()
+  gt()
 ```
 
 . . .
@@ -975,7 +967,9 @@ p2 <- p_lorenzkurve(d_bsp_gini_reduktion, "B", "Gruppe B") + sx + sy
 p1 + p2 + plot_layout(axes = "collect")
 ```
 
-. . .
+## Beispiel: Informationsverlust
+
+Normierte Gini-Koeffizienten elementargeometrisch bestimmt
 
 $$
 \begin{aligned}
@@ -987,3 +981,15 @@ $$
 + \frac{1}{2} \cdot \frac{1}{10} \cdot \left(\frac{1}{2} + 1 \right)\right)\right) = \frac{4}{9}
 \end{aligned}
 $$
+
+. . .
+
+[]{.down20}
+
+→ Zwei völlig unterschiedliche Verteilungen mit demselben Gini-Koeffizienten: Immer die gesamte Verteilung im
+Blick behalten
+
+## Literatur
+
+::: {#refs}
+:::

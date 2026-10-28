@@ -71,7 +71,7 @@ ggplot(data = data) +
 ```
 
 ::: {#exm-arithmetisches-mittel}
-## arithmetisches Mittel
+## Arithmetisches Mittel
 Wir betrachten einen Datensatz mit $n = 17$ Beobachtungen der zwei Merkmale $X$ und $Y$ mit den Werten
 
 ```{r}
@@ -116,7 +116,7 @@ Anhand der beiden oben festgehaltenen Eigenschaften des arithmetischen Mittels l
 Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabefehler handelt: Es wurden aus Versehen die nebeneinanderliegenden Tasten 2 und 1 anstatt nur der Taste 2 gedrückt. In diesem Fall verzerrt der einzelne falsche Wert den Mittelwert stark.
 :::
 
-**Ausreißer.** Der Wert $y_{13} = 21$ in Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genauso gut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
+**Ausreißer.** Der Wert $y_{13} = 21$ im Beispiel zum arithmetischen Mittel fällt aus dem Wertebereich der anderen Beobachtungen heraus. Man spricht bei einer solchen extremen Beobachtung von einem [Ausreißer]{.neuerbegriff}. Bei solchen Ausreißern kann es sich um wichtige Informationen handeln. Genauso gut können sie aber auch auf Grund von Übertragungsfehlern oder fehlerhaften Messungen vorkommen. Ob es sich bei einem Ausreißer um einen zwar extremen, aber doch richtigen Wert oder aber um eine fehlerhafte Größe handelt, ist im Einzelfall sorgfältig zu prüfen.
 
 ::: {#exm-ozonloch}
 ## Ozonloch
@@ -125,7 +125,7 @@ Für den Wert $y_{13} = 21$ könnte man vermuten, dass es sich um einen Eingabef
 Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
 :::
 
-**Empfindliche und robuste Lagemaße.** Das arithmetische Mittel ist ein Lagemaß, dass gegenüber Ausreißern sehr empfindlich ist: Einzelne fehlerhafte Werte können den Mittelwert stark verfälschen. Lagemaße hingegen, die wenig anfällig gegenüber Extremwerten sind, heißen [resistent]{.neuerbegriff} oder [robust]{.neuerbegriff}.
+**Empfindliche und robuste Lagemaße.** Das arithmetische Mittel ist ein Lagemaß, das gegenüber Ausreißern sehr empfindlich ist: Einzelne fehlerhafte Werte können den Mittelwert stark verfälschen. Lagemaße hingegen, die wenig anfällig gegenüber Extremwerten sind, heißen [resistent]{.neuerbegriff} oder [robust]{.neuerbegriff}.
 
 ### Median
 
@@ -141,7 +141,7 @@ gelten soll. Für eine ungerade Anzahl an Beobachtungen ist der Median $x_\mathr
 
 ::: {#def-median}
 ## Median
-Der Median $x_\mathrm{med}$ einer geordneten Urliste $x_{(i)} \dots x_{(n)}$ ist
+Der Median $x_\mathrm{med}$ einer geordneten Urliste $x_{(1)}, \dots, x_{(n)}$ ist
 $$
 x_\mathrm{med} =
 \begin{cases}
@@ -163,11 +163,11 @@ Darüber hinaus besitzt der Median $x_\mathrm{med}$ folgende Eigenschaften:
 
 An der ersten Eigenschaft ist nochmals zu erkennen, dass der Median im Vergleich zum arithmetischen Mittel ein resistentes Lagemaß darstellt: In die Summe der Beträge der Abweichungen geht ein extrem großer Wert wesentlich weniger stark ein als in die Summe der quadrierten Abweichungen — denn das Quadrieren verstärkt große Abweichungen überproportional.
 
-Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte Merkmale angegeben werden. Bei einer geraden Anzahl von Stichproben liegt der Median dann gegebenenfalls zwischen zwei Ausprägungen.
+Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte Merkmale angegeben werden. Bei einer geraden Anzahl von Beobachtungen liegt der Median dann gegebenenfalls zwischen zwei Ausprägungen.
 
 ::: {#exm-gueteklasse}
 ## Güteklasse
-Die Erhebung eines Merkmals "Güteklasse" ergibt
+Die Erhebung eines Merkmals „Güteklasse“ ergibt
 
 ```{r}
 d_bsp_median |>
@@ -188,7 +188,7 @@ Ein weiteres Lagemaß ist der Modus, der angibt, welche Ausprägung am häufigst
 
 ::: {#def-modus}
 ## Modus
-Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der Modus ist nur dann bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
+Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der Modus ist nur dann eindeutig bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
 :::
 
 Der Modus lässt sich für alle Arten von Merkmalen bestimmen, auch wenn es sich nur um eine nominalskalierte Größe handelt. In der Darstellung durch ein Stab- oder Säulendiagramm entspricht der Modus der Ausprägung mit dem höchsten Stab bzw. der höchsten Säule.
@@ -253,11 +253,11 @@ Außerdem halten wir fest, dass alle Verteilungen unimodal sind.
 
 Muss der im Beispiel beobachtete Zusammenhang zwischen Symmetrie und Steilheit und den Größen der Lagemaße immer gelten? Wir überlegen uns hierzu:
 
-- Für eine schiefe Verteilung zieht der "Hebelarm'' der flach auslaufenden kleineren Werte das arithmetische Mittel in die Richtung der Schiefe.
+- Für eine schiefe Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in die Richtung der Schiefe.
 
 - Es lässt sich zeigen, dass auf der steilen Seite des Modus weniger als die Hälfte der Werte angesiedelt sind. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel.
 
-- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetisches Mittel sowie der Median. Allerdings sind reale Verteilungen selten exakt symmetrisch, so dass wir nur die ungefähre Gleichheit der drei Lagemaße fordern können.
+- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetische Mittel sowie der Median. Allerdings sind reale Verteilungen selten exakt symmetrisch, so dass wir nur die ungefähre Gleichheit der drei Lagemaße fordern können.
 
 Wir halten also die folgenden Lageregeln fest.
 
@@ -301,8 +301,8 @@ d_reservoir_w |>
 
 Der Wachstumsfaktor $x_i$ ist das Verhältnis der Wasserstände an zwei aufeinanderfolgenden Tagen $i-1$ und $i$, also
 $$
-x_i = \frac{W_i}{W_{i-1}}
-$$,
+x_i = \frac{W_i}{W_{i-1}},
+$$
 wobei $i = 1, \dots, 6$ den Zeitraum zwischen zwei Tagen bezeichnet. In unserem konkreten Beispiel erhalten wir die Werte
 
 ```{r}
@@ -353,7 +353,7 @@ ggplot(data = d_reservoir_w, mapping = aes(x = Tag, y = Wasserstand)) +
   )
 ```
 
-Die Definition des Wachstumsfaktors stellen wir zu $W_i = x_i W_{j-i}$ um. Mit den Wachstumsfaktoren $x_i$ und dem Wasserstand $W_0 = 1$ können wir also den Verlauf des Wasserstandes für die betrachteten Tage folgendermaßen rekonstruieren:
+Die Definition des Wachstumsfaktors stellen wir zu $W_i = x_i W_{i-1}$ um. Mit den Wachstumsfaktoren $x_i$ und dem Wasserstand $W_0 = 1$ können wir also den Verlauf des Wasserstandes für die betrachteten Tage folgendermaßen rekonstruieren:
 $$
 \begin{aligned}
 W_1  
@@ -481,7 +481,7 @@ B_n
 = 
 (\bar{x}_\mathrm{geom})^n B_0.
 $$ 
-Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_\mathrm{geom}$ die adäquate Mittlung der Wachstumsfaktoren.
+Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ermittelt man also denselben Bestand $B_n$, der sich auch mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$ ergibt. In diesem Sinn ist $\bar{x}_\mathrm{geom}$ die adäquate Mittelung der Wachstumsfaktoren.
 
 ### Das harmonische Mittel
 
@@ -509,7 +509,7 @@ $$
 = 
 \SI{93.9}{km/h}.
 $$
-Verallgemeinerungsfähig wird das dann, wenn wir die Situation etwas anders formulieren: Es liegen für die Fahrstrecke $70$ Beobachtungen über die Geschwindigkeit vor, eine für jeden gefahrenen Kilometer. Dabei haben $10$ Beobachtungen einem Wert von $\SI{50}{km/h}$ und $60$ einem Wert von $\SI{110}{km/h}$. Damit entspricht die Durchschnittsgeschwindigkeit dem Bruch
+Verallgemeinerungsfähig wird das dann, wenn wir die Situation etwas anders formulieren: Es liegen für die Fahrstrecke $70$ Beobachtungen über die Geschwindigkeit vor, eine für jeden gefahrenen Kilometer. Dabei haben $10$ Beobachtungen einen Wert von $\SI{50}{km/h}$ und $60$ einen Wert von $\SI{110}{km/h}$. Damit entspricht die Durchschnittsgeschwindigkeit dem Bruch
 $$
 \bar{v} 
 = 
@@ -537,11 +537,11 @@ harmonisches Mittel.
 
 Mit den verschiedenen Lagemaßen lässt sich die ungefähre Lage der Werte auf dem Zahlenstrahl angeben. Allerdings können zwei sehr unterschiedliche Stichproben ein und dasselbe Lagemaß aufweisen. Wir überlegen uns nun, wie wir die Variabilität eines Merkmals messen können.
 
-Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist naheliegend zu erwarten, dass wir eine Variabilität von Null erhalten, wenn alle betrachteten Werte identisch sind. Demzufolge wächst die Zahl mit zunehmender Variabilität an, so dass eine negative Variabilität keinen Sinn ergibt. Darüber hinaus soll das Maß für die Variabilität nicht vom Umfang der Stichprobe abhängen. Das soll an einem Beispiel verdeutlicht werden
+Welche Eigenschaften soll nun ein solches Variabilitätsmaß haben? Es ist naheliegend zu erwarten, dass wir eine Variabilität von null erhalten, wenn alle betrachteten Werte identisch sind. Demzufolge wächst die Zahl mit zunehmender Variabilität an, so dass eine negative Variabilität keinen Sinn ergibt. Darüber hinaus soll das Maß für die Variabilität nicht vom Umfang der Stichprobe abhängen. Das soll an einem Beispiel verdeutlicht werden.
 
 ::: {#exm-niederschlaege-in-bochum-2008-und-2010}
 ## Niederschläge in Bochum 2008 und 2010
-Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken, einen Vergleich aus der Stadt Dresden zeigen die fogenden Bilder (Quelle: spiegel.de). Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts). 
+Im Jahr 2010 titelte der Spiegel ["So verrückt war dieser Sommer"](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html): Noch nie hat es seit Beginn der Aufzeichnungen 1881 im August so viel geregnet. Demgegenüber war es im Juli noch sehr trocken. Einen Vergleich aus der Stadt Dresden zeigen die folgenden Bilder (Quelle: spiegel.de). Die Elbe führt im Juli fast kein Wasser (links), nur um kurz darauf im August über die Ufer zu treten (rechts). 
 
 ![](00-bilder/sommer-2010.svg){fig-alt="Elbe mit sehr niedrigem Wasserstand und Elbe bei Hochwasser (Dresden)"}
 
@@ -561,8 +561,8 @@ d_ns_bo_2008_2010_monat |>
 
 ```{r}
 #| fig-alt: |
-# Monatliche Niederschläge in Bochum für die Jahre 2008 und 2012.
-# Die Mittelwerte unterscheiden sich nur geringfügig.
+#|  Monatliche Niederschläge in Bochum für die Jahre 2008 und 2010.
+#|  Die Mittelwerte unterscheiden sich nur geringfügig.
 
 ggplot(
   data = d_ns_bo_2008_2010_monat,
@@ -604,7 +604,7 @@ Mithilfe von Streuungsmaßen versucht man, die Variabilität in beobachteten Wer
 
 ### Spannweite
 
-Das einfachste Streuungsmaß ist die [Spannweite]{.neuerbegriff} $R$ eines Merkmals(englisch: [range]{.eng}), die angibt, wie weit der größte und der kleinste Wert auseinanderliegen:
+Das einfachste Streuungsmaß ist die [Spannweite]{.neuerbegriff} $R$ eines Merkmals (englisch: [range]{.eng}), die angibt, wie weit der größte und der kleinste Wert auseinanderliegen:
 
 $$
 R = \max x_i - \min x_i.
@@ -613,7 +613,7 @@ $$
 Die Spannweite ist zwar einfach zu berechnen, allerdings hat sie den Nachteil, dass sie allein von zwei Werten abhängt und daher kein robustes Maß darstellt.
 
 ::: {#exm-kenngroessen-8}
-Für die Niederschläge der Jahre 2008 und 2010 betragen die Spannweiten der monatlichen Mittelwerte
+Für die Niederschläge der Jahre 2008 und 2010 betragen die Spannweiten der monatlichen Niederschläge
 
 $$
 R_{2008} 
@@ -637,7 +637,7 @@ R_{2010}
 \SI{`r pluck(d_niederschlag_kenngroessen, "Spannweite", 2)`}{mm}.
 $$
 
-Wie es sein muss ergibt sich für die beiden Jahre ein deutlicher Unterschied.
+Wie erwartet ergibt sich für die beiden Jahre ein deutlicher Unterschied.
 :::
 
 
@@ -656,7 +656,7 @@ d_niederschlag_am |>
 
 ```{r}
 d_niederschlag_am |>
-  filter(Monat <= month(6, label = TRUE)) |>
+  filter(Monat >= month(7, label = TRUE)) |>
   tab_niederschlag()
 ```
 
@@ -686,7 +686,7 @@ ggplot(mapping = aes(x = Monat, y = Niederschlag, fill = Jahr, color = Jahr, gro
 ```
 :::
 
-Man könnte nun auf die Idee kommen, die Abweichungen $(x_i - \bar{x})$ einfach aufzuaddieren. Eine kurze Überschlagsrechung im Kopf zeigt jedoch für unser Beispiel, dass die Summen für beide Jahre nahe bei Null liegen. Dass sie sogar exakt null sein müssen, wird sofort klar, wenn man sich überlegt, was da eigentlich addiert wird:
+Man könnte nun auf die Idee kommen, die Abweichungen $(x_i - \bar{x})$ einfach aufzuaddieren. Eine kurze Überschlagsrechnung im Kopf zeigt jedoch für unser Beispiel, dass die Summen für beide Jahre nahe bei null liegen. Dass sie sogar exakt null sein müssen, wird sofort klar, wenn man sich überlegt, was da eigentlich addiert wird:
 
 $$
 \sum_{i=1}^n(x_i - \bar{x})
@@ -698,7 +698,7 @@ $$
 
 Die Summe der Abweichungen vom Mittelwert ist also keinesfalls ein geeignetes Maß für Variabilität.
 
-Das Problem der sich aufhebenden Summanden lässt sich natürlich dadurch umgehen, dass wir die Beträge der Abweichungen $x_i - \bar{x}$ addieren. Wir erhalten damit die AD-Streuung [average deviation]{.eng}
+Das Problem der sich aufhebenden Summanden lässt sich natürlich dadurch umgehen, dass wir die Beträge der Abweichungen $x_i - \bar{x}$ addieren. Wir erhalten damit die AD-Streuung (englisch: [average deviation]{.eng})
 
 $$
 AD 
@@ -710,7 +710,7 @@ $$
 
 mit den gewünschten Eigenschaften. Allerdings sind die Betragsstriche in der Handhabung umständlich, zum Beispiel wenn Ableitungen berechnet werden sollen (Fallunterscheidung!). Die AD-Streuung wird daher nur äußerst selten verwendet.
 
-Eine weitere Möglichkeit besteht darin, die Summanden $x_i - \bar{x}$ zu quadrieren um sicherzustellen, dass nur positive Zahlen aufsummiert werden. Dieser Gedanke führt uns auf die [empirische Varianz]{.neuerbegriff}
+Eine weitere Möglichkeit besteht darin, die Summanden $x_i - \bar{x}$ zu quadrieren, um sicherzustellen, dass nur positive Zahlen aufsummiert werden. Dieser Gedanke führt uns auf die [empirische Varianz]{.neuerbegriff}
 
 $$
 \tilde{s}^2
@@ -720,9 +720,9 @@ $$
 \frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2  \text{.}
 $$
 
-Die empirische Varianz ist also das arithmetische Mittel der quadrierten Abweichungen. Sie ist klein, wenn die Werte nahe des Mittelwerts angesiedelt sind. Infolge des Quadrierens hat $\tilde{s}^2$ nicht die gleiche Maßeinheit wie die Werte $x_i$.
+Die empirische Varianz ist also das arithmetische Mittel der quadrierten Abweichungen. Sie ist klein, wenn die Werte nahe am Mittelwert angesiedelt sind. Infolge des Quadrierens hat $\tilde{s}^2$ nicht die gleiche Maßeinheit wie die Werte $x_i$.
 
-Schließlich kann man aus der Summe der quadrierten Abweichungen noch die Wurzel ziehen. Der Wert
+Schließlich kann man aus der empirischen Varianz noch die Wurzel ziehen. Der Wert
 
 $$
 \tilde{s} = \sqrt{\tilde{s}^2} = \sqrt{\frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2}
@@ -751,10 +751,10 @@ sowie die Standardabweichungen
 $$
 \begin{aligned}
 \tilde{s}_{2008} & = \sqrt{453.17} = \SI{21.29}{mm} \\[1em]
-\tilde{s}_{2010} & = \sqrt{2000.32} = \SI{44.7}{mm}.
+\tilde{s}_{2010} & = \sqrt{2000.32} = \SI{44.72}{mm}.
 \end{aligned}
 $$
-Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in diesen Streuungsmaßen deutlich zum Ausdruck. Die Standardabweichung ist dabei einfacher zu interpretieren, da sie im selben Wertebereich wie die Beobachtungen selber liegen.
+Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in diesen Streuungsmaßen deutlich zum Ausdruck. Die Standardabweichung ist dabei einfacher zu interpretieren, da sie im selben Wertebereich wie die Beobachtungen liegt.
 :::
 
 In der schließenden Statistik wird die empirische Varianz in einer leicht veränderten Form verwendet: Man dividiert durch $n-1$ und erhält die [Stichprobenvarianz]{.neuerbegriff}
@@ -801,7 +801,7 @@ $$
 
 ## Quantile und Box-Plots
 
-Mit den Lage- und Variabilitätsmaßen haben wir nun die Möglichkeit, eine Verteilung mithilfe von zwei Zahlen zusammenzufassen. Eine umfassendere, aber immer noch sehr kompakte Charakterisierung von Verteilungen erhält man, wenn zusätzlich die so genannten Quartilwerte hinzugenommen werden. Man erhält mit diesen Werten die Basis für die sogenannte Fünf-Punkte-Zusammenfassung und den Box-Plot.
+Mit den Lage- und Variabilitätsmaßen haben wir nun die Möglichkeit, eine Verteilung mithilfe von zwei Zahlen zusammenzufassen. Eine umfassendere, aber immer noch sehr kompakte Charakterisierung von Verteilungen erhält man, wenn zusätzlich die sogenannten Quartilwerte hinzugenommen werden. Man erhält mit diesen Werten die Basis für die sogenannte Fünf-Punkte-Zusammenfassung und den Box-Plot.
 
 ### Quantile
 
@@ -895,7 +895,7 @@ p_stichprobe_raw() +
   labs(x = NULL, y = "F(x)")
 ```
 
-### Quartile und Fünf-Punkte-Zusammenhang {#sec-quantile-5punkt}
+### Quartile und Fünf-Punkte-Zusammenfassung {#sec-quantile-5punkt}
 
 Zwei bestimmte Quantilwerte werden immer wieder verwendet und haben daher eigene Namen:
 
@@ -911,7 +911,7 @@ heißt Interquartilsabstand. Zusammen mit den Extremwerten und dem Median erhalt
 $$
 x_{\mathrm{min}}, \; x_{0.25}, \; x_\mathrm{med}, \; x_{0.75}, \; x_{\mathrm{max}},
 $$
-mit der man die Verteilung in vier Bereiche aufteilt, die jeweils ein viertel Werte enthalten. Dabei werden Werte, die auf einem Quartilwert liegen, jeweils mitgezählt. Im Beispiel 
+mit der man die Verteilung in vier Bereiche aufteilt, die jeweils ein Viertel der Werte enthalten. Dabei werden Werte, die auf einem Quartilwert liegen, jeweils mitgezählt. Im Beispiel 
 
 ```{r}
 #| fig-asp: 0.15
@@ -923,7 +923,7 @@ sind in jedem Abschnitt fünf Werte enthalten.
 
 ### Box-Plot
 
-Mit einem Box-Plot wird die Fünf-Punkte-Zusammenfassung graphisch dargestellt. Dabei wird unterschieden, ob es sich bei den Beobachtungen um 'normale' Werte oder um vermutete Ausreißer handelt. Der Boxplot ist eine komprimierte Zusammenfassung, an dem man einfach ablesen kann, wo die Verteilung liegt, wie stark sie streut, ob sie schief oder symmetrisch ist und ob es in dem Datensatz Ausreißer gibt.
+Mit einem Box-Plot wird die Fünf-Punkte-Zusammenfassung graphisch dargestellt. Dabei wird unterschieden, ob es sich bei den Beobachtungen um „normale“ Werte oder um vermutete Ausreißer handelt. Der Boxplot ist eine komprimierte Zusammenfassung, an der man einfach ablesen kann, wo die Verteilung liegt, wie stark sie streut, ob sie schief oder symmetrisch ist und ob es in dem Datensatz Ausreißer gibt.
 
 ```{r}
 #| fig-asp: 0.3
@@ -1002,10 +1002,10 @@ ggplot(data = d_ns_bo_2008_2010) +
 
 ## Konzentrationsmaß: Der Gini-Koeffizient
 
-Für eine gegebene Stichprobe kann man sich neben der Lage und der Streuung auch noch danach fragen, in welchem Maß einzelne Werte zur Summe aller Werte beitragen. Wir betrachten das am Beispiel von Niederschlägen. 
+Für eine gegebene Stichprobe kann man sich neben der Lage und der Streuung auch noch fragen, in welchem Maß einzelne Werte zur Summe aller Werte beitragen. Wir betrachten das am Beispiel von Niederschlägen. 
 
 ::: {#exm-kenngroessen-13}
-In Abbildung unten sind die monatlichen Niederschläge des Jahres 2008 in Bochum und des Jahres 2010 in Nha Trang (Vietnam) zu sehen. Insgesamt sind in Bochum $\SI{869}{mm}$ und in Nha Trang $\SI{`r sum(pull(d_ns_nt_2015_monat, Niederschlag))`}{mm}$ Niederschläge gefallen. Allerdings konzentrieren sich die Niederschläge in Vietnam auf drei Monate, in allen anderen Monaten regnet es sogar weniger als in Bochum. Eine solche Konzentration von großen Beiträgen zu einer Gesamtsumme auf wenige Merkmalen wird mithilfe eines Konzentrationsmaßes quantifiziert.
+In der Abbildung unten sind die monatlichen Niederschläge des Jahres 2008 in Bochum und des Jahres 2015 in Nha Trang (Vietnam) zu sehen. Insgesamt sind in Bochum $\SI{869}{mm}$ und in Nha Trang $\SI{`r sum(pull(d_ns_nt_2015_monat, Niederschlag))`}{mm}$ Niederschläge gefallen. Allerdings konzentrieren sich die Niederschläge in Vietnam auf drei Monate, in allen anderen Monaten regnet es sogar weniger als in Bochum. Eine solche Konzentration von großen Beiträgen zu einer Gesamtsumme auf wenige Merkmalsträger wird mithilfe eines Konzentrationsmaßes quantifiziert.
 
 ```{r}
 #| fig-asp: 0.45
@@ -1026,8 +1026,8 @@ Das gebräuchlichste Konzentrationsmaß ist der Gini-Koeffizient, ein statistisc
 #| fig-asp: 0.5
 #| label: fig-gini-world
 #| fig-cap: |
-# Gini-Koeffizient der Einkommen
-# (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))
+#|  Gini-Koeffizient der Einkommen
+#|  (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))
 
 ggplot(data = d_bsp_gini) +
   geom_sf(mapping = aes(fill = gini / 100)) +
@@ -1070,7 +1070,7 @@ p1 + p2 + p3 + plot_layout(axes = "collect")
 ```
 :::
 
-Da die Beiträge sortiert sind, ist die Lorenzkurve wachsend. Dabei nimmt die Steigung der Liniensegmente nach rechts hin zu oder bleibt gleich. Sind alle Werte des Merkmals gleich groß, dann ist die Lorenzkurve die Winkelhalbierende zwischen den Koordinatenachsen. Je stärker sich die Werte unterscheiden, umso größer wird der "Bauch" der Kurve.
+Da die Beiträge sortiert sind, ist die Lorenzkurve wachsend. Dabei nimmt die Steigung der Liniensegmente nach rechts hin zu oder bleibt gleich. Sind alle Werte des Merkmals gleich groß, dann ist die Lorenzkurve die Winkelhalbierende zwischen den Koordinatenachsen. Je stärker sich die Werte unterscheiden, umso größer wird der „Bauch“ der Kurve.
 
 Aus dem Beispiel oben können wir die Rechenvorschrift für die Punkte der Lorenzkurve ableiten und in der folgenden Definition festhalten.
 
@@ -1084,7 +1084,7 @@ mit den Koordinaten
 $$
 u_j = \frac{1}{n} \cdot j
 \quad \text{und} \quad
-v_j = \frac{1}{s} \cdot \sum_{i=1}^j x_i
+v_j = \frac{1}{s} \cdot \sum_{i=1}^j x_{(i)}
 \quad \text{wobei} \quad
 s = \sum_{i=1}^n x_i \text{.}
 $$
@@ -1116,8 +1116,8 @@ die beiden Lorenzkurven
 ```{r}
 #| fig-asp: 0.55
 #| fig-alt: |
-# Lorenzkurven für die Niederschläge in Bochum und Nha Trang. Der Bauch der Kurve ist für
-# Nha Trang deutlich größer als für Bochum.
+#|  Lorenzkurven für die Niederschläge in Bochum und Nha Trang. Der Bauch der Kurve ist für
+#|  Nha Trang deutlich größer als für Bochum.
 
 p1 <- p_lorenzkurve(d_ns_bo_2008_monat, "Niederschlag", "Bochum")
 p2 <- p_lorenzkurve(d_ns_nt_2015_monat, "Niederschlag", "Nha Trang")
@@ -1151,8 +1151,9 @@ Für den Gini-Koeffizienten gibt es zwei Extremfälle:
 
 ```{r}
 #| fig-asp: 0.55
-#fig-alt: "Grenzfälle für den Gini-Koeffizienten:
-#          Links sind alle Werte gleich, rechts nur ein Wert ungleich null."
+#| fig-alt: |
+#|  Grenzfälle für den Gini-Koeffizienten:
+#|  Links sind alle Werte gleich, rechts nur ein Wert ungleich null.
 
 p1 <- p_lorenzkurve(d_bsp_gini_grenzfaelle, "A", "")
 p2 <- p_lorenzkurve(d_bsp_gini_grenzfaelle, "B", "")
@@ -1270,7 +1271,7 @@ G^*
 = 
 \frac{4}{9}
 $$
-und stellen fest, dass sich jeweils derselbe Wert ergibt. Wenn man sich die beiden Lorenz-Kurven genauer anschaut ist dieses Ergebnis nicht überraschend: Die jeweils andere Kurve ergibt sich aus einer Spiegelung an der Geraden $1 - x$. Somit ist die eingeschlossene Fläche natürlich gleich.
+und stellen fest, dass sich jeweils derselbe Wert ergibt. Wenn man sich die beiden Lorenzkurven genauer anschaut, ist dieses Ergebnis nicht überraschend: Die jeweils andere Kurve ergibt sich aus einer Spiegelung an der Geraden $v = 1 - u$. Somit ist die eingeschlossene Fläche natürlich gleich.
 
 Auch dieses Beispiel macht nochmal deutlich, dass es wichtig ist, stets die gesamte Verteilung im Blick zu behalten und sich nicht ausschließlich auf einzelne Kenngrößen zu verlassen.
 :::

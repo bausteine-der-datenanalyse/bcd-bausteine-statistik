@@ -36,3 +36,8 @@ Offene Punkte zu den Modulen (Skript, Aufgaben, Folien). Hintergrund und Details
   Aussehen. Vorher die Extension in `_extensions/matthiasbaitsch/tinh-notes` aktualisieren. Die meisten in
   `m-kenngroessen` (17) und `m-zufallsvariablen` (6). Tabellen in Beispielen haben im PDF keine untere Linie
   (longtable in einer Box), vermutlich auch mit `#exm-`.
+- [ ] Kapitel 1 (`m-statistische-daten`): Tidy-Data-Tabellen wieder mit `gt` statt `tinytable` (Commit `9bd1ca4`
+  zurücknehmen). `tab_tidydata()` in `01-daten/statistische-daten.R` wieder auf `gt(d) |> tab_options(...)`, im
+  Skript (Lösung 4) `group_tt()` wieder durch `tab_spanner()` ersetzen. Wirkt auch auf die Folien. `gt` sieht in den
+  Typst-Folien besser aus und ist kleiner (siehe `m-kenngroessen/folien`). Danach Folien rendern und prüfen, ob
+  `tab_spanner` in Typst sauber aussieht.
