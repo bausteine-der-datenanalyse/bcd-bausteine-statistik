@@ -78,6 +78,11 @@ $selection-bg: #26351c !default;
 .reveal {
   font-weight: lighter;
 
+  // Abschnittsfolien blau wie bei typst
+  h1 {
+    color: $accent;
+  }
+
   h2 {
     font-size: 1.4em;
   }
@@ -89,6 +94,17 @@ $selection-bg: #26351c !default;
 
   .slides section.smaller h3 {
     font-size: 1.3em;
+  }
+
+  // Abgesetzte Formeln linksbündig, 1em eingerückt (wie bei typst)
+  mjx-container[display="true"] {
+    text-align: left !important;
+    margin-left: 1em !important;
+  }
+
+  // Formeln grau, damit sie neben Roboto Light weniger fett wirken
+  mjx-container {
+    color: #444;
   }
 
   dl dt {
@@ -106,7 +122,7 @@ $selection-bg: #26351c !default;
 .reveal {
   pre {
     font-weight: lighter !important;
-    font-size: 0.825em !important;
+    font-size: 0.75em !important;
   }
 
   code {
@@ -173,6 +189,22 @@ $selection-bg: #26351c !default;
 
   div.objective p {
     margin: 0 !important;
+  }
+
+  // Definition (::: {#def-...}) im Kasten wie bei tinh-notes
+  div.definition {
+    background-color: WhiteSmoke;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 5pt;
+  }
+
+  div.definition > :first-child {
+    margin-top: 0 !important;
+  }
+
+  div.definition > :last-child {
+    margin-bottom: 0 !important;
   }
 }
 
@@ -245,10 +277,12 @@ $selection-bg: #26351c !default;
       margin-top: 0.2em !important;
     }
 
-    // 0: übereinanderliegende Fragments, Spalten nebeneinander, Dateiname über Code
+    // 0: übereinanderliegende Fragments, Spalten nebeneinander, Dateiname über Code,
+    // Innenleben von HTML-Widgets (z.B. interaktive gt-Tabellen aus divs)
     .r-stack>*,
     .columns>*,
-    .code-with-filename>* {
+    .code-with-filename>*,
+    .html-widget * {
       margin-top: 0 !important;
     }
   }
@@ -376,6 +410,15 @@ $selection-bg: #26351c !default;
   .slide-chalkboard-buttons>* {
     pointer-events: auto;
   }
+
+  // Mit Logo (unten rechts) setzt Quarto die Seitenzahl oben rechts, dort liegt aber das Menü.
+  // !important, weil Quartos footer.css nach dem Theme kommt
+  &.has-logo .slide-number {
+    top: initial !important;
+    right: initial !important;
+    bottom: 10px !important;
+    left: 10px !important;
+  }
 }
 
 // Hilfsklassen (ohne .reveal)
@@ -384,6 +427,11 @@ $selection-bg: #26351c !default;
 .neuerbegriff {
   color: $accent2;
   font-weight: 400;
+}
+
+// Englischer Begriff, z. B. [range]{.eng}
+.eng {
+  font-style: italic;
 }
 
 .alert {
@@ -494,4 +542,8 @@ $selection-bg: #26351c !default;
     display: block;
     margin-top: #{$n}px;
   }
+}
+
+#title-slide .quarto-title-author-name {
+  font-size: 0.8em;
 }

@@ -2,7 +2,11 @@
 .neuerbegriff { 
     color: rgba(177, 52, 52); 
     font-weight: bolder;
-} 
+}
+
+.eng {
+    font-style: italic;
+}
 
 .ja::before {
     content: "✓";
@@ -14,7 +18,7 @@
     color: red;
 }
 	
-.beispiel {
+.example {
   border-left: 5px solid;
   border-color: darksalmon;
   padding-left: 8px;
