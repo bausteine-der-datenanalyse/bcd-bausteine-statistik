@@ -57,6 +57,7 @@ Die Grundidee bei der Berechnung von Versagenswahrscheinlichkeiten besteht darin
 
 ::: {#exm-zugstab}
 ## Zugstab
+
 Wir betrachten einen Zugstab aus Baustahl S235 der Fläche $A = 100\,\mathrm{mm^2}$, an dem eine Kraft $F = 21000\,\mathrm{N}$ angreift.
 
 ![](00-bilder/zugstab.svg){width=50%}
@@ -145,6 +146,7 @@ Der große Vorteil dieser Methode ist, dass sie für alle Aufgabenstellungen fun
 
 ::: {#exm-fortsetzung-zugstab}
 ## Fortsetzung Zugstab
+
 Im Beispiel des Zugstabes können wir das einfach in R umsetzen, da für die Analyse des Tragwerks keine aufwändige Berechnung notwendig ist. Die Realisierungen des Tragsystems lassen sich mit folgender Anweisung erzeugen:
 
 ```{r}

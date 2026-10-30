@@ -17,6 +17,7 @@ Dichtekurven sind eine Alternative zu Histogrammen für die Darstellung einzelne
 
 ::: {#exm-geschwindigkeitsmessung}
 ## Geschwindigkeitsmessung
+
 In einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum wurden innerhalb von zwei Tagen die Geschwindigkeiten von `r nrow(d_unistrasse)` Fahrzeugen gemessen. 
 
 ```{r}
@@ -51,6 +52,7 @@ Diese Eigenschaften werden auf die Dichtekurve übertragen und es ergibt sich di
 
 ::: {#def-dichtekurve}
 ## Dichtekurve
+
 Eine stetige Funktion $f : \mathbb{R} \to \mathbb{R}$ heißt Dichtekurve, wenn für alle $x \in \mathbb{R}$ gilt, dass $f(x) \ge 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Die zweite Bedingung können wir mithilfe eines Integrals in der Form
 $$
 \int_{-\infty}^{\infty} f(x)\, dx = 1
@@ -125,6 +127,7 @@ Definiert ist die Dichtekurve der Normalverteilung mithilfe der Exponentialfunkt
 
 ::: {#def-dichtekurve}
 ## Dichtekurven von Normalverteilungen
+
 Für $\mu, \sigma \in \mathbb{R}$ und $\sigma > 0$ ist die Dichte der Normalverteilung durch 
 $$
 f(x) 
@@ -195,6 +198,7 @@ sigma <- sd(v)
 
 ::: {#exm-geschwindigkeitsmessung-fortsetzung}
 ## Geschwindigkeitsmessung (Fortsetzung)
+
 Für die Geschwindigkeitsmessung auf Universitätsstraße erhalten wir die Kenngrößen 
 $$
 \bar{x} = \SI{`r round(mu, 2)`}{km/h}
@@ -308,6 +312,7 @@ p1 / p2
 
 ::: {#exm-geschwindigkeitsmessung-fortsetzung-2}
 ## Geschwindigkeitsmessung (Fortsetzung)
+
 Für die Geschwindigkeitsmessung an der Universitätsstraße stellt die Normalverteilung nur eine unzureichende Approximation der wirklichen Verteilung dar. Das sieht man auch an dem NQ-Plot in @fig-unistrasse-nq.
 :::
 
@@ -406,6 +411,7 @@ Damit können wir den sogenannten Kerndichteschätzer definieren.
 
 ::: {#def-kerndichteschaetzer}
 ## Kerndichteschätzer
+
 Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ und gegebenen
 Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
 $$

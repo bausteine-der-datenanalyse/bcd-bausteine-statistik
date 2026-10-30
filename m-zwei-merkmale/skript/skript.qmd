@@ -16,6 +16,7 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 
 ::: {#exm-prognose-des-sachverstaendigenrats}
 ## Prognose des Sachverständigenrats
+
 Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
@@ -303,6 +304,7 @@ Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kaus
 
 ::: {#exm-scheinkorrelation}
 ## Scheinkorrelation
+
 In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
 
 ```{r}
@@ -473,6 +475,7 @@ minimiert die Summe der Fehlerquadrate.
 
 ::: {#exm-pisa-studie}
 ## PISA-Studie
+
 Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
 $$
   \bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0

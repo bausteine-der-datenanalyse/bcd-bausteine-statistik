@@ -673,6 +673,7 @@ Radius beim Dartspiel: empirisch (oben, Histogramm und Verteilungsfunktion) und 
 
 ::: {#exm-pegel-hofkirchen}
 ## Pegel Hofkirchen
+
 Eine übliche Klassifikation von Hochwasserereignissen erfolgt anhand der sogenannten Jährlichkeit. So bezeichnet zum Beispiel die Durchflussmenge $\mathrm{HQ}_{10}$ einen Wert des Abflusses, der im Mittel in zehn Jahren einmal überschritten wird. Der Kehrwert dieser so genannten Jährlichkeit ist die Überschreitungswahrscheinlichkeit. Für das Zehn-Jahres-Hochwasser erhalten wir $p_{10} = 1/10 = 0.1$.
 
 Für den Pegel Hofkirchen an der Donau gibt der Niedrigwasser-Informationsdienst Bayern den Wert $\mathrm{HQ}_{10} = 2700\,\mathrm{m^3/s}$ an. Wenn wir nun mit $\omega = (Q_1, Q_2, \dots, Q_{365})$ die Abflusswerte eines Jahres bezeichnen, dann ist die Funktion $X : \mathbb{R}^{365} \to \mathbb{R}$ mit
@@ -737,6 +738,7 @@ Erwartungswert und Varianz lassen sich leicht bestimmen (Übungsaufgabe).
 
 ::: {#exm-fortsetzung-pegel-hofkirchen}
 ## Fortsetzung Pegel Hofkirchen
+
 In der Darstellung der jährlichen Maximalwerte ist aufgefallen, dass in drei Fällen innerhalb von fünf Jahren der Durchfluss $\mathrm{HQ}_{10}$ zweimal überschritten wurde. Wie wahrscheinlich ist das? Wir betrachten also das Ereignis $B$, dass in fünf willkürlich herausgegriffenen aufeinanderfolgenden Jahren in zwei Jahren der Abfluss $\mathrm{HQ}_{10}$ überschritten wird.
 
 Hierzu definieren wir einen neuen Zufallsvorgang: Es werden in fünf aufeinanderfolgenden Jahren die Abflusswerte betrachtet. In jedem Jahr wird entweder der Abfluss $\mathrm{HQ}_{10}$ überschritten (bezeichnet mit $A$) oder nicht (bezeichnet mit $\bar{A}$). Ein Ergebnis mit zwei Überschreitungsjahren ist dann beispielsweise $\omega = (AA\bar{A}\bar{A}\bar{A})$. Wir wollen nun annehmen, dass Hochwasserereignisse in zwei aufeinanderfolgenden Jahren nicht korreliert sind. Dann ist die Wahrscheinlichkeit gleich dem Produkt der Einzelwahrscheinlichkeiten und es gilt
@@ -1002,6 +1004,7 @@ Wichtig: In R wird die Standardabweichung $\sigma$ und nicht die Varianz $\sigma
 
 ::: {#exm-geschwindigkeitsmessung-2}
 ## Geschwindigkeitsmessung
+
 Eine Geschwindigkeitsmessung ergab eine mittlere Geschwindigkeit von $\bar{x} = 80\,\mathrm{km/h}$ mit einer empirischen Standardabweichung von $\tilde s = 10\,\mathrm{km/h}$. Die empirische Häufigkeitsverteilung legt nahe, dass die Daten annähernd normalverteilt sind. Damit ist die Geschwindigkeit eine Zufallsvariable $X \sim N(\mu = 80, \sigma^2 = 100)$. Das Beispiel ist aus @herz entnommen.
 
 Wir stellen uns nun die folgenden Fragen:
@@ -1078,6 +1081,7 @@ Wir stellen uns nun die folgenden Fragen:
 
 ::: {#exm-mittelwerte-gleichverteilter-werte}
 ## Mittelwerte gleichverteilter Werte
+
 Wir betrachten einen Datensatz mit 5000000 Werten, die zwischen $-1$ und $1$ gleichverteilt sind. Daraus wird ein neuer Datensatz erzeugt, indem jeweils aus $n$ Werten der Stichprobe der Mittelwert gebildet wird. Die drei Abbildungen zeigen die Histogramme der auf diese Art erzeugten Daten für $n = 2$, $n = 3$ und $n = 10$.
 
 ```{r}
@@ -1414,6 +1418,7 @@ Jede Funktion $f$, die auf ganz $\mathbb{R}$ definiert ist, keine negativen Wert
 
 ::: {#exm-imperfektionen-von-walztraegern}
 ## Imperfektionen von Walzträgern
+
 Träger aus Walzprofilen werden nie exakt gerade gefertigt, es ist immer mit Imperfektionen zu rechnen. Eine Firma, die Walzprofile herstellt, garantiert für Träger einer Länge $l$ eine maximale Abweichung $d$ von der ideal geraden Geometrie. Dabei sind große Werte der Abweichung weniger wahrscheinlich als kleine Werte.
 
 Wenn wir die Abweichung als Zufallsvariable auffassen, dann muss dementsprechend die Wahrscheinlichkeitsdichte für $x < -d$ und $x > d$ null sein und für $x = 0$ ihr Maximum annehmen. Denkbar ist also eine nach unten geöffnete Parabel für die Dichtefunktion.
@@ -1502,6 +1507,7 @@ $$
 
 ::: {#exm-zufallsvariablen-6}
 ## $Z = X + X$
+
 Für eine Zufallsvariable $X$ definieren wir $Z = X + X = 2X$. Wir können also den Erwartungswert sowohl mit der Formel für die lineare Transformation als auch mit der Rechenregel für die Addition ermitteln. Wir erhalten
 $$
 \operatorname{E}(Z) = 2 \operatorname{E}(X)

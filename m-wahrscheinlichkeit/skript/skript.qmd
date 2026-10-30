@@ -59,6 +59,7 @@ für jedes Elementarereignis $\{\omega_i\}, \; i = 1, \dots, N$.
 
 ::: {#exm-maexchen-2}
 ## Mäxchen
+
 Beim Mäxchen liegt $(5,5)$ auf dem Tisch und wir hoffen, dass bei unserem Wurf das Ereignis
 $$
 \{(6,6), (1,2), (2,1)\}
@@ -97,6 +98,7 @@ gilt und wir daher mit der Laplace-Wahrscheinlichkeit nicht weiterkommen. Dabei 
 
 ::: {#exm-reisszwecken-2}
 ## Reißzwecken
+
 Wie kann man nun die Wahrscheinlichkeit dafür bestimmen, dass eine Reißzwecke mit der Spitze auf dem Boden landet (und somit keine Gefahr für die Füße darstellt)?
 
 Zunächst werten wir das Experiment aus und erhalten die Sequenz
@@ -246,6 +248,7 @@ Aus den Axiomen von Kolmogoroff lassen sich die folgenden Rechenregeln ableiten.
 
 ::: {#exm-gluecksrad}
 ## Glücksrad
+
 Ein faires Glücksrad ist in vier Felder unterteilt, die mit den Zahlen 1–4 bezeichnet sind. Damit ist $\Omega = \{1, 2, 3, 4\}$ die Ergebnismenge des Zufallsexperiments. Für die Ereignismenge setzen wir die Potenzmenge von $\Omega$ ein, so dass
 $$
 \mathcal{A} = \mathcal{P}(\Omega) = \{\varnothing, \{1\}, \{2\}, \{3\}, \{1, 2\}, \dots, \{1, 2, 3, 4\}\} \quad \text{mit} \quad |\mathcal{A}| = 2^4 = 16
