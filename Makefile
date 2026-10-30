@@ -22,3 +22,6 @@ pdf:
 
 render: html pdf
 
+update-extension:
+	quarto update matthiasbaitsch/quarto-tinh --no-prompt
+
