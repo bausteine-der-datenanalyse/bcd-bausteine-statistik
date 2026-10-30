@@ -41,3 +41,5 @@ Offene Punkte zu den Modulen (Skript, Aufgaben, Folien). Hintergrund und Details
   Skript (Lösung 4) `group_tt()` wieder durch `tab_spanner()` ersetzen. Wirkt auch auf die Folien. `gt` sieht in den
   Typst-Folien besser aus und ist kleiner (siehe `m-kenngroessen/folien`). Danach Folien rendern und prüfen, ob
   `tab_spanner` in Typst sauber aussieht.
+- [ ] Kapitel 3 (`m-kenngroessen`): Im Skript am Anfang von „Lagemaße“ erklären, was ein Lagemaß ist und welche
+  Eigenschaften es hat, wie auf der Folie „Lagemaß: Ein Maß für das Zentrum“ (analog zu den Streuungsmaßen).

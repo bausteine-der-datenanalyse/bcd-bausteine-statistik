@@ -20,13 +20,15 @@ d_streuung <- d_ns_bo_2008_2010_monat |>
     Stichprobenvarianz = var(Niederschlag)
   )
 
-kg <- function(d, v, i, digits = 2) format(round(pluck(d, v, i), digits), nsmall = digits)
+kg <- function(d, v, i, digits = 2) {
+  format(round(pluck(d, v, i), digits), nsmall = digits)
+}
 
 tab_monate <- function(d) {
   d |>
     mutate(Niederschlag = round(Niederschlag, 2)) |>
     pivot_wider(names_from = Monat, values_from = Niederschlag) |>
-    gt()
+    tt()
 }
 ```
 
@@ -44,389 +46,391 @@ tab_monate <- function(d) {
 
 # Lagemaße
 
+## Lagemaß: Ein Maß für das Zentrum
+
+[]{.down20}
+
+### Was ist ein Lagemaß?
+
+Maßzahl, die das Zentrum einer Verteilung beschreibt
+
+. . .
+
+[]{.down20}
+
+### Eigenschaften
+
+- Liegt zwischen dem kleinsten und dem größten Wert
+
+- Sind alle Werte gleich, ist das Lagemaß gleich diesem Wert
+
+- Hat dieselbe Einheit wie die Werte
+
 ## Arithmetisches Mittel
 
+[]{.down40}
+
+::: {#def-arithmetisches-mittel}
 Für die $n$ Zahlen $x_1, x_2, \dots, x_n$ wird der Wert
-
 $$
-\bar{x} = \frac{1}{n}\left(x_1 + x_2 + \dots + x_n\right) = \frac{1}{n} \sum_{j=1}^n x_j
+\bar{x} = \frac{1}{n}\left(x_1 + x_2 + \dots + x_n\right) = \frac{1}{n} \sum_{i=1}^n x_i
 $$
-
 [arithmetisches Mittel]{.neuerbegriff} oder kurz [Mittelwert]{.neuerbegriff} genannt.
+:::
+
+. . .
+
+[]{.down20}
+
+::: {#exm-arithmetisches-mittel}
+## Arithmetisches Mittel
+
+Für die Zahlen $x_1 = 2$, $x_2 = 3$, $x_3 = 7$ ist $\bar{x} = \frac{1}{3}(2 + 3 + 7) = 4$
+:::
 
 ## Eigenschaften des arithmetischen Mittels
 
-1. Der Wert $\bar{x}$ minimiert die Summe der quadrierten Abstände:
-   $$
-   \bar{x} = \underset{a}{\operatorname{argmin}} \sum_{j=1}^n (x_j - a)^2
-   $$
+[]{.down30}
 
-1. Hängt man für jeden Wert $x_j$ eine Kugel an der Stelle $x_j$ an eine gewichtslose Stange, dann ist $\bar{x}$ der
-   Schwerpunkt der Kugeln.
-
-```{r}
-#| fig-asp: 0.15
-#| out-width: 60%
-
-bar_y <- 0.3
-ticklength <- 0.1
-positions <- c(1, 2, 2, 2, 3, 4, 6, 8, 17)
-threads <- tibble(X = unique(positions), Y = c(0, -1.5, 0, 0, 0, 0, 0))
-
-ggplot(data = tibble(X = positions)) +
-  geom_hline(yintercept = bar_y, linewidth = 1) +
-  geom_segment(
-    data = threads,
-    mapping = aes(x = X, xend = X, y = bar_y + ticklength, yend = Y),
-    linewidth = 0.35
-  ) +
-  geom_dotplot(
-    mapping = aes(x = X),
-    method = "histodot",
-    dotsize = 0.75,
-    binwidth = 1,
-    stackdir = "down",
-    stackratio = 1.25
-  ) +
-  annotate("point", x = mean(positions), y = bar_y - 0.15, size = 4) +
-  ylim(-2, 0.75) +
-  theme_void()
-```
-
-## Beispiel: Ein einzelner Wert
-
-Datensatz mit den Merkmalen $X$ und $Y$
-
-```{r}
-d_bsp_mittelwert |>
-  transpose_df() |>
-  rename(" " = name) |>
-  gt()
-```
+1. Der Wert $\bar{x}$ minimiert die Summe der quadrierten Abstände
+   ```{=typst}
+   $ macron(x) = op("argmin", limits: #true)_a sum_(i=1)^n (x_i - a)^2 $
+   ```
 
 . . .
 
+1. An eine gewichtslose Stange wird für jeden Wert $x_i$ eine Kugel gehängt. Wenn die Stange bei $\bar{x}$ gelagert wird, ist das System im statischen Gleichgewicht.
+
 ```{r}
-#| fig-asp: 0.3
-#| out-width: 65%
+#| fig-asp: 0.2
+p_mittelwert_schwerpunkt()
+```
 
-mtitle <- function(l) {
-  annotate(geom = "text", label = l, x = 21, y = 1, hjust = "right", vjust = "top")
-}
+## 
 
-p1 <- p_mittelwert(d_bsp_mittelwert, X) + mtitle("Merkmal X, Mittelwert 2.588…")
-p2 <- p_mittelwert(d_bsp_mittelwert, Y) + mtitle("Merkmal Y, Mittelwert 3.705…")
+[]{.up40}
 
+::: {#exm-arithmetisches-mittel-einzelner-wert}
+## Änderung eines einzelnen Werts
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.525
+p1 <- p_mittelwert(d_bsp_mittelwert, X)
+p2 <- p_mittelwert(d_bsp_mittelwert, Y)
 p1 / p2 + plot_layout(axes = "collect")
 ```
 
-. . .
+[]{.up20}
 
-→ Das arithmetische Mittel wird durch den einzelnen Wert $y_{13} = 21$ stark beeinflusst
-
-## Ausreißer
-
-[]{.down20}
-
-- Der Wert $y_{13} = 21$ fällt aus dem Wertebereich der anderen Beobachtungen heraus
-- Eine solche extreme Beobachtung heißt [Ausreißer]{.neuerbegriff}
-- Kann eine wichtige Information sein, aber auch ein Übertragungs- oder Messfehler
-- Ob ein Ausreißer ein extremer, aber richtiger Wert oder ein Fehler ist, muss im Einzelfall sorgfältig geprüft
-  werden
-
-## Empfindliche und robuste Lagemaße
-
-[]{.down20}
-
-- Das arithmetische Mittel ist gegenüber Ausreißern sehr empfindlich: Einzelne fehlerhafte Werte können den
-  Mittelwert stark verfälschen
-- Lagemaße, die wenig anfällig gegenüber Extremwerten sind, heißen [resistent]{.neuerbegriff} oder
-  [robust]{.neuerbegriff}
-
-## Die Entdeckung des Ozonlochs
-
-::: {layout-ncol="2"}
-![](../skript/00-bilder/nimbus7-satellit.jpg){height="60%"}
-
-![](../skript/00-bilder/nimbus7-ozon.jpg){height="60%"}
+→ Arithmetisches Mittel durch einen einzelnen Wert stark beeinflusst
 :::
 
+## Ausreißer und Robustheit
+
+[]{.down10}
+
+### Ausreißer
+
+- Der einzelne Wert fällt aus dem Wertebereich der anderen Beobachtungen heraus
+- Eine solche extreme Beobachtung heißt [Ausreißer]{.neuerbegriff}
+- Kann eine wichtige Information sein, aber auch ein Übertragungs- oder Messfehler
+- Ob ein Ausreißer ein extremer, aber richtiger Wert oder ein Fehler ist, muss im Einzelfall sorgfältig geprüft werden
+
+. . .
+
+[]{.down10}
+
+### Empfindliche und robuste Lagemaße
+
+- Das arithmetische Mittel ist gegenüber Ausreißern sehr empfindlich. Einzelne fehlerhafte Werte können den Mittelwert stark verfälschen
+- Gegenüber Extremwerten wenig anfällige Lagemaße heißen [resistent]{.neuerbegriff} oder [robust]{.neuerbegriff}
+
 ## Die Entdeckung des Ozonlochs
 
-[]{.down20}
-
-Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Bei
-der automatischen Auswertung wurden diese Werte als Messfehler ausgesondert. Erst 1984 belegten Forschungsstationen
-das Ozonloch durch Beobachtungen. Eine Neuauswertung der Satellitendaten zeigte dann das gesamte Ausmaß.
-[@ludwig2006]
-
-. . .
-
-Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990].
-
-## Robustes Lagemaß: Der Median
-
-Urliste $x_1, x_2, \dots, x_n$ zur [geordneten Urliste]{.neuerbegriff} $x_{(1)}, x_{(2)}, \dots, x_{(n)}$
-umsortieren, so dass
-
-$$
-x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(i)} \leq \dots \leq x_{(n)}
-$$
-
-Der [Median]{.neuerbegriff} ist
-
-$$
-x_\mathrm{med} =
-\begin{cases}
-x_{\left(\frac{n+1}{2}\right)} & \text{für ungerades $n$} \\[1em]
-\frac{1}{2}\left(x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}\right) & \text{für gerades $n$}
-\end{cases}
-$$
+::: {.columns}
+::: {.column width=30%}
+![](../skript/00-bilder/nimbus7-satellit.jpg){width="6cm"}
+![](../skript/00-bilder/nimbus7-ozon.jpg){width="6cm"}
+:::
+::: {.column width=62%}
+Vom Wettersatelliten Nimbus 7 wurden seit November 1978 extrem geringe Ozonwerte über der Antarktis gemeldet. Bei der automatischen Auswertung wurden diese Werte als Messfehler ausgesondert. Erst 1984 belegten Forschungsstationen das Ozonloch durch Beobachtungen. Eine Neuauswertung der Satellitendaten zeigte dann das gesamte Ausmaß [@ludwig2006]
 
 . . .
 
-Anwendbar für
+Anmerkung: In Wirklichkeit war es wohl komplizierter, siehe [@pukelsheim1990]
+:::
+:::
 
-- Metrische Merkmale (dafür ist die Definition oben gedacht)
-- Ordinalskalierte Merkmale, bei gerader Anzahl von Beobachtungen liegt der Median ggf. zwischen zwei Ausprägungen
+## Median als robustes Lagemaß
+
+Zuerst: Urliste $x_1, x_2, \dots, x_n$ zur [geordneten Urliste]{.neuerbegriff} $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ umsortieren, so dass $x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(i)} \leq \dots \leq x_{(n)}$
+
+[]{.down10}
+
+. . .
+
+::: {#def-median}
+Der [Median]{.neuerbegriff} $x_\mathrm{med}$ einer geordneten Urliste $x_{(1)}, \dots, x_{(n)}$ ist
+```{=typst}
+$ x_"med" = cases(
+  x_(((n+1)/2)) & "für ungerades" n,
+  1/2 (x_((n/2)) + x_((n/2 + 1))) & "für gerades" n,
+  gap: #1em
+). $
+```
+:::
+
+[]{.down10}
+
+. . .
+
+### Anwendbar für
+
+- Metrische Merkmale mit der Definition oben
+
+- Ordinalskalierte Merkmale, Median gegebenenfalls zwischen zwei Ausprägungen
+
+## Beispiel: Median
+
+[]{.down50}
+[]{.down50}
+
+### → iPad
 
 ## Eigenschaften des Medians
 
-1. Der Median minimiert die Summe der Beträge der Abstände:
-   $$
-   x_\mathrm{med} = \underset{a}{\operatorname{argmin}} \sum_{j=1}^n |x_j - a|
-   $$
+[]{.down10}
 
-1. Mindestens 50% der Daten sind kleiner oder gleich dem Median $x_\mathrm{med}$ und mindestens 50% der Daten sind
-   größer oder gleich dem Median $x_\mathrm{med}$.
+1. Für den Median gilt:
+
+    - mindestens 50% der Werte sind größer gleich $x_\mathrm{med}$
+
+    - mindestens 50% sind kleiner gleich $x_\mathrm{med}$
+
+1. Der Median minimiert die Summe der Beträge der Abstände
+
+   ```{=typst}
+   $ x_"med" = op("argmin", limits: #true)_a sum_(i=1)^n |x_i - a| $
+   ```
 
 . . .
 
-[]{.down20}
+[]{.down10}
 
-→ Auch an der ersten Eigenschaft ist zu erkennen, dass der Median robust ist: In die Summe der Beträge geht eine
-extrem große Abweichung wesentlich weniger stark ein als in die Summe der Quadrate
+### Warum robust? 
+
+1. Median hängt nur von der Reihenfolge ab, nicht von der Größe der äußeren Werte
+
+1. Große Abweichungen zählen in $\sum |x_i - a|$ weniger als in $\sum (x_i - a)^2$
 
 ## Modus
 
 []{.down20}
 
-Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der
-Modus ist nur dann eindeutig bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
+::: {#def-modus}
+Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merkmals, die am häufigsten vorkommt. Der Modus ist nur dann eindeutig bestimmt, wenn die Verteilung ein eindeutiges Maximum besitzt.
+:::
 
 []{.down20}
 
 - Lässt sich für alle Arten von Merkmalen bestimmen, auch für nominalskalierte
-- Im Stab- oder Säulendiagramm die Ausprägung mit dem höchsten Stab bzw. der höchsten Säule
 
-## Lageregeln 1/2
-
-```{r}
-#| fig-asp: 0.22
-
-p1 <- p_lageregeln(d_bsp_lageregeln, I)
-p2 <- p_lageregeln(d_bsp_lageregeln, II)
-p3 <- p_lageregeln(d_bsp_lageregeln, III)
-p1 + p2 + p3 + plot_layout(axes = "collect", guides = "collect") & theme(plot.title = element_text(size = 12))
-```
-
-. . .
-
-| Stichprobe | $\bar{x}$ | $x_\mathrm{med}$ | $x_\mathrm{mod}$ | Form der Verteilung |                  Lagemaße                   |
-|:----------:|:---------:|:----------------:|:----------------:|:-------------------:|:-------------------------------------------:|
-|     I      |   3.57    |        3         |        2         |     linkssteil      | $\bar{x} > x_\mathrm{med} > x_\mathrm{mod}$ |
-|     II     |     5     |        5         |        5         |     symmetrisch     | $\bar{x} = x_\mathrm{med} = x_\mathrm{mod}$ |
-|    III     |   6.43    |        7         |        8         |     rechtssteil     | $\bar{x} < x_\mathrm{med} < x_\mathrm{mod}$ |
-
-## Lageregeln 2/2
-
-Für eine unimodale Verteilung gilt
-
-$$
-\begin{aligned}
-\text{linkssteil} & \iff \bar{x} > x_\mathrm{med} > x_\mathrm{mod} \\
-\text{symmetrisch} & \iff \bar{x} \approx x_\mathrm{med} \approx x_\mathrm{mod} \\
-\text{rechtssteil} & \iff \bar{x} < x_\mathrm{med} < x_\mathrm{mod}
-\end{aligned}
-$$
-
-. . .
-
-Warum ist das so?
-
-- Bei einer schiefen Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in diese
-  Richtung
-- Es lässt sich zeigen: Auf der steilen Seite des Modus liegen weniger als die Hälfte der Werte. Der Median liegt
-  daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel.
-- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetische Mittel und der
-  Median
-
-## Wasserreservoir: Mittelwert von Wachstumsfaktoren
-
-```{r}
-#| fig-asp: 0.3
-
-w0 <- pluck(d_reservoir_w, "Wasserstand", 1)
-xm <- pull(d_reservoir_x, "Wachstumsfaktor") |> mean_geom()
-
-p_reservoir <- function(d_w, d_x, fill) {
-  ggplot(data = d_w, mapping = aes(x = Tag, y = Wasserstand)) +
-    geom_col(
-      data = d_x,
-      mapping = aes(x = Zeitraum - 0.5, y = Wachstumsfaktor, fill = {{ fill }}),
-      alpha = 0.5,
-      show.legend = FALSE
-    ) +
-    geom_line(linewidth = 1.15) +
-    geom_point(size = 2) +
-    scale_x_continuous(breaks = 0:nrow(d_w), minor_breaks = NULL) +
-    coord_cartesian(ylim = c(0, 5)) +
-    labs(x = "Tag", y = NULL)
-}
-
-p1 <- p_reservoir(d_reservoir_w, d_reservoir_x, Wachstumsfaktor >= 1) +
-  labs(title = "Wasserstand und Wachstumsfaktoren")
-p2 <- p_reservoir(
-  mutate(d_reservoir_w, Wasserstand = w0 * xm^Tag),
-  mutate(d_reservoir_x, Wachstumsfaktor = xm),
-  "mittel"
-) +
-  scale_fill_manual(values = "#00BFC4") +
-  labs(title = "Mittlerer Wachstumsfaktor")
-
-p1 + p2
-```
-
-- Wachstumsfaktor $x_i = W_i / W_{i-1}$
-- Wasserstand nach 6 Tagen (links)
-  $$
-  W_6 = x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1 \cdot W_0
-  $$
-- Mittlerer Wachstumsfaktor $z$ (rechts)
-  $$
-  W_6 = z \cdot z \cdot z \cdot z \cdot z \cdot z \cdot W_0 = z^6 \cdot W_0
-  \quad \leadsto \quad
-  z = \sqrt[6]{x_6 \cdot x_5 \cdot x_4 \cdot x_3 \cdot x_2 \cdot x_1}
-  $$
+- Im Säulendiagramm die Ausprägung mit der höchsten Säule
 
 ## Geometrisches Mittel
 
-Das [geometrische Mittel]{.neuerbegriff} zu den Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt
-der Faktoren, also
+::: {#def-geometrisches-mittel}
+Das [geometrische Mittel]{.neuerbegriff} zu den positiven Faktoren $x_1, x_2, \dots, x_n$ ist die $n$-te Wurzel aus dem Produkt der Faktoren, also
 
 $$
-\bar{x}_\mathrm{geom} = \sqrt[n]{x_1 \cdot x_2 \cdot \dots \cdot x_n}
+\bar{x}_\mathrm{geom} = \sqrt[n]{x_1 \cdot x_2 \cdot \dots \cdot x_n}.
 $$
+:::
 
 . . .
 
 []{.down20}
 
-Daraus erhält man für einen Bestand $B_0, B_1, \dots, B_n$ mit den Wachstumsfaktoren $x_i = B_i / B_{i-1}$,
-$i = 1, \dots, n$ den Zusammenhang
+### Zusammenhang 
+
+Für Bestand $B_0, B_1, \dots, B_n$ mit Wachstumsfaktoren $x_i = B_i / B_{i-1}$ gilt
+
+[]{.down10}
 
 $$
-B_n = \underbrace{\bar{x}_\mathrm{geom} \cdot \; \dots \; \cdot \bar{x}_\mathrm{geom}}_{n\text{-mal}} \cdot B_0
-= \left(\bar{x}_\mathrm{geom}\right)^{n} B_0
+B_n 
+= 
+x_1 \cdot x_2 \cdot \dots \cdot x_n \cdot B_0 
+= 
+\underbrace{\bar{x}_\mathrm{geom} \cdot \bar{x}_\mathrm{geom} \cdot \dots \cdot \bar{x}_\mathrm{geom}}_{n\ \mathrm{mal}} \cdot B_0 
+=
+\left(\bar{x}_\mathrm{geom}\right)^{n} \cdot B_0
 $$
 
-→ Mit $\bar{x}_\mathrm{geom}$ als mittlerem Wachstumsfaktor für alle Perioden ergibt sich derselbe Bestand $B_n$
-wie mit den tatsächlichen Wachstumsfaktoren $x_1, \dots, x_n$
+→ Wachstumsfaktor $\bar{x}_\mathrm{geom}$ ergibt $n$-mal angewendet dasselbe Ergebnis $B_n$
+
+## Beispiel: Geometrisches Mittel
+
+[]{.down50}
+[]{.down50}
+
+### → iPad
 
 ## Harmonisches Mittel
 
 []{.down20}
 
-Für die Werte $x_1, \dots, x_n$ heißt die Zahl
-
+::: {#def-harmonisches-mittel}
+Für die positiven Werte $x_1, \dots, x_n$ heißt die Zahl
 $$
 \bar{x}_\mathrm{har} = \frac{n}{\displaystyle \sum_{i=1}^n\frac{1}{x_i}}
 $$
-
-[harmonisches Mittel]{.neuerbegriff}.
+das [harmonische Mittel]{.neuerbegriff}.
+:::
 
 . . .
 
 []{.down20}
 
-Das harmonische Mittel wird verwendet, wenn das zu mittelnde Merkmal eine Verhältnisgröße ist, bei der die
-Häufigkeit im Zähler steht. Beispiele sind die Geschwindigkeit (Weg/Zeit) oder die Dichte (Masse/Volumen).
+Das harmonische Mittel wird für Verhältnisgrößen verwendet, wenn die Zählergröße für alle Werte gleich ist, z. B. die mittlere Geschwindigkeit auf gleich langen Teilstrecken.
+
+# Lageregeln
+
+## 
+
+[]{.up40}
+
+::: {#exm-lageregeln}
+
+## Mittelwert, Median und Modus für drei verschiedene Stichproben
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.325
+
+p1 <- p_lageregeln(d_bsp_lageregeln, I)
+p2 <- p_lageregeln(d_bsp_lageregeln, II)
+p3 <- p_lageregeln(d_bsp_lageregeln, III)
+p1 +
+  p2 +
+  p3 +
+  plot_layout(axes = "collect", guides = "collect") &
+  theme(plot.title = element_text(size = 12))
+```
+
+[]{.down10}
+
+```{r}
+d_bsp_lageregeln |>
+  pivot_longer(-a, names_to = "Stichprobe", values_to = "n") |>
+  uncount(n) |>
+  summarise(
+    `$macron(x)$` = mean(a),
+    `$x_"med"$` = median(a),
+    `$x_"mod"$` = modes(a),
+    .by = Stichprobe
+  ) |>
+  mutate(
+    `Form der Verteilung` = c("linkssteil", "symmetrisch", "rechtssteil"),
+    `Lagemaße` = c(
+      '$macron(x) > x_"med" > x_"mod"$',
+      '$macron(x) = x_"med" = x_"mod"$',
+      '$macron(x) < x_"med" < x_"mod"$'
+    )
+  ) |>
+  tt(width = c(15, 6, 6, 6, 22, 22) / 100, height = 1.8) |>
+  format_tt(j = 2, digits = 2, num_fmt = "decimal", num_zero = TRUE) |>
+  style_tt(align = "c", alignv = "m")
+```
+
+:::
+
+## Verallgemeinerung: Lageregeln
+
+### Für eine unimodale Verteilung gilt meistens
+
+|             |        |                                                         |
+|------------:|:------:|:--------------------------------------------------------|
+| linkssteil  | $\iff$ | $\bar{x} > x_\mathrm{med} > x_\mathrm{mod}$             |
+| symmetrisch | $\iff$ | $\bar{x} \approx x_\mathrm{med} \approx x_\mathrm{mod}$ |
+| rechtssteil | $\iff$ | $\bar{x} < x_\mathrm{med} < x_\mathrm{mod}$             |
+
+. . .
+
+### Warum ist das so?
+
+- Bei einer schiefen Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in diese Richtung
+
+- Typischerweise liegen auf der steilen Seite des Modus weniger als die Hälfte der Werte. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel
+
+- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetische Mittel und der Median
 
 # Maße der Variabilität
 
 ## Sommer 2010
 
-[So verrückt war dieser Sommer](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html)
-(Spiegel Online, 30.08.2010)
+::: {.columns}
+::: {.column width=70%}
+![](../skript/00-bilder/sommer-2010.svg){fig-align="center"}
+:::
+::: {.column width=30%}
+Elbe in Dresden im Juli (links) und August (rechts)
+:::
+:::
 
-> Hitzewelle, Rekordregen, Neuschnee: Der Sommer 2010 war von Extremen geprägt. Vom Deutschen Wetterdienst
-> veröffentlichte Statistiken enthalten Rekorde in Serie – von tropischen Temperaturen bis hin zum nassesten August
-> seit Beginn der Aufzeichnungen 1881.
+[]{.down20}
 
-## Die Elbe in Dresden
+. . .
 
-![](../skript/00-bilder/sommer-2010.svg){fig-align="center" height="70%"}
+[So verrückt war dieser Sommer](http://www.spiegel.de/wissenschaft/natur/extremwetter-so-verrueckt-war-dieser-sommer-a-714629.html) (Spiegel Online, 30.08.2010)
 
-12\. Juli und 16. August 2010
+*Hitzewelle, Rekordregen, Neuschnee: Der Sommer 2010 war von Extremen geprägt. Vom Deutschen Wetterdienst veröffentlichte Statistiken enthalten Rekorde in Serie – von tropischen Temperaturen bis hin zum nassesten August seit Beginn der Aufzeichnungen*
 
 ## Die Jahre 2008 und 2010 in Bochum
 
-Monatssumme der täglichen Niederschlagshöhe in mm (Quelle: DWD)
-
 ```{r}
-tab_monate(d_ns_bo_2008_2010_monat)
+p_niederschlag_monate()
 ```
 
-```{r}
-#| fig-asp: 0.22
-#| out-width: 60%
+### Arithmetische Mittelwerte
 
-ggplot(
-  data = d_ns_bo_2008_2010_monat,
-  mapping = aes(x = Monat, y = Niederschlag, color = Jahr, group = Jahr)
-) +
-  geom_hline(
-    data = d_niederschlag_kenngroessen,
-    mapping = aes(yintercept = Mittelwert, color = Jahr)
-  ) +
-  geom_line(linewidth = 1.15) +
-  geom_point(size = 2) +
-  labs(x = NULL, y = "Niederschlag in mm")
-```
-
-Arithmetische Mittelwerte
 $\bar{x}_{2008} = `r kg(d_streuung, "Mittelwert", 1)`\,\mathrm{mm}$ und
 $\bar{x}_{2010} = `r kg(d_streuung, "Mittelwert", 2)`\,\mathrm{mm}$
+$\quad$ → Notwendig: Messung der Variabilität
 
 ## Streuungsmaß: Ein Maß für die Variabilität
 
 []{.down20}
 
-Was ist ein Streuungsmaß?
+### Was ist ein Streuungsmaß?
 
-: Zahl, die angibt, wie stark die einzelnen Werte eines Merkmals voneinander abweichen
+Maßzahl, die angibt, wie die Werte um das Zentrum streuen
 
 . . .
 
 []{.down20}
 
-Eigenschaften
+### Eigenschaften
 
 - Streuungsmaß gleich null $\iff$ alle Werte identisch
+
 - Wird mit zunehmender Variabilität der Werte größer
-- Negative Werte ergeben keinen Sinn
-- Unabhängig vom Umfang der Stichprobe
+
+- Kann nicht negativ werden
 
 ## Spannweite
 
 []{.down20}
 
-Die [Spannweite]{.neuerbegriff} $R$ eines Merkmals ([range]{.eng}) gibt an, wie weit der größte und der kleinste Wert
-auseinanderliegen:
-
+::: {#def-spannweite}
+Die [Spannweite]{.neuerbegriff} $R$ einer Stichprobe ([range]{.eng}) gibt an, wie weit der größte und der kleinste Wert auseinanderliegen:
 $$
-R = \max x_i - \min x_i
+R = \max x_i - \min x_i.
 $$
+:::
 
 Die Spannweite ist einfach zu berechnen, hängt aber allein von zwei Werten ab und ist daher kein robustes Maß.
 
@@ -434,7 +438,8 @@ Die Spannweite ist einfach zu berechnen, hängt aber allein von zwei Werten ab u
 
 []{.down20}
 
-Spannweiten der monatlichen Niederschläge in Bochum
+::: {#exm-spannweite}
+## Spannweiten der monatlichen Niederschläge in Bochum
 
 $$
 \begin{aligned}
@@ -446,32 +451,17 @@ R_{2010} & =
 `r pluck(d_niederschlag_kenngroessen, "Spannweite", 2)`\,\mathrm{mm}
 \end{aligned}
 $$
+:::
 
-## Grundlage für robustes Streuungsmaß
-
-Abweichungen $x_i - \bar{x}$ der monatlichen Niederschläge vom Mittelwert in mm
-
-```{r}
-tab_monate(d_niederschlag_am)
-```
+## Grundlage für ein besseres Streuungsmaß
 
 ```{r}
-#| fig-asp: 0.2
-
-ggplot(mapping = aes(x = Monat, y = Niederschlag, fill = Jahr, color = Jahr, group = Jahr)) +
-  geom_hline(yintercept = 0) +
-  geom_hline(
-    data = d_niederschlag_kenngroessen,
-    mapping = aes(yintercept = Mittelwert, color = Jahr),
-    alpha = 0.5
-  ) +
-  geom_line(data = d_ns_bo_2008_2010_monat, alpha = 0.5) +
-  geom_col(data = d_niederschlag_am, color = "black", position = "dodge", width = 0.7) +
-  coord_cartesian(ylim = c(-60, 120)) +
-  labs(x = NULL, y = NULL)
+p_abweichungen_mittelwert()
 ```
 
-→ Idee: Abweichungen $x_i - \bar{x}$ aller Werte einbeziehen (Streuungsmaße auf Basis des Medians sind unüblich)
+. . .
+
+Idee: Abweichungen $x_i - \bar{x}$ aller Werte vom Mittelwert einbeziehen
 
 ## AD-Streuung
 
@@ -483,7 +473,7 @@ $$
 AD = \frac{1}{n} \left( |x_1 - \bar{x}| + \dots + |x_n - \bar{x}| \right) = \frac{1}{n} \cdot \sum_{i=1}^n |x_i - \bar{x}|
 $$
 
-heißt AD-Streuung ([average deviation]{.eng}).
+heißt [AD-Streuung]{.neuerbegriff} ([average deviation]{.eng}).
 
 . . .
 
@@ -492,16 +482,20 @@ heißt AD-Streuung ([average deviation]{.eng}).
 Aber
 
 - Beträge umständlich in der Handhabung (Fallunterscheidung)
-- AD-Streuung daher unüblich
+
+- AD-Streuung daher eher unüblich
 
 ## Varianz und Standardabweichung
 
+::: {#def-varianz}
 Der Mittelwert der quadrierten Abweichungen
 
 $$
 \tilde{s}^2 = \frac{1}{n} \left( (x_1 - \bar{x})^2 + \dots + (x_n - \bar{x})^2 \right)
 = \frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2
 $$
+
+[]{.up5}
 
 heißt [empirische Varianz]{.neuerbegriff}, die Wurzel
 
@@ -510,17 +504,26 @@ $$
 $$
 
 wird [empirische Standardabweichung]{.neuerbegriff} genannt.
+:::
 
 . . .
 
-[]{.down20}
+- Einheit der Varianz $\tilde{s}^2$ ist das Quadrat der Einheit des Merkmals
 
-- Die Einheit der Varianz $\tilde{s}^2$ stimmt wegen des Quadrierens nicht mit der Einheit des Merkmals überein
-- Die Standardabweichung $\tilde{s}$ hat wieder die Einheit des Merkmals
+- Standardabweichung $\tilde{s}$ hat wieder die Einheit des Merkmals
+
+## 
+
+[]{.up40}
+
+::: {#exm-varianz-bochum}
 
 ## Niederschläge in Bochum
 
-Empirische Varianzen
+[]{.up5}
+[]{.down5}
+
+### Empirische Varianzen
 
 $$
 \begin{aligned}
@@ -531,7 +534,7 @@ $$
 \end{aligned}
 $$
 
-Standardabweichungen
+### Standardabweichungen
 
 $$
 \tilde{s}_{2008} = \sqrt{`r kg(d_streuung, "Varianz", 1)`} \approx `r kg(d_streuung, "Standardabweichung", 1)`\,\mathrm{mm}
@@ -539,25 +542,31 @@ $$
 \tilde{s}_{2010} = \sqrt{`r kg(d_streuung, "Varianz", 2)`} \approx `r kg(d_streuung, "Standardabweichung", 2)`\,\mathrm{mm}
 $$
 
-. . .
+### Anmerkungen
 
-[]{.down20}
+- Unterschiedliche Niederschlagscharakteristik deutlich ablesbar
 
-- Die unterschiedliche Niederschlagscharakteristik der beiden Jahre kommt in den Streuungsmaßen deutlich zum Ausdruck
-- Die Standardabweichung ist einfacher zu interpretieren, da sie im selben Wertebereich wie die Beobachtungen liegt
+- Standardabweichung im selben Wertebereich wie Merkmal
+:::
 
 ## Variationskoeffizient
 
-[]{.down20}
-
-Für ein Merkmal mit nichtnegativen Ausprägungen und $\bar{x} > 0$ heißt die dimensionslose Zahl
-
+::: {#def-variationskoeffizient}
+Für eine Stichprobe $x_1, \dots, x_n$ mit $x_i \geq 0$ und $\bar{x} > 0$ heißt die dimensionslose Zahl
 $$
 v = \frac{\tilde{s}}{\bar{x}}
 $$
+[Variationskoeffizient]{.neuerbegriff}.
+:::
 
-[Variationskoeffizient]{.neuerbegriff}. Er gibt an, wie groß die Variabilität im Verhältnis zum Mittelwert ist.
-Für die Niederschläge in Bochum
+→ Variabilität im Verhältnis zum Mittelwert
+
+[]{.down10}
+
+. . .
+
+::: {#exm-variationskoeffizient-bochum}
+## Niederschläge in Bochum
 
 $$
 v_{2008} \approx \frac{`r kg(d_streuung, "Standardabweichung", 1)`}{`r kg(d_streuung, "Mittelwert", 1)`}
@@ -566,6 +575,7 @@ v_{2008} \approx \frac{`r kg(d_streuung, "Standardabweichung", 1)`}{`r kg(d_stre
 v_{2010} \approx \frac{`r kg(d_streuung, "Standardabweichung", 2)`}{`r kg(d_streuung, "Mittelwert", 2)`}
 \approx `r kg(d_streuung, "Variationskoeffizient", 2)`
 $$
+:::
 
 ## Stichprobenvarianz
 
@@ -579,20 +589,9 @@ $$
 
 Für größere Werte von $n$ ist der Unterschied zwischen $\tilde{s}^2$ und $s^2$ vernachlässigbar.
 
-## Zusammenfassung
+. . .
 
-[]{.down20}
-
-$$
-\begin{aligned}
-R & = \max x_i - \min x_i && \text{Spannweite} \\[0.5em]
-AD & = \frac{1}{n} \cdot \sum_{i=1}^n |x_i - \bar{x}| && \text{AD-Streuung} \\[0.5em]
-\tilde{s}^2 & = \frac{1}{n} \cdot \sum_{i=1}^n (x_i - \bar{x})^2 && \text{Empirische Varianz} \\[0.5em]
-\tilde{s} & = \sqrt{\tilde{s}^2} && \text{Empirische Standardabweichung} \\[0.5em]
-v & = \frac{\tilde{s}}{\bar{x}} && \text{Variationskoeffizient} \\[0.5em]
-s^2 & = \frac{1}{n - 1} \cdot \sum_{i=1}^n (x_i - \bar{x})^2 && \text{Stichprobenvarianz}
-\end{aligned}
-$$
+→ Werden wir später ausführlich behandeln
 
 # Quantile und Box-Plots
 
@@ -602,19 +601,38 @@ $$
 x <- pull(d_random_sample, X)
 ```
 
-Der Median teilt eine Stichprobe (hier mit 20 Werten) in zwei gleich große Teile
+. . .
+
+[]{.down20}
+
+### Bekannt: Median
+
+Der Median $x_\mathrm{med}$ teilt die Stichprobe so, dass mindestens $50\%$ der Werte kleiner oder gleich $x_\mathrm{med}$ und mindestens $50\%$ größer oder gleich $x_\mathrm{med}$ sind
 
 ```{r}
-#| fig-asp: 0.12
+#| fig-asp: 0.125
 
 p_stichprobe() |>
-  p_stichprobe_marker(median(x), "x[med]")
+  p_stichprobe_marker(median(x), "x[med]", py = 0.05)
 ```
 
-Das $p$-Quantil $x_p$ teilt die Stichprobe so, dass $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und $(1 - p) \cdot 100\%$
-größer oder gleich $x_p$ sind
+### Neu: Quantil
+
+Für $0 < p < 1$ teilt das $p$-Quantil $x_p$ die Stichprobe so, dass mindestens $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und mindestens $(1 - p) \cdot 100\%$ größer oder gleich $x_p$ sind
+
+## Beispiel: Median
+
+[]{.down50}
+[]{.down50}
+
+### → iPad
 
 ## Beispiel: Lage von Quantilen
+
+TODO: Raus wenn notizen fertig
+
+::: {#exm-lage-quantile}
+## Stichprobe mit 20 Werten
 
 | $p$ | kleiner gleich $x_p$  | größer gleich $x_p$         | Lage von $x_p$                     |
 |:---:|:---------------------:|:---------------------------:|:----------------------------------:|
@@ -630,150 +648,149 @@ p_stichprobe() |>
   p_stichprobe_marker(quantile(x, 0.33, type = 2), "x[0.33]") |>
   p_stichprobe_marker(quantile(x, 0.75, type = 2), "x[0.75]")
 ```
+:::
 
 ## Quantilwerte
 
-Eine Zahl $x_p$ mit $0 < p < 1$ heißt [$p$-Quantil]{.neuerbegriff}, wenn mindestens ein Anteil von $p \cdot 100\%$
-der Daten kleiner oder gleich $x_p$ und mindestens ein Anteil von $(1-p) \cdot 100\%$ größer oder gleich $x_p$ ist.
-Es muss also
-
+::: {#def-quantil}
+Eine Zahl $x_p$ mit $0 < p < 1$ heißt [$p$-Quantil]{.neuerbegriff}, wenn mindestens ein Anteil von $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und mindestens ein Anteil von $(1-p) \cdot 100\%$ größer oder gleich $x_p$ ist.
+Es gilt also
 $$
 \frac{\text{Anzahl} (\text{Werte} \leq x_p)}{n} \geq p
 \quad \text{und} \quad
-\frac{\text{Anzahl} (\text{Werte} \geq x_p)}{n} \geq 1 - p
+\frac{\text{Anzahl} (\text{Werte} \geq x_p)}{n} \geq 1 - p.
 $$
+:::
 
-gelten. Fällt der Quantilwert zwischen zwei Werte, dann wird häufig (aber nicht immer) der Mittelwert verwendet.
-Mit der geordneten Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ergibt sich die Rechenvorschrift
+Fällt der Quantilwert zwischen zwei Werte, dann wird in der Regel der Mittelwert verwendet. Mit der geordneten Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ergibt sich die Rechenvorschrift
 
 $$
 x_p =
 \begin{cases}
-x_{([pn]+1)} & \text{falls} \; p \cdot n \; \text{nicht ganzzahlig} \\[1em]
-\frac{1}{2} \cdot \left(x_{(pn)} + x_{(pn + 1)}\right) & \text{falls} \; p \cdot n \; \text{ganzzahlig}
+x_{(\lfloor pn \rfloor + 1)} & \text{falls} \ p \cdot n \ \text{nicht ganzzahlig} \\[1em]
+\frac{1}{2} \cdot \left(x_{(pn)} + x_{(pn + 1)}\right) & \text{falls} \ p \cdot n \ \text{ganzzahlig}
 \end{cases}
 $$
 
-Dabei ist $[pn]$ die größte ganze Zahl, die kleiner als $p \cdot n$ ist (runden nach unten).
+Dabei ist $\lfloor pn \rfloor$ der auf eine ganze Zahl abgerundete Wert von $p \cdot n$.
 
 ## Quantile und empirische Verteilungsfunktion
 
-Die empirische Verteilungsfunktion $F$ gibt zu $x$ den Anteil der Werte kleiner oder gleich $x$ an
+Empirische Verteilungsfunktion $F$ Anteil der Werte kleiner oder gleich $x$ an
 
 → Zu vorgegebenem $p$ lässt sich das Quantil $x_p$ am Graphen von $F$ ablesen
 
+. . .
+
+::: {#exm-quantile-verteilungsfunktion}
+## Stichprobe mit 20 Werten
+
+[]{.up10}
+
 ```{r}
 #| fig-asp: 0.4
-#| out-width: 65%
 
-p <- c(0.05, 0.33, 0.75)
-xp <- quantile(pull(d_random_sample, "X"), p, type = 2)
-
-p_stichprobe_raw() +
-  geom_step(
-    data = tibble(X = mix(-10, xp), Y = mix(p, -10), G = rep(1:3, each = 2)),
-    mapping = aes(x = X, y = Y, group = G),
-    color = "hotpink"
-  ) +
-  stat_ecdf(mapping = aes(x = X)) +
-  scale_x_continuous(
-    breaks = xp,
-    labels = c(expression(x[0.05]), expression(x[0.33]), expression(x[0.75])),
-    minor_breaks = pull(d_random_sample, "X")
-  ) +
-  scale_y_continuous(breaks = c(0, p), minor_breaks = NULL) +
-  coord_cartesian(xlim = c(0, 100), ylim = c(-0.1, 1)) +
-  labs(x = NULL, y = "F(x)")
+p_quantile_verteilungsfunktion()
 ```
+:::
 
-## Quartile
+## Quartile und Fünf-Punkte-Zusammenfassung
 
-[]{.down20}
 
-- Quartile: Quantilwerte mit eigenen Namen
-  - 25%-Quantil $x_{0.25}$ heißt [unteres Quartil]{.neuerbegriff}
-  - 75%-Quantil $x_{0.75}$ heißt [oberes Quartil]{.neuerbegriff}
+::: {.columns}
+::: {.column}
+Quartile: Quantilwerte mit eigenen Namen
 
-- [Interquartilsabstand]{.neuerbegriff} IQR ([interquartile range]{.eng})
-  $$
-  d_\mathrm{Q} = x_{0.75} - x_{0.25}
-  $$
+- 25%-Quantil $x_{0.25}$ -- [unteres Quartil]{.neuerbegriff}
 
-## Fünf-Punkte-Zusammenfassung
-
-[]{.down20}
-
-Die [Fünf-Punkte-Zusammenfassung]{.neuerbegriff}
+- 75%-Quantil $x_{0.75}$ -- [oberes Quartil]{.neuerbegriff}
+:::
+::: {.column}
+[Fünf-Punkte-Zusammenfassung]{.neuerbegriff}
 
 $$
-x_{\mathrm{min}}, \; x_{0.25}, \; x_\mathrm{med}, \; x_{0.75}, \; x_{\mathrm{max}}
+x_{\mathrm{min}}, \ x_{0.25}, \ x_\mathrm{med}, \ x_{0.75}, \ x_{\mathrm{max}}
 $$
 
-teilt die Stichprobe in vier Bereiche mit jeweils gleich vielen Werten
+4 Bereiche mit etwa gleich vielen Werten
+:::
+:::
+
+. . .
 
 []{.down20}
 
 ```{r}
 #| fig-asp: 0.12
 
-p_fuenfpunkt_zusammenfassung(d_random_sample)
+p_fuenfpunkt_zusammenfassung(d_random_sample, py = 0.05)
 ```
 
-## Box-Plot
+. . .
+
+[]{.down10}
+
+Praktisch: Der [Interquartilsabstand]{.neuerbegriff} IQR ([interquartile range]{.eng})
+$$
+d_\mathrm{Q} = x_{0.75} - x_{0.25}
+$$
+
+## Box-Plot -- John W. Tukey (1915 – 2000)
 
 ```{r}
 #| fig-asp: 0.2
-
-fig_boxplot()
+fig_boxplot(py = 0.11)
 ```
 
-1. Ein Rechteck ([box]{.eng}) zwischen den Quartilen $x_{0.25}$ und $x_{0.75}$
-1. Ein Strich markiert den Median $x_\mathrm{med}$
+### Schritte
+
+1. Rechteck ([box]{.eng}) zwischen den Quartilen $x_{0.25}$ und $x_{0.75}$
+
+1. Strich markiert den Median $x_\mathrm{med}$
+
 1. Werte im Intervall $[x_{0.25} - 1.5 d_\mathrm{Q}, x_{0.75} + 1.5 d_\mathrm{Q}]$ sind normale Beobachtungen
+
 1. Linien (die [whiskers]{.eng}) zur kleinsten und größten normalen Beobachtung
-1. Werte außerhalb der normalen Beobachtungen werden als Punkte eingezeichnet
 
-→ Diese Form heißt manchmal auch modifizierter Box-Plot
+1. Werte außerhalb der normalen Beobachtungen als Punkte darstellen
 
-## Die Jahre 2008 und 2010 in Bochum
+## 
+
+[]{.up40}
+
+::: {#exm-boxplot-bochum}
+## Niederschläge in Bochum
+
+[]{.up5}
 
 ```{r}
-#| fig-asp: 0.6
+#| fig-asp: 0.55
 
-d_ns_bo_2008_2010_monat |>
-  mutate(X = if_else(Jahr == 2008, 0, 3)) |>
-  ggplot() +
-  geom_boxplot(mapping = aes(x = Jahr, y = Niederschlag)) +
-  geom_point(
-    mapping = aes(x = X, y = Niederschlag, fill = Monat),
-    shape = 21,
-    color = "black",
-    size = 3
-  ) +
-  scale_fill_brewer(palette = "Set3") +
-  labs(x = NULL, y = NULL, title = "Monatliche Niederschläge in mm") +
-  coord_cartesian(xlim = c(0, 3))
+p_boxplot_monatlich()
 ```
+:::
 
-## Auf Basis täglicher Messungen
+##
+
+[]{.up40}
+
+::: {#exm-boxplot-bochum-taeglich}
+## Niederschläge in Bochum
+
+[]{.up5}
 
 ```{r}
 #| fig-asp: 0.5
 
-ggplot(data = d_ns_bo_2008_2010) +
-  geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
-  facet_wrap(~Jahr) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  labs(x = NULL, y = NULL, title = "Tägliche Niederschläge in mm")
+p_boxplot_taeglich()
 ```
+:::
 
 # Konzentrationsmaß: Der Gini-Koeffizient
 
 ## Niederschläge in Bochum und Nha Trang (Vietnam)
 
 ```{r}
-#| fig-asp: 0.25
-
 d_ns_bo_nt |>
   mutate(Ort = if_else(Ort == "Bochum", "Bochum 2008", "Nha Trang 2015")) |>
   ggplot() +
@@ -785,37 +802,49 @@ d_ns_bo_nt |>
   labs(fill = NULL, x = NULL, y = "Niederschlag in mm")
 ```
 
-- Gesamt: Bochum `r sum(pull(d_ns_bo_2008_monat, Niederschlag))` mm und Nha Trang
-  `r sum(pull(d_ns_nt_2015_monat, Niederschlag))` mm
-- Niederschläge in Nha Trang vor allem von Oktober bis Dezember, in Bochum über das Jahr verteilt
+- Gesamt: Bochum `r sum(pull(d_ns_bo_2008_monat, Niederschlag))` mm und Nha Trang `r sum(pull(d_ns_nt_2015_monat, Niederschlag))` mm
 
-. . .
-
-[Konzentrationsmaß]{.neuerbegriff}: Zahl, die angibt, wie stark sich die Beiträge zu einer Summe auf wenige
-Merkmalsträger konzentrieren
+- Regen in Nha Trang von Oktober bis Dezember, in Bochum über das Jahr verteilt
 
 ## Regen in Vietnam
 
-![](../skript/00-bilder/regen-vietnam.jpg){fig-align="center" height="85%"}
+```{=typst}
+// Bild über die ganze Folie, an der aktuellen Position um deren Abstand zur Ecke zurückversetzt
+#context {
+  let pos = here().position()
+  place(left, dx: -pos.x, dy: -pos.y, image(
+    "../skript/00-bilder/regen-vietnam.jpg", width: page.width, height: page.height, fit: "cover"
+  ))
+}
+```
 
-## Gini-Koeffizient
+## Konzentrationsmaß: Ein Maß für die Ungleichverteilung
+
+[]{.down20}
+
+### Was ist ein Konzentrationsmaß?
+
+Maßzahl, die angibt, wie stark sich die Beiträge zu einer Summe auf wenige Merkmalsträger konzentrieren
+
+. . .
+
+[]{.down20}
+
+### Eigenschaften
+
+- Nur für nichtnegative Werte, deren Summe sinnvoll ist
+
+- Klein, wenn alle Merkmalsträger ähnlich viel beitragen
+
+- Groß, wenn wenige Merkmalsträger fast alles beitragen
+
+## Gini-Koeffizient weltweit
 
 ```{r}
 #| fig-asp: 0.4
 #| out-width: 65%
 
-ggplot(data = d_bsp_gini) +
-  geom_sf(mapping = aes(fill = gini / 100)) +
-  scale_fill_gradient2(
-    high = "#fc8d59",
-    low = "#91bfdb",
-    mid = "#ffffbf",
-    midpoint = median(pull(d_bsp_gini, gini) / 100, na.rm = TRUE),
-    na.value = "#C4BCB3"
-  ) +
-  theme_void() +
-  theme(legend.position = "right") +
-  labs(fill = NULL)
+p_gini_welt()
 ```
 
 Gini-Koeffizient der Einkommen (Daten: [Weltbank](https://data.worldbank.org/indicator/SI.POV.GINI))
@@ -823,40 +852,18 @@ Gini-Koeffizient der Einkommen (Daten: [Weltbank](https://data.worldbank.org/ind
 - M. O. Lorenz (1876 – 1959): Kurve, die die Konzentration einer Verteilung veranschaulicht
 - C. Gini (1884 – 1965): Koeffizient zur Ungleichverteilung von Einkommen in Volkswirtschaften
 
-## Beispiel: Lorenzkurven
-
-Datensatz mit den Merkmalen $A$, $B$ und $C$
-
-```{r}
-d_bsp_lorenzkurve |>
-  transpose_df() |>
-  rename(" " = name) |>
-  gt()
-```
-
-```{r}
-#| fig-asp: 0.33
-#| out-width: 70%
-
-p1 <- p_lorenzkurve(d_bsp_lorenzkurve, "A", mb = seq(0, 1, by = 0.05))
-p2 <- p_lorenzkurve(d_bsp_lorenzkurve, "B", mb = seq(0, 1, by = 0.05))
-p3 <- p_lorenzkurve(d_bsp_lorenzkurve, "C", mb = seq(0, 1, by = 0.05))
-
-p1 + p2 + p3 + plot_layout(axes = "collect")
-```
-
 ## Lorenzkurve
 
-Für die geordnete Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ist die [Lorenzkurve]{.neuerbegriff} der Polygonzug
-durch die Punkte $(0, 0), (u_1, v_1), (u_2, v_2), \dots, (u_n, v_n)$ mit den Koordinaten
-
+::: {#def-lorenzkurve}
+Für die geordnete Urliste $x_{(1)}, x_{(2)}, \dots, x_{(n)}$ ist die [Lorenzkurve]{.neuerbegriff} der Polygonzug durch die Punkte $(0, 0), (u_1, v_1), (u_2, v_2), \dots, (u_n, v_n)$ mit den Koordinaten
 $$
 u_j = \frac{1}{n} \cdot j
 \quad \text{und} \quad
-v_j = \frac{1}{s} \cdot \sum_{i=1}^j x_{(i)}
+v_j = \frac{1}{s} \cdot \sum_{i=1}^j x_{(i)}, \quad j = 1, \dots, n
 \quad \text{wobei} \quad
 s = \sum_{i=1}^n x_i
 $$
+:::
 
 Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
 
@@ -864,74 +871,77 @@ Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
 
 []{.down20}
 
-Eigenschaften
+### Eigenschaften
 
 - Monoton steigend
+
+- Verläuft unterhalb der Diagonalen
+
 - „Bauch“ umso größer, je stärker die Konzentration
+
+## Beispiel: Lorenzkurve
+
+[]{.down50}
+[]{.down50}
+
+### → iPad
 
 ## Gini-Koeffizient
 
+[]{.down50}
+
+::: {#def-gini-koeffizient}
 Der [Gini-Koeffizient]{.neuerbegriff} ist
 
-$$
-\begin{aligned}
-G & = \frac{\text{Fläche zwischen Diagonale und Lorenzkurve}}{\text{Fläche zwischen Diagonale und $u$-Achse}} \\[1em]
-& = 2 \cdot \text{Fläche zwischen Diagonale und Lorenzkurve}
-\end{aligned}
-$$
+```{=typst}
+#[
+#set par(leading: 1.5em)
+$ G & = ("'Fläche zwischen Diagonale und Lorenzkurve'") / ("'Fläche zwischen Diagonale und" u"-Achse'") \
+  & = 2 dot.op "'Fläche zwischen Diagonale und Lorenzkurve'" $
+]
+```
+:::
 
 ## Extremfälle
 
 ```{r}
-#| fig-asp: 0.45
-#| out-width: 60%
-
 p1 <- p_lorenzkurve(d_bsp_gini_grenzfaelle, "A", "Alle Werte gleich")
 p2 <- p_lorenzkurve(d_bsp_gini_grenzfaelle, "B", "Nur ein Wert ungleich null")
 
 p1 + p2 + plot_layout(axes = "collect")
 ```
 
-$$
-G_\mathrm{min} = 0
-\qquad \text{und} \qquad
-G_\mathrm{max} = 2 \cdot \left(\frac{1}{2} - \frac{1}{2} \cdot 1 \cdot \frac{1}{n}\right) = \frac{n - 1}{n}
-$$
+[]{.up20}
+
+Wertebereich des Gini-Koeffizienten: von $0$ bis $2 \cdot \left(\frac{1}{2} - \frac{1}{2} \cdot 1 \cdot \frac{1}{n}\right) = \frac{n - 1}{n}$
+
+. . .
+
+→ Maximaler Gini-Koeffizient abhängig von Anzahl der Beobachtungen
 
 ## Lorenz-Münzer-Koeffizient
 
-[]{.down20}
-
-Der maximale Gini-Koeffizient hängt von der Anzahl $n$ der Beobachtungen ab.
 
 []{.down20}
 
+::: {#def-gini-koeffizient-normiert}
 Die Multiplikation mit dem Faktor $n / (n - 1)$ ergibt den [normierten Gini-Koeffizienten]{.neuerbegriff}
-
 $$
 G^* = \frac{n}{n-1} G
 $$
-
 mit dem Wertebereich $G^* \in [0, 1]$, auch [Lorenz-Münzer-Koeffizient]{.neuerbegriff} genannt.
+:::
 
-## Niederschläge in Bochum und Nha Trang
+##
 
-```{r}
-d_ns_bo_nt |>
-  select(Ort, Niederschlag) |>
-  group_by(Ort) |>
-  arrange(Niederschlag, .by_group = TRUE) |>
-  mutate(Rang = paste0("x(", row_number(), ")")) |>
-  ungroup() |>
-  pivot_wider(names_from = Rang, values_from = Niederschlag) |>
-  rename(" " = Ort) |>
-  gt()
-```
+[]{.up40}
+
+::: {#exm-gini-bochum-nha-trang}
+## Lorenzkurven der monatlichen Niederschläge
+
+[]{.up5}
 
 ```{r}
-#| fig-asp: 0.4
-#| out-width: 55%
-
 p1 <- p_lorenzkurve(d_ns_bo_2008_monat, "Niederschlag", "Bochum, G* = 0.18")
 p2 <- p_lorenzkurve(d_ns_nt_2015_monat, "Niederschlag", "Nha Trang, G* = 0.79")
 
@@ -939,55 +949,41 @@ p1 + p2 + plot_layout(axes = "collect")
 ```
 
 → In Nha Trang fallen in neun Monaten weniger als 1/6 der Jahresniederschläge
+:::
 
-## Beispiel: Informationsverlust
+## 
 
-Zwei Gruppen von je zehn Personen mit dem angegebenen Betrag im Geldbeutel
+[]{.up50}
+
+::: {#exm-gini-informationsverlust}
+## Informationsverlust
+
+[]{.up5}
+[]{.down5}
 
 ```{r}
 d_bsp_gini_reduktion |>
   transpose_df() |>
   rename(Gruppe = name) |>
-  gt()
+  tt() |>
+  style_tt(align = "c")
 ```
 
-. . .
+[]{.up20}
 
 ```{r}
-#| fig-asp: 0.4
-#| out-width: 60%
 #| warning: false
-
-sx <- scale_x_continuous(breaks = c(0, 0.5, 1), minor_breaks = NULL)
+sx <- scale_x_continuous(breaks = c(0, 0.5, 0.9, 1), minor_breaks = NULL)
 sy <- scale_y_continuous(breaks = c(0, 0.1, 0.5, 1), minor_breaks = NULL)
-
 p1 <- p_lorenzkurve(d_bsp_gini_reduktion, "A", "Gruppe A") + sx + sy
 p2 <- p_lorenzkurve(d_bsp_gini_reduktion, "B", "Gruppe B") + sx + sy
-
 p1 + p2 + plot_layout(axes = "collect")
 ```
 
-## Beispiel: Informationsverlust
+[]{.up20}
 
-Normierte Gini-Koeffizienten elementargeometrisch bestimmt
-
-$$
-\begin{aligned}
-\text{Gruppe A:} \quad G^* & = \frac{10}{9} \cdot 2 \cdot
-\left(\frac{1}{2} - \left(\frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{10}
-+ \frac{1}{2} \cdot \frac{1}{2} \cdot \left(\frac{1}{10} + 1 \right)\right)\right) = \frac{4}{9} \\[0.5em]
-\text{Gruppe B:} \quad G^* & = \frac{10}{9} \cdot 2 \cdot
-\left(\frac{1}{2} - \left(\frac{1}{2} \cdot \frac{9}{10} \cdot \frac{1}{2}
-+ \frac{1}{2} \cdot \frac{1}{10} \cdot \left(\frac{1}{2} + 1 \right)\right)\right) = \frac{4}{9}
-\end{aligned}
-$$
-
-. . .
-
-[]{.down20}
-
-→ Zwei völlig unterschiedliche Verteilungen mit demselben Gini-Koeffizienten: Immer die gesamte Verteilung im
-Blick behalten
+→ Es ist $G^*_A = G^*_B = 4/9$. Nie die Verteilung aus dem Auge verlieren!
+:::
 
 ## Literatur
 

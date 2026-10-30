@@ -47,8 +47,8 @@ tab_niederschlag_sortiert <- function(d) {
 
 # Arithmetisches Mittel
 d_bsp_mittelwert <- tibble(
-  X = c(1, 2, 6, 2, 5, 2, 4, 3, 1, 3, 2, 1, 2, 3, 4, 1, 2),
-  Y = c(1, 2, 6, 2, 5, 2, 4, 3, 1, 3, 2, 1, 21, 3, 4, 1, 2)
+  X = c(1, 2,  6, 2, 5, 2, 4, 3, 1, 3, 2, 1, 2, 3, 4, 1, 2),
+  Y = c(1, 2, 30, 2, 5, 2, 4, 3, 1, 3, 2, 1, 2, 3, 4, 1, 2)
 )
 
 # Median
@@ -84,6 +84,33 @@ d_reservoir_x <-
   drop_na()
 
 # Funktionen zum Plotten
+
+p_mittelwert_schwerpunkt <- function() {
+  bar_y <- 0.3
+  ticklength <- 0.1
+  positions <- c(1, 2, 2, 2, 3, 4, 6, 8, 17)
+  threads <- tibble(X = unique(positions), Y = c(0, -1.5, 0, 0, 0, 0, 0))
+
+  ggplot(data = tibble(X = positions)) +
+    geom_hline(yintercept = bar_y, linewidth = 1) +
+    geom_segment(
+      data = threads,
+      mapping = aes(x = X, xend = X, y = bar_y + ticklength, yend = Y),
+      linewidth = 0.35
+    ) +
+    geom_dotplot(
+      mapping = aes(x = X),
+      method = "histodot",
+      dotsize = 0.75,
+      binwidth = 1,
+      stackdir = "down",
+      stackratio = 1.25
+    ) +
+    annotate("point", x = mean(positions), y = bar_y - 0.15, size = 4) +
+    ylim(-2, 0.75) +
+    theme_void()
+}
+
 p_mittelwert <- function(d, m) {
   x_bar <- mean(pull(d, {{ m }}))
   ggplot(data = d) +
@@ -94,11 +121,11 @@ p_mittelwert <- function(d, m) {
       binwidth = 1,
       stackratio = 1.25
     ) +
-    geom_vline(xintercept = x_bar, color = "red", linewidth = 1.15) +
+    geom_vline(xintercept = x_bar, color = "red", linewidth = 1) +
     scale_x_continuous(
-      breaks = c(1, 10, 20),
-      minor_breaks = 1:21,
-      limits = c(1, 21)
+      breaks = c(1, 10, 20, 30, 40),
+      minor_breaks = 1:100,
+      limits = c(1, 30)
     ) +
     scale_y_continuous(breaks = NULL, minor_breaks = NULL, limits = c(0, 1)) +
     annotate(
@@ -223,6 +250,41 @@ d_niederschlag_am <- d_ns_bo_2008_2010_monat |>
   ) |>
   ungroup()
 
+# Monatliche Niederschläge mit Mittelwerten
+p_niederschlag_monate <- function() {
+  ggplot(
+    data = d_ns_bo_2008_2010_monat,
+    mapping = aes(x = Monat, y = Niederschlag, color = Jahr, group = Jahr)
+  ) +
+    geom_hline(
+      data = d_niederschlag_kenngroessen,
+      mapping = aes(yintercept = Mittelwert, color = Jahr)
+    ) +
+    geom_line(linewidth = 1.15) +
+    geom_point(size = 3) +
+    labs(x = NULL, y = "Monatlicher Niederschlag in mm")
+}
+
+# Abweichungen der monatlichen Niederschläge vom Mittelwert
+p_abweichungen_mittelwert <- function() {
+  ggplot(mapping = aes(x = Monat, y = Niederschlag, fill = Jahr, color = Jahr, group = Jahr)) +
+    geom_hline(yintercept = 0) +
+    geom_hline(
+      data = d_niederschlag_kenngroessen,
+      mapping = aes(yintercept = Mittelwert, color = Jahr),
+      alpha = 0.5
+    ) +
+    geom_line(data = d_ns_bo_2008_2010_monat, alpha = 0.5, linewidth = 1) +
+    geom_col(
+      data = d_niederschlag_am,
+      color = "black",
+      position = "dodge",
+      width = 0.7
+    ) +
+    coord_cartesian(ylim = c(-60, 120)) +
+    labs(x = NULL, y = NULL, title = "Abweichungen vom Mittelwert")
+}
+
 
 # -------------------------------------------------------------------------------------------------
 # Quantile und Box-Plots
@@ -268,26 +330,50 @@ p_stichprobe_marker <- function(p, v, l, py = 0.15, hjust = -0.2) {
     )
 }
 
-p_fuenfpunkt_zusammenfassung <- function(d) {
+# Quantile an der empirischen Verteilungsfunktion ablesen
+p_quantile_verteilungsfunktion <- function() {
+  p <- c(0.05, 0.33, 0.75)
+  xp <- quantile(pull(d_random_sample, "X"), p, type = 2)
+
+  p_stichprobe_raw() +
+    geom_step(
+      data = tibble(X = mix(-10, xp), Y = mix(p, -10), G = rep(1:3, each = 2)),
+      mapping = aes(x = X, y = Y, group = G),
+      color = "hotpink"
+    ) +
+    stat_ecdf(mapping = aes(x = X)) +
+    scale_x_continuous(
+      breaks = xp,
+      labels = c(expression(x[0.05]), expression(x[0.33]), expression(x[0.75])),
+      minor_breaks = pull(d_random_sample, "X")
+    ) +
+    scale_y_continuous(breaks = c(0, p), minor_breaks = NULL) +
+    coord_cartesian(xlim = c(0, 100), ylim = c(-0.1, 1)) +
+    labs(x = NULL, y = "F(x)")
+}
+
+p_fuenfpunkt_zusammenfassung <- function(d, py = 0.15) {
   x <- pull(d, X)
 
   p_stichprobe(d) |>
-    p_stichprobe_marker(min(x), "x[min]") |>
+    p_stichprobe_marker(min(x), "x[min]", py = py) |>
     p_stichprobe_marker(
       quantile(x, 0.25, type = 2),
       "x[0.25]",
+      py = py,
       hjust = 1.05
     ) |>
     p_stichprobe_marker(
       quantile(x, 0.50, type = 2),
       "x[med]",
+      py = py,
       hjust = 0.5
     ) |>
-    p_stichprobe_marker(quantile(x, 0.75, type = 2), "x[0.75]") |>
-    p_stichprobe_marker(max(x), "x[max]", hjust = 1.05)
+    p_stichprobe_marker(quantile(x, 0.75, type = 2), "x[0.75]", py = py) |>
+    p_stichprobe_marker(max(x), "x[max]", py = py, hjust = 1.05)
 }
 
-fig_boxplot <- function() {
+fig_boxplot <- function(py = 0.15) {
   d <- tibble(
     X = c(-15, -14, -6, -5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 7, 12, 15, 16)
   )
@@ -302,8 +388,8 @@ fig_boxplot <- function() {
   normal_min <- x_25 - 1.5 * d_q
   normal_max <- x_75 + 1.5 * d_q
   by <- 0.02
-  bh <- 0.03
-  ay <- -0.225
+  bh <- 0.04
+  ay <- -0.2
 
   whisker <- d |>
     filter(normal_min <= X & X <= normal_max) |>
@@ -315,7 +401,7 @@ fig_boxplot <- function() {
   outliers <- d |>
     filter(X < normal_min | X > normal_max)
 
-  p_fuenfpunkt_zusammenfassung(d) +
+  p_fuenfpunkt_zusammenfassung(d, py = py) +
     geom_vline(
       xintercept = c(normal_min, normal_max)
     ) +
@@ -364,16 +450,49 @@ fig_boxplot <- function() {
       ),
       y = ay,
       label = c(
-        TeX("$1.5 \\cdot d_q$", output = "character"),
-        TeX("$d_q$", output = "character"),
-        TeX("$1.5 \\cdot d_q$", output = "character")
+        TeX("$1.5 \\cdot d_Q$", output = "character"),
+        TeX("$d_Q$", output = "character"),
+        TeX("$1.5 \\cdot d_Q$", output = "character")
       ),
       fill = "white",
       border.color = "white",
       label.padding = unit(1, "lines"),
       parse = TRUE,
       size = annotation_fontsize
+    ) +
+    # Punkte der Stichprobe nochmals, damit die Beschriftung der Maßlinie sie nicht verdeckt
+    geom_point(
+      mapping = aes(x = X, y = -0.1),
+      size = 3,
+      shape = 21,
+      fill = "orange"
     )
+}
+
+# Box-Plots der monatlichen Niederschläge, daneben die Werte
+p_boxplot_monatlich <- function() {
+  d_ns_bo_2008_2010_monat |>
+    mutate(X = if_else(Jahr == 2008, 0, 3)) |>
+    ggplot() +
+    geom_boxplot(mapping = aes(x = Jahr, y = Niederschlag)) +
+    geom_point(
+      mapping = aes(x = X, y = Niederschlag, fill = Monat),
+      shape = 21,
+      color = "black",
+      size = 3
+    ) +
+    scale_fill_brewer(palette = "Set3") +
+    labs(x = NULL, y = NULL, title = "Monatliche Niederschläge in mm") +
+    coord_cartesian(xlim = c(0, 3))
+}
+
+# Box-Plots der täglichen Niederschläge für jeden Monat
+p_boxplot_taeglich <- function() {
+  ggplot(data = d_ns_bo_2008_2010) +
+    geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
+    facet_wrap(~Jahr) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+    labs(x = NULL, y = NULL, title = "Tägliche Niederschläge in mm")
 }
 
 
@@ -439,6 +558,22 @@ d_bsp_gini <-
       ungroup(),
     by = join_by(adm0_a3 == iso3c)
   )
+
+# Weltkarte mit Gini-Koeffizienten der Einkommen
+p_gini_welt <- function(legend_position = "right") {
+  ggplot(data = d_bsp_gini) +
+    geom_sf(mapping = aes(fill = gini / 100)) +
+    scale_fill_gradient2(
+      high = "#fc8d59",
+      low = "#91bfdb",
+      mid = "#ffffbf",
+      midpoint = median(pull(d_bsp_gini, gini) / 100, na.rm = TRUE),
+      na.value = "#C4BCB3"
+    ) +
+    theme_void() +
+    theme(legend.position = legend_position) +
+    labs(fill = NULL)
+}
 
 p_lorenzkurve <- function(d, v, t = v, mb = NULL) {
   x <- sort(c(0, pull(d, v)))
