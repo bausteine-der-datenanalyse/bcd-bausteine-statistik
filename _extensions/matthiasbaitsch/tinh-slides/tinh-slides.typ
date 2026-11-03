@@ -74,6 +74,8 @@
 // Befehle (Klassen per environment.lua der Bridge und commands: in _extension.yml, z. B. [Begriff]{.neuerbegriff})
 #let neuerbegriff(body) = text(fill: rgb("#9a2515"), weight: "regular", body)
 #let eng(body) = emph(body)
+// Abschnitte (Überschriften 1) als Aufzählung, z. B. []{.inhalt} auf einer Inhaltsfolie
+#let inhalt(body) = context list(tight: false, ..query(heading.where(level: 1)).map(h => h.body))
 #let ja(body) = text(fill: rgb("#2e7d32"))[✓]
 #let nein(body) = text(fill: red)[✗]
 
