@@ -4,10 +4,13 @@
 Dargestellt ist ein Ausschnitt einer Geschwindigkeitsmessung mit dem Seitenradar an der Universitätsstraße in Bochum.
 
 ```{r}
-#| echo: false
-
+#| include: false
 library(tidyverse)
 library(gt)
+```
+
+```{r}
+#| echo: false
 
 tibble(
   Datum = c(

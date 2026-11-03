@@ -167,10 +167,15 @@ $ x_"med" = cases(
 
 ## Beispiel: Median
 
-[]{.down50}
-[]{.down50}
+```{=typst}
+#image("notizen/Beispiel- Median.pdf", page: 1, height: 100%)
+```
 
-### → iPad
+## Beispiel: Median
+
+```{=typst}
+#image("notizen/Beispiel- Median.pdf", page: 2, height: 100%)
+```
 
 ## Eigenschaften des Medians
 
@@ -320,10 +325,15 @@ $$
 
 ## Beispiel: Geometrisches Mittel
 
-[]{.down50}
-[]{.down50}
+```{=typst}
+#image("notizen/Beispiel- Geometrisches Mittel.pdf", page: 1, height: 100%)
+```
 
-### → iPad
+## Beispiel: Geometrisches Mittel
+
+```{=typst}
+#image("notizen/Beispiel- Geometrisches Mittel.pdf", page: 2, height: 100%)
+```
 
 ## Harmonisches Mittel
 
@@ -593,10 +603,9 @@ Für $0 < p < 1$ teilt das $p$-Quantil $x_p$ die Stichprobe so, dass mindestens 
 
 ## Beispiel: Quantil
 
-[]{.down50}
-[]{.down50}
-
-### → iPad
+```{=typst}
+#image("notizen/Beispiel- Quantilwerte.pdf", page: 1, height: 100%)
+```
 
 ## Beispiel: Lage von Quantilen
 
@@ -852,10 +861,9 @@ Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
 
 ## Beispiel: Lorenzkurve
 
-[]{.down50}
-[]{.down50}
-
-### → iPad
+```{=typst}
+#image("notizen/Beispiel- Lorenzkurve.pdf", page: 1, height: 100%)
+```
 
 ## Gini-Koeffizient
 

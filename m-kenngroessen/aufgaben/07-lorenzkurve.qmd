@@ -4,11 +4,14 @@
 In den drei Städten A, B und C teilen sich Bauleistungen auf jeweils fünf Firmen wie folgt auf (in 100000 Euro):
 
 ```{r}
-#| echo: false
-#| warning: false
-
+#| include: false
 library(tidyverse)
 library(gt)
+```
+
+```{r}
+#| echo: false
+#| warning: false
 
 d <- tibble(
   Stadt = c("A", "B", "C"),
