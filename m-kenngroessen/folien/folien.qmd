@@ -9,42 +9,15 @@ execute:
 #| include: false
 source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 withr::with_dir("../skript", source("01-daten/kenngroessen.R"))
-
-d_streuung <- d_ns_bo_2008_2010_monat |>
-  group_by(Jahr) |>
-  summarise(
-    Mittelwert = mean(Niederschlag),
-    Varianz = mean((Niederschlag - Mittelwert)^2),
-    Standardabweichung = sqrt(Varianz),
-    Variationskoeffizient = Standardabweichung / Mittelwert,
-    Stichprobenvarianz = var(Niederschlag)
-  )
-
-kg <- function(d, v, i, digits = 2) {
-  format(round(pluck(d, v, i), digits), nsmall = digits)
-}
-
-tab_monate <- function(d) {
-  d |>
-    mutate(Niederschlag = round(Niederschlag, 2)) |>
-    pivot_wider(names_from = Monat, values_from = Niederschlag) |>
-    tt()
-}
 ```
 
 ## Inhalt
 
 []{.down50}
 
-- Lagemaße
+[]{.inhalt}
 
-- Maße der Variabilität
-
-- Quantile und Box-Plots
-
-- Konzentrationsmaß: Der Gini-Koeffizient
-
-# Lagemaße
+# Mittelwert, Median und Modus
 
 ## Lagemaß: Ein Maß für das Zentrum
 
@@ -239,6 +212,80 @@ Der [Modus]{.neuerbegriff} $x_\mathrm{mod}$ ist diejenige Ausprägung eines Merk
 
 - Im Säulendiagramm die Ausprägung mit der höchsten Säule
 
+# Lageregeln
+
+## 
+
+[]{.up40}
+
+::: {#exm-lageregeln}
+
+## Mittelwert, Median und Modus für drei verschiedene Stichproben
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.325
+
+p1 <- p_lageregeln(d_bsp_lageregeln, I)
+p2 <- p_lageregeln(d_bsp_lageregeln, II)
+p3 <- p_lageregeln(d_bsp_lageregeln, III)
+p1 +
+  p2 +
+  p3 +
+  plot_layout(axes = "collect", guides = "collect") &
+  theme(plot.title = element_text(size = 12))
+```
+
+[]{.down10}
+
+```{r}
+d_bsp_lageregeln |>
+  pivot_longer(-a, names_to = "Stichprobe", values_to = "n") |>
+  uncount(n) |>
+  summarise(
+    `$macron(x)$` = mean(a),
+    `$x_"med"$` = median(a),
+    `$x_"mod"$` = modes(a),
+    .by = Stichprobe
+  ) |>
+  mutate(
+    `Form der Verteilung` = c("linkssteil", "symmetrisch", "rechtssteil"),
+    `Lagemaße` = c(
+      '$macron(x) > x_"med" > x_"mod"$',
+      '$macron(x) = x_"med" = x_"mod"$',
+      '$macron(x) < x_"med" < x_"mod"$'
+    )
+  ) |>
+  tt(width = c(15, 6, 6, 6, 22, 22) / 100, height = 1.8) |>
+  format_tt(j = 2, digits = 2, num_fmt = "decimal", num_zero = TRUE) |>
+  style_tt(align = "c", alignv = "m")
+```
+
+:::
+
+## Verallgemeinerung
+
+### Für eine unimodale Verteilung gilt meistens
+
+|             |        |                                                         |
+|------------:|:------:|:--------------------------------------------------------|
+| linkssteil  | $\iff$ | $\bar{x} > x_\mathrm{med} > x_\mathrm{mod}$             |
+| symmetrisch | $\iff$ | $\bar{x} \approx x_\mathrm{med} \approx x_\mathrm{mod}$ |
+| rechtssteil | $\iff$ | $\bar{x} < x_\mathrm{med} < x_\mathrm{mod}$             |
+
+. . .
+
+### Warum ist das so?
+
+- Bei einer schiefen Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in diese Richtung
+
+- Typischerweise liegen auf der steilen Seite des Modus weniger als die Hälfte der Werte. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel
+
+- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetische Mittel und der Median
+
+# Weitere Lagemaße
+
 ## Geometrisches Mittel
 
 ::: {#def-geometrisches-mittel}
@@ -296,87 +343,15 @@ das [harmonische Mittel]{.neuerbegriff}.
 
 Das harmonische Mittel wird für Verhältnisgrößen verwendet, wenn die Zählergröße für alle Werte gleich ist, z. B. die mittlere Geschwindigkeit auf gleich langen Teilstrecken.
 
-# Lageregeln
-
-## 
-
-[]{.up40}
-
-::: {#exm-lageregeln}
-
-## Mittelwert, Median und Modus für drei verschiedene Stichproben
-
-[]{.up10}
-
-```{r}
-#| fig-asp: 0.325
-
-p1 <- p_lageregeln(d_bsp_lageregeln, I)
-p2 <- p_lageregeln(d_bsp_lageregeln, II)
-p3 <- p_lageregeln(d_bsp_lageregeln, III)
-p1 +
-  p2 +
-  p3 +
-  plot_layout(axes = "collect", guides = "collect") &
-  theme(plot.title = element_text(size = 12))
-```
-
-[]{.down10}
-
-```{r}
-d_bsp_lageregeln |>
-  pivot_longer(-a, names_to = "Stichprobe", values_to = "n") |>
-  uncount(n) |>
-  summarise(
-    `$macron(x)$` = mean(a),
-    `$x_"med"$` = median(a),
-    `$x_"mod"$` = modes(a),
-    .by = Stichprobe
-  ) |>
-  mutate(
-    `Form der Verteilung` = c("linkssteil", "symmetrisch", "rechtssteil"),
-    `Lagemaße` = c(
-      '$macron(x) > x_"med" > x_"mod"$',
-      '$macron(x) = x_"med" = x_"mod"$',
-      '$macron(x) < x_"med" < x_"mod"$'
-    )
-  ) |>
-  tt(width = c(15, 6, 6, 6, 22, 22) / 100, height = 1.8) |>
-  format_tt(j = 2, digits = 2, num_fmt = "decimal", num_zero = TRUE) |>
-  style_tt(align = "c", alignv = "m")
-```
-
-:::
-
-## Verallgemeinerung: Lageregeln
-
-### Für eine unimodale Verteilung gilt meistens
-
-|             |        |                                                         |
-|------------:|:------:|:--------------------------------------------------------|
-| linkssteil  | $\iff$ | $\bar{x} > x_\mathrm{med} > x_\mathrm{mod}$             |
-| symmetrisch | $\iff$ | $\bar{x} \approx x_\mathrm{med} \approx x_\mathrm{mod}$ |
-| rechtssteil | $\iff$ | $\bar{x} < x_\mathrm{med} < x_\mathrm{mod}$             |
-
-. . .
-
-### Warum ist das so?
-
-- Bei einer schiefen Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in diese Richtung
-
-- Typischerweise liegen auf der steilen Seite des Modus weniger als die Hälfte der Werte. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel
-
-- Bei einer symmetrischen Verteilung liegt der höchste Punkt in der Mitte, ebenso das arithmetische Mittel und der Median
-
 # Maße der Variabilität
 
 ## Sommer 2010
 
 ::: {.columns}
-::: {.column width=70%}
+::: {.column width=65%}
 ![](../skript/00-bilder/sommer-2010.svg){fig-align="center"}
 :::
-::: {.column width=30%}
+::: {.column width=35%}
 Elbe in Dresden im Juli (links) und August (rechts)
 :::
 :::
@@ -559,9 +534,9 @@ $$
 [Variationskoeffizient]{.neuerbegriff}.
 :::
 
-→ Variabilität im Verhältnis zum Mittelwert
+- Variabilität im Verhältnis zum Mittelwert
 
-[]{.down10}
+- nur für Merkmale mit natürlichem Nullpunkt (also nicht für Temperatur in °C)
 
 . . .
 
@@ -597,12 +572,6 @@ Für größere Werte von $n$ ist der Unterschied zwischen $\tilde{s}^2$ und $s^2
 
 ## Vom Median zum Quantil
 
-```{r}
-x <- pull(d_random_sample, X)
-```
-
-. . .
-
 []{.down20}
 
 ### Bekannt: Median
@@ -611,16 +580,18 @@ Der Median $x_\mathrm{med}$ teilt die Stichprobe so, dass mindestens $50\%$ der 
 
 ```{r}
 #| fig-asp: 0.125
-
+x <- pull(d_random_sample, X)
 p_stichprobe() |>
   p_stichprobe_marker(median(x), "x[med]", py = 0.05)
 ```
+
+. . .
 
 ### Neu: Quantil
 
 Für $0 < p < 1$ teilt das $p$-Quantil $x_p$ die Stichprobe so, dass mindestens $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und mindestens $(1 - p) \cdot 100\%$ größer oder gleich $x_p$ sind
 
-## Beispiel: Median
+## Beispiel: Quantil
 
 []{.down50}
 []{.down50}
@@ -650,7 +621,7 @@ p_stichprobe() |>
 ```
 :::
 
-## Quantilwerte
+## Quantile
 
 ::: {#def-quantil}
 Eine Zahl $x_p$ mit $0 < p < 1$ heißt [$p$-Quantil]{.neuerbegriff}, wenn mindestens ein Anteil von $p \cdot 100\%$ der Werte kleiner oder gleich $x_p$ und mindestens ein Anteil von $(1-p) \cdot 100\%$ größer oder gleich $x_p$ ist.
@@ -735,7 +706,7 @@ $$
 d_\mathrm{Q} = x_{0.75} - x_{0.25}
 $$
 
-## Box-Plot -- John W. Tukey (1915 – 2000)
+## Box-Plot – John W. Tukey (1915 – 2000)
 
 ```{r}
 #| fig-asp: 0.2

@@ -16,6 +16,11 @@ modes <- function(x) {
   ux[tab == max(tab)]
 }
 
+# Wert v in Zeile i von d gerundet mit festen Nachkommastellen, z. B. für Inline-Ausgaben
+kg <- function(d, v, i, digits = 2) {
+  format(round(pluck(d, v, i), digits), nsmall = digits)
+}
+
 tab_niederschlag <- function(d) {
   d |>
     pivot_wider(names_from = Monat, values_from = Niederschlag) |>
@@ -249,6 +254,16 @@ d_niederschlag_am <- d_ns_bo_2008_2010_monat |>
     Niederschlag = Niederschlag - mean(Niederschlag)
   ) |>
   ungroup()
+
+d_streuung <- d_ns_bo_2008_2010_monat |>
+  group_by(Jahr) |>
+  summarise(
+    Mittelwert = mean(Niederschlag),
+    Varianz = mean((Niederschlag - Mittelwert)^2),
+    Standardabweichung = sqrt(Varianz),
+    Variationskoeffizient = Standardabweichung / Mittelwert,
+    Stichprobenvarianz = var(Niederschlag)
+  )
 
 # Monatliche Niederschläge mit Mittelwerten
 p_niederschlag_monate <- function() {
