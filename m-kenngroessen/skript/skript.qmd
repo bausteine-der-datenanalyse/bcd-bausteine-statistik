@@ -140,7 +140,7 @@ Anders als das arithmetische Mittel kann der Median auch für ordinalskalierte M
 ::: {#exm-gueteklasse}
 ## Güteklasse
 
-Die Erhebung eines Merkmals „Güteklasse“ ergibt
+Die Erhebung eines Merkmals "Güteklasse" ergibt
 
 ```{r}
 d_bsp_median |>
@@ -228,7 +228,7 @@ Außerdem halten wir fest, dass alle Verteilungen unimodal sind.
 
 Muss der im Beispiel beobachtete Zusammenhang zwischen Symmetrie und Steilheit und den Größen der Lagemaße immer gelten? Wir überlegen uns hierzu:
 
-- Für eine schiefe Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in die Richtung der Schiefe.
+- Für eine schiefe Verteilung zieht der "Hebelarm" der flach auslaufenden Seite das arithmetische Mittel in die Richtung der Schiefe.
 
 - Typischerweise sind auf der steilen Seite des Modus weniger als die Hälfte der Werte angesiedelt. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel.
 
@@ -863,7 +863,7 @@ sind in jedem Abschnitt fünf Werte enthalten.
 
 ### Box-Plot
 
-Mit einem Box-Plot wird die Fünf-Punkte-Zusammenfassung graphisch dargestellt. Dabei wird unterschieden, ob es sich bei den Beobachtungen um „normale“ Werte oder um vermutete Ausreißer handelt. Der Boxplot ist eine komprimierte Zusammenfassung, an der man einfach ablesen kann, wo die Verteilung liegt, wie stark sie streut, ob sie schief oder symmetrisch ist und ob es in dem Datensatz Ausreißer gibt.
+Mit einem Box-Plot wird die Fünf-Punkte-Zusammenfassung graphisch dargestellt. Dabei wird unterschieden, ob es sich bei den Beobachtungen um "normale" Werte oder um vermutete Ausreißer handelt. Der Boxplot ist eine komprimierte Zusammenfassung, an der man einfach ablesen kann, wo die Verteilung liegt, wie stark sie streut, ob sie schief oder symmetrisch ist und ob es in dem Datensatz Ausreißer gibt.
 
 ```{r}
 #| fig-asp: 0.3
@@ -960,7 +960,7 @@ p1 + p2 + p3 + plot_layout(axes = "collect")
 ```
 :::
 
-Da die Beiträge sortiert sind, ist die Lorenzkurve wachsend. Dabei nimmt die Steigung der Liniensegmente nach rechts hin zu oder bleibt gleich, die Lorenzkurve verläuft daher nie oberhalb der Diagonalen. Sind alle Werte des Merkmals gleich groß, dann ist die Lorenzkurve die Winkelhalbierende zwischen den Koordinatenachsen. Je stärker sich die Werte unterscheiden, umso größer wird der „Bauch“ der Kurve.
+Da die Beiträge sortiert sind, ist die Lorenzkurve wachsend. Dabei nimmt die Steigung der Liniensegmente nach rechts hin zu oder bleibt gleich, die Lorenzkurve verläuft daher nie oberhalb der Diagonalen. Sind alle Werte des Merkmals gleich groß, dann ist die Lorenzkurve die Winkelhalbierende zwischen den Koordinatenachsen. Je stärker sich die Werte unterscheiden, umso größer wird der "Bauch" der Kurve.
 
 Aus dem Beispiel oben können wir die Rechenvorschrift für die Punkte der Lorenzkurve ableiten und in der folgenden Definition festhalten.
 

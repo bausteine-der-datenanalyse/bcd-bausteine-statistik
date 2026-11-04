@@ -283,7 +283,7 @@ d_bsp_lageregeln |>
 
 ### Warum ist das so?
 
-- Bei einer schiefen Verteilung zieht der „Hebelarm“ der flach auslaufenden Seite das arithmetische Mittel in diese Richtung
+- Bei einer schiefen Verteilung zieht der "Hebelarm" der flach auslaufenden Seite das arithmetische Mittel in diese Richtung
 
 - Typischerweise liegen auf der steilen Seite des Modus weniger als die Hälfte der Werte. Der Median liegt daher bei einer schiefen Verteilung zwischen Modus und arithmetischem Mittel
 
@@ -828,7 +828,7 @@ Damit ist auch klar, dass $u_n = v_n = 1$ gelten muss.
 
 - Verläuft unterhalb der Diagonalen
 
-- „Bauch“ umso größer, je stärker die Konzentration
+- "Bauch" umso größer, je stärker die Konzentration
 
 ## Beispiel: Lorenzkurve
 

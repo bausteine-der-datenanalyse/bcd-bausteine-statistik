@@ -33,7 +33,7 @@ Grundlage jeder statistischen Untersuchung sind Daten, zum Beispiel aus
 
 ![](../skript/00-bilder/mobilitaetsbefragung.svg){fig-align="center" height="70%"}
 
-- Befragung unter Angehörigen der BO im Modul „Methoden der Verkehrsplanung“ 
+- Befragung unter Angehörigen der BO im Modul "Methoden der Verkehrsplanung" 
 - Von wo und mit welchen Verkehrsmitteln kommen die Befragten zur Hochschule?
 - Knapp 300 Fragebögen, Antworten zur einfacheren Übertragung mit Ziffern codiert
 
@@ -274,7 +274,7 @@ Intervall- und Verhältnisskala heißen zusammen [Kardinalskala]{.neuerbegriff} 
 
 Temperatur in Grad Celsius ist intervallskaliert:
 
-> „Gestern Mittag waren es 10 °C, heute sind es 20 °C. Es ist also doppelt so warm.“
+> "Gestern Mittag waren es 10 °C, heute sind es 20 °C. Es ist also doppelt so warm."
 
 → nicht sinnvoll
 
@@ -284,7 +284,7 @@ Temperatur in Grad Celsius ist intervallskaliert:
 
 Geschwindigkeit ist verhältnisskaliert:
 
-> „Mein Porsche fährt mehr als doppelt so schnell wie dein Smart.“
+> "Mein Porsche fährt mehr als doppelt so schnell wie dein Smart."
 
 → sinnvoll
 

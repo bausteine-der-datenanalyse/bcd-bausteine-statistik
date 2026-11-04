@@ -81,7 +81,7 @@ Für die Schätzung von Parametern gibt es zwei verschiedene Ansätze:
 
 Punktschätzung
 
-: Ein unbekannter Parameter soll möglichst gut durch einen Schätzwert „getroffen" werden. Der Schätzwert ist ein Punkt auf dem Zahlenstrahl, daher nennt man diese Art der Schätzung Punktschätzung.
+: Ein unbekannter Parameter soll möglichst gut durch einen Schätzwert "getroffen" werden. Der Schätzwert ist ein Punkt auf dem Zahlenstrahl, daher nennt man diese Art der Schätzung Punktschätzung.
 
 Intervallschätzung
 
@@ -350,7 +350,7 @@ x \cdot (1-p) - (n-x) p = 0
 \iff
 x - px - np + px = 0
 $$
-erhalten wir den „optimalen Wert"
+erhalten wir den "optimalen Wert"
 $$
 p = \frac{x}{n}
 $$

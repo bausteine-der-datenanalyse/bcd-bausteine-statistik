@@ -165,7 +165,7 @@ Wir können uns nun fragen, mit welcher Wahrscheinlichkeit die verschiedenen Pun
 $$
 P(X = 50) = P(\text{„Bull's Eye"}) \approx 0.0014.
 $$
-Demgegenüber kann der Wert $20$ durch einen Treffer in „einfach 20" oder „doppelt 10" erreicht werden. Die beiden Ereignisse sind disjunkt und wir können die Wahrscheinlichkeiten addieren. Damit ist
+Demgegenüber kann der Wert $20$ durch einen Treffer in "einfach 20" oder "doppelt 10" erreicht werden. Die beiden Ereignisse sind disjunkt und wir können die Wahrscheinlichkeiten addieren. Damit ist
 $$
 P(X = 20) = P(\text{„Single"}) + P(\text{„Double Ring"}) \approx 0.0420 + 0.0046 = 0.0466.
 $$
@@ -410,7 +410,7 @@ Die Variable heißt wieder $X$, damit die Bezeichnung nicht von den Definitionen
 
 ![](00-bilder/zufallsvariable-2-darts.svg)
 
-Wie können wir nun die Wahrscheinlichkeit für das Eintreten bestimmter Werte für den Radius charakterisieren? Würde es Sinn machen, wie bei der Punktzahl über das Eintreten einzelner Zahlenwerte für den Radius, zum Beispiel $P(X = 123.3864912)$, nachzudenken? Nach kurzem Überlegen lautet die Antwort natürlich „Nein", denn es gibt ja überabzählbar unendlich viele Werte zwischen 0 mm und 170 mm.
+Wie können wir nun die Wahrscheinlichkeit für das Eintreten bestimmter Werte für den Radius charakterisieren? Würde es Sinn machen, wie bei der Punktzahl über das Eintreten einzelner Zahlenwerte für den Radius, zum Beispiel $P(X = 123.3864912)$, nachzudenken? Nach kurzem Überlegen lautet die Antwort natürlich "Nein", denn es gibt ja überabzählbar unendlich viele Werte zwischen 0 mm und 170 mm.
 
 Was wir uns jedoch fragen können, ist, wie groß die Wahrscheinlichkeit ist, dass der Pfeil innerhalb eines Kreises mit einem bestimmten Radius auftrifft. Dabei sehen wir sofort, dass
 $$
@@ -531,7 +531,7 @@ Beachten Sie, dass die Eigenschaften weitgehend mit denen diskreter Zufallsvaria
 
 #### Erwartungswert, Varianz und Standardabweichung
 
-In der empirischen Untersuchung des Experiments haben wir auch für das stetige Merkmal „Abstand vom Ursprung" mit den uns bekannten Methoden einen Mittelwert und eine Standardabweichung berechnet. Wie können wir diese Werte nun auf der Basis theoretischer Überlegungen vorhersagen? Genau diese Information liefert uns der Erwartungswert einer Zufallsvariablen.
+In der empirischen Untersuchung des Experiments haben wir auch für das stetige Merkmal "Abstand vom Ursprung" mit den uns bekannten Methoden einen Mittelwert und eine Standardabweichung berechnet. Wie können wir diese Werte nun auf der Basis theoretischer Überlegungen vorhersagen? Genau diese Information liefert uns der Erwartungswert einer Zufallsvariablen.
 
 ::: {#def-erwartungswert-stetig}
 ## Erwartungswert einer stetigen Zufallsvariablen

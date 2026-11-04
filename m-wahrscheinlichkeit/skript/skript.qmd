@@ -21,7 +21,7 @@ Im Alltag denken wir ständig in Begriffen wie:
 
 Aber auch bei sehr ernsten Themen geht es ähnlich zu:
 
-- Die Autoren der „Deutschen Risikostudie Kernkraftwerke – Phase B" kamen 1989 für das Kernkraftwerk Biblis zum Ergebnis, dass die Wahrscheinlichkeit für eine Kernschmelze pro Reaktor-Betriebsjahr bei 3.6 Millionstel liegt [@deutsche_1990].
+- Die Autoren der "Deutschen Risikostudie Kernkraftwerke – Phase B" kamen 1989 für das Kernkraftwerk Biblis zum Ergebnis, dass die Wahrscheinlichkeit für eine Kernschmelze pro Reaktor-Betriebsjahr bei 3.6 Millionstel liegt [@deutsche_1990].
 
 Es geht also letztlich darum, die Chance für das Eintreten eines Ereignisses zu bewerten und daraus Entscheidungen für Handlungen abzuleiten. Während Ihre Einschätzung über den Erlös für das Fahrrad eindeutig eine subjektive Einschätzung ist, fußen die Aussagen über das Wetter oder die Reaktorsicherheit auf einer mathematischen Theorie des Zufalls (was natürlich niemanden davor bewahrt, unzutreffende Aussagen daraus abzuleiten).
 

@@ -24,7 +24,7 @@ plot_dartscheibe() +
 
 Wir verwenden das Darts-Spiel als Denkmodell und zählen nur Würfe, die auf der Scheibe landen. Gleichzeitig gehen wir davon aus, dass jede Stelle der Scheibe mit der gleichen Wahrscheinlichkeit getroffen wird. Die Drähte, mit denen die Felder unterteilt werden, vernachlässigen wir. Nach 2500 Würfen könnte sich damit zum Beispiel das oben dargestellte Bild ergeben.
 
-Die Wahrscheinlichkeit dafür, dass ein bestimmtes Feld getroffen wird, entspricht unter diesen Bedingungen genau dem Verhältnis der Fläche des Feldes zur Gesamtfläche der Scheibe. Bezeichnet also $A$ das Ereignis „Pfeil steckt in Triple 20", dann ist
+Die Wahrscheinlichkeit dafür, dass ein bestimmtes Feld getroffen wird, entspricht unter diesen Bedingungen genau dem Verhältnis der Fläche des Feldes zur Gesamtfläche der Scheibe. Bezeichnet also $A$ das Ereignis "Pfeil steckt in Triple 20", dann ist
 $$
 P(A) = \frac{\text{Fläche eines Triple-Feldes}}{\text{Fläche der Scheibe}}
 $$
@@ -41,7 +41,7 @@ $$
 
 ![](00-bilder/darts-a-b.svg){width=40%}
 
-Wir fragen uns nun nach der Wahrscheinlichkeit für das Ereignis $A$, wenn wir wissen, dass $B$ eingetreten ist (stellen Sie sich vor, Sie stehen im Nebenzimmer und jemand ruft Ihnen durch die offene Tür „20" zu).
+Wir fragen uns nun nach der Wahrscheinlichkeit für das Ereignis $A$, wenn wir wissen, dass $B$ eingetreten ist (stellen Sie sich vor, Sie stehen im Nebenzimmer und jemand ruft Ihnen durch die offene Tür "20" zu).
 
 In einer solchen Situation spricht man von einer bedingten Wahrscheinlichkeit: Wie wahrscheinlich ist $A$ unter der Voraussetzung $B$? Dabei gilt die Schreibweise
 $$

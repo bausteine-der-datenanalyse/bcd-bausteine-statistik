@@ -22,7 +22,7 @@ a. Sie schreiben morgen eine Klausur. Welches Ergebnis erreichen Sie?
 
 a. Sie wollen Ihr 5 Jahre altes Fahrrad (Neupreis 455 Euro) verkaufen. Wie viel bekommen Sie dafür?
 
-a. Bei dem Würfelspiel „Mäxchen" wird mit zwei Würfeln gewürfelt. Der Würfel mit der größeren Augenzahl kommt zuerst. Hier die möglichen Kombinationen
+a. Bei dem Würfelspiel "Mäxchen" wird mit zwei Würfeln gewürfelt. Der Würfel mit der größeren Augenzahl kommt zuerst. Hier die möglichen Kombinationen
 
     | 1      | 2      | 3      | 4      | 5      | 6      | 7      | 8      | 9      | 10     | 11     |
     |:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -94,7 +94,7 @@ In vielen Situationen interessiert man sich bei einem Zufallsvorgang nicht dafü
 ::: {#exm-beispiele-fuer-ereignisse}
 ## Beispiele für Ereignisse
 
-a. Es gibt Menschen, die sich nicht für Fußball interessieren, aber eine Abneigung gegen Bayern München hegen. Sie sind schon zufrieden, wenn der Meister in der Menge $A = \{$Hoffenheim, Leverkusen, Dortmund, Mönchengladbach, Frankfurt, Augsburg, Schalke, Fortuna Düsseldorf, Mainz, Hannover, Hertha BSC, Nürnberg, Leipzig, Freiburg, Stuttgart, Wolfsburg, Bremen$\}$ enthalten ist. Dann ist nämlich das Ereignis $A$: „Bayern München ist nicht deutscher Meister" eingetreten.
+a. Es gibt Menschen, die sich nicht für Fußball interessieren, aber eine Abneigung gegen Bayern München hegen. Sie sind schon zufrieden, wenn der Meister in der Menge $A = \{$Hoffenheim, Leverkusen, Dortmund, Mönchengladbach, Frankfurt, Augsburg, Schalke, Fortuna Düsseldorf, Mainz, Hannover, Hertha BSC, Nürnberg, Leipzig, Freiburg, Stuttgart, Wolfsburg, Bremen$\}$ enthalten ist. Dann ist nämlich das Ereignis $A$: "Bayern München ist nicht deutscher Meister" eingetreten.
 
 a. Wenn Sie in Berlin noch einen Anschlusszug nach Frankfurt (Oder) erwischen müssen (Umsteigezeit 10 Minuten), dann hoffen Sie auf das Ereignis
     $$
@@ -271,7 +271,7 @@ Zu jeder Menge $A$ lässt sich eine neue Menge bilden, die alle Teilmengen von $
 
 ![Menge $A$ (links), alle Teilmengen von $A$ (Mitte) und Menge der Teilmengen von $A$ (rechts)](00-bilder/potenzmenge.svg)
 
-Diese Menge der Teilmengen von $A$ heißt [Potenzmenge]{.neuerbegriff} $\mathcal{P}(A)$ und wird mit einem Schreibschrift-P bezeichnet. Wir definieren die Potenzmenge als die Menge aller Objekte $M$ mit der Eigenschaft „$M$ ist Teilmenge von $A$":
+Diese Menge der Teilmengen von $A$ heißt [Potenzmenge]{.neuerbegriff} $\mathcal{P}(A)$ und wird mit einem Schreibschrift-P bezeichnet. Wir definieren die Potenzmenge als die Menge aller Objekte $M$ mit der Eigenschaft "$M$ ist Teilmenge von $A$":
 $$
 \mathcal{P}(A) = \{ M \; | \; M \subset A \}.
 $$

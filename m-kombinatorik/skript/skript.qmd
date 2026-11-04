@@ -53,7 +53,7 @@ N^n
 $$
 verschiedene mögliche Ergebnisse.
 
-#### Ereignis „Kein Geburtstag kommt zweimal vor"
+#### Ereignis "Kein Geburtstag kommt zweimal vor"
 
 Eigentlich interessieren wir uns für das Ereignis $A$, dass mindestens ein Geburtstag mindestens zweifach vertreten ist. Das Problem mit dieser Menge ist, dass sie ziemlich schwer zu beschreiben ist: Es gibt sehr viele Möglichkeiten, wie die betrachtete Situation zustande kommen kann. Viel einfacher haben wir es mit dem Komplementärereignis
 $$
@@ -148,7 +148,7 @@ wurde mit dem Programm Mathematica durchgeführt. Taschenrechner können häufig
 
 ## Urnenmodell ohne Berücksichtigung der Reihenfolge
 
-Im Beispiel mit den Geburtstagen war jeder Eintrag in dem Tupel einer Person zugeordnet, die Reihenfolge der Werte in dem Tupel spielt also eine Rolle. In anderen Zusammenhängen ist das nicht der Fall, denken Sie zum Beispiel an die Ziehung der Lottozahlen oder das Würfelspiel „Mäxchen".
+Im Beispiel mit den Geburtstagen war jeder Eintrag in dem Tupel einer Person zugeordnet, die Reihenfolge der Werte in dem Tupel spielt also eine Rolle. In anderen Zusammenhängen ist das nicht der Fall, denken Sie zum Beispiel an die Ziehung der Lottozahlen oder das Würfelspiel "Mäxchen".
 
 ### Ziehung ohne Zurücklegen
 
@@ -189,7 +189,7 @@ Wenn beim Lotto nun jedes Ergebnis auf $720$ verschiedene Arten zustande kommen 
 $$
 |\Omega| = \frac{49! / (49-6)!}{6!} = \frac{10068347520}{720} = 13983816.
 $$
-Es gibt also knapp 14 Millionen verschiedene Lottoergebnisse. Die Wahrscheinlichkeit für das Ereignis $A$ = „Sechs Richtige im Lotto" beträgt somit
+Es gibt also knapp 14 Millionen verschiedene Lottoergebnisse. Die Wahrscheinlichkeit für das Ereignis $A$ = "Sechs Richtige im Lotto" beträgt somit
 $$
 P(A) = \frac{|A|}{|\Omega|} = \frac{1}{13983816},
 $$
@@ -203,7 +203,7 @@ mögliche Ergebnisse. Dieser Ausdruck kommt so häufig vor, dass er einen eigene
 $$
 \binom{N}{n} := \frac{N!}{(N-n)! \cdot n!},
 $$
-der als „$N$ über $n$" gelesen wird.
+der als "$N$ über $n$" gelesen wird.
 
 ### Ziehung mit Zurücklegen
 

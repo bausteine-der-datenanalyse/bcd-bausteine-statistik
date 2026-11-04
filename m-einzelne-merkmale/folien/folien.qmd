@@ -267,7 +267,7 @@ ggplot(data = d_klausur) +
 
 1. Darstellung in Säulendiagramm, Fläche der Säule proportional zur Häufigkeit 
 
-   - „Fläche = Breite $\times$ Höhe“ mit Höhe $h_j / d_j$ oder $f_j / d_j$
+   - "Fläche = Breite $\times$ Höhe" mit Höhe $h_j / d_j$ oder $f_j / d_j$
 
    → [Prinzip der Flächentreue]{.neuerbegriff}
 

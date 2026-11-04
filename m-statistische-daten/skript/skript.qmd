@@ -242,13 +242,13 @@ Merkmale lassen sich auch nach der verwendeten Messskala klassifizieren. Es werd
 
     Dadurch, dass es keinen natürlichen Nullpunkt gibt, lassen sich Quotienten von Ausprägungen nicht sinnvoll interpretieren. Ein typisches Beispiel für eine intervallskalierte Größe ist die Temperatur in Grad Celsius: Die Aussage
 
-    > „Gestern Mittag waren es 10 °C, heute sind es 20 °C. Es ist also doppelt so warm.“
+    > "Gestern Mittag waren es 10 °C, heute sind es 20 °C. Es ist also doppelt so warm."
 
     ist nicht sinnvoll.
 
 1. [Verhältnisskala]{.neuerbegriff}: Gibt es für ein zahlenwertiges Merkmal zusätzlich noch einen natürlichen Nullpunkt, dann lassen sich Quotienten bilden und man spricht von einem verhältnisskalierten Merkmal. Zum Beispiel gibt es für die Geschwindigkeit einen natürlichen Nullpunkt und der Satz
 
-    > „Mein Porsche fährt mehr als doppelt so schnell wie dein Smart.“
+    > "Mein Porsche fährt mehr als doppelt so schnell wie dein Smart."
 
     ist sinnvoll, auch wenn man sich über ein allgemeines Tempolimit durchaus streiten kann.
 
