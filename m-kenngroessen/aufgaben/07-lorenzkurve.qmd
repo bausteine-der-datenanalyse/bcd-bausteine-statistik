@@ -30,7 +30,9 @@ gt(d) |>
 Aufgaben:
 
 1.  Wie ist die Kurve zu Stadt A entstanden? Ergänzen Sie nach demselben Prinzip die Diagramme für die Städte B und C.
+
 1.  In welcher Stadt ist der Markt am stärksten bei einer Firma konzentriert?
+
 1.  Wie können Sie das an den Kurven ablesen?
 
 ::: {layout-ncol="3"}

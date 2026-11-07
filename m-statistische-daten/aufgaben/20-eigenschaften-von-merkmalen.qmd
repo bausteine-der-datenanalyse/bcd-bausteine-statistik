@@ -12,6 +12,7 @@ Eine Firma interessiert sich im Rahmen der Planung von Parkplätzen und dem Eins
 Aufgaben: 
 
 1. Geben Sie die Grundgesamtheit und die statistischen Einheiten an.
+
 1. Geben Sie für jedes Merkmal an,
     a) welche Ausprägungen es gibt und ob das Merkmal stetig oder diskret ist,
     a) welches Skalenniveau zugrunde liegt,

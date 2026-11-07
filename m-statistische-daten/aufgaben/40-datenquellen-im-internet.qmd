@@ -6,8 +6,11 @@ Im Internet steht eine unglaubliche Menge an Daten zur Verfügung. Recherchieren
 Was können Sie finden? Gehen Sie dabei auf folgende Punkte ein:
 
 - In welchen Format liegen die Daten vor?
+
 - Wie sind die Daten organisiert?
+
 - Welchen Umfang besitzt die Datenbasis?
+
 - Welche Merkmale werden erfasst? Charakterisieren Sie die Merkmale!
 
 
