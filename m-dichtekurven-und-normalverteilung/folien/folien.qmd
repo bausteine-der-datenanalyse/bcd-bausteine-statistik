@@ -1,0 +1,381 @@
+---
+title: "Dichtekurven und Normalverteilung"
+execute:
+  cache: true
+---
+
+```{r}
+#| cache: false
+#| include: false
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
+withr::with_dir("../skript", source("01-daten/dichtekurven-und-normalverteilung.R"))
+```
+
+## Inhalt
+
+[]{.down50}
+
+[]{.inhalt}
+
+# Dichtekurven
+
+##
+
+[]{.up40}
+
+::: {#exm-geschwindigkeitsmessung}
+## Geschwindigkeitsmessung Universitätsstraße
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.4
+p_unistrasse()
+```
+
+- Insgesamt `r nrow(d_unistrasse)` Werte, Messgenauigkeit $1\,\mathrm{km/h}$
+
+- Klassenbreite des Histogramms $2\,\mathrm{km/h}$, Fläche unter dem Histogramm ist 1
+:::
+
+## Szenario: Messung genauer und länger
+
+[]{.down50}
+
+- Zum Beispiel mit Genauigkeit $1\,\mathrm{mm/s}$ ein Jahr lang messen
+
+- Histogramm: Sehr kleine Klassenbreite, sehr viele Klassen
+
+- In jeder Klasse trotzdem viele Werte
+
+. . .
+
+[]{.down20}
+
+→ Treppenkurve nähert sich kontinuierlicher Kurve
+
+##
+
+[]{.up40}
+
+::: {#exm-grenzuebergang}
+## 10 Millionen simulierte Geschwindigkeiten
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.6
+#| dev: png
+#| dpi: 200
+p_unistrasse_simuliert()
+```
+:::
+
+## Idee: Grenzübergang vorwegnehmen
+
+::: {.columns}
+::: {.column width=55%}
+```{r}
+#| fig-asp: 0.5
+#| out-width: 100%
+p_dichtekurve()
+```
+:::
+::: {.column width=40%}
+[]{.down20}
+
+- Histogramm wird durch eine "schöne" Kurve $y = f(x)$ approximiert
+
+- Gesamtfläche unter der Kurve ist gleich 1
+:::
+:::
+
+Die Fläche unter der Kurve zwischen $a$ und $b$ ist der Anteil der Werte in diesem Bereich
+$$
+\int_a^b f(x)\, dx \approx \text{Anteil der Werte zwischen $a$ und $b$}
+$$
+
+## Dichtekurve
+
+[]{.down50}
+
+::: {#def-dichtekurve}
+Eine Funktion $f : \mathbb{R} \to \mathbb{R}$ heißt [Dichtekurve]{.neuerbegriff}, wenn für alle $x \in \mathbb{R}$ gilt, dass $f(x) \geq 0$ ist und gleichzeitig die vom Graphen von $f$ überdeckte Fläche gleich 1 ist. Es muss also gelten:
+$$
+f(x) \geq 0 \quad \text{für alle} \quad x \in \mathbb{R}
+\quad \text{und} \quad
+\int_{-\infty}^{\infty} f(x)\, dx = 1
+$$
+:::
+
+## Beispiel: Dichtekurve
+
+```{=typst}
+#align(center, image("notizen/Beispiel Dichtekurve.pdf", page: 1, height: 100%))
+```
+
+## Quantile und Median
+
+```{r}
+#| fig-asp: 0.25
+p_quantil_median()
+```
+
+Direkt von Häufigkeitsverteilungen auf Dichtekurven übertragen:
+
+- Das $p$-Quantil $x_p$ mit $0 < p < 1$ teilt die Fläche unter der Dichtekurve in zwei Teilflächen mit den Flächeninhalten $p$ und $1 - p$
+
+- Der Median $x_\mathrm{med}$ teilt die Fläche unter der Dichtekurve in zwei Teilflächen mit einem Flächeninhalt von jeweils $1/2$
+
+# Normalverteilung
+
+##
+
+```{=typst}
+// Bild über die ganze Folie, an der aktuellen Position um deren Abstand zur Ecke zurückversetzt
+#context {
+  let pos = here().position()
+  place(left, dx: -pos.x, dy: -pos.y, image(
+    "../skript/00-bilder/10_DM_Serie4_Vorderseite.jpg", width: page.width, height: page.height, fit: "cover"
+  ))
+}
+```
+
+##
+
+```{=typst}
+#context {
+  let pos = here().position()
+  place(left, dx: -pos.x, dy: -pos.y, image(
+    "../skript/00-bilder/10_DM_Serie4_Vorderseite-detail.jpg", width: page.width, height: page.height, fit: "cover"
+  ))
+}
+```
+
+## Dichtekurve der Normalverteilung
+
+```{r}
+#| fig-asp: 0.25
+p_normalverteilung()
+```
+
+::: {#def-normalverteilung}
+Für $\mu, \sigma \in \mathbb{R}$ und $\sigma > 0$ ist die Dichte der [Normalverteilung]{.neuerbegriff} durch
+$$
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp \left(-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2 \right)
+$$
+gegeben. Dabei heißt $\mu$ Mittelwert und $\sigma$ Standardabweichung der Verteilung.
+:::
+
+## Die 68-95-99.7 Regel
+
+[]{.down20}
+
+```{r}
+#| fig-asp: 0.3
+p_prozentregel()
+```
+
+[]{.down20}
+
+::: {.columns}
+::: {.column width=35%}
+Von der Gesamtfläche unter der Dichtekurve liegen
+:::
+::: {.column width=60%}
+$$
+\begin{aligned}
+68\% & \qquad \text{im Intervall} \qquad [\mu - \sigma,\; \mu + \sigma] \\
+95\% & \qquad \text{im Intervall} \qquad [\mu - 2\sigma,\; \mu + 2\sigma] \\
+99.7\% & \qquad \text{im Intervall} \qquad [\mu - 3\sigma,\; \mu + 3\sigma]
+\end{aligned}
+$$
+:::
+:::
+
+## Standardnormalverteilung
+
+```{r}
+#| fig-asp: 0.25
+p_standardnormalverteilung()
+```
+
+Eine Normalverteilung mit dem Mittelwert $\mu = 0$ und der Standardabweichung $\sigma = 1$ heißt [Standardnormalverteilung]{.neuerbegriff}. Die zugehörige Dichtekurve ist
+$$
+\phi(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{z^2}{2}\right).
+$$
+Die Funktion $\Phi : \mathbb{R} \to \mathbb{R}$ liefert für das Quantil $z_p$ den Wert $p$.
+
+## Normalverteilung anpassen
+
+```{r}
+#| fig-asp: 0.22
+p_normalverteilung_angepasst()
+```
+
+Kenngrößen der Geschwindigkeitsmessung Universitätsstraße
+$$
+\bar{x} = `r round(mu_unistrasse, 2)`\,\mathrm{km/h}
+\quad \text{und} \quad
+\tilde{s} = `r round(sigma_unistrasse, 3)`\,\mathrm{km/h}
+$$
+
+Funktionsgleichung der Dichtekurve
+$$
+f(x) =
+`r signif(1 / (sigma_unistrasse * sqrt(2 * pi)), 4)`
+\cdot
+\exp \left(- `r signif(1 / (2 * sigma_unistrasse^2), 4)` \cdot \left(x - `r signif(mu_unistrasse, 4)`\right)^2 \right)
+$$
+
+→ Mittelwert und Standardabweichung in die Normalverteilung einsetzen!
+
+# Normal-Quantil-Plots
+
+## Wie gut passt die Normalverteilung?
+
+[]{.down50}
+
+Wie gut ist die Approximation des Histogramms durch die Normalverteilung?
+
+[]{.down20}
+
+. . .
+
+→ Normal-Quantil-Plot (NQ-Plot)
+
+## Idee Normal-Quantil-Plot
+
+```{r}
+#| fig-width: 7
+#| fig-asp: 1
+#| dev: png
+#| dpi: 300
+#| out-width: 45%
+p_nq_idee()
+```
+
+## Beispiele Normal-Quantil-Plot
+
+```{r}
+#| fig-asp: 0.55
+p_nq_beispiele_histogramme(ncol = 4)
+```
+
+## Beispiele Normal-Quantil-Plot
+
+```{r}
+#| fig-asp: 0.55
+p_nq_beispiele_qq(ncol = 4)
+```
+
+##
+
+[]{.up40}
+
+::: {#exm-geschwindigkeitsmessung-fortsetzung-2}
+## Geschwindigkeitsmessung (Fortsetzung)
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.45
+p_unistrasse_nq()
+```
+
+→ Steilere Flanken als die angepasste Normalverteilung: Kleine Werte liegen unterhalb der Geraden, große Werte oberhalb
+:::
+
+# Approximation von Dichtekurven
+
+## Wenn die Normalverteilung nicht passt
+
+[]{.down20}
+
+Häufig lässt sich die Verteilung eines Merkmals nicht sinnvoll durch eine Normalverteilung darstellen. Trotzdem ist eine Dichtekurve wünschenswert, denn beim Histogramm
+
+- beeinflusst die willkürlich zu wählende Klassenbreite den optischen Eindruck,
+
+- kann der Verlauf sehr unregelmäßig sein,
+
+- wird eine eigentlich stetige Funktion durch eine Treppenkurve dargestellt.
+
+. . .
+
+[]{.down20}
+
+→ Dichtekurve geeignet durch eine stetige Funktion approximieren
+
+## Idee der Approximation
+
+```{r}
+#| fig-asp: 0.35
+p_kerndichteschaetzer()
+```
+
+- Kernfunktion über die Datenpunkte schieben, Längen der Linien von den Beobachtungen bis zum Graphen der Kernfunktion summieren
+
+- Summe geteilt durch die Anzahl der Werte ist der Funktionswert der approximierten Dichtekurve
+
+## Gebräuchliche Kernfunktionen
+
+```{r}
+#| fig-asp: 0.18
+p_kernfunktionen()
+```
+
+$$
+\begin{aligned}
+K(u) & =
+\begin{cases}
+\frac{3}{4}(1 - u^2) & \text{für} \quad -1 \leq u \leq 1 \\
+0 & \text{sonst}
+\end{cases}
+&& \quad \text{Epanechnikov-Kern}
+\\[1em]
+K(u) & =
+\begin{cases}
+\frac{15}{16}(1 - u^2)^2 & \text{für} \quad -1 \leq u \leq 1 \\
+0 & \text{sonst}
+\end{cases}
+&& \quad \text{Bisquare-Kern}
+\\[1em]
+K(u) & = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)
+&& \quad \text{Gauß-Kern}
+\end{aligned}
+$$
+
+→ [Demo-Programm](https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/lernpfad/weitere-unterlagen/c/kern-dichteschaetzer-app.zip)
+
+## Kerndichteschätzer
+
+[]{.down50}
+
+::: {#def-kerndichteschaetzer}
+Zu einer Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ und gegebenen Daten $x_1, x_2, \dots, x_n$ ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
+$$
+\hat f(x) = \frac{1}{nh} \sum_{i=1}^n K \left(\frac{x - x_i}{h}\right)
+$$
+ein [Kerndichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Dabei legt der Parameter $h$ die Breite des Kerns fest.
+:::
+
+[]{.down20}
+
+## 
+
+[]{.up40}
+
+::: {#exm-kerndichteschaetzer}
+## Geschwindigkeitsmessung mit Epanechnikov-Kern
+
+[]{.up10}
+
+```{r}
+#| fig-asp: 0.35
+p_kerndichteschaetzer_breiten()
+```
+
+- $h = 3\,\mathrm{km/h}$: Glatte Kurve, die dem Histogramm gut folgt
+
+- $h = 8\,\mathrm{km/h}$: Noch glatter, aber Gipfel flacher und Flanken breiter
+:::

@@ -145,7 +145,7 @@ Die [Grundgesamtheit]{.neuerbegriff} ist die Menge aller statistischen Einheiten
 Meist untersucht man nur einen Teil der Grundgesamtheit, eine [Stichprobe]{.neuerbegriff}.
 
 ```{r}
-fig_stichprobe()
+p_stichprobe()
 ```
 
 ## Planung einer Erhebung
@@ -159,7 +159,7 @@ fig_stichprobe()
 
 ::: {}
 ```{r}
-fig_stichprobe()
+p_stichprobe()
 ```
 :::
 ::::

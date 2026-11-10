@@ -77,7 +77,7 @@ d_tidydata_42 <- tribble(
 # Stichprobe
 # -------------------------------------------------------------------------------------------------
 
-fig_stichprobe <- function() {
+p_stichprobe <- function() {
   n <- 13.0
   set.seed(22202)
 

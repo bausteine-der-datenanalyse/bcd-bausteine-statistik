@@ -44,6 +44,23 @@ d_unistrasse <- read_excel(
   range = "B2:H20712"
 )
 
+# Kenngrößen für die angepasste Normalverteilung
+mu_unistrasse <- mean(pull(d_unistrasse, Geschwindigkeit))
+sigma_unistrasse <- sd(pull(d_unistrasse, Geschwindigkeit))
+
+
+# -------------------------------------------------------------------------------------------------
+# Simulierte Geschwindigkeiten: 10 Millionen Werte, ähnlich verteilt wie an der Unistraße
+# -------------------------------------------------------------------------------------------------
+
+d_unistrasse_simuliert <- local({
+  set.seed(4711)
+  n <- 1e7
+  m <- 1.05 * n
+  v <- if_else(runif(m) < 0.9, rnorm(m, 53.5, 6), rnorm(m, 47, 14))
+  tibble(Geschwindigkeit = head(v[5 < v & v < 110], n))
+})
+
 
 # -------------------------------------------------------------------------------------------------
 # Beispieldaten NQ-Plot
@@ -97,10 +114,30 @@ p_unistrasse <- function() {
 
 
 # -------------------------------------------------------------------------------------------------
+# Plot simulierte Geschwindigkeiten mit immer kleineren Klassen
+# -------------------------------------------------------------------------------------------------
+
+p_unistrasse_simuliert <- function(breiten = c(5, 1, 0.02)) {
+  plots <- map(breiten, \(b) {
+    ggplot(data = d_unistrasse_simuliert) +
+      geom_histogram(
+        mapping = aes(x = Geschwindigkeit, y = after_stat(density)),
+        binwidth = b,
+        boundary = 0,
+        color = if (b >= 1) "black" else NA
+      ) +
+      coord_cartesian(xlim = c(20, 90), ylim = c(0, 0.075)) +
+      labs(title = paste("Klassenbreite", format(b, decimal.mark = "."), "km/h"), y = "Relative Häufigkeit")
+  })
+  wrap_plots(plots, ncol = 3) + plot_layout(axes = "collect")
+}
+
+
+# -------------------------------------------------------------------------------------------------
 # Abbildung Dichtekurve
 # -------------------------------------------------------------------------------------------------
 
-fig_dichtekurve <- function() {
+p_dichtekurve <- function() {
   set.seed(105)
 
   # Data
@@ -185,12 +222,26 @@ p_quantile <- function(xp, lp) {
     labs(x = NULL, y = NULL)
 }
 
+p_quantil_median <- function() {
+  label <- \(x, y, l) annotate("text", x = x, y = y, label = TeX(l, output = "character"), parse = TRUE)
+
+  p1 <- p_quantile(1.1, TeX("$x_p$")) +
+    label(0.75, 0.05, "$p$") +
+    label(2, 0.05, "$1 - p$")
+
+  p2 <- p_quantile(1.835, TeX("$x_{med}$")) +
+    label(1.1, 0.05, "$1/2$") +
+    label(2.45, 0.05, "$1/2$")
+
+  p1 + p2
+}
+
 
 # -------------------------------------------------------------------------------------------------
 # Abbildungen Normalverteilung
 # -------------------------------------------------------------------------------------------------
 
-fig_normalverteilung <- function() {
+p_normalverteilung <- function() {
   mu <- 2
 
   s1 <- 0.75
@@ -257,7 +308,7 @@ fig_normalverteilung <- function() {
     labs(x = NULL, y = NULL)
 }
 
-fig_prozentregel <- function() {
+p_prozentregel <- function() {
   ggplot() +
     stat_function(
       fun = dnorm,
@@ -305,7 +356,7 @@ fig_prozentregel <- function() {
     labs(x = NULL, y = NULL)
 }
 
-fig_standardnormalverteilung <- function() {
+p_standardnormalverteilung <- function() {
   zp <- -0.3
   w2 <- 2.5
 
@@ -397,12 +448,22 @@ fig_standardnormalverteilung <- function() {
   p1 + p2 + plot_layout(axes = "collect") & labs(x = NULL, y = NULL)
 }
 
+p_normalverteilung_angepasst <- function() {
+  p_unistrasse() +
+    geom_function(
+      fun = dnorm,
+      args = list(mean = mu_unistrasse, sd = sigma_unistrasse),
+      color = "red",
+      linewidth = 1
+    )
+}
+
 
 # -------------------------------------------------------------------------------------------------
 # Abbildung NQ-Plot
 # -------------------------------------------------------------------------------------------------
 
-fig_nq_plot <- function() {
+p_nq_idee <- function() {
   set.seed(29)
 
   # Parameters
@@ -606,10 +667,43 @@ fig_nq_plot <- function() {
 
 
 # -------------------------------------------------------------------------------------------------
+# Beispiele NQ-Plot
+# -------------------------------------------------------------------------------------------------
+
+p_nq_beispiele_histogramme <- function(ncol = 2) {
+  ggplot(data = d_nq_examples()) +
+    geom_histogram(
+      mapping = aes(x = wert, y = after_stat(density), fill = verteilung),
+      binwidth = 0.25,
+      boundary = 0
+    ) +
+    facet_wrap(~verteilung, ncol = ncol) +
+    labs(x = "Beobachtung", y = "Relative Häufigkeit") +
+    theme(legend.position = "none")
+}
+
+p_nq_beispiele_qq <- function(ncol = 2) {
+  ggplot(data = d_nq_examples(), mapping = aes(sample = wert, color = verteilung)) +
+    geom_qq_line(color = "black") +
+    geom_qq() +
+    facet_wrap(~verteilung, ncol = ncol) +
+    labs(x = "Theoretischer Wert", y = "Beobachtung") +
+    theme(legend.position = "none")
+}
+
+p_unistrasse_nq <- function() {
+  ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
+    geom_qq_line() +
+    geom_qq() +
+    labs(x = "Theoretischer Wert", y = "Geschwindigkeit")
+}
+
+
+# -------------------------------------------------------------------------------------------------
 # Abbildung Kerndichteschätzer
 # -------------------------------------------------------------------------------------------------
 
-fig_kerndichteschaetzer <- function() {
+p_kerndichteschaetzer <- function() {
   set.seed(10)
 
   n <- 35
@@ -706,4 +800,50 @@ fig_kerndichteschaetzer <- function() {
       hjust = 0,
     ) +
     theme_void()
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# Abbildung Kernfunktionen
+# -------------------------------------------------------------------------------------------------
+
+k_epanechnikov <- function(u) ifelse(-1 <= u & u <= 1, 0.75 * (1 - u^2), 0)
+k_bisquare <- function(u) ifelse(-1 <= u & u <= 1, 15 / 16 * (1 - u^2)^2, 0)
+k_gauss <- function(u) 1 / sqrt(2 * pi) * exp(-u^2 / 2)
+
+p_kernfunktionen <- function() {
+  p1 <- ggplot() + geom_function(fun = k_epanechnikov) + labs(title = "Epanechnikov-Kern")
+  p2 <- ggplot() + geom_function(fun = k_bisquare) + labs(title = "Bisquare-Kern")
+  p3 <- ggplot() + geom_function(fun = k_gauss) + labs(title = "Gauß-Kern")
+
+  p1 +
+    p2 +
+    p3 +
+    plot_layout(axes = "collect") &
+    scale_x_continuous(minor_breaks = NULL, limits = c(-3, 3)) &
+    scale_y_continuous(breaks = c(0, 0.5, 1), minor_breaks = NULL, limits = c(0, 1)) &
+    labs(x = NULL, y = NULL)
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# Kerndichteschätzer Unistraße mit verschiedenen Kernbreiten
+# -------------------------------------------------------------------------------------------------
+
+# Epanechnikov-Kern mit Kernbreite h wie in der Definition. In R ist `bw` die Standardabweichung des Kerns,
+# für den Epanechnikov-Kern gilt bw = h / sqrt(5)
+p_kerndichteschaetzer_breiten <- function(h = c(3, 8)) {
+  plots <- map(h, \(hi) {
+    p_unistrasse() +
+      geom_density(
+        mapping = aes(x = Geschwindigkeit),
+        kernel = "epanechnikov",
+        bw = hi / sqrt(5),
+        color = "red",
+        linewidth = 1
+      ) +
+      coord_cartesian(xlim = c(20, 90), ylim = c(0, 0.07)) +
+      labs(title = paste0("h = ", hi, " km/h"))
+  })
+  wrap_plots(plots, nrow = 1) + plot_layout(axes = "collect")
 }

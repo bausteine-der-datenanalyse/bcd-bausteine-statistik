@@ -43,3 +43,7 @@ Offene Punkte zu den Modulen (Skript, Aufgaben, Folien). Hintergrund und Details
   `tab_spanner` in Typst sauber aussieht.
 - [ ] Kapitel 3 (`m-kenngroessen`): Im Skript am Anfang von „Lagemaße“ erklären, was ein Lagemaß ist und welche
   Eigenschaften es hat, wie auf der Folie „Lagemaß: Ein Maß für das Zentrum“ (analog zu den Streuungsmaßen).
+- [ ] Kapitel 4 (`m-dichtekurven-und-normalverteilung`): Grenzübergang zur Dichtekurve zeigen. 10 Millionen Werte
+  erzeugen, die etwa wie die Geschwindigkeiten an der Universitätsstraße verteilt sind, und daraus Histogramme
+  mit immer kleineren Klassen zeichnen (Funktion in `01-daten/dichtekurven-und-normalverteilung.R`). In den Folien
+  bei „Szenario: Messung genauer und länger“, ggf. auch im Skript nach @exm-geschwindigkeitsmessung.

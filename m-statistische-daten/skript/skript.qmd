@@ -157,7 +157,7 @@ Bei den in der Mobilitätsbefragung befragten Personen handelt es sich um eine A
 #| fig-cap: |
 #|  Grundgesamtheit und Stichproben. Das Ergebnis hängt von der Auswahl der Stichprobe ab
 
-fig_stichprobe()
+p_stichprobe()
 ```
 
 #### Stichprobe

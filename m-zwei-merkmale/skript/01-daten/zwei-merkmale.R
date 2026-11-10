@@ -192,7 +192,7 @@ tab_wirtschaftswachstum <- function(s, e) {
 # Funktionen Abbildungen
 # -------------------------------------------------------------------------------------------------
 
-fig_correlation_idea <- function() {
+p_correlation_idea <- function() {
   d <-
     tibble(x = c(-1, -0.7, 0.7, 1), y = c(1.5, -0.7, 0.6, -0.4)) |>
     mutate(

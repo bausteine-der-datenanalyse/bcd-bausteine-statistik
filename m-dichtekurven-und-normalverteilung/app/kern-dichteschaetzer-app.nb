@@ -1,0 +1,140 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6142,        130]
+NotebookOptionsPosition[      5853,        117]
+NotebookOutlinePosition[      6188,        132]
+CellTagsIndexPosition[      6145,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 1, $CellContext`x$$ = -1.75, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`h$$], 1}, 0.25, 2}, {{
+       Hold[$CellContext`x$$], -1.75}, -4, 4}}, Typeset`size$$ = {
+    600., {183., 188.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`h$6053$$ = 
+    0, $CellContext`x$6054$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 1, $CellContext`x$$ = -1.75}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`h$$, $CellContext`h$6053$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$6054$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`K0$, $CellContext`KK$, $CellContext`X$, \
+$CellContext`p1$, $CellContext`p2$, $CellContext`p3$, $CellContext`p4$, \
+$CellContext`d$, $CellContext`n$}, $CellContext`X$ = {-1.6252, -1.46445, \
+-0.8421, -0.695, -0.5113, -0.43, -0.1, -0.44, 0.07542, 0.261, 0.269, 0.325, 
+          0.471, 0.47598, 0.6486, 0.811, 1.0982, 1.48, 1.4865, 
+          1.561}; $CellContext`n$ = 
+         Length[$CellContext`X$]; $CellContext`K0$[
+           Pattern[$CellContext`u, 
+            Blank[]]] := 
+         If[Abs[$CellContext`u] <= 1, (3/4) (1 - $CellContext`u^2), 
+           0]; $CellContext`KK$[
+           Pattern[$CellContext`u$, 
+            Blank[]]] := (
+           1/$CellContext`h$$) \
+$CellContext`K0$[$CellContext`u$/$CellContext`h$$]; $CellContext`d$[
+           Pattern[$CellContext`x$, 
+            Blank[]]] := (1/$CellContext`n$) Sum[
+            $CellContext`KK$[$CellContext`x$ - $CellContext`xx], \
+{$CellContext`xx, $CellContext`X$}]; $CellContext`p1$ = 
+         Histogram[$CellContext`X$, {0.5}, "PDF", Axes -> 
+           False]; $CellContext`p2$ = Plot[
+           $CellContext`KK$[$CellContext`xx - $CellContext`x$$], \
+{$CellContext`xx, -5, 5}, PlotRange -> {Automatic, {0, 0.75}}, PlotStyle -> 
+           Darker[Blue]]; $CellContext`p3$ = Plot[
+           $CellContext`d$[$CellContext`x$$], {$CellContext`x$$, -5, 5}, 
+           PlotStyle -> Directive[Red, Thick], Exclusions -> 
+           None]; $CellContext`p4$ = Graphics[{Black, 
+            Line[{{-5, 0}, {5, 0}}], 
+            Darker[Green], 
+            Table[
+             Line[{{$CellContext`xx, 0}, {$CellContext`xx, 
+                $CellContext`KK$[$CellContext`x$$ - $CellContext`xx]}}], \
+{$CellContext`xx, $CellContext`X$}], Thick, Red, 
+            Line[{{$CellContext`x$$, 0}, {$CellContext`x$$, 
+               $CellContext`d$[$CellContext`x$$]}}], Black, 
+            Table[
+             Disk[{$CellContext`xx, 0}, 
+              Scaled[{0.007, 0.01}]], {$CellContext`xx, $CellContext`X$}]}]; 
+        Show[{$CellContext`p1$, $CellContext`p2$, $CellContext`p4$, \
+$CellContext`p3$}, PlotRange -> {{-4, 4}, {0, 0.75}}, ImageSize -> 600]], 
+      "Specifications" :> {{{$CellContext`h$$, 1}, 0.25, 
+         2}, {{$CellContext`x$$, -1.75}, -4, 4}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{643., {241., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.7508547138862534`*^9, 3.750854762065517*^9}, {
+   3.750855210606496*^9, 3.7508552213080893`*^9}, 3.750855274628817*^9, {
+   3.750855313544592*^9, 3.750855557493355*^9}, {3.750855605284944*^9, 
+   3.750855624255568*^9}, {3.750855721905559*^9, 3.7508557576486387`*^9}, 
+   3.750855790503724*^9, 3.750855837087984*^9, {3.750855901727934*^9, 
+   3.750855913890709*^9}, 3.750855992968923*^9, {3.75085604144921*^9, 
+   3.7508560655572023`*^9}, {3.7508561234395113`*^9, 3.7508561465471287`*^9}, 
+   3.750856263783661*^9, 3.750856295920793*^9, {3.7508563521148767`*^9, 
+   3.750856371767029*^9}, {3.750856409805944*^9, 3.750856577790687*^9}, {
+   3.7508566124006033`*^9, 3.750856639971307*^9}, {3.750856671608757*^9, 
+   3.750856677706031*^9}, {3.750856715846409*^9, 3.750856750770205*^9}, {
+   3.750856819710232*^9, 3.750856856915856*^9}, 3.750856917492803*^9, {
+   3.750856954214408*^9, 3.750856994670064*^9}, {3.750857099001781*^9, 
+   3.750857134972103*^9}, 3.7508591173361387`*^9, 3.7508591576256237`*^9, {
+   3.7508591953130693`*^9, 3.750859212595649*^9}, {3.750859254541258*^9, 
+   3.750859285491007*^9}, {3.750859332816143*^9, 3.7508593634702997`*^9}, 
+   3.750916585017418*^9, 3.751103500883202*^9, {3.751103564293288*^9, 
+   3.751103597949863*^9}, 3.815318168010232*^9, 3.81531819813024*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"c4e4fe6e-b9ec-4d6e-85ce-13e1b0b4a54b"]
+},
+WindowSize->{808, 905},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5291, 95, 505, "Output",ExpressionUUID->"c4e4fe6e-b9ec-4d6e-85ce-13e1b0b4a54b"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

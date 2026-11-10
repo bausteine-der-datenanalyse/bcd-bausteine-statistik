@@ -388,7 +388,7 @@ p_fuenfpunkt_zusammenfassung <- function(d, py = 0.15) {
     p_stichprobe_marker(max(x), "x[max]", py = py, hjust = 1.05)
 }
 
-fig_boxplot <- function(py = 0.15) {
+p_boxplot <- function(py = 0.15) {
   d <- tibble(
     X = c(-15, -14, -6, -5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 7, 12, 15, 16)
   )
