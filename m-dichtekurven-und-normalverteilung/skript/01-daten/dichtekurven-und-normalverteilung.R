@@ -842,7 +842,7 @@ p_kerndichteschaetzer_breiten <- function(h = c(2, 6, 15)) {
       geom_histogram(
         mapping = aes(y = after_stat(density)),
         binwidth = 2,
-        boundary = 1,
+        boundary = 0,
         closed = "left"
       ) +
       geom_rug(alpha = 0.4) +
