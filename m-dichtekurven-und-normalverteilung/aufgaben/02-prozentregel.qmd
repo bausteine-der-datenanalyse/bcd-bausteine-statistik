@@ -1,0 +1,62 @@
+::: {#exr-prozentregel}
+## 68-95-99.7-Regel
+
+Die Geschwindigkeiten auf einer Straße mit Tempo 50 seien normalverteilt mit Mittelwert $\mu = 50\,\mathrm{km/h}$ und Standardabweichung $\sigma = 6\,\mathrm{km/h}$.
+
+Aufgaben:
+
+1. Skizzieren Sie die Dichtekurve und markieren Sie auf der $x$-Achse die Werte $\mu \pm \sigma$, $\mu \pm 2\sigma$ und $\mu \pm 3\sigma$.
+
+1. Wie viel Prozent der Fahrzeuge fahren zwischen 44 und 56 km/h?
+
+1. Wie viel Prozent der Fahrzeuge fahren schneller als 62 km/h?
+
+1. Wie viel Prozent der Fahrzeuge fahren zwischen 38 und 56 km/h?
+
+1. Wie viel Prozent der Fahrzeuge fahren langsamer als 32 km/h?
+
+1. An einem Tag passieren 2000 Fahrzeuge die Messstelle. Wie viele davon fahren schneller als 56 km/h?
+
+Hinweis: Nutzen Sie die Symmetrie der Dichtekurve und dass die Fläche unter der Dichtekurve gleich 1 ist.
+
+::: {.tinh-solution}
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+**Teil 1**
+
+Die Werte sind $\mu \pm \sigma = 44, 56$, $\mu \pm 2\sigma = 38, 62$ und $\mu \pm 3\sigma = 32, 68$.
+
+```{r}
+#| echo: false
+#| fig-asp: 0.4
+ggplot() +
+  geom_function(fun = \(x) dnorm(x, 50, 6), xlim = c(26, 74), linewidth = 1) +
+  geom_vline(xintercept = 50 + 6 * (-3:3), linetype = "dashed", color = "gray50") +
+  scale_x_continuous(breaks = 50 + 6 * (-3:3)) +
+  labs(x = "Geschwindigkeit in km/h", y = NULL)
+```
+
+**Teil 2**
+
+Das Intervall $[44, 56]$ ist $[\mu - \sigma, \mu + \sigma]$, also 68 %.
+
+**Teil 3**
+
+Außerhalb von $[\mu - 2\sigma, \mu + 2\sigma]$ liegen 5 %, wegen der Symmetrie die Hälfte davon rechts: 2.5 %.
+
+**Teil 4**
+
+Von 38 bis 50 liegt die Hälfte von 95 %, von 50 bis 56 die Hälfte von 68 %: $47.5\,\% + 34\,\% = 81.5\,\%$.
+
+**Teil 5**
+
+Außerhalb von $[\mu - 3\sigma, \mu + 3\sigma]$ liegen 0.3 %, davon die Hälfte links: 0.15 %.
+
+**Teil 6**
+
+Schneller als $\mu + \sigma$ fahren $(100\,\% - 68\,\%)/2 = 16\,\%$, also etwa $0.16 \cdot 2000 = 320$ Fahrzeuge.
+:::
+:::

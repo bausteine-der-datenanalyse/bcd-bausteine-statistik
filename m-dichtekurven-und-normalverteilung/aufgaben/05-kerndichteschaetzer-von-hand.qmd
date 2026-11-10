@@ -1,0 +1,82 @@
+::: {#exr-kerndichteschaetzer-von-hand}
+## Kerndichteschätzer von Hand
+
+Gegeben sind die drei Werte $x_1 = 1$, $x_2 = 2$ und $x_3 = 4$ sowie der Dreieckskern
+
+$$
+  K(u)
+  =
+  \begin{cases}
+    1 - |u| & \text{für} \quad -1 \leq u \leq 1 \\
+    0 & \text{sonst.}
+  \end{cases}
+$$
+
+Aufgaben:
+
+1. Skizzieren Sie $K$ und zeigen Sie, dass $K$ eine Dichtekurve ist.
+
+1. Skizzieren Sie für die Kernbreite $h = 1$ die drei Funktionen $\frac{1}{nh} K\left(\frac{x - x_i}{h}\right)$ in ein gemeinsames Koordinatensystem und bestimmen Sie daraus den Kerndichteschätzer $\hat f$.
+
+1. Wiederholen Sie das für die Kernbreite $h = 2$.
+
+1. Vergleichen Sie die beiden Kerndichteschätzer.
+
+Hinweis: Alle Funktionen sind stückweise linear. Es genügt daher, $\hat f$ an den Knickstellen auszurechnen und die Punkte durch Strecken zu verbinden.
+
+::: {.tinh-solution}
+```{r}
+#| include: false
+library(tidyverse)
+x_i <- c(1, 2, 4)
+k <- \(u) pmax(1 - abs(u), 0)
+
+p_kde_von_hand <- function(h) {
+  x <- seq(-1.5, 6.5, by = 0.01)
+  d_k <- map(x_i, \(xi) tibble(x = x, y = k((x - xi) / h) / (3 * h), i = xi)) |> list_rbind()
+  d_f <- d_k |> summarise(y = sum(y), .by = x)
+  ggplot() +
+    geom_line(data = d_k, mapping = aes(x = x, y = y, group = i), linetype = "dashed", color = "gray40") +
+    geom_line(data = d_f, mapping = aes(x = x, y = y), color = "red", linewidth = 1) +
+    scale_x_continuous(breaks = -1:6) +
+    labs(title = paste0("h = ", h), x = "x", y = NULL)
+}
+```
+
+**Teil 1**
+
+Der Graph von $K$ ist ein Dreieck mit der Grundseite von $-1$ bis $1$ und der Höhe 1. Es gilt $K(u) \geq 0$ und die Fläche ist $\frac{1}{2} \cdot 2 \cdot 1 = 1$.
+
+**Teil 2**
+
+Für $h = 1$ sind die Einzelkerne Dreiecke der Höhe $\frac{1}{3}$ um 1, 2 und 4 mit der halben Breite 1. Zwischen 1 und 2 fällt der erste Kern so schnell, wie der zweite steigt, deshalb ist $\hat f$ dort konstant $\frac{1}{3}$:
+
+| $x$ | 0 | 1 | 2 | 3 | 4 | 5 |
+|-----|---|---|---|---|---|---|
+| $\hat f(x)$ | 0 | $\frac{1}{3}$ | $\frac{1}{3}$ | 0 | $\frac{1}{3}$ | 0 |
+
+```{r}
+#| echo: false
+#| fig-asp: 0.4
+p_kde_von_hand(1)
+```
+
+**Teil 3**
+
+Für $h = 2$ sind die Einzelkerne Dreiecke der Höhe $\frac{1}{6}$ mit der halben Breite 2:
+
+| $x$ | −1 | 0 | 1 | 2 | 3 | 4 | 6 |
+|-----|----|---|---|---|---|---|---|
+| $\hat f(x)$ | 0 | $\frac{1}{12}$ | $\frac{1}{4}$ | $\frac{1}{4}$ | $\frac{1}{6}$ | $\frac{1}{6}$ | 0 |
+
+```{r}
+#| echo: false
+#| fig-asp: 0.4
+p_kde_von_hand(2)
+```
+
+**Teil 4**
+
+Mit $h = 1$ ist $\hat f$ zweigipflig, der Wert 4 bildet einen eigenen Buckel. Mit $h = 2$ ist $\hat f$ glatter und eingipflig, dafür breiter und niedriger. In beiden Fällen ist die Fläche unter $\hat f$ gleich 1.
+:::
+:::
