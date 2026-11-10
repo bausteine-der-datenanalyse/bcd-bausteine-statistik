@@ -323,17 +323,17 @@ Die Wahl der Kernbreite $h$ hat großen Einfluss auf das Ergebnis.
 ::: {#exm-kerndichteschaetzer}
 ## Geschwindigkeitsmessung mit Epanechnikov-Kern
 
-Für die Geschwindigkeitsmessung an der Universitätsstraße ist in @fig-kerndichteschaetzer-breiten der Kerndichteschätzer mit dem Epanechnikov-Kern für zwei verschiedene Kernbreiten dargestellt.
+Für 200 simulierte Geschwindigkeiten, die ähnlich verteilt sind wie an der Universitätsstraße, ist in @fig-kerndichteschaetzer-breiten der Kerndichteschätzer mit dem Epanechnikov-Kern für drei verschiedene Kernbreiten dargestellt. Die Striche unter den Histogrammen markieren die einzelnen Werte.
 
 ```{r}
-#| fig-asp: 0.4
+#| fig-asp: 0.35
 #| label: fig-kerndichteschaetzer-breiten
-#| fig-cap: Kerndichteschätzer mit Epanechnikov-Kern für zwei Kernbreiten
+#| fig-cap: Kerndichteschätzer mit Epanechnikov-Kern für drei Kernbreiten
 
 p_kerndichteschaetzer_breiten()
 ```
 
-Mit der Kernbreite $h = 3\,\mathrm{km/h}$ ergibt sich eine glatte Kurve, die dem Histogramm gut folgt. Mit $h = 8\,\mathrm{km/h}$ wird die Kurve noch glatter, dafür fällt der Gipfel flacher aus und die Flanken werden breiter. Ist $h$ zu klein, zeigt die Kurve dagegen Zacken, ist $h$ zu groß, gehen Details der Verteilung verloren.
+Mit der Kernbreite $h = 2\,\mathrm{km/h}$ ist die Kurve unruhig und zeigt Buckel bei einzelnen Werten. Mit $h = 6\,\mathrm{km/h}$ ergibt sich eine glatte Kurve, die dem Histogramm gut folgt. Mit $h = 15\,\mathrm{km/h}$ ist die Kurve zu stark geglättet: Der Gipfel fällt zu flach aus, die Flanken werden zu breit. Ist $h$ zu klein, zeigt die Kurve also Zacken, ist $h$ zu groß, gehen Details der Verteilung verloren.
 :::
 
 Wie sich die Wahl des Kerns und der Breite $h$ auf den Kerndichteschätzer auswirkt, lässt sich mit der [Demo-App](https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/lernpfad/weitere-unterlagen/c/kern-dichteschaetzer-app.zip) nachvollziehen. Sie benötigen dazu den kostenlosen [Wolfram Player](https://www.wolfram.com/player/).

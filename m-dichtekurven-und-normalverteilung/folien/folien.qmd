@@ -375,7 +375,11 @@ ein [Kerndichteschätzer]{.neuerbegriff} für die unbekannte Dichtekurve $f$. Da
 p_kerndichteschaetzer_breiten()
 ```
 
-- $h = 3\,\mathrm{km/h}$: Glatte Kurve, die dem Histogramm gut folgt
+- 200 simulierte Geschwindigkeiten, ähnlich verteilt wie an der Universitätsstraße
 
-- $h = 8\,\mathrm{km/h}$: Noch glatter, aber Gipfel flacher und Flanken breiter
+- $h = 2\,\mathrm{km/h}$: Unruhig, Buckel bei einzelnen Werten
+
+- $h = 6\,\mathrm{km/h}$: Glatte Kurve, die dem Histogramm gut folgt
+
+- $h = 15\,\mathrm{km/h}$: Zu glatt, Gipfel zu flach und Flanken zu breit
 :::

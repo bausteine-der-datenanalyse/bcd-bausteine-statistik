@@ -1,0 +1,45 @@
+::: {#exr-kerndichteschaetzer-ist-dichtekurve}
+## Kerndichteschätzer
+
+Gegeben sind Daten $x_1, x_2, \dots, x_n$, eine Kernfunktion $K : \mathbb{R} \to \mathbb{R}$ und eine Kernbreite $h > 0$. Der Kerndichteschätzer ist die Funktion $\hat f : \mathbb{R} \to \mathbb{R}$ mit
+
+$$
+  \hat f(x) = \frac{1}{nh} \sum_{i=1}^n K \left(\frac{x - x_i}{h}\right) .
+$$
+
+Zeigen Sie: Wenn $K$ eine Dichtekurve ist, dann ist auch $\hat f$ eine Dichtekurve.
+
+Aufgaben:
+
+1. Zeigen Sie, dass $\hat f(x) \geq 0$ für alle $x \in \mathbb{R}$ gilt.
+
+1. Berechnen Sie für ein festes $i$ das Integral
+   $$
+     \int_{-\infty}^{\infty} K \left(\frac{x - x_i}{h}\right) dx .
+   $$
+   Hinweis: Substitution $u = (x - x_i)/h$.
+
+1. Zeigen Sie damit, dass die Fläche unter dem Graphen von $\hat f$ gleich 1 ist.
+
+::: {.tinh-solution}
+
+1. Da $K$ eine Dichtekurve ist, gilt $K(u) \geq 0$ für alle $u$. Damit ist jeder Summand nicht negativ, und wegen $n > 0$ und $h > 0$ auch der Faktor $1/(nh)$. Also ist $\hat f(x) \geq 0$.
+
+1. Mit $u = (x - x_i)/h$ ist $du = dx/h$, also $dx = h\, du$. Läuft $x$ von $-\infty$ bis $\infty$, so auch $u$ (wegen $h > 0$). Damit
+   $$
+     \int_{-\infty}^{\infty} K \left(\frac{x - x_i}{h}\right) dx
+     = h \int_{-\infty}^{\infty} K(u)\, du
+     = h \cdot 1
+     = h .
+   $$
+
+1. Das Integral einer Summe ist die Summe der Integrale:
+   $$
+     \int_{-\infty}^{\infty} \hat f(x)\, dx
+     = \frac{1}{nh} \sum_{i=1}^n \int_{-\infty}^{\infty} K \left(\frac{x - x_i}{h}\right) dx
+     = \frac{1}{nh} \sum_{i=1}^n h
+     = \frac{1}{nh} \cdot n h
+     = 1 .
+   $$
+:::
+:::

@@ -827,23 +827,34 @@ p_kernfunktionen <- function() {
 
 
 # -------------------------------------------------------------------------------------------------
-# Kerndichteschätzer Unistraße mit verschiedenen Kernbreiten
+# Kerndichteschätzer für 200 simulierte Geschwindigkeiten mit verschiedenen Kernbreiten
 # -------------------------------------------------------------------------------------------------
 
+# Simulierte statt gemessener Werte, da die Messwerte auf ganze km/h gerundet sind.
 # Epanechnikov-Kern mit Kernbreite h wie in der Definition. In R ist `bw` die Standardabweichung des Kerns,
 # für den Epanechnikov-Kern gilt bw = h / sqrt(5)
-p_kerndichteschaetzer_breiten <- function(h = c(3, 8)) {
+p_kerndichteschaetzer_breiten <- function(h = c(2, 6, 15)) {
+  set.seed(1)
+  d <- slice_sample(d_unistrasse_simuliert, n = 200)
+
   plots <- map(h, \(hi) {
-    p_unistrasse() +
+    ggplot(data = d, mapping = aes(x = Geschwindigkeit)) +
+      geom_histogram(
+        mapping = aes(y = after_stat(density)),
+        binwidth = 2,
+        boundary = 1,
+        closed = "left"
+      ) +
+      geom_rug(alpha = 0.4) +
       geom_density(
-        mapping = aes(x = Geschwindigkeit),
         kernel = "epanechnikov",
         bw = hi / sqrt(5),
         color = "red",
         linewidth = 1
       ) +
-      coord_cartesian(xlim = c(20, 90), ylim = c(0, 0.07)) +
-      labs(title = paste0("h = ", hi, " km/h"))
+      scale_x_continuous(limits = c(20, 90)) +
+      coord_cartesian(ylim = c(0, 0.08)) +
+      labs(title = paste0("h = ", hi, " km/h"), y = "Relative Häufigkeit")
   })
   wrap_plots(plots, nrow = 1) + plot_layout(axes = "collect")
 }
