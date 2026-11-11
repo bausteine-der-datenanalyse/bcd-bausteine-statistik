@@ -16,7 +16,11 @@ Aufgaben:
 
 1. Skizzieren Sie $K$ und zeigen Sie, dass $K$ eine Dichtekurve ist.
 
-1. Skizzieren Sie für die Kernbreite $h = 1$ die drei Funktionen $\frac{1}{nh} K\left(\frac{x - x_i}{h}\right)$ in ein gemeinsames Koordinatensystem und bestimmen Sie daraus den Kerndichteschätzer $\hat f$.
+1. Der Kerndichteschätzer ist die Summe $\hat f(x) = \hat f_1(x) + \hat f_2(x) + \hat f_3(x)$ der Funktionen $\hat f_i : \mathbb{R} \to \mathbb{R}$ mit
+   $$
+     \hat f_i(x) = \frac{1}{nh} K\left(\frac{x - x_i}{h}\right), \quad i = 1, 2, 3.
+   $$
+   Skizzieren Sie für die Kernbreite $h = 1$ die Funktionen $\hat f_1$, $\hat f_2$ und $\hat f_3$ in ein gemeinsames Koordinatensystem und bestimmen Sie daraus $\hat f$.
 
 1. Wiederholen Sie das für die Kernbreite $h = 2$.
 
@@ -38,6 +42,7 @@ p_kde_von_hand <- function(h) {
   ggplot() +
     geom_line(data = d_k, mapping = aes(x = x, y = y, group = i), linetype = "dashed", color = "gray40") +
     geom_line(data = d_f, mapping = aes(x = x, y = y), color = "red", linewidth = 1) +
+    geom_point(data = tibble(x = x_i, y = 0), mapping = aes(x = x, y = y), size = 3) +
     scale_x_continuous(breaks = -1:6) +
     labs(title = paste0("h = ", h), x = "x", y = NULL)
 }
@@ -49,7 +54,7 @@ Der Graph von $K$ ist ein Dreieck mit der Grundseite von $-1$ bis $1$ und der H�
 
 **Teil 2**
 
-Für $h = 1$ sind die Einzelkerne Dreiecke der Höhe $\frac{1}{3}$ um 1, 2 und 4 mit der halben Breite 1. Zwischen 1 und 2 fällt der erste Kern so schnell, wie der zweite steigt, deshalb ist $\hat f$ dort konstant $\frac{1}{3}$:
+Für $h = 1$ sind die Graphen von $\hat f_1$, $\hat f_2$ und $\hat f_3$ Dreiecke der Höhe $\frac{1}{3}$ um 1, 2 und 4 mit der halben Breite 1. Zwischen 1 und 2 fällt $\hat f_1$ so schnell, wie $\hat f_2$ steigt, deshalb ist $\hat f$ dort konstant $\frac{1}{3}$:
 
 | $x$ | 0 | 1 | 2 | 3 | 4 | 5 |
 |-----|---|---|---|---|---|---|
@@ -63,7 +68,7 @@ p_kde_von_hand(1)
 
 **Teil 3**
 
-Für $h = 2$ sind die Einzelkerne Dreiecke der Höhe $\frac{1}{6}$ mit der halben Breite 2:
+Für $h = 2$ sind die Graphen von $\hat f_1$, $\hat f_2$ und $\hat f_3$ Dreiecke der Höhe $\frac{1}{6}$ mit der halben Breite 2:
 
 | $x$ | −1 | 0 | 1 | 2 | 3 | 4 | 6 |
 |-----|----|---|---|---|---|---|---|
@@ -77,6 +82,6 @@ p_kde_von_hand(2)
 
 **Teil 4**
 
-Mit $h = 1$ ist $\hat f$ zweigipflig, der Wert 4 bildet einen eigenen Buckel. Mit $h = 2$ ist $\hat f$ glatter und eingipflig, dafür breiter und niedriger. In beiden Fällen ist die Fläche unter $\hat f$ gleich 1.
+Mit $h = 1$ ist $\hat f$ bimodal, der Wert 4 bildet einen eigenen Buckel. Mit $h = 2$ ist $\hat f$ glatter und unimodal, dafür breiter und niedriger. In beiden Fällen ist die Fläche unter $\hat f$ gleich 1.
 :::
 :::

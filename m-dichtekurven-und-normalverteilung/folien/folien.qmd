@@ -246,14 +246,27 @@ Wie gut ist die Approximation des Histogramms durch die Normalverteilung?
 
 ## Idee Normal-Quantil-Plot
 
+::: {.columns}
+::: {.column width=55%}
 ```{r}
 #| fig-width: 7
 #| fig-asp: 1
 #| dev: png
 #| dpi: 300
-#| out-width: 45%
+#| out-width: 80%
 p_nq_idee()
 ```
+:::
+::: {.column width=45%}
+[]{.down50}
+
+- Geordnete Werte $x_{(1)}, \dots, x_{(n)}$
+
+- Anteile $p_i = (i - 0.5)/n$ statt $i/n$, da das 1-Quantil der Standardnormalverteilung im Unendlichen liegt (Stetigkeitskorrektur)
+
+- Punkte $(z_{p_i}, x_{(i)})$ im NQ-Plot
+:::
+:::
 
 ## Beispiele Normal-Quantil-Plot
 

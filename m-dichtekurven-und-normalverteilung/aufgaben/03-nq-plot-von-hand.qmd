@@ -21,8 +21,6 @@ Aufgaben:
 
 1. Zeichnen Sie die Gerade $x = \bar x + \tilde s \cdot z$ ein.
 
-1. Sind die Fahrzeiten näherungsweise normalverteilt? Welche Form hat die Verteilung?
-
 ::: {.tinh-solution}
 ```{r}
 #| include: false
@@ -33,13 +31,15 @@ library(tidyverse)
 
 Geordnet: $14, 18, 20, 23, 35$. Mit $n = 5$ ist $p_i = 0.1, 0.3, 0.5, 0.7, 0.9$.
 
+Warum $(i - 0.5)/n$ und nicht $i/n$? Für $i = n$ wäre $i/n = 1$, das 1-Quantil der Standardnormalverteilung liegt aber im Unendlichen. Deshalb werden alle Anteile um $0.5/n$ nach unten verschoben (Stetigkeitskorrektur, siehe Skript, Abschnitt Normal-Quantil-Plots).
+
 **Teil 2**
 
 Die Punkte sind $(-1.28, 14)$, $(-0.52, 18)$, $(0, 20)$, $(0.52, 23)$ und $(1.28, 35)$.
 
 **Teil 3**
 
-Die Gerade geht durch $(0, 22)$ und hat die Steigung $7.13$.
+Die Gerade $x = \bar x + \tilde s \cdot z$ (siehe Skript, Abschnitt Normal-Quantil-Plots) hat den Achsenabschnitt $\bar x = 22$ und die Steigung $\tilde s \approx 7.13$.
 
 ```{r}
 #| echo: false
@@ -50,9 +50,5 @@ ggplot(data = d, mapping = aes(x = z, y = x)) +
   geom_point(color = "red", size = 3) +
   labs(x = "z", y = "Fahrzeit in Minuten")
 ```
-
-**Teil 4**
-
-Die Punkte liegen nicht auf der Geraden: Der kleinste und der größte Wert liegen oberhalb, die mittleren Werte unterhalb. Die Punkte bilden also eine konvexe Kurve, die Verteilung ist linkssteil (rechtsschief): Die meisten Fahrzeiten sind kurz, wenige sind deutlich länger. Bei nur fünf Werten ist diese Aussage allerdings unsicher.
 :::
 :::
