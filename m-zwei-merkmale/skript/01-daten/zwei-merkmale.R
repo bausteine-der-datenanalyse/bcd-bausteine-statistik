@@ -153,21 +153,22 @@ plot_life_expectancy <- function(xvar, xlabel, xlim, xlog = FALSE) {
   }
 }
 
-plot_correlation_example <- function(x, y, t) {
+plot_correlation_example <- function(x, y, t, farbig = TRUE) {
   x <- x - mean(x)
   y <- y - mean(y)
   d <- tibble(X = x, Y = y, Quadrant = factor(quadrant(x, y)))
 
-  ggplot(data = d) +
+  p <- ggplot(data = d) +
     geom_vline(xintercept = 0, color = "gray60") +
-    geom_hline(yintercept = 0, color = "gray60") +
-    geom_point(
-      mapping = aes(x = X, y = Y, fill = Quadrant),
-      color = "black",
-      shape = 21,
-      size = 2.5
-    ) +
-    labs(title = t)
+    geom_hline(yintercept = 0, color = "gray60")
+
+  if (farbig) {
+    p <- p + geom_point(mapping = aes(x = X, y = Y, fill = Quadrant), color = "black", shape = 21, size = 2.5)
+  } else {
+    p <- p + geom_point(mapping = aes(x = X, y = Y), fill = "light blue", color = "black", shape = 21, size = 2.5)
+  }
+
+  p + labs(title = t)
 }
 
 
@@ -316,6 +317,125 @@ p_correlation_idea <- function() {
     coord_fixed() +
     theme_void() +
     theme(legend.position = "none")
+}
+
+p_sachverstaendigenrat <- function() {
+  ggplot(data = d_wirtschaftswachstum, mapping = aes(x = Prognose, y = Wachstum)) +
+    geom_abline(intercept = 0, slope = 1, color = "red", linewidth = 0.75) +
+    geom_point(shape = 21, fill = "light blue", size = 2.5) +
+    geom_rug()
+}
+
+p_lebenserwartung <- function(ncol = 2) {
+  p1 <- plot_life_expectancy(he, "Ausgaben Gesundheitswesen (% BIP)", c(0, 17))
+  p2 <- plot_life_expectancy(edu, "Ausgaben Bildung (% BIP)", c(0, 10.5))
+  p3 <- plot_life_expectancy(gini, "Gini-Koeffizient", c(10, 70))
+  p4 <- plot_life_expectancy(gdppc, "BIP pro Kopf (USD)", c(110, NA), TRUE)
+
+  p1 + p2 + p3 + p4 + plot_layout(axes = "collect", ncol = ncol)
+}
+
+p_blasendiagramm <- function() {
+  ggplot(data = d_wb_latest) +
+    geom_point(
+      mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
+      shape = 21, show.legend = FALSE, alpha = 0.8
+    ) +
+    scale_size(range = c(0.1, 10)) +
+    scale_fill_distiller(palette = "Reds", direction = 1) +
+    labs(x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung")
+}
+
+p_histogramm_dichte_2d <- function() {
+  p0 <- ggplot(data = d_wb_latest, mapping = aes(x = he, y = le))
+
+  p1 <- p0 +
+    geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
+    scale_fill_distiller(palette = "Blues", direction = 1)
+
+  p2 <- p0 +
+    geom_density_2d_filled(color = "black", linewidth = 0.25) +
+    scale_fill_brewer(palette = "Blues")
+
+  p1 + p2 + plot_layout(axes = "collect") &
+    xlim(0, 20) & ylim(45, 85) &
+    labs(x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung", fill = "Anzahl") &
+    theme(legend.position = "none")
+}
+
+p_korrelation_beispiele <- function(farbig = TRUE) {
+  withr::with_seed(6, {
+    n <- 200
+    x <- runif(n, min = -1, max = 1)
+    p1 <- plot_correlation_example(x, x + rnorm(n, sd = 0.3), TeX("A: $r > 0$"), farbig)
+    p2 <- plot_correlation_example(x, -x + rnorm(n, sd = 0.3), TeX("B: $r < 0$"), farbig)
+    p3 <- plot_correlation_example(x, rnorm(n, sd = 0.3), TeX("C: $r \\approx 0$"), farbig)
+    p4 <- plot_correlation_example(0.4 * x, rnorm(n, sd = 1), TeX("D: $r \\approx 0$"), farbig)
+    p5 <- plot_correlation_example(x, -1 + 2 * x^2 + rnorm(n, sd = 0.3), TeX("E: $r \\approx 0$"), farbig)
+    p6 <- plot_correlation_example(x, 1 - 2 * x^2 + rnorm(n, sd = 0.3), TeX("F: $r \\approx 0$"), farbig)
+  })
+
+  p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect") &
+    theme_void() & xlim(-1, 1) & ylim(-2, 2)
+}
+
+p_pisa <- function() {
+  countries <- c("Singapore", "Finland", "Brazil", "Switzerland")
+  d <- mutate(d_pisa, sel = country %in% countries)
+
+  ggplot(data = d, mapping = aes(x = read, y = math)) +
+    geom_point(mapping = aes(fill = sel), shape = 21, show.legend = FALSE) +
+    geom_label(
+      data = filter(d, country %in% countries),
+      mapping = aes(label = country),
+      hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
+    ) +
+    scale_fill_manual(values = c("light blue", "red")) +
+    labs(x = "Lesekompetenz", y = "Mathematische Kompetenz")
+}
+
+p_pisa_regression <- function() {
+  ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
+    geom_smooth(method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75) +
+    geom_point(shape = 21, fill = "light blue", size = 2.5) +
+    labs(x = "Lesekompetenz", y = "Mathematische Kompetenz")
+}
+
+p_anscombe_residuen <- function() {
+  anscombe |>
+    mutate(
+      y1 = y1 - 3 - 0.5 * x1,
+      y2 = y2 - 3 - 0.5 * x2,
+      y3 = y3 - 3 - 0.5 * x3,
+      y4 = y4 - 3 - 0.5 * x4,
+    ) |>
+    plot_anscombe(c(-4, 4))
+}
+
+p_bestimmtheitsmass_beispiel <- function() {
+  plot_rsquare_example(y1) + plot_rsquare_example(y2) + plot_layout(axes = "collect") &
+    scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
+    scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
+    labs(x = NULL, y = NULL)
+}
+
+p_loess <- function() {
+  d <- withr::with_seed(1, tibble(x = 2 * pi * runif(300), y = sin(x) + 0.2 * rnorm(length(x))))
+
+  ggplot(data = d, mapping = aes(x = x, y = y)) +
+    geom_point(shape = 21, fill = "light blue", size = 2.5) +
+    geom_smooth(method = "loess", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75) +
+    labs(x = NULL, y = NULL)
+}
+
+p_regression_lebenserwartung <- function(ncol = 2) {
+  ylab <- "Mittlere Lebenserwartung"
+  p1 <- plot_linear_regression(d_wb_latest, he, le, "Ausgaben Gesundheitswesen (% BIP)", ylab)
+  p2 <- plot_linear_regression(d_wb_latest, edu, le, "Ausgaben Bildungswesen (% BIP)", ylab)
+  p3 <- plot_linear_regression(d_wb_latest, gini, le, "Gini-Koeffizient", ylab)
+  p4 <- plot_linear_regression(d_wb_latest, gdppc, le, "BIP pro Kopf", ylab, log = TRUE)
+
+  p1 + p2 + p3 + p4 + plot_layout(axes = "collect", ncol = ncol)
 }
 
 

@@ -17,7 +17,7 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 ::: {#exm-prognose-des-sachverstaendigenrats}
 ## Prognose des Sachverständigenrats
 
-Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahr 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
+Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahre 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
 tab_wirtschaftswachstum(1975, 1983)
@@ -63,17 +63,7 @@ Die Darstellung der Wertepaare $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ durch
 Unten dargestellt ist das Streudiagramm des tatsächlichen Wirtschaftswachstums geplottet über die Vorhersagen des Sachverständigenrats. Dabei sind auf den jeweiligen Achsen noch durch kurze Striche die Lage der einzelnen Werte angedeutet. Könnte der Sachverständigenrat in die Zukunft sehen, lägen alle Punkte auf der eingezeichneten Winkelhalbierenden. In der Wirklichkeit ist das nicht der Fall und je schlechter die Prognose war, umso weiter sind die Punkte von dieser Diagonale entfernt.
 
 ```{r}
-ggplot(
-  data = d_wirtschaftswachstum,
-  mapping = aes(x = Prognose, y = Wachstum)
-) +
-  geom_abline(
-    intercept = 0, slope = 1, color = "red", linewidth = 0.75
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  geom_rug()
+p_sachverstaendigenrat()
 ```
 
 #### Lebenserwartung
@@ -85,31 +75,13 @@ verschiedene andere Indikatoren geplottet. Beachten Sie, dass im Plot
 ```{r}
 #| fig-asp: 1.1
 
-p1 <- plot_life_expectancy(he, "Ausgaben Gesundheitswesen (% BIP)", c(0, 17))
-p2 <- plot_life_expectancy(edu, "Ausgaben Bildung (% BIP)", c(0, 10.5))
-p3 <- plot_life_expectancy(gini, "Gini-Koeffizient", c(10, 70))
-p4 <- plot_life_expectancy(gdppc, "BIP pro Kopf (USD)", c(110, NA), TRUE)
-
-p1 + p2 + p3 + p4 + plot_layout(axes = "collect", ncol = 2)
+p_lebenserwartung()
 ```
 
-Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem dargestellten Blasendiagramm, in dem die Wirtschaftsleitung der Länder auf Größe und Farbe der Kreise abgebildet ist.
+Eine erweiterte Sicht lässt sich gewinnen, wenn in dem Plot der Lebenserwartung über die prozentualen Ausgaben im Gesundheitswesen noch das BIP pro Kopf berücksichtigt wird. Dies führt zu dem dargestellten Blasendiagramm, in dem die Wirtschaftsleistung der Länder auf Größe und Farbe der Kreise abgebildet ist.
 
 ```{r}
-ggplot(data = d_wb_latest) +
-  geom_point(
-    mapping = aes(x = he, y = le, fill = gdppc, size = gdppc),
-    shape = 21, show.legend = FALSE, alpha = 0.8
-  ) +
-  scale_size(
-    range = c(0.1, 10)
-  ) +
-  scale_fill_distiller(
-    palette = "Reds", direction = 1
-  ) +
-  labs(
-    x = "Ausgaben Gesundheitswesen (% BIP)", y = "Mittlere Lebenserwartung"
-  )
+p_blasendiagramm()
 ```
 
 ### Zweidimensionale Histogramme und Dichten
@@ -151,33 +123,13 @@ Die Glättungseigenschaften des Schätzers hängen von den Parametern $h_1$ und 
 In einer zweidimensionalen Darstellung des Histogramms oder der Dichtefunktion werden die Häufigkeiten farblich kodiert, siehe @fig-zwei-merkmale-2d. Eine weitere Möglichkeit besteht in einer dreidimensionalen Darstellung wie in @fig-zwei-merkmale-3d zu sehen. Die ebene Darstellung ist mit ggplot erstellt, die räumliche Darstellung mit dem Programm Mathematica.
 
 ```{r}
-#| fig-cap: Histogramms (links) und geschätzte Verteilungsfunktion (rechts), ebene Darstellung
+#| fig-cap: Histogramm (links) und geschätzte Dichte (rechts), ebene Darstellung
 #| label: fig-zwei-merkmale-2d
 
-p0 <- ggplot(
-  data = d_wb_latest,
-  mapping = aes(x = he, y = le)
-)
-
-p1 <- p0 +
-  geom_bin_2d(binwidth = c(1.25, 2.5), color = "black", linewidth = 0.25) +
-  scale_fill_distiller(palette = "Blues", direction = 1)
-
-p2 <- p0 +
-  geom_density_2d_filled(color = "black", linewidth = 0.25) +
-  scale_fill_brewer(palette = "Blues")
-
-p1 + p2 + plot_layout(axes = "collect") &
-  xlim(0, 20) & ylim(45, 85) &
-  labs(
-    x = "Ausgaben Gesundheitswesen (% BIP)",
-    y = "Mittlere Lebenserwartung",
-    fill = "Anzahl"
-  ) &
-  theme(legend.position = "none")
+p_histogramm_dichte_2d()
 ```
 
-![Histogramms (links) und geschätzte Verteilungsfunktion (rechts), räumliche Darstellung](00-bilder/weltbank-3d.svg){#fig-zwei-merkmale-3d}
+![Histogramm (links) und geschätzte Dichte (rechts), räumliche Darstellung](00-bilder/weltbank-3d.svg){#fig-zwei-merkmale-3d}
 
 ## Zusammenhangsmaß: Empirischer Korrelationskoeffizient von Bravais und Pearson
 
@@ -190,19 +142,7 @@ Es geht nun darum, für die Beobachtungen $x_1, x_2, \dots x_n$ und $y_1, y_2, \
 #| label: fig-korrelation
 #| fig-cap: Mögliche Situationen für den Korrelationskoeffizienten $r$
 
-n <- 200
-set.seed(6)
-x <- runif(n, min = -1, max = 1)
-
-p1 <- plot_correlation_example(x, x + rnorm(n, sd = 0.3), TeX("A: $r > 0$"))
-p2 <- plot_correlation_example(x, -x + rnorm(n, sd = 0.3), TeX("B: $r < 0$"))
-p3 <- plot_correlation_example(x, rnorm(n, sd = 0.3), TeX("C: $r \\approx 0$"))
-p4 <- plot_correlation_example(0.4 * x, rnorm(n, sd = 1), TeX("D: $r \\approx 0$"))
-p5 <- plot_correlation_example(x, -1 + 2 * x^2 + rnorm(n, sd = 0.3), TeX("E: $r \\approx 0$"))
-p6 <- plot_correlation_example(x, 1 - 2 * x^2 + rnorm(n, sd = 0.3), TeX("F: $r \\approx 0$"))
-
-p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect") &
-  theme_void() & xlim(-1, 1) & ylim(-2, 2)
+p_korrelation_beispiele()
 ```
 
 Wie lässt sich nun eine solche Zahl bestimmen? Die grundlegende Idee besteht darin, dass im Streudiagramm ein Koordinatensystem in das Zentrum der Punktwolke gelegt wird. Für jeden Punkt $(x_i, y_i)$ lässt sich dann überprüfen, in welchem Quadrant des neuen Koordinatensystems der Punkt liegt. In @fig-korrelation ist dieser Zusammenhang farblich hervorgehoben.
@@ -225,7 +165,7 @@ Für die Lage des neuen Koordinatensystems verwenden wir die Mittelwerte $\bar{x
 p_correlation_idea()
 ```
 
-Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis D werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
+Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis F werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
 $$
   r = \frac
   {\text{Summe der blauen und roten Flächen}}
@@ -244,7 +184,7 @@ $$
   \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
   }
 $$ 
-Bravais-Person-[Korrelationskoeffizient]{.neuerbegriff} . Der Wertebereich ist $-1 \leq r \leq 1$.
+Bravais-Pearson-[Korrelationskoeffizient]{.neuerbegriff}. Der Wertebereich ist $-1 \leq r \leq 1$.
 :::
 
 Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgende Situationen vor.
@@ -279,7 +219,7 @@ Für $|r| = 1$:
 
 : Die Werte liegen exakt auf einer Geraden.
 
-Neben dem Korrelationskoeffizienten von Bravais und Pearson gibt es noch weitere Zusammenhangsmaße, zum Beispiel den Spaerman-Korrelationskoeffizienten. Diese sind aber weniger gebräuchlich und werden hier nicht weiter diskutiert.
+Neben dem Korrelationskoeffizienten von Bravais und Pearson gibt es noch weitere Zusammenhangsmaße, zum Beispiel den Spearman-Korrelationskoeffizienten. Diese sind aber weniger gebräuchlich und werden hier nicht weiter diskutiert.
 
 ### Korrelation und Kausalität
 
@@ -288,13 +228,13 @@ werden.
 
 Ein weiteres Problem besteht darin, dass es häufig verlockend ist, einen hohen Korrelationswert vorschnell als kausalen Zusammenhang zu interpretieren. Kausalzusammenhänge können niemals allein durch große Werte eines Zusammenhangmaßes begründet werden. Um einen kausalen Zusammenhang zu begründen, vielmehr muss stets ein Zusammenhang zwischen Ursache und Wirkung gefunden werden, der sich ohne Bezugnahme auf die statistischen Werte begründen lässt.
 
-Die Webseite <http://tylervigen.com> (mittlerweile auch als Buch erhältlich) verdeutlicht das an einer Reihe kurioser Beispiele. Dort sind eine Vielzahl von Daten aufgelistet, die einen sehr hohen Korrelationsgrad aufweisen, aber offensichtlich völlig unabhängig voneinander sind. Zum Beispiel weist in den USA der Konsum von Mozarella und die Anzahl von Promotionen in Ingenieursfächern in den Jahren 2000 bis 2009 einen Korrelationskoeffizienten von $r = 0.95$ auf.
+Die Webseite <http://tylervigen.com> (mittlerweile auch als Buch erhältlich) verdeutlicht das an einer Reihe kurioser Beispiele. Dort sind eine Vielzahl von Daten aufgelistet, die einen sehr hohen Korrelationsgrad aufweisen, aber offensichtlich völlig unabhängig voneinander sind. Zum Beispiel weist in den USA der Konsum von Mozzarella und die Anzahl von Promotionen im Bauingenieurwesen in den Jahren 2000 bis 2009 einen Korrelationskoeffizienten von $r = 0.96$ auf.
 
 ![](00-bilder/chart.svg)
 
 Wir merken uns daher:
 
-::: {rem-korrelation-ungleich-kausalität}
+::: {#rem-korrelation-ungleich-kausalitaet}
 $$
   \text{Korrelation} \quad \neq \quad \text{Kausalität}
 $$
@@ -308,28 +248,11 @@ Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kaus
 In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
 
 ```{r}
-countries <- c("Singapore", "Finland", "Brazil", "Switzerland")
-d <- mutate(d_pisa, sel = country %in% countries)
-
-ggplot(data = d, mapping = aes(x = read, y = math)) +
-  geom_point(
-    mapping = aes(fill = sel), shape = 21, show.legend = FALSE
-  ) +
-  geom_label(
-    data = filter(d, country %in% countries),
-    mapping = aes(label = country),
-    hjust = 1, nudge_x = -3, nudge_y = 5, size = label_fontsize, alpha = 0.5
-  ) +
-  scale_fill_manual(
-    values = c("light blue", "red")
-  ) +
-  labs(
-    x = "Lesekompetenz", y = "Mathematische Kompetenz"
-  )
+p_pisa()
 ```
 
 Dargestellt sind die Ergebnisse in den Kompetenzbereichen Mathematik und Lesen. Offenbar sind die Ergebnisse für beide Kompetenzbereiche eng miteinander korreliert. Dies spiegelt sich in dem Zahlenwert von $r = 0.94$ wider. Allerdings ist die Schlussfolgerung, dass eine gute Lesekompetenz automatisch auch eine gute Kompetenz im mathematischen Bereich zur Folge hat (oder umgekehrt), sicherlich nicht die passende Erklärung. Vielmehr muss man hier nach Einflussfaktoren fragen, die im Schulsystem und im kulturellen Umfeld angesiedelt sind.
-::::
+:::
 
 ## Lineare Regression
 
@@ -470,7 +393,7 @@ $$
     \displaystyle \sum_{i=1}^n(x_i - \bar{x})^2
   }
 $$ 
-minimiert die Summe der Fehlerquadrate.
+minimieren die Summe der Fehlerquadrate.
 :::
 
 ::: {#exm-pisa-studie}
@@ -487,16 +410,7 @@ $$
 der unten dargestellten Ausgleichsgeraden.
 
 ```{r}
-ggplot(data = d_pisa, mapping = aes(x = read, y = math)) +
-  geom_smooth(
-    method = "lm", formula = y ~ x, se = FALSE, color = "red", linewidth = 0.75
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  labs(
-    x = "Lesekompetenz", y = "Mathematische Kompetenz"
-  )
+p_pisa_regression()
 ```
 :::
 
@@ -540,7 +454,7 @@ mit $0 \leq R^2 \leq 1$ die Güte des linearen Modells. Dabei ist
 $$
   \hat y_i = \hat \alpha + \hat \beta x_i.
 $$
-Es lässt sich zeigen, dass es sich bei dem Bestimmtheitsmaß um das Quadrat des Korrelationskoeffizienten $r$ handelt, es gilt also $R = r^2$.
+Es lässt sich zeigen, dass es sich bei dem Bestimmtheitsmaß um das Quadrat des Korrelationskoeffizienten $r$ handelt, es gilt also $R^2 = r^2$.
 :::
 
 Damit kann der Korrelationskoeffizient auch in Bezug auf das lineare Regressionsmodell interpretiert werden: Der quadrierte Korrelationskoeffizient entspricht dem Anteil der Gesamtstreuung, der durch das lineare Modell erklärt werden kann.
@@ -551,27 +465,17 @@ Als Beispiel betrachten wir die beiden nachfolgend dargestellten Datensätze. Wi
 ```{r}
 #| fig-asp: 0.45
 
-plot_rsquare_example(y1) + plot_rsquare_example(y2) + plot_layout(axes = "collect") &
-  scale_x_continuous(breaks = 0:1, limits = c(0, 1)) &
-  scale_y_continuous(breaks = 0:1, limits = c(0, 1)) &
-  labs(x = NULL, y = NULL)
+p_bestimmtheitsmass_beispiel()
 ```
 
 Gegenbeispiel: Für die Datensätze aus Anscombes Quartett ergeben sich in allen vier Fällen für das Bestimmtheitsmaß Werte von $R^2 = 0.67$, so dass wir hier keinerlei Aufschluss darüber erhalten, ob das lineare Modell sinnvoll ist oder nicht. Im Zweifelsfall sollte man daher immer die Residuen $\varepsilon_i$ plotten, wie das hier für das Anscombe-Quartett dargestellt ist. 
 
 ```{r}
-anscombe |>
-  mutate(
-    y1 = y1 - 3 - 0.5 * x1,
-    y2 = y2 - 3 - 0.5 * x2,
-    y3 = y3 - 3 - 0.5 * x3,
-    y4 = y4 - 3 - 0.5 * x4,
-  ) |>
-  plot_anscombe(c(-4, 4))
+p_anscombe_residuen()
 ```
 :::
 
-Anmerkung: Der Wertebereich für den Korrelationskoeffizienten $r$ und das Bestimmtheitsmaß $R^2$ ist jeweils das Intervall $[0, 1]$. Es liegt daher nahe, die Werte als prozentuale Größen zu interpretieren. Man spricht dann zum Beispiel davon, dass eine Korrelation von 40 % besteht, oder dass eine Variabilität zu 16 % durch das lineare Modell erklärt werden kann.
+Anmerkung: Der Betrag $|r|$ des Korrelationskoeffizienten und das Bestimmtheitsmaß $R^2$ liegen jeweils im Intervall $[0, 1]$. Es liegt daher nahe, die Werte als prozentuale Größen zu interpretieren. Man spricht dann zum Beispiel davon, dass eine Korrelation von 40 % besteht, oder dass eine Variabilität zu 16 % durch das lineare Modell erklärt werden kann.
 
 ### Ausblick: Nichtlineare und lokale Regression
 
@@ -589,21 +493,7 @@ verwendet werden. Im quadratischen Fall bestimmen sich die Koeffizienten $\alpha
 Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, die auch komplexere Zusammenhänge zwischen Merkmalen erfassen kann. Das Akronym LOESS steht dabei für *Locally Estimated Scatterplot Smoothing*. Unten dargestellt ist ein Datensatz mit Werten, die um eine Sinusfunktion herum streuen. Die zugehörige Regressionskurve bildet den zugrunde liegenden Zusammenhang sehr gut ab.
 
 ```{r}
-tibble(
-  x = 2 * pi * runif(300),
-  y = sin(x) + 0.2 * rnorm(length(x))
-) |>
-  ggplot(
-    mapping = aes(x = x, y = y)
-  ) +
-  geom_point(
-    shape = 21, fill = "light blue", size = 2.5
-  ) +
-  geom_smooth(
-    method = "loess", formula = y ~ x,
-    se = FALSE, color = "red", linewidth = 0.75
-  ) +
-  labs(x = NULL, y = NULL)
+p_loess()
 ```
 
 ## Beispiele
@@ -621,38 +511,5 @@ In den nachfolgend dargestellten Auswertungen zur mittleren Lebenserwartung auf 
 ```{r}
 #| fig-asp: 1.2
 
-p1 <- plot_linear_regression(
-  d_wb_latest,
-  he,
-  le,
-  "Ausgaben Gesundheitswesen (% BIP)",
-  "Mittlere Lebenswerwartung"
-)
-
-p2 <- plot_linear_regression(
-  d_wb_latest,
-  edu,
-  le,
-  "Ausgaben Bildungswesen (% BIP)",
-  "Mittlere Lebenswerwartung"
-)
-
-p3 <- plot_linear_regression(
-  d_wb_latest,
-  gini,
-  le,
-  "Gini-Koeffizient",
-  "Mittlere Lebenswerwartung"
-)
-
-p4 <- plot_linear_regression(
-  d_wb_latest,
-  gdppc,
-  le,
-  "BIP pro Kopf",
-  "Mittlere Lebenswerwartung",
-  log = TRUE
-)
-
-p1 + p2 + p3 + p4 + plot_layout(axes = "collect")
+p_regression_lebenserwartung()
 ```
