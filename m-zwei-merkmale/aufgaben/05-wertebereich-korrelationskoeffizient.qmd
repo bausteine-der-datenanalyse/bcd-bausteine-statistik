@@ -1,0 +1,76 @@
+::: {#exr-wertebereich-korrelationskoeffizient}
+## Wertebereich des Korrelationskoeffizienten
+
+Für die Werte $(x_i, y_i), i = 1, \dots, n$ ist der Korrelationskoeffizient
+
+$$
+  r = \frac{
+  \displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
+  }{
+  \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
+  } .
+$$
+
+Zeigen Sie, dass $-1 \leq r \leq 1$ gilt. Gehen Sie dazu wie folgt vor.
+
+1. Mit den Abkürzungen
+   $$
+     S_x = \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}
+     \quad \text{und} \quad
+     S_y = \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
+   $$
+   seien
+   $$
+     u_i = \frac{x_i - \bar{x}}{S_x}
+     \quad \text{und} \quad
+     v_i = \frac{y_i - \bar{y}}{S_y} .
+   $$
+   Zeigen Sie, dass
+   $$
+     \sum_{i=1}^n u_i^2 = 1, \quad
+     \sum_{i=1}^n v_i^2 = 1
+     \quad \text{und} \quad
+     \sum_{i=1}^n u_i v_i = r
+   $$
+   gilt.
+
+1. Multiplizieren Sie die Summen
+   $$
+     \sum_{i=1}^n (u_i - v_i)^2
+     \quad \text{und} \quad
+     \sum_{i=1}^n (u_i + v_i)^2
+   $$
+   aus und drücken Sie diese durch $r$ aus.
+
+1. Folgern Sie daraus $-1 \leq r \leq 1$.
+
+1. Wann gilt $r = 1$, wann $r = -1$? Was bedeutet das für die Lage der Punkte $(x_i, y_i)$?
+
+::: {.tinh-solution}
+
+1. Einsetzen ergibt
+   $$
+     \sum_{i=1}^n u_i^2 = \frac{1}{S_x^2} \sum_{i=1}^n (x_i - \bar{x})^2 = \frac{S_x^2}{S_x^2} = 1 ,
+   $$
+   ebenso $\sum v_i^2 = 1$. Außerdem ist
+   $$
+     \sum_{i=1}^n u_i v_i = \frac{1}{S_x S_y} \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) = r .
+   $$
+
+1. Mit der binomischen Formel und Teil 1 gilt
+   $$
+     \sum_{i=1}^n (u_i \mp v_i)^2
+     = \sum_{i=1}^n u_i^2 \mp 2 \sum_{i=1}^n u_i v_i + \sum_{i=1}^n v_i^2
+     = 1 \mp 2r + 1
+     = 2(1 \mp r) .
+   $$
+
+1. Eine Summe von Quadraten ist nicht negativ. Also ist $2(1 - r) \geq 0$, das heißt $r \leq 1$, und $2(1 + r) \geq 0$, das heißt $r \geq -1$.
+
+1. $r = 1$ gilt genau dann, wenn $\sum (u_i - v_i)^2 = 0$ ist, also $u_i = v_i$ für alle $i$. Das bedeutet
+   $$
+     y_i = \bar{y} + \frac{S_y}{S_x} (x_i - \bar{x}) ,
+   $$
+   alle Punkte liegen auf einer Geraden mit positiver Steigung. Entsprechend gilt $r = -1$ genau dann, wenn $u_i = -v_i$ für alle $i$ ist, alle Punkte liegen dann auf einer Geraden mit negativer Steigung.
+:::
+:::

@@ -21,56 +21,59 @@ withr::with_dir("../skript", source("01-daten/zwei-merkmale.R"))
 
 ## Prognose des Sachverständigenrats (Wirtschaftsweise)
 
-![](../skript/00-bilder/sachverstaendigenrat-1964.jpg){height="20%"}
-![](../skript/00-bilder/sachverstaendigenrat-heute.jpg){height="20%"}
+![](../skript/00-bilder/sachverstaendigenrat-1964.jpg){height="40%"}
+![](../skript/00-bilder/sachverstaendigenrat-heute.jpg){height="40%"}
+
+```{r}
+d_wirtschaftswachstum |> filter(Jahr < 1987) |> transpose_df(col = "Jahr") |> rename(Jahr = name) |> tt() |> style_tt(align = "c")
+```
+
+```{r}
+d_wirtschaftswachstum |> filter(Jahr >= 1987) |> transpose_df(col = "Jahr") |> rename(Jahr = name) |> tt() |> style_tt(align = "c")
+```
 
 Quellen: Bundesarchiv und <https://www.sachverstaendigenrat-wirtschaft.de>
 
-```{r}
-d_wirtschaftswachstum |> filter(Jahr < 1987) |> transpose_df(col = "Jahr") |> rename(Jahr = name) |> knitr::kable()
-```
-
-```{r}
-d_wirtschaftswachstum |> filter(Jahr >= 1987) |> transpose_df(col = "Jahr") |> rename(Jahr = name) |> knitr::kable()
-```
-
 ## Mittlere Lebenserwartung
 
+![](../skript/00-bilder/lebenserwartung-weltkarte.png){width=65%}
+
+Wir untersuchen den Zusammenhang mit
+
 ::: {.columns}
-::: {.column width=55%}
-![](../skript/00-bilder/lebenserwartung-weltkarte.png){width="7cm"}
-
-Quelle: Wikipedia
-:::
-::: {.column width=40%}
-Zusammenhang mit
-
+::: {.column}
 - BIP pro Kopf
 
 - Ausgaben Gesundheitswesen (% BIP)
-
+:::
+::: {.column}
 - Ausgaben Bildung (% BIP)
 
-- Gini-Koeffizient
+- Gini-Koeffizient des Einkommens
 :::
 :::
 
-→ Daten der Weltbank
+Quellen: Wikipedia und Weltbank
 
 ## PISA-Studie der OECD 2015
 
+[]{.down40}
+
 ::: {.columns}
-::: {.column width=30%}
-![](../skript/00-bilder/pisa.png){width="100%"}
+::: {.column width=20%}
+![](../skript/00-bilder/pisa.png){}
 :::
-::: {.column width=65%}
+::: {.column width=75%}
 - Untersuchung von Schulleistungen in 73 Ländern
 
-- Erhebung in den Bereichen Lesekompetenz, Mathematik und Naturwissenschaften
+- Erhebung in den Bereichen 
+  - Lesekompetenz
+  - Mathematik
+  - Naturwissenschaften
 
 - Rohdaten: 519334 Beobachtungen von 921 Merkmalen
 
-- Für uns: Mittelwerte der Länder
+- Wir betrachten Mittelwerte der Länder
 :::
 :::
 
@@ -98,8 +101,7 @@ Die Darstellung der Wertepaare $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ durch
 p_sachverstaendigenrat()
 ```
 
-- Alle Prognosen richtig: Punkte auf der Winkelhalbierenden
-
+- 'Alle Prognosen richtig' $\iff$ 'Punkte auf der Winkelhalbierenden'
 - Einzelne Werte an den Achsen durch Striche gekennzeichnet
 :::
 
@@ -114,6 +116,7 @@ p_sachverstaendigenrat()
 
 ```{r}
 #| fig-asp: 0.5
+#| fig-width: 12
 p_lebenserwartung()
 ```
 
@@ -130,7 +133,6 @@ p_lebenserwartung()
 []{.up10}
 
 ```{r}
-#| fig-asp: 0.45
 p_blasendiagramm()
 ```
 
@@ -196,6 +198,8 @@ p_histogramm_dichte_2d()
 
 ![](../skript/00-bilder/weltbank-3d.svg){fig-align="center" height="65%"}
 
+[]{.down10}
+
 - Räumliche Darstellung von Histogramm und Kerndichteschätzer (Mathematica)
 
 # Korrelationskoeffizient
@@ -219,9 +223,7 @@ p_korrelation_beispiele()
 ## Berechnung des Korrelationskoeffizienten
 
 ```{r}
-#| fig-asp: 0.6
-#| out-width: 60%
-#| fig-align: center
+#| cache: false
 p_correlation_idea()
 ```
 

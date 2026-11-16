@@ -163,7 +163,9 @@ plot_correlation_example <- function(x, y, t, farbig = TRUE) {
     geom_hline(yintercept = 0, color = "gray60")
 
   if (farbig) {
-    p <- p + geom_point(mapping = aes(x = X, y = Y, fill = Quadrant), color = "black", shape = 21, size = 2.5)
+    p <- p +
+      geom_point(mapping = aes(x = X, y = Y, fill = Quadrant), color = "black", shape = 21, size = 2.5) +
+      scale_fill_manual(values = c("#2F6BC6", "#D33F49", "#EBC63F", "#43A047"))
   } else {
     p <- p + geom_point(mapping = aes(x = X, y = Y), fill = "light blue", color = "black", shape = 21, size = 2.5)
   }
@@ -206,7 +208,33 @@ p_correlation_idea <- function() {
   xi <- pluck(d, "x", 4)
   yi <- pluck(d, "y", 4)
 
+  # Globales Koordinatensystem links und unten
+  x0 <- min(d$x1) - 0.3
+  y0 <- min(d$y1) - 0.3
+  x_end <- max(d$x1) + 0.3
+  y_end <- max(d$y1) + 0.3
+
   ggplot(data = d) +
+    annotate(
+      geom = "segment",
+      x = x0, y = y0, xend = x_end, yend = y0,
+      arrow = arrow(length = unit(0.025, "npc"), angle = 20)
+    ) +
+    annotate(
+      geom = "segment",
+      x = x0, y = y0, xend = x0, yend = y_end,
+      arrow = arrow(length = unit(0.025, "npc"), angle = 20)
+    ) +
+    annotate(geom = "latex", x = x_end, y = y0, label = "$x$", hjust = 0.5, vjust = 1.8) +
+    annotate(geom = "latex", x = x0, y = y_end, label = "$y$", hjust = 1.8, vjust = 0.5) +
+    annotate(
+      geom = "latex", x = 0, y = y0, label = "$\\bar{x}$",
+      hjust = 0.5, vjust = 1.5
+    ) +
+    annotate(
+      geom = "latex", x = x0, y = 0, label = "$\\bar{y}$",
+      hjust = 1.5, vjust = 0.5
+    ) +
     geom_rect(
       mapping = aes(
         xmin = 0,
@@ -241,8 +269,8 @@ p_correlation_idea <- function() {
       linewidth = 0.25,
       color = "black"
     ) +
-    geom_vline(xintercept = 0) +
-    geom_hline(yintercept = 0) +
+    annotate(geom = "segment", x = 0, y = y0, xend = 0, yend = y_end) +
+    annotate(geom = "segment", x = x0, y = 0, xend = x_end, yend = 0) +
     geom_segment(
       mapping = aes(
         x = x,
@@ -270,43 +298,39 @@ p_correlation_idea <- function() {
       shape = 21,
       size = 2
     ) +
-    scale_fill_manual(values = c("blue", "red", "yellow", "green")) +
-    scale_color_manual(values = c("blue", "red")) +
+    scale_fill_manual(values = c("#2F6BC6", "#D33F49", "#EBC63F", "#43A047")) +
+    scale_color_manual(values = c("#2F6BC6", "#D33F49")) +
     annotate(
-      geom = "text",
+      geom = "latex",
       x = xi,
       y = yi,
-      label = TeX("$(x_i, y_i)$", output = "character"),
+      label = "$(x_i, y_i)$",
       hjust = -0.2,
-      vjust = 1.2,
-      parse = TRUE
+      vjust = 1.2
     ) +
     annotate(
-      geom = "text",
+      geom = "latex",
       x = xi,
       y = yi / 2,
-      label = TeX("$y_i - \\bar{y}$", output = "character"),
+      label = "$y_i - \\bar{y}$",
       hjust = -0.2,
-      vjust = 0.5,
-      parse = TRUE
+      vjust = 0.5
     ) +
     annotate(
-      geom = "text",
+      geom = "latex",
       x = xi / 2,
       y = yi,
-      label = TeX("$x_i - \\bar{x}$", output = "character"),
+      label = "$x_i - \\bar{x}$",
       hjust = 0.5,
-      vjust = 1.5,
-      parse = TRUE
+      vjust = 1.5
     ) +
     annotate(
-      geom = "text",
+      geom = "latex",
       x = 0,
       y = 0,
-      label = TeX("$(\\bar{x}, \\bar{y})$", output = "character"),
+      label = "$(\\bar{x}, \\bar{y})$",
       hjust = -0.2,
-      vjust = 1.2,
-      parse = TRUE
+      vjust = 1.2
     ) +
     annotate(
       geom = "point",
