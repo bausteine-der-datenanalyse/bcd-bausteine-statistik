@@ -220,22 +220,32 @@ p_korrelation_beispiele(farbig = FALSE)
 p_korrelation_beispiele()
 ```
 
-## Berechnung des Korrelationskoeffizienten
+## Berechnung Korrelationskoeffizient
 
+::: {.columns}
+::: {.column width=45%}
 ```{r}
-#| cache: false
+#| fig-asp: 1.1
+#| fig-width: 4
+#| out-width: 100%
 p_correlation_idea()
 ```
+:::
+::: {.column width=55%}
+[]{.down20}
 
+Korrelationskoeffizient
 $$
-r = \frac
-{\text{Summe der blauen und roten Flächen}}
-{\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}}
+r = \frac{\text{Summe blau} - \text{Summe rot}}{\sqrt{\text{Summe gelb} \cdot \text{Summe grün}}}
 $$
+
+- Im Zähler: Lage in den Quadranten
+
+- Im Nenner: Normalisierung
+:::
+:::
 
 ## Bravais-Pearson-Korrelationskoeffizient
-
-[]{.down50}
 
 ::: {#def-korrelationskoeffizient}
 Für die Werte $(x_i, y_i), i = 1, \dots, n$ heißt die Zahl
@@ -246,14 +256,32 @@ r = \frac{
 \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
 }
 $$
-[Bravais-Pearson-Korrelationskoeffizient]{.neuerbegriff}. Der Wertebereich ist $-1 \leq r \leq 1$.
+[Bravais-Pearson-Korrelationskoeffizient]{.neuerbegriff}. 
 :::
+
+. . .
+
+### Eigenschaften
+
+- Dimensionslos, da Einheiten in Zähler und Nenner gleich
+
+- $-1 \leq r \leq 1$ (Aufgabe in der Übung)
+
+- Symmetrisch, keine Aussage über die Richtung einer Wirkung
 
 ## Interpretation des Korrelationskoeffizienten
 
-- $r > 0$: Positive Korrelation, Werte liegen tendenziell um eine Gerade positiver Steigung
+[]{.down10}
 
-- $r < 0$: Negative Korrelation, Werte liegen tendenziell um eine Gerade negativer Steigung
+### Vorzeichen
+
+- $r > 0$: Positive Korrelation, Werte um eine Gerade positiver Steigung
+
+- $r < 0$: Negative Korrelation, Werte um eine Gerade negativer Steigung
+
+. . .
+
+[]{.down10}
 
 ### Korrelationsgrad
 
@@ -270,28 +298,51 @@ $$
 ## Naheliegende Vermutung
 
 []{.down50}
+[]{.down50}
 
-$$
-\text{Hohe Korrelation} \quad = \quad \text{Kausaler Zusammenhang}
-$$
+```{=typst}
+#align(center, box(stroke: 1pt, radius: 0.5em, inset: 1em, text(size: 1.5em)[
+  'Hohe Korrelation' $<==>$ 'Kausaler Zusammenhang'
+]))
+```
+
 
 ## Korrelation und Kausalität
 
-![](../skript/00-bilder/chart.svg){width="65%"}
+![](../skript/00-bilder/chart.png){width="65%"}
 
-Quelle: <http://tylervigen.com>
 
-- Mozzarella-Konsum und Promotionen im Bauingenieurwesen (USA) mit $r = 0.96$ hochgradig korreliert
+- Mozzarella-Konsum und Promotionen (USA) mit $r = 0.96$ hochgradig korreliert
 
 - Es besteht (wahrscheinlich) keinerlei Zusammenhang
+
+Quelle: <http://tylervigen.com>
 
 ## Korrelation und Kausalität
 
 []{.down50}
 
-$$
-\text{Korrelation} \quad \neq \quad \text{Kausalität}
-$$
+```{=typst}
+#align(center, box(stroke: 1pt, radius: 0.5em, inset: 1em, text(size: 1.4em)[
+  #grid(
+    columns: 3, column-gutter: 0.5em, row-gutter: 1em, align: (right, center, left),
+    ['Hohe Korrelation'], $arrow.r.double.not$, ['Kausaler Zusammenhang'],
+    ['Kausaler Zusammenhang'], $arrow.r.double.not$, ['Hohe Korrelation'],
+  )
+]))
+```
+
+. . .
+
+[]{.down20}
+
+Kausaler Zusammenhang, aber $r \approx 0$:
+
+- Zusammenhang nicht linear (Beispiele E und F)
+
+- Wirkungen heben sich auf
+
+- Ursache variiert in den Daten kaum
 
 ##
 
@@ -308,10 +359,8 @@ p_pisa()
 ```
 
 - Lesekompetenz und mathematische Kompetenz: $r = 0.94$
-
-- Gut Lesen → Gut Rechnen?
-
-- Wirklicher Zusammenhang: Gute Schulen → Gut Lesen und Rechnen
+- Gilt also 'Gut Lesen' $\implies$ 'Gut Rechnen'? Oder umgekehrt?
+- Wirklicher Zusammenhang: 'Gute Schulen' $\implies$ 'Gut Lesen und Rechnen'
 :::
 
 # Lineare Regression
@@ -366,9 +415,14 @@ $$
 \frac{\partial Q(\alpha, \beta)}{\partial \beta} = 0
 $$
 
-[]{.down20}
+. . .
 
-→ Tafel
+Ergibt
+$$
+\alpha = \bar{y} - \beta \bar{x}
+\quad \text{und} \quad
+\beta = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}
+$$
 
 ## Lineare Regression
 
@@ -412,44 +466,52 @@ p_pisa_regression()
 
 Lesekompetenz $X$ und mathematische Kompetenz $Y$
 $$
-\bar{x} = 461.8, \quad \bar{y} = 463.0
+\bar{x} = 463.0, \quad \bar{y} = 461.8
 \quad \Rightarrow \quad
-\hat \alpha = 58.9, \quad \hat \beta = 0.875
+\hat \alpha = -5.14, \quad \hat \beta = 1.009
 $$
 :::
 
-## Anscombes Quartett (F. Anscombe, 1973)
+## Anscombes Quartett [@anscombe_graphs_1973]
 
+
+::: {.columns}
+::: {.column width=40%}
+[]{.up5}
 ```{r}
-#| fig-asp: 0.25
-#| out-width: 50%
+#| fig-asp: 1
+#| fig-width: 6
+#| out-width: 100%
 anscombe |> plot_anscombe(c(3, 15))
 ```
-
-Vier Datensätze mit derselben Ausgleichsgeraden. Wo ist die Ausgleichsgerade sinnvoll?
+:::
+::: {.column width=60%}
+Wo ist die Ausgleichsgerade sinnvoll?
 
 . . .
 
 1. Linearer Zusammenhang mit zufälliger Abweichung, Ausgleichsgerade sinnvoll
+1. Zusammenhang quadratisch, Ausgleichsgerade sinnlos
+1. Ausgleichsgerade durch Ausreißer verfälscht
+1. Ohne Ausreißer keine Ausgleichsgerade
+:::
+:::
 
-2. Zusammenhang quadratisch, Ausgleichsgerade sinnlos
-
-3. Ausgleichsgerade durch Ausreißer verfälscht
-
-4. Ohne Ausreißer keine Ausgleichsgerade
 
 . . .
 
-→ Im Zweifelsfall immer die Daten anschauen!
+→ Im Zweifelsfall immer die Daten anschauen! 
 
 ## Bestimmtheitsmaß
+
+[]{.down20}
 
 ::: {#def-bestimmtheitsmass}
 Für die Werte $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ erfasst das [Bestimmtheitsmaß]{.neuerbegriff}
 $$
 R^2
 \; = \;
-\frac{\text{Streuung Ausgleichsgerade}}{\text{Gesamte Streuung}}
+\frac{\text{Erklärte Streuung}}{\text{Gesamte Streuung}}
 \; = \;
 \frac{
 \displaystyle \sum_{i=1}^n(\hat y_i - \bar{y})^2
@@ -478,53 +540,51 @@ Neue Interpretation des Korrelationskoeffizienten: $r^2$ ist der Anteil der Stre
 []{.up10}
 
 ```{r}
-#| fig-asp: 0.4
-#| out-width: 80%
-#| fig-align: center
 p_bestimmtheitsmass_beispiel()
 ```
 
 - Links $R^2 = `r round(summary(lm(y1 ~ x, data = d_rsquare_example))$r.squared, 2)`$, rechts $R^2 = `r round(summary(lm(y2 ~ x, data = d_rsquare_example))$r.squared, 2)`$
-
 - Unterschiedliche Variabilität um die Ausgleichsgerade wird gut erfasst
 :::
 
-##
-
-[]{.up40}
-
-::: {#exm-anscombe-residuen}
 ## Anscombes Quartett: Residuen
 
-[]{.up10}
-
+::: {.columns}
+::: {.column width=40%}
+[]{.up5}
 ```{r}
-#| fig-asp: 0.25
+#| fig-asp: 1
+#| fig-width: 6
+#| out-width: 100%
 p_anscombe_residuen()
 ```
-
-- Bestimmtheitsmaß in allen vier Fällen $R^2 = 0.67$
-
-- Gibt keinen Aufschluss darüber, ob das lineare Modell sinnvoll ist
-
-- Im Zweifelsfall die Residuen $\varepsilon_i$ plotten
 :::
+::: {.column width=60%}
+- Bestimmtheitsmaß immer $R^2 = 0.67$
+
+- Kein Aufschluss, ob lineares Modell sinnvoll
+:::
+:::
+
+. . .
+
+→ Im Zweifelsfall die Residuen $\varepsilon_i$ plotten!
 
 ## Nichtlineare und lokale Regression
 
 ::: {.columns}
 ::: {.column width=45%}
-Quadratisches Modell
-$$
-Y = \alpha + \beta X + \gamma X^2 + \varepsilon
-$$
+1. Quadratisches Modell
+  $$
+  Y = \alpha + \beta X + \gamma X^2 + \varepsilon
+  $$
 
-Exponentieller Ansatz
-$$
-Y = \alpha \exp(\beta X) + \varepsilon
-$$
+1. Exponentieller Ansatz
+  $$
+  Y = \alpha \exp(\beta X) + \varepsilon
+  $$
 
-Lokale Regression mit der LOESS-Methode (*Locally Estimated Scatterplot Smoothing*)
+1. Lokale Regression mit der LOESS-Methode (*Locally Estimated Scatterplot Smoothing*)
 :::
 ::: {.column width=50%}
 ```{r}
@@ -532,39 +592,50 @@ Lokale Regression mit der LOESS-Methode (*Locally Estimated Scatterplot Smoothin
 #| out-width: 100%
 p_loess()
 ```
+:::
+:::
 
-Werte variieren um eine Sinusfunktion, die LOESS-Kurve bildet den Zusammenhang sehr gut ab
-:::
-:::
+Beispiel mit Sinusfunktion: LOESS-Kurve bildet den Zusammenhang sehr gut ab
 
 # Mit den Beispieldaten
 
 ## Prognose Sachverständigenrat
 
 ```{r}
-#| fig-asp: 0.45
 plot_linear_regression(d_wirtschaftswachstum, Prognose, Wachstum, "Prognose", "Wachstum")
 ```
 
 - Mittlere Korrelation mit $r = 0.64$
-
 - 40 % der Variabilität des Wachstums durch das lineare Modell erklärt
 
 ## Mittlere Lebenserwartung
 
 ::: {.columns}
-::: {.column width=60%}
+::: {.column width=50%}
+[]{.up5}
 ```{r}
-#| fig-asp: 0.8
+#| fig-asp: 1
+#| fig-width: 7
 #| out-width: 100%
 p_regression_lebenserwartung()
 ```
 :::
-::: {.column width=35%}
-[]{.down50}
+::: {.column width=50%}
+- Schwache Korrelation
 
-- Schwache Korrelation für Ausgaben Gesundheitswesen, Bildung und Gini-Koeffizient
+  - Ausgaben Gesundheitswesen
 
-- Starke Korrelation für BIP pro Kopf (logarithmisch)
+  - Ausgaben Bildungswesen
+
+  - Gini-Koeffizient Einkommen
+
+- Starke Korrelation
+
+  - BIP pro Kopf (logarithmisch)
 :::
+:::
+
+## Literatur
+
+::: {#refs}
 :::

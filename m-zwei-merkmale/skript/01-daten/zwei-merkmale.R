@@ -63,6 +63,8 @@ plot_anscombe <- function(d, ylims) {
       ) +
       labs(title = n, x = NULL, y = NULL) +
       theme(
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
         plot.title = element_text(
           margin = margin(
             t = 5,
@@ -225,15 +227,15 @@ p_correlation_idea <- function() {
       x = x0, y = y0, xend = x0, yend = y_end,
       arrow = arrow(length = unit(0.025, "npc"), angle = 20)
     ) +
-    annotate(geom = "latex", x = x_end, y = y0, label = "$x$", hjust = 0.5, vjust = 1.8) +
-    annotate(geom = "latex", x = x0, y = y_end, label = "$y$", hjust = 1.8, vjust = 0.5) +
+    annotate(geom = "text", x = x_end, y = y0, label = "x", fontface = "italic", hjust = 0.5, vjust = 1.8) +
+    annotate(geom = "text", x = x0, y = y_end, label = "y", fontface = "italic", hjust = 1.8, vjust = 0.5) +
     annotate(
-      geom = "latex", x = 0, y = y0, label = "$\\bar{x}$",
-      hjust = 0.5, vjust = 1.5
+      geom = "text", x = 0, y = y0, label = TeX("$\\bar{x}$", output = "character"),
+      hjust = 0.5, vjust = 1.5, parse = TRUE
     ) +
     annotate(
-      geom = "latex", x = x0, y = 0, label = "$\\bar{y}$",
-      hjust = 1.5, vjust = 0.5
+      geom = "text", x = x0, y = 0, label = TeX("$\\bar{y}$", output = "character"),
+      hjust = 1.5, vjust = 0.5, parse = TRUE
     ) +
     geom_rect(
       mapping = aes(
@@ -301,36 +303,40 @@ p_correlation_idea <- function() {
     scale_fill_manual(values = c("#2F6BC6", "#D33F49", "#EBC63F", "#43A047")) +
     scale_color_manual(values = c("#2F6BC6", "#D33F49")) +
     annotate(
-      geom = "latex",
+      geom = "text",
       x = xi,
       y = yi,
-      label = "$(x_i, y_i)$",
+      label = TeX("$(x_i, y_i)$", output = "character"),
       hjust = -0.2,
-      vjust = 1.2
+      vjust = 1.2,
+      parse = TRUE
     ) +
     annotate(
-      geom = "latex",
+      geom = "text",
       x = xi,
       y = yi / 2,
-      label = "$y_i - \\bar{y}$",
+      label = TeX("$y_i - \\bar{y}$", output = "character"),
       hjust = -0.2,
-      vjust = 0.5
+      vjust = 0.5,
+      parse = TRUE
     ) +
     annotate(
-      geom = "latex",
+      geom = "text",
       x = xi / 2,
       y = yi,
-      label = "$x_i - \\bar{x}$",
+      label = TeX("$x_i - \\bar{x}$", output = "character"),
       hjust = 0.5,
-      vjust = 1.5
+      vjust = 1.5,
+      parse = TRUE
     ) +
     annotate(
-      geom = "latex",
+      geom = "text",
       x = 0,
       y = 0,
-      label = "$(\\bar{x}, \\bar{y})$",
+      label = TeX("$(\\bar{x}, \\bar{y})$", output = "character"),
       hjust = -0.2,
-      vjust = 1.2
+      vjust = 1.2,
+      parse = TRUE
     ) +
     annotate(
       geom = "point",

@@ -17,7 +17,7 @@ Im folgenden Abschnitt werden wir Methoden kennenlernen, mit denen solche Zusamm
 ::: {#exm-prognose-des-sachverstaendigenrats}
 ## Prognose des Sachverständigenrats
 
-Der am statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahre 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
+Der am Statistischen Bundesamt angesiedelte Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (die fünf Wirtschaftsweisen) veröffentlicht seit 1963 jährlich eine Prognose zum Wirtschaftswachstum des nächsten Jahres. Die Prognosen und das tatsächliche Wachstum sind für die Jahre 1975 bis 1997 in der folgenden Tabelle zusammengestellt.
 
 ```{r}
 tab_wirtschaftswachstum(1975, 1983)
@@ -35,13 +35,13 @@ Es liegt in der Natur von Prognosen, dass sie von der später beobachteten Wirkl
 
 **Mittlere Lebenserwartung:** Mit den Daten der Weltbank betrachten wir den Zusammenhang zwischen der mittleren Lebenserwartung in einem Land und
 
-- dem Bruttoinlandsprodukt (BIP),
+- dem Bruttoinlandsprodukt (BIP) pro Kopf,
 
 - den Ausgaben für das Gesundheitswesen (in % des BIP),
 
 - den Ausgaben für Bildung (in % des BIP) sowie
 
-- dem Gini-Koeffizienten.
+- dem Gini-Koeffizienten der Einkommensverteilung.
 
 Welcher dieser Indikatoren hängt am stärksten mit der Lebenserwartung zusammen?
 :::
@@ -165,13 +165,14 @@ Für die Lage des neuen Koordinatensystems verwenden wir die Mittelwerte $\bar{x
 p_correlation_idea()
 ```
 
-Um die Lage der Punkte ($x_i$,$y_i$) im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, ... , n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis F werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird, um den Wertebereich des Korrelationskoeffizienten auf das Intervall $[-1, 1]$ einzuschränken, noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
+Um die Lage der Punkte $(x_i, y_i)$ im jeweiligen Quadranten zu berücksichtigen, werden für $i = 1, \dots, n$ die (orientierten) Flächeninhalte der Rechtecke mit den Seitenlängen $x_i - \bar{x}$ und $y_i - \bar{y}$ zu Grunde gelegt. In der Summe ergibt sich damit, wie es sein soll, in den Fällen A und B eine positive bzw. negative Zahl. Für die Fälle C bis F werden sich die Flächeninhalte in etwa aufheben. Zusätzlich wird noch durch die Wurzel des Produktes der Summen der Abstandsquadrate $(x_i - \bar{x})^2$ (grün) und $(y_i - \bar{y})^2$ (gelb) dividiert. Wir erhalten damit den Korrelationskoeffizienten
 $$
   r = \frac
-  {\text{Summe der blauen und roten Flächen}}
-  {\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}},
+  {\text{Summe der blauen Flächen} - \text{Summe der roten Flächen}}
+  {\sqrt{(\text{Summe der gelben Flächen}) \cdot (\text{Summe der grünen Flächen})}}.
 $$
-den wir nochmal formal festhalten wollen.
+
+Den Korrelationskoeffizienten wollen wir nochmal formal festhalten.
 
 ::: {#def-korrelationskoeffizient}
 ## Bravais-Pearson-Korrelationskoeffizient
@@ -187,7 +188,17 @@ $$
 Bravais-Pearson-[Korrelationskoeffizient]{.neuerbegriff}. Der Wertebereich ist $-1 \leq r \leq 1$.
 :::
 
-Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgende Situationen vor.
+Die wichtigsten Eigenschaften des Korrelationskoeffizienten lassen sich an der Grafik und an der Formel nachvollziehen. Zunächst wird klar, warum gerade durch die Wurzel geteilt wird. Der Zähler allein hängt von den Einheiten der Merkmale ab: Wird $Y$ in cm statt in m gemessen, so werden alle Rechtecke und damit auch der Zähler 100-mal so groß, obwohl sich am Zusammenhang nichts geändert hat. Die Summe der gelben Quadrate wird dabei $100^2$-mal so groß, ihre Wurzel also ebenfalls 100-mal. Der Faktor kürzt sich heraus, der Korrelationskoeffizient hängt somit weder von den Einheiten noch vom Maßstab der Achsen ab und ist eine dimensionslose Zahl.
+
+Der Nenner ist das geometrische Mittel der Summen der gelben und der grünen Flächen. Auch jedes einzelne Rechteck lässt sich so deuten: Ein Rechteck mit den Seitenlängen $a$ und $b$ hat den Flächeninhalt $|ab| = \sqrt{a^2 \cdot b^2}$ und ist damit das geometrische Mittel der beiden Quadrate über seinen Seiten. Mit $a_i = x_i - \bar{x}$ und $b_i = y_i - \bar{y}$ steht im Zähler also eine Summe von geometrischen Mitteln, im Nenner das geometrische Mittel der Summen. Allgemein gilt (Cauchy-Schwarz-Ungleichung)
+$$
+  \sum_{i=1}^n \sqrt{a_i^2 \cdot b_i^2} \leq \sqrt{\sum_{i=1}^n a_i^2 \cdot \sum_{i=1}^n b_i^2} ,
+$$
+die Summe der geometrischen Mittel ist also höchstens so groß wie das geometrische Mittel der Summen. Da sich im Zähler blaue und rote Flächen zudem teilweise aufheben, kann der Betrag des Zählers nicht größer sein als der Nenner, es gilt also $-1 \leq r \leq 1$. Den Wert $1$ bzw. $-1$ nimmt $r$ genau dann an, wenn alle Rechtecke die gleiche Farbe haben und bei allen Punkten die beiden Quadrate im gleichen Größenverhältnis stehen, also alle Punkte auf einer Geraden liegen. Weitere Möglichkeiten, den Korrelationskoeffizienten zu deuten, finden sich in [@rodgers_thirteen_1988].
+
+Schließlich werden in der Formel die Werte beider Merkmale gleich behandelt: Vertauscht man $x_i$ und $y_i$, so ändert sich $r$ nicht. Der Korrelationskoeffizient gibt also keinerlei Auskunft darüber, in welcher Richtung eine mögliche Beeinflussung zwischen den Merkmalen stattfindet.
+
+Je nachdem ob der Korrelationskoeffizient positiv oder negativ ist, liegt eine der folgenden Situationen vor.
 
 Falls $r > 0$:
 
@@ -223,29 +234,33 @@ Neben dem Korrelationskoeffizienten von Bravais und Pearson gibt es noch weitere
 
 ### Korrelation und Kausalität
 
-In der Gleichung für den Bravais-Pearson-Korrelationskoeffizienten werden die Werte beider Merkmale gleich behandelt. Der Wert von $r$ gibt also keinerlei Auskunft darüber, in welcher Richtung eine mögliche Beeinflussung zwischen den Merkmalen stattfindet. Der Zahlenwert von $r$ darf daher nie losgelöst von dem sachlogischen Zusammenhang betrachtet
-werden.
+Da der Korrelationskoeffizient symmetrisch ist, sagt er nichts über die Richtung einer möglichen Beeinflussung zwischen den Merkmalen aus. Der Zahlenwert von $r$ darf daher nie losgelöst von dem sachlogischen Zusammenhang betrachtet werden.
 
-Ein weiteres Problem besteht darin, dass es häufig verlockend ist, einen hohen Korrelationswert vorschnell als kausalen Zusammenhang zu interpretieren. Kausalzusammenhänge können niemals allein durch große Werte eines Zusammenhangmaßes begründet werden. Um einen kausalen Zusammenhang zu begründen, vielmehr muss stets ein Zusammenhang zwischen Ursache und Wirkung gefunden werden, der sich ohne Bezugnahme auf die statistischen Werte begründen lässt.
+Ein weiteres Problem besteht darin, dass es häufig verlockend ist, einen hohen Korrelationswert vorschnell als kausalen Zusammenhang zu interpretieren. Kausalzusammenhänge können niemals allein durch große Werte eines Zusammenhangsmaßes begründet werden. Um einen kausalen Zusammenhang zu begründen, muss vielmehr stets ein Zusammenhang zwischen Ursache und Wirkung gefunden werden, der sich ohne Bezugnahme auf die statistischen Werte begründen lässt.
 
-Die Webseite <http://tylervigen.com> (mittlerweile auch als Buch erhältlich) verdeutlicht das an einer Reihe kurioser Beispiele. Dort sind eine Vielzahl von Daten aufgelistet, die einen sehr hohen Korrelationsgrad aufweisen, aber offensichtlich völlig unabhängig voneinander sind. Zum Beispiel weist in den USA der Konsum von Mozzarella und die Anzahl von Promotionen im Bauingenieurwesen in den Jahren 2000 bis 2009 einen Korrelationskoeffizienten von $r = 0.96$ auf.
+Die Webseite <http://tylervigen.com> (mittlerweile auch als Buch erhältlich) verdeutlicht das an einer Reihe kurioser Beispiele. Dort sind eine Vielzahl von Daten aufgelistet, die einen sehr hohen Korrelationsgrad aufweisen, aber sachlich offensichtlich nichts miteinander zu tun haben. Zum Beispiel weisen in den USA der Konsum von Mozzarella und die Anzahl von Promotionen im Bauingenieurwesen in den Jahren 2000 bis 2009 einen Korrelationskoeffizienten von $r = 0.96$ auf.
 
-![](00-bilder/chart.svg)
+![](00-bilder/chart.png)
 
-Wir merken uns daher:
+Wir merken uns:
 
 ::: {#rem-korrelation-ungleich-kausalitaet}
 $$
-  \text{Korrelation} \quad \neq \quad \text{Kausalität}
+  \begin{aligned}
+  \text{Hohe Korrelation} & \quad \nRightarrow \quad \text{Kausaler Zusammenhang} \\
+  \text{Kausaler Zusammenhang} & \quad \nRightarrow \quad \text{Hohe Korrelation}
+  \end{aligned}
 $$
 :::
 
-Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kausalen Zusammenhang verstehen, der näher zu untersuchen ist. Dazu sind stets sachlogische Überlegungen erforderlich. Zusätzlich ist immer zu bedenken, dass weitere wesentliche Merkmale unter Umständen übersehen wurden. Dies kann zu so genannten [Scheinkorrelationen]{.neuerbegriff} oder auch zu [verdeckten Korrelationen]{.neuerbegriff} führen. [@fahrmeir_statistik_2016]
+Auch die Umkehrung gilt nämlich nicht: Ein kausaler Zusammenhang muss sich nicht in einem Korrelationskoeffizienten deutlich von Null zeigen. Der Korrelationskoeffizient erfasst nur lineare Zusammenhänge, ein nichtlinearer kausaler Zusammenhang kann daher wie in den Fällen E und F zu $r \approx 0$ führen. Außerdem können sich verschiedene Wirkungen einer Ursache gegenseitig aufheben, etwa wenn eine Ursache ein Merkmal $Y$ auf direktem Weg verstärkt und über einen Umweg abschwächt. Schließlich zeigt sich auch eine starke Ursache nicht in den Daten, wenn sie dort kaum variiert.
+
+Man sollte eine hohe Korrelation lediglich als Hinweis auf einen möglichen kausalen Zusammenhang verstehen, der näher zu untersuchen ist. Dazu sind stets sachlogische Überlegungen erforderlich. Zusätzlich ist immer zu bedenken, dass weitere wesentliche Merkmale unter Umständen übersehen wurden. Dies kann zu so genannten [Scheinkorrelationen]{.neuerbegriff} führen oder dazu, dass ein vorhandener Zusammenhang durch ein weiteres Merkmal überdeckt wird ([verdeckte Korrelation]{.neuerbegriff}) [@fahrmeir_statistik_2016].
 
 ::: {#exm-scheinkorrelation}
 ## Scheinkorrelation
 
-In der PISA-Studie der OECD wurden zuletzt im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, das entsprechende Datenfile ist ca. 1.5 GB groß.
+In der PISA-Studie der OECD wurden im Jahr 2015 die Ergebnisse einer weltweiten Studie zu den Fähigkeiten von Schülern in verschiedenen Kompetenzbereichen veröffentlicht. Die Rohdaten der Studie stehen unter <http://www.oecd.org/pisa/data> zum Download bereit. Der Datensatz umfasst 519334 Beobachtungen von 921 Merkmalen, die entsprechende Datei ist ca. 1.5 GB groß.
 
 ```{r}
 p_pisa()
@@ -283,7 +298,7 @@ wobei $\varepsilon_i$ den Fehler erfasst, der sich aus der Geradenanpassung ergi
 
 Es stellt sich nun die Frage, wie die Parameter $\alpha$ und $\beta$ der Ausgleichsgeraden gewählt werden sollen. Ziel ist es, die Abstände $\varepsilon_i = y_i - (\alpha + \beta x_i)$, also die Länge der grünen Linien in @fig-ausgleichsgerade insgesamt möglichst klein werden zu lassen.
 
-Natürlich könnten wir wieder wie beim Median, die Beträge der Abstände summieren. Allerdings ist die Betragsfunktion in der Anwendung unhandlich und wir summieren stattdessen die Abstandsquadrate. Gesucht sind also Zahlen $\alpha$ und $\beta$, so dass die Summe
+Natürlich könnten wir wieder wie beim Median die Beträge der Abstände summieren. Allerdings ist die Betragsfunktion in der Anwendung unhandlich und wir summieren stattdessen die Abstandsquadrate. Gesucht sind also Zahlen $\alpha$ und $\beta$, so dass die Summe
 $$
   \sum_{i=1}^n \varepsilon_i^2 
   = 
@@ -291,7 +306,7 @@ $$
 $$
 möglichst klein wird. Die Werte von $\alpha$ und $\beta$, für die die Summe ihr Minimum annimmt, nennt man [Kleinste-Quadrate-Schätzer]{.neuerbegriff} und diese Methode zur Bestimmung der Ausgleichsgeraden die [Methode der kleinsten Quadrate]{.neuerbegriff}.
 
-Zur Bestimmung der Kleinste-Quadrate-Schätzer stellen wir die Funktion $Q : R^2 \to R$ mit
+Zur Bestimmung der Kleinste-Quadrate-Schätzer stellen wir die Funktion $Q : \mathbb{R}^2 \to \mathbb{R}$ mit
 $$
   Q(\alpha, \beta) = \sum_{i=1}^n (y_i - (\alpha + \beta x_i))^2
 $$ 
@@ -379,7 +394,7 @@ Für die Werte $(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)$ heißt der Zusammenha
 $$
   y_i = \alpha + \beta x_i + \varepsilon_i
 $$ 
-lineare Einfachregression. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und $\varepsilon_i$ der Fehler.
+[lineare Einfachregression]{.neuerbegriff}. Dabei ist $\alpha$ der $y$-Achsenabschnitt, $\beta$ die Steigung und $\varepsilon_i$ der Fehler.
 
 Die Kleinste-Quadrate-Schätzer 
 $$
@@ -401,11 +416,11 @@ minimieren die Summe der Fehlerquadrate.
 
 Für die Daten zur Lesekompetenz $X$ und der mathematischen Kompetenz $Y$ aus der PISA-Studie erhalten wir mit den Mittelwerten 
 $$
-  \bar{x} = 461.8 \quad \text{und} \quad \bar{y} = 463.0
+  \bar{x} = 463.0 \quad \text{und} \quad \bar{y} = 461.8
 $$ 
 die Parameter 
 $$
-  \hat \alpha = 58.9 \quad \text{und} \quad \hat \beta = 0.875
+  \hat \alpha = -5.14 \quad \text{und} \quad \hat \beta = 1.009
 $$ 
 der unten dargestellten Ausgleichsgeraden.
 
@@ -416,7 +431,7 @@ p_pisa_regression()
 
 #### Anscombes Quartett
 
-Einen Datensatz durch eine Ausgleichsgerade anzunähern ist natürlich nur dann sinnvoll, wenn für die betrachteten Werte ein linearer Zusammenhang zu Grunde liegt. Darauf, dass es immer wichtig ist, neben der Ausgleichsgeraden auch die zugrunde liegenden Daten zu betrachten, hat der Statistiker John Anscombe im Jahr 1973 hingewiesen. Er hat hierzu die unten dargestellten vier Datensätze verwendet, die alle zur selben Regressionsgeraden mit $\hat \alpha = 3$ und $\hat \beta = 1/2$ führen.
+Einen Datensatz durch eine Ausgleichsgerade anzunähern ist natürlich nur dann sinnvoll, wenn für die betrachteten Werte ein linearer Zusammenhang zu Grunde liegt. Darauf, dass es immer wichtig ist, neben der Ausgleichsgeraden auch die zugrunde liegenden Daten zu betrachten, hat der Statistiker Francis J. Anscombe im Jahr 1973 hingewiesen [@anscombe_graphs_1973]. Er hat hierzu die unten dargestellten vier Datensätze verwendet, die alle zur selben Regressionsgeraden mit $\hat \alpha = 3$ und $\hat \beta = 1/2$ führen.
 
 ```{r}
 anscombe |> plot_anscombe(c(3, 15))
@@ -436,7 +451,7 @@ Zu den vier Datensätzen halten wir fest:
 
 Um die Güte des linearen Modells zu beurteilen, untersucht man, wie die Werte auf der Ausgleichsgeraden $\hat y_i = \hat \alpha + \hat \beta x_i$ und die ursprünglichen Werte $y_i$ um den Mittelwert $\bar{y}$ herum streuen. Hierzu werden die Differenzen zum Mittelwert quadriert und aufsummiert. Der Quotient aus den beiden Quadratsummen ist das so genannte Bestimmtheitsmaß. Je näher die Punkte an der Ausgleichsgeraden liegen, umso mehr stimmen die beiden Differenzen überein. Liegen alle Punkte exakt auf der Ausgleichsgeraden, dann ist das Bestimmtheitsmaß gleich eins.
 
-::: {#def-bestimmtheitsmaße}
+::: {#def-bestimmtheitsmass}
 ## Bestimmtheitsmaß
 
 Für die Werte
@@ -479,7 +494,7 @@ Anmerkung: Der Betrag $|r|$ des Korrelationskoeffizienten und das Bestimmtheitsm
 
 ### Ausblick: Nichtlineare und lokale Regression
 
-Liegt den Daten ein nichtlinearer Zusammenhang zu Grunde, dann kann sinnvoll sein, mit nichtlinearen Funktionen zu arbeiten. Zum Beispiel kann ein quadratisches Modell
+Liegt den Daten ein nichtlinearer Zusammenhang zu Grunde, dann kann es sinnvoll sein, mit nichtlinearen Funktionen zu arbeiten. Zum Beispiel kann ein quadratisches Modell
 $$
   Y = \alpha + \beta X + \gamma X^2 + \varepsilon
 $$ 
@@ -488,7 +503,7 @@ $$
   Y = \alpha \exp(\beta X) + \varepsilon
 $$
 
-verwendet werden. Im quadratischen Fall bestimmen sich die Koeffizienten $\alpha, \beta, \gamma$ aus einem linearen Gleichungssystem mit drei unbekannten. Für das exponentielle Modell ist ein nichtlineares Gleichungssystem zu lösen.
+verwendet werden. Im quadratischen Fall bestimmen sich die Koeffizienten $\alpha, \beta, \gamma$ aus einem linearen Gleichungssystem mit drei Unbekannten. Für das exponentielle Modell ist ein nichtlineares Gleichungssystem zu lösen.
 
 Alternativ kann mit der LOESS-Methode eine Regressionskurve berechnet werden, die auch komplexere Zusammenhänge zwischen Merkmalen erfassen kann. Das Akronym LOESS steht dabei für *Locally Estimated Scatterplot Smoothing*. Unten dargestellt ist ein Datensatz mit Werten, die um eine Sinusfunktion herum streuen. Die zugehörige Regressionskurve bildet den zugrunde liegenden Zusammenhang sehr gut ab.
 
@@ -506,7 +521,7 @@ plot_linear_regression(d_wirtschaftswachstum, Prognose, Wachstum, "Prognose", "W
 
 Für die Prognose des Sachverständigenrats besteht mit 64 % eine mittlere Korrelation mit dem realen Wirtschaftswachstum. Entsprechend lassen sich 40 % der Variabilität des Wachstums durch den unterstellten linearen Zusammenhang erklären.
 
-In den nachfolgend dargestellten Auswertungen zur mittleren Lebenserwartung auf Grundlage der Weltbankdaten zeigt sich, abgesehen vom BIP pro Kopf, für alle Indikatoren eine schwache Korrelation. Dabei sind die Ausgaben für das Gesundheitswesen und der Gini-Koeffizient etwa gleich stark mit der Lebenserwartung korreliert, der Zusammenhang zwischen den Ausgaben für Bildung ist erwartungsgemäß schwächer. Demgegenüber zeigt sich für die BIP pro Kopf (in einer logarithmischen Skalierung) mit 86 % eine starke Korrelation mit der Lebenserwartung.
+In den nachfolgend dargestellten Auswertungen zur mittleren Lebenserwartung auf Grundlage der Weltbankdaten zeigt sich, abgesehen vom BIP pro Kopf, für alle Indikatoren eine schwache Korrelation. Dabei sind die Ausgaben für das Gesundheitswesen und der Gini-Koeffizient etwa gleich stark mit der Lebenserwartung korreliert, der Zusammenhang mit den Ausgaben für Bildung ist erwartungsgemäß schwächer. Demgegenüber zeigt sich für das BIP pro Kopf (in einer logarithmischen Skalierung) mit 86 % eine starke Korrelation mit der Lebenserwartung.
 
 ```{r}
 #| fig-asp: 1.2
