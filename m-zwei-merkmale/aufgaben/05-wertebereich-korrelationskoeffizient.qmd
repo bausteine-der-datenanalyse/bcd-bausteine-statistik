@@ -1,46 +1,34 @@
 ::: {#exr-wertebereich-korrelationskoeffizient}
 ## Wertebereich des Korrelationskoeffizienten
 
-Für die Werte $(x_i, y_i), i = 1, \dots, n$ ist der Korrelationskoeffizient
-
+Für die Werte $(x_i, y_i), i = 1, \dots, n$ seien
 $$
-  r = \frac{
-  \displaystyle \sum_{i=1}^n (x_i - \bar{x})\cdot(y_i - \bar{y})
-  }{
-  \displaystyle \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
-  } .
+  S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2, \quad
+  S_{yy} = \sum_{i=1}^n (y_i - \bar{y})^2
+  \quad \text{und} \quad
+  S_{xy} = \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) .
 $$
+Damit ist der Korrelationskoeffizient
+$$
+  r = \frac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}}
+$$
+und die Ausgleichsgerade $\hat y = \hat\alpha + \hat\beta x$ hat die Steigung und den Achsenabschnitt
+$$
+  \hat\beta = \frac{S_{xy}}{S_{xx}}
+  \quad \text{und} \quad
+  \hat\alpha = \bar{y} - \hat\beta \bar{x} .
+$$
+Zeigen Sie mit Hilfe der Ausgleichsgeraden, dass $-1 \leq r \leq 1$ gilt. Gehen Sie dazu wie folgt vor.
 
-Zeigen Sie, dass $-1 \leq r \leq 1$ gilt. Gehen Sie dazu wie folgt vor.
+1. Zeigen Sie, dass für die Residuen $\varepsilon_i = y_i - \hat y_i$ mit $\hat y_i = \hat\alpha + \hat\beta x_i$ gilt:
+   $$
+     \varepsilon_i = (y_i - \bar{y}) - \hat\beta (x_i - \bar{x}) .
+   $$
 
-1. Mit den Abkürzungen
+1. Zeigen Sie, dass für die Summe der Abstandsquadrate gilt:
    $$
-     S_x = \sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}
-     \quad \text{und} \quad
-     S_y = \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}
+     \sum_{i=1}^n \varepsilon_i^2 = (1 - r^2) \, S_{yy} .
    $$
-   seien
-   $$
-     u_i = \frac{x_i - \bar{x}}{S_x}
-     \quad \text{und} \quad
-     v_i = \frac{y_i - \bar{y}}{S_y} .
-   $$
-   Zeigen Sie, dass
-   $$
-     \sum_{i=1}^n u_i^2 = 1, \quad
-     \sum_{i=1}^n v_i^2 = 1
-     \quad \text{und} \quad
-     \sum_{i=1}^n u_i v_i = r
-   $$
-   gilt.
-
-1. Multiplizieren Sie die Summen
-   $$
-     \sum_{i=1}^n (u_i - v_i)^2
-     \quad \text{und} \quad
-     \sum_{i=1}^n (u_i + v_i)^2
-   $$
-   aus und drücken Sie diese durch $r$ aus.
 
 1. Folgern Sie daraus $-1 \leq r \leq 1$.
 
@@ -48,29 +36,29 @@ Zeigen Sie, dass $-1 \leq r \leq 1$ gilt. Gehen Sie dazu wie folgt vor.
 
 ::: {.tinh-solution}
 
-1. Einsetzen ergibt
+1. Einsetzen von $\hat\alpha = \bar{y} - \hat\beta \bar{x}$ ergibt
    $$
-     \sum_{i=1}^n u_i^2 = \frac{1}{S_x^2} \sum_{i=1}^n (x_i - \bar{x})^2 = \frac{S_x^2}{S_x^2} = 1 ,
-   $$
-   ebenso $\sum v_i^2 = 1$. Außerdem ist
-   $$
-     \sum_{i=1}^n u_i v_i = \frac{1}{S_x S_y} \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) = r .
+     \varepsilon_i
+     = y_i - \bar{y} + \hat\beta \bar{x} - \hat\beta x_i
+     = (y_i - \bar{y}) - \hat\beta (x_i - \bar{x}) .
    $$
 
-1. Mit der binomischen Formel und Teil 1 gilt
+1. Mit der binomischen Formel und $\hat\beta = S_{xy} / S_{xx}$ gilt
    $$
-     \sum_{i=1}^n (u_i \mp v_i)^2
-     = \sum_{i=1}^n u_i^2 \mp 2 \sum_{i=1}^n u_i v_i + \sum_{i=1}^n v_i^2
-     = 1 \mp 2r + 1
-     = 2(1 \mp r) .
+     \begin{aligned}
+       \sum_{i=1}^n \varepsilon_i^2
+       & = \sum_{i=1}^n (y_i - \bar{y})^2
+           - 2 \hat\beta \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+           + \hat\beta^2 \sum_{i=1}^n (x_i - \bar{x})^2 \\
+       & = S_{yy} - 2 \frac{S_{xy}}{S_{xx}} S_{xy} + \frac{S_{xy}^2}{S_{xx}^2} S_{xx}
+         = S_{yy} - \frac{S_{xy}^2}{S_{xx}} \\
+       & = S_{yy} \left( 1 - \frac{S_{xy}^2}{S_{xx} \, S_{yy}} \right)
+         = (1 - r^2) \, S_{yy} .
+     \end{aligned}
    $$
 
-1. Eine Summe von Quadraten ist nicht negativ. Also ist $2(1 - r) \geq 0$, das heißt $r \leq 1$, und $2(1 + r) \geq 0$, das heißt $r \geq -1$.
+1. Die linke Seite ist eine Summe von Quadraten, also nicht negativ. Wegen $S_{yy} > 0$ folgt $1 - r^2 \geq 0$, das heißt $r^2 \leq 1$ und damit $-1 \leq r \leq 1$.
 
-1. $r = 1$ gilt genau dann, wenn $\sum (u_i - v_i)^2 = 0$ ist, also $u_i = v_i$ für alle $i$. Das bedeutet
-   $$
-     y_i = \bar{y} + \frac{S_y}{S_x} (x_i - \bar{x}) ,
-   $$
-   alle Punkte liegen auf einer Geraden mit positiver Steigung. Entsprechend gilt $r = -1$ genau dann, wenn $u_i = -v_i$ für alle $i$ ist, alle Punkte liegen dann auf einer Geraden mit negativer Steigung.
+1. $r = \pm 1$ gilt genau dann, wenn $\sum \varepsilon_i^2 = 0$ ist, also alle Residuen null sind. Dann liegen alle Punkte $(x_i, y_i)$ auf der Ausgleichsgeraden. Da $r$ und $\hat\beta$ beide das Vorzeichen von $S_{xy}$ haben, ist $r = 1$, wenn die Gerade eine positive Steigung hat, und $r = -1$ bei negativer Steigung.
 :::
 :::
