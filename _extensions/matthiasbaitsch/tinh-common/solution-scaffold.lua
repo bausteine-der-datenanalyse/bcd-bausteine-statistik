@@ -53,11 +53,11 @@ local function has_solution(block)
   return found
 end
 
--- Aufgabe auf Titel und Lösung kürzen
+-- Aufgabe auf Titel (##) und Lösung kürzen, Abschnitte (###) außerhalb der Lösung fallen weg
 local function title_only(exercise, none)
   local content = pandoc.Blocks({})
   for _, block in ipairs(exercise.content) do
-    if block.t == "Header" or has_solution(block) then
+    if (block.t == "Header" and block.level <= 2) or has_solution(block) then
       content:insert(block)
     end
   end
