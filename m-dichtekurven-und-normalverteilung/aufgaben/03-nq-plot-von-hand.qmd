@@ -27,17 +27,17 @@ Aufgaben:
 library(tidyverse)
 ```
 
-**Teil 1**
+### Teil 1
 
 Geordnet: $14, 18, 20, 23, 35$. Mit $n = 5$ ist $p_i = 0.1, 0.3, 0.5, 0.7, 0.9$.
 
 Warum $(i - 0.5)/n$ und nicht $i/n$? Für $i = n$ wäre $i/n = 1$, das 1-Quantil der Standardnormalverteilung liegt aber im Unendlichen. Deshalb werden alle Anteile um $0.5/n$ nach unten verschoben (Stetigkeitskorrektur, siehe Skript, Abschnitt Normal-Quantil-Plots).
 
-**Teil 2**
+### Teil 2
 
 Die Punkte sind $(-1.28, 14)$, $(-0.52, 18)$, $(0, 20)$, $(0.52, 23)$ und $(1.28, 35)$.
 
-**Teil 3**
+### Teil 3
 
 Die Gerade $x = \bar x + \tilde s \cdot z$ (siehe Skript, Abschnitt Normal-Quantil-Plots) hat den Achsenabschnitt $\bar x = 22$ und die Steigung $\tilde s \approx 7.13$.
 
