@@ -236,7 +236,7 @@ p_correlation_idea()
 
 Korrelationskoeffizient
 $$
-r = \frac{\text{Summe blau} - \text{Summe rot}}{\sqrt{\text{Summe gelb} \cdot \text{Summe grün}}}
+r = \frac{\text{'Fläche blau'} - \text{'Fläche rot'}}{\sqrt{\text{'Fläche gelb'}} \cdot \sqrt{\text{'Fläche grün'}}}
 $$
 
 - Im Zähler: Lage in den Quadranten
