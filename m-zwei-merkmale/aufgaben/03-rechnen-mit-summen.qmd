@@ -11,7 +11,7 @@ $$
 
 gelten.
 
-::: {.tinh-solution}
-![](00-bilder/l-zm-03-rechnen-mit-summen.png)
+::: {.lm-solution}
+![](_bilder/l-zm-03-rechnen-mit-summen.png)
 :::
 :::

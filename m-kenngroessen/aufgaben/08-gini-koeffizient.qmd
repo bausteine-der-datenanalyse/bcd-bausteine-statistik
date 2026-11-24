@@ -18,9 +18,9 @@ Aufgaben:
 
 3.  Wie groß ist der Anteil der 25% reichsten Einkommensbezieher am Gesamteinkommen?
 
-::: {.tinh-solution}
-![](00-bilder/l-kenngroessen-08-gini-koeffizient-1.png)
+::: {.lm-solution}
+![](_bilder/l-kenngroessen-08-gini-koeffizient-1.png)
 
-![](00-bilder/l-kenngroessen-08-gini-koeffizient-2.png)
+![](_bilder/l-kenngroessen-08-gini-koeffizient-2.png)
 :::
 :::

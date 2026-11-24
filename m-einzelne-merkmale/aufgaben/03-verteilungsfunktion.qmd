@@ -7,7 +7,7 @@ Bestimmen Sie für die Geschwindigkeitsmessung mit dem Seitenradar (Aufgabe oben
 1. eine tabellarische Übersicht über die absoluten und relativen kumulierten Häufigkeiten und
 1. die empirische Verteilungsfunktion.
 
-::: {.tinh-solution}
+::: {.lm-solution}
 1. Stamm-Blatt-Diagramm
 
 | Zehnerstelle  | Einerstelle                   |
@@ -42,7 +42,7 @@ Bestimmen Sie für die Geschwindigkeitsmessung mit dem Seitenradar (Aufgabe oben
 | Summe            | 30          |       |       |
 
 3. Empirische Verteilungsfunktion
-![](00-bilder/l-em-03.png)
+![](_bilder/l-em-03.png)
 
 Antwort: 80% der Verkehrsteilnehmenden fahren 53 km/h oder langsamer
 :::

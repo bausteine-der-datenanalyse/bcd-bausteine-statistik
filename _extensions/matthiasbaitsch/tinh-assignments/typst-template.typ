@@ -40,6 +40,10 @@
   stroke: none
 )
 
+// Tabellen zentriert wie in HTML (Quarto setzt Markdown-Tabellen ohne Titel als bloßes #table), Zellen ohne
+// Ausrichtung (auto) bleiben linksbündig
+#show table: it => align(center, block({ set align(left); it }))
+
 // gt-Tabellen kommen über Quartos CSS-Übersetzung mit fest 12pt (16px) an
 #show table: it => context {
   if text.size == 12pt { set text(size: 0.8em); it } else { it }

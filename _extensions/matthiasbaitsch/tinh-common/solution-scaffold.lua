@@ -21,7 +21,11 @@
 -- Läuft vor Quartos Filtern (pre-ast).
 local TARGETS = { solution = true, scaffold = true, blank = true }
 local TASKS = { full = true, title = true }
-local KINDS = { ["tinh-solution"] = "solution", ["tinh-scaffold"] = "scaffold", ["tinh-work"] = "work" }
+local KINDS = {
+  ["tinh-solution"] = "solution",
+  ["tinh-scaffold"] = "scaffold",
+  ["tinh-work"] = "work",
+}
 local LABELS = {
   de = { solution = "Lösung", scaffold = "Gerüst", none = "Keine Lösung." },
   en = { solution = "Solution", scaffold = "Scaffold", none = "No solution." },

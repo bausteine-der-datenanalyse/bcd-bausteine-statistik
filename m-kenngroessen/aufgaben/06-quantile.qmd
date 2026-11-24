@@ -13,7 +13,7 @@
 | $x_{0.33}$ | Mind. 33% der Zahlen $\leq x_{0.33}$ | Mind. 67% der Zahlen $\geq x_{0.33}$ |
 | $x_{0.75}$ | Mind. 75% der Zahlen $\leq x_{0.75}$ | Mind. 25% der Zahlen $\geq x_{0.75}$ |
 
-::: {.tinh-solution}
-![](00-bilder/l-kenngroessen-06-quantile.png)
+::: {.lm-solution}
+![](_bilder/l-kenngroessen-06-quantile.png)
 :::
 :::

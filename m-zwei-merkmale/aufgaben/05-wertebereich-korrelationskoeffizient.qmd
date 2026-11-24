@@ -34,7 +34,7 @@ Zeigen Sie mit Hilfe der Ausgleichsgeraden, dass $-1 \leq r \leq 1$ gilt. Gehen 
 
 1. Wann gilt $r = 1$, wann $r = -1$? Was bedeutet das für die Lage der Punkte $(x_i, y_i)$?
 
-::: {.tinh-solution}
+::: {.lm-solution}
 
 1. Einsetzen von $\hat\alpha = \bar{y} - \hat\beta \bar{x}$ ergibt
    $$

@@ -21,7 +21,7 @@ Aufgaben:
 
 1. Zeichnen Sie die Gerade $x = \bar x + \tilde s \cdot z$ ein.
 
-::: {.tinh-solution}
+::: {.lm-solution}
 ```{r}
 #| include: false
 library(tidyverse)

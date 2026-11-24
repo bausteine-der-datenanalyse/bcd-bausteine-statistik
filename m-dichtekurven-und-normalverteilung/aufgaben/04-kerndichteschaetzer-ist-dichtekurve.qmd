@@ -21,7 +21,7 @@ Aufgaben:
 
 1. Zeigen Sie damit, dass die Fläche unter dem Graphen von $\hat f$ gleich 1 ist.
 
-::: {.tinh-solution}
+::: {.lm-solution}
 
 1. Da $K$ eine Dichtekurve ist, gilt $K(u) \geq 0$ für alle $u$. Damit ist jeder Summand nicht negativ, und wegen $n > 0$ und $h > 0$ auch der Faktor $1/(nh)$. Also ist $\hat f(x) \geq 0$.
 

@@ -1,8 +1,3 @@
-```{r}
-#| include: false
-library(patchwork)
-library(tidyverse)
-```
 
 {{< pagebreak >}}
 
@@ -11,8 +6,12 @@ library(tidyverse)
 
 Welche empirische Verteilungsfunktion (A-D) gehört zu welchem Histogramm (1-4)?
 
+::: {.lm-sheet}
 ```{r}
 #| echo: false
+#| message: false
+library(patchwork)
+library(tidyverse)
 n0 <- 100
 set.seed(106)
 
@@ -48,10 +47,11 @@ d4 <- tibble(X = (100 + runif(35 * n0, min = -0.1, max = 0.1)))
     plot_ecdf(d2, "2") |
     plot_ecdf(d1, "1"))
 ```
+:::
 
 Begründen Sie Ihre Antwort!
 
-::: {.tinh-solution}
+::: {.lm-solution}
 
 - 1 - D
 - 2 - C

@@ -28,7 +28,7 @@ Aufgaben:
 
 Hinweis: Alle Funktionen sind stückweise linear. Es genügt daher, $\hat f$ an den Knickstellen auszurechnen und die Punkte durch Strecken zu verbinden.
 
-::: {.tinh-solution}
+::: {.lm-solution}
 ```{r}
 #| include: false
 library(tidyverse)

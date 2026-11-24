@@ -24,4 +24,8 @@ Falls Sie Inspiration brauchen, können Sie beispielsweise zu folgenden Themen r
 - Entwicklung der Baupreise in Deutschland
 - Entwicklungsindikatoren (Weltbank)
 - Entwicklung des Energiesplits in Deutschland
+
+::: {.lm-solution}
+Keine Lösung.
+:::
 :::

@@ -3,16 +3,13 @@
 
 In den drei Städten A, B und C teilen sich Bauleistungen auf jeweils fünf Firmen wie folgt auf (in 100000 Euro):
 
-```{r}
-#| include: false
-library(tidyverse)
-library(gt)
-```
-
+::: {.lm-sheet}
 ```{r}
 #| echo: false
+#| message: false
 #| warning: false
-
+library(tidyverse)
+library(gt)
 d <- tibble(
   Stadt = c("A", "B", "C"),
   `1` = c(6, 4, 2),
@@ -21,11 +18,11 @@ d <- tibble(
   `4` = c(3, 4, 2),
   `5` = c(2, 1, 12)
 )
-
 gt(d) |>
   cols_align("center") |>
   tab_spanner(label = "Baufirma", columns = -Stadt)
 ```
+:::
 
 Aufgaben:
 
@@ -36,14 +33,14 @@ Aufgaben:
 1.  Wie können Sie das an den Kurven ablesen?
 
 ::: {layout-ncol="3"}
-![](00-bilder/lorenzkurve.svg)
+![](_bilder/lorenzkurve.svg)
 
-![](00-bilder/lorenzkurve-e.svg)
+![](_bilder/lorenzkurve-e.svg)
 
-![](00-bilder/lorenzkurve-e.svg)
+![](_bilder/lorenzkurve-e.svg)
 :::
 
-::: {.tinh-solution}
-![](00-bilder/l-kenngroessen-07-lorenzkurve.png)
+::: {.lm-solution}
+![](_bilder/l-kenngroessen-07-lorenzkurve.png)
 :::
 :::

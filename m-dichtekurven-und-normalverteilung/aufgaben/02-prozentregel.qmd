@@ -19,7 +19,7 @@ Aufgaben:
 
 Hinweis: Nutzen Sie die Symmetrie der Dichtekurve und dass die Fläche unter der Dichtekurve gleich 1 ist.
 
-::: {.tinh-solution}
+::: {.lm-solution}
 ```{r}
 #| include: false
 library(tidyverse)
